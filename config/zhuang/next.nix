@@ -1,5 +1,15 @@
 { pkgs, ...}:
 {
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      # ssh
+      22
+      # tailscale
+      41641
+    ];
+  };
+
   services.tailscale = {
     enable = true;
   };
