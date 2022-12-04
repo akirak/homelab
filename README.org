@@ -1,0 +1,15 @@
+# -*- org-id-link-to-org-use-id: nil; -*-
+* Nix Home Lab
+This repository is a configuration for servers running in my home network.
+At present, it runs NixOS on a single unit of Raspberry Pi 3B.
+** Usage
+[[https://github.com/zhaofengli/colmena][Colmena]] is used to build and deploy images.
+
+First allow direnv in the project directory and then run
+
+#+begin_src sh
+  colmena build
+  colmena apply
+#+end_src
+
+to switch to the latest configuration.
