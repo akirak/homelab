@@ -13,6 +13,10 @@
     ...
   }: let
     clientSystem = "x86_64-linux";
+
+    pkgs = import nixpkgs {
+      system = clientSystem;
+    };
   in {
     colmena = {
       meta = {
@@ -44,6 +48,14 @@
         format = "sd-aarch64";
         modules = [
           ./config/zhuang/initial.nix
+        ];
+      };
+    };
+
+    devShells.${clientSystem} = {
+      default = pkgs.mkShell {
+        buildInputs = [
+          pkgs.colmena
         ];
       };
     };
