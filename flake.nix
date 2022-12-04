@@ -37,6 +37,7 @@
         imports = [
           <nixpkgs/nixos/modules/installer/sd-card/sd-image-aarch64.nix>
           ./config/zhuang/initial.nix
+          ./config/zhuang/next.nix
         ];
       };
     };
