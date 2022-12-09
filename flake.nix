@@ -14,16 +14,11 @@
   }: let
     clientSystem = "x86_64-linux";
 
-    pkgs = import nixpkgs {
-      system = clientSystem;
-    };
+    pkgs = nixpkgs.legacyPackages.${clientSystem};
   in {
     colmena = {
       meta = {
-        nixpkgs = import nixpkgs {
-          system = clientSystem;
-          overlays = [];
-        };
+        nixpkgs = pkgs;
       };
 
       zhuang = {
