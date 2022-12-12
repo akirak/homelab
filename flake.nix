@@ -25,7 +25,7 @@
         deployment = {
           # A fixed IP address is configured in the router
           targetHost = "192.168.0.60";
-          targetPort = 22;
+          targetPort = 2022;
           targetUser = "root";
         };
         nixpkgs.system = "aarch64-linux";
