@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "nixpkgs";
+    unstable.url = "nixpkgs/nixos-unstable";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -9,6 +10,7 @@
   outputs = {
     self,
     nixpkgs,
+    unstable,
     nixos-generators,
     ...
   }: let
@@ -19,6 +21,9 @@
     colmena = {
       meta = {
         nixpkgs = pkgs;
+        specialArgs = {
+          inherit unstable;
+        };
       };
 
       zhuang = {

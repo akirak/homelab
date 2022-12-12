@@ -1,5 +1,11 @@
-{ pkgs, ...}:
 {
+  pkgs,
+  config,
+  unstable,
+  ...
+}: let
+  unstablePkgs = unstable.legacyPackages.${config.nixpkgs.system};
+in {
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
@@ -17,6 +23,7 @@
 
   services.tailscale = {
     enable = true;
+    package = unstablePkgs.tailscale;
   };
 
   services.adguardhome = {
