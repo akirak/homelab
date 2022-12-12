@@ -4,7 +4,7 @@
     enable = true;
     allowedTCPPorts = [
       # ssh
-      22
+      2022
       # adguardhome
       53
       # tailscale

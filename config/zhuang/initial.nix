@@ -1,5 +1,14 @@
 {
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    listenAddresses = [
+      {
+        addr = "192.168.0.60";
+        port = 2022;
+      }
+    ];
+  };
+
   users.users.root = {
     # Allow root login only with my GPG card
     openssh.authorizedKeys.keys = [
