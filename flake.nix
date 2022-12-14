@@ -44,7 +44,7 @@
 
     packages.${clientSystem} = {
       # Use nixos-generators to bootstrap
-      zhuang = nixos-generators.nixosGenerate {
+      sd-image-zhuang = nixos-generators.nixosGenerate {
         system = "aarch64-linux";
         format = "sd-aarch64";
         modules = [
