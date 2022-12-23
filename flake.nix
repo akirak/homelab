@@ -1,7 +1,13 @@
 {
+  nixConfig = {
+    flake-registry = "https://raw.githubusercontent.com/akirak/flake-pins/master/registry.json";
+  };
+
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
-    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # From the registry
+    nixpkgs.url = "stable";
+    unstable.url = "unstable";
+
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
