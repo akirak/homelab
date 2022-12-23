@@ -1,8 +1,4 @@
 {
-  nixConfig = {
-    flake-registry = "https://raw.githubusercontent.com/akirak/flake-pins/master/registry.json";
-  };
-
   inputs = {
     # From the registry
     nixpkgs.url = "stable";
