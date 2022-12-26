@@ -40,7 +40,7 @@
           system = "aarch64-linux";
           format = "sd-aarch64";
           modules = [
-            ./config/zhuang/initial.nix
+            ./config/hosts/zhuang/initial.nix
           ];
         };
 
@@ -70,8 +70,8 @@
             nixpkgs.system = "aarch64-linux";
             imports = [
               <nixpkgs/nixos/modules/installer/sd-card/sd-image-aarch64.nix>
-              ./config/zhuang/initial.nix
-              ./config/zhuang/rest.nix
+              ./config/hosts/zhuang/initial.nix
+              ./config/hosts/zhuang/rest.nix
             ];
           };
         };
