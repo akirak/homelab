@@ -1,8 +1,8 @@
 {modulesPath, ...}: {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
-    # (modulesPath + "/profiles/hardened.nix")
-    # (modulesPath + "/profiles/headless.nix")
+    (modulesPath + "/profiles/hardened.nix")
+    (modulesPath + "/profiles/headless.nix")
   ];
 
   boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "xen_blkfront" "vmw_pvscsi"];
