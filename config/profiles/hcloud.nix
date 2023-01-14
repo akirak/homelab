@@ -1,3 +1,4 @@
+# This profile can be used for NixOS installation with nixos-infect.
 {modulesPath, ...}: {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")

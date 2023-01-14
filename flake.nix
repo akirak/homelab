@@ -6,6 +6,11 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,7 +61,7 @@
           hcloud-basic = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
-              ./config/profiles/hcloud.nix
+              ./config/profiles/hcloud-remote.nix
               {
                 networking.hostName = "default";
                 # networking.firewall.enable = true;
@@ -98,9 +103,17 @@
                   '';
                 };
               }
+              inputs.disko.nixosModules.disko
+              {
+                disko.devices = import ./config/profiles/disko-1.nix {
+                  inherit (nixpkgs) lib;
+                };
+              }
             ];
           };
         };
+
+        diskoConfigurations.hcloud = import ./config/profiles/disko-1.nix;
 
         colmena = {
           meta = {
