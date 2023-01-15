@@ -12,7 +12,7 @@
     # https://xeiaso.net/blog/paranoid-nixos-2021-07-18
     passwordAuthentication = false;
     allowSFTP = false;
-    challengeResponseAuthentication = false;
+    kbdInteractiveAuthentication = false;
     extraConfig = ''
       AllowTcpForwarding yes
       X11Forwarding no

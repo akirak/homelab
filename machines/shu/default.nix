@@ -12,7 +12,7 @@
 
   disko.devices = import ./disko.nix {};
 
-  nix.allowedUsers = ["root"];
+  nix.settings.allowed-users = ["root"];
 
   services.journald.extraConfig = ''
     SystemMaxUse=1G
