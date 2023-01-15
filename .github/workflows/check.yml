@@ -1,0 +1,31 @@
+name: Check the flake
+
+on:
+  workflow_dispatch:
+
+  pull_request:
+
+  push:
+    branches-ignore:
+    - master
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v3
+
+    - uses: cachix/install-nix-action@v18
+      with:
+        extra_nix_config: |
+          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+          flake-registry = https://raw.githubusercontent.com/akirak/flake-pins/master/registry.json
+
+    - uses: cachix/cachix-action@v12
+      with:
+        name: akirak
+        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+        pushFilter: '-source$'
+
+    - run: nix flake check
