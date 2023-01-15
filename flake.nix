@@ -45,7 +45,7 @@
           system = "aarch64-linux";
           format = "sd-aarch64";
           modules = [
-            ./config/hosts/zhuang/initial.nix
+            ./machines/zhuang/initial.nix
           ];
         };
 
@@ -61,7 +61,7 @@
           shu = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
-              ./config/profiles/hcloud-remote.nix
+              ./suites/hcloud-remote.nix
               {
                 networking.hostName = "shu";
                 networking.firewall = {
@@ -108,16 +108,14 @@
               }
               inputs.disko.nixosModules.disko
               {
-                disko.devices = import ./config/hosts/shu/disko.nix {
-                  inherit (nixpkgs) lib;
-                };
+                disko.devices = import ./machines/shu/disko.nix {};
               }
             ];
           };
         };
 
         diskoConfigurations = {
-          shu = import ./config/hosts/shu/disko.nix;
+          shu = import ./machines/shu/disko.nix;
         };
 
         colmena = {
@@ -138,8 +136,8 @@
             nixpkgs.system = "aarch64-linux";
             imports = [
               <nixpkgs/nixos/modules/installer/sd-card/sd-image-aarch64.nix>
-              ./config/hosts/zhuang/initial.nix
-              ./config/hosts/zhuang/rest.nix
+              ./machines/zhuang/initial.nix
+              ./machines/zhuang/rest.nix
             ];
           };
         };
