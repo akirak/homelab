@@ -1,5 +1,5 @@
 # Based on https://github.com/numtide/nixos-remote-examples/blob/9768e438b1467ec55d42e096860e7199bd1ef43d/disk-config.nix
-{ disks ? ["/dev/sda"], ... }: {
+{ disks ? ["/dev/sda"], luksKey ? "/persist/luks-cryptroot.key", ... }: {
   disk.sda = {
     device = builtins.elemAt disks 0;
     type = "disk";
@@ -15,6 +15,7 @@
           part-type = "primary";
           flags = ["bios_grub"];
         }
+
         {
           type = "partition";
           name = "ESP";
@@ -30,38 +31,28 @@
             ];
           };
         }
+
         {
-          name = "root";
           type = "partition";
+          name = "luks";
           start = "100MiB";
           end = "100%";
-          part-type = "primary";
-          bootable = true;
           content = {
-            type = "lvm_pv";
-            vg = "pool";
+            type = "luks";
+            name = "cryptroot";
+            keyFile = luksKey;
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/";
+              mountOptions = [
+                "defaults"
+              ];
+            };
           };
         }
+
       ];
-    };
-  };
-  lvm_vg = {
-    pool = {
-      type = "lvm_vg";
-      lvs = {
-        root = {
-          type = "lvm_lv";
-          size = "100%FREE";
-          content = {
-            type = "filesystem";
-            format = "ext4";
-            mountpoint = "/";
-            mountOptions = [
-              "defaults"
-            ];
-          };
-        };
-      };
     };
   };
 }

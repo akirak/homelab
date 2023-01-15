@@ -4,6 +4,7 @@
     ../../suites/base.nix
     ../../profiles/tailscale.nix
     ../../profiles/nginx.nix
+    ./boot.nix
   ];
 
   networking.hostName = "shu";
