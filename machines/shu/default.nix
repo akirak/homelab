@@ -13,4 +13,9 @@
   disko.devices = import ./disko.nix {};
 
   nix.allowedUsers = ["root"];
+
+  services.journald.extraConfig = ''
+    SystemMaxUse=1G
+    MaxFileSec=10day
+  '';
 }
