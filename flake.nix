@@ -58,12 +58,12 @@
 
       flake = {
         nixosConfigurations = {
-          hcloud-basic = nixpkgs.lib.nixosSystem {
+          shu = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
               ./config/profiles/hcloud-remote.nix
               {
-                networking.hostName = "default";
+                networking.hostName = "shu";
                 networking.firewall = {
                   enable = true;
                   trustedInterfaces = ["tailscale0"];
@@ -108,7 +108,7 @@
               }
               inputs.disko.nixosModules.disko
               {
-                disko.devices = import ./config/profiles/disko-1.nix {
+                disko.devices = import ./config/hosts/shu/disko.nix {
                   inherit (nixpkgs) lib;
                 };
               }
@@ -116,7 +116,9 @@
           };
         };
 
-        diskoConfigurations.hcloud = import ./config/profiles/disko-1.nix;
+        diskoConfigurations = {
+          shu = import ./config/hosts/shu/disko.nix;
+        };
 
         colmena = {
           meta = {
