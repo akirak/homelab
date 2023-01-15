@@ -64,9 +64,12 @@
               ./config/profiles/hcloud-remote.nix
               {
                 networking.hostName = "default";
-                # networking.firewall.enable = true;
+                networking.firewall = {
+                  enable = true;
+                  trustedInterfaces = ["tailscale0"];
+                  checkReversePath = "loose";
+                };
                 services.tailscale.enable = true;
-                networking.firewall.trustedInterfaces = ["tailscale0"];
                 nix.allowedUsers = ["root"];
 
                 users.users.root = {
