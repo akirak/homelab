@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1673488360,
+        "narHash": "sha256-oqYrGBGA3HfZD9E2LSa+WHGJy40DfHgc3Z3oe0Mnstk=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "d4ad9595432959440984b2ba33064cfe3399d0e3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -88,6 +108,7 @@
     },
     "root": {
       "inputs": {
+        "disko": "disko",
         "flake-parts": "flake-parts",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
