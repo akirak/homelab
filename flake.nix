@@ -6,6 +6,11 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,7 +45,7 @@
           system = "aarch64-linux";
           format = "sd-aarch64";
           modules = [
-            ./config/hosts/zhuang/initial.nix
+            ./machines/zhuang/initial.nix
           ];
         };
 
@@ -52,6 +57,25 @@
       };
 
       flake = {
+        nixosConfigurations = {
+          shu = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = {
+              inherit unstable;
+            };
+            modules = [
+              # You cannot add disko module to the root module list of
+              # flake-parts. It causes infinite recursion.
+              inputs.disko.nixosModules.disko
+              ./machines/shu
+            ];
+          };
+        };
+
+        diskoConfigurations = {
+          shu = import ./machines/shu/disko.nix;
+        };
+
         colmena = {
           meta = {
             nixpkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -70,8 +94,8 @@
             nixpkgs.system = "aarch64-linux";
             imports = [
               <nixpkgs/nixos/modules/installer/sd-card/sd-image-aarch64.nix>
-              ./config/hosts/zhuang/initial.nix
-              ./config/hosts/zhuang/rest.nix
+              ./machines/zhuang/initial.nix
+              ./machines/zhuang/rest.nix
             ];
           };
         };
