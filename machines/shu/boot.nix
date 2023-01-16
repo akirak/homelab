@@ -43,4 +43,11 @@ let
     useDHCP = false;
     interfaces.eth0.useDHCP = true;
   };
+
+  boot.supportedFilesystems = ["zfs"];
+  boot.initrd.supportedFilesystems = ["zfs"];
+  boot.zfs.requestEncryptionCredentials = true;
+  boot.kernelParams = ["zfs.zfs_arc_max=805306368"];
+  services.zfs.autoSnapshot.enable = true;
+  services.zfs.autoScrub.enable = true;
 }

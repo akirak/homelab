@@ -32,6 +32,7 @@
           };
         }
 
+
         {
           type = "partition";
           name = "luks";
@@ -42,17 +43,51 @@
             name = "cryptroot";
             keyFile = luksKey;
             content = {
-              type = "filesystem";
-              format = "ext4";
-              mountpoint = "/";
-              mountOptions = [
-                "defaults"
-              ];
+              type = "zfs";
+              pool = "zroot";
             };
           };
         }
-
       ];
+    };
+  };
+
+  zpool = {
+    zroot = {
+      type = "zpool";
+      # mode = "mirror";
+      rootFsOptions = {
+        "com.sun:auto-snapshot" = "false";
+      };
+
+      mountpoint = "/";
+
+      datasets = {
+        nix = {
+          zfs_type = "filesystem";
+          mountpoint = "/nix";
+          size = "20G";
+          options = {
+            compression = "lz4";
+            "com.sun:auto-snapshot" = "true";
+          };
+        };
+        persist = {
+          zfs_type = "filesystem";
+          mountpoint = "/persist";
+          options = {
+            "com.sun:auto-snapshot" = "true";
+          };
+        };
+        var = {
+          zfs_type = "filesystem";
+          mountpoint = "/var";
+          options = {
+            compression = "lz4";
+            "com.sun:auto-snapshot" = "true";
+          };
+        };
+      };
     };
   };
 }
