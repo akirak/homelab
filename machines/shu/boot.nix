@@ -31,11 +31,6 @@ let
 
         authorizedKeys = config.users.users.root.openssh.authorizedKeys.keys;
       };
-
-      # https://discourse.nixos.org/t/disk-encryption-on-nixos-servers-how-when-to-unlock/5030/3
-      postCommands = ''
-        echo "cryptsetup-askpass" >> /root/.profile
-      '';
     };
   };
 
