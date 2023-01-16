@@ -3,12 +3,24 @@
     # From the registry
     nixpkgs.url = "stable";
     unstable.url = "unstable";
+    home-manager.url = "home-manager";
+    nix-darwin.url = "nix-darwin";
+
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    cachix-deploy-flake = {
+      url = "github:cachix/cachix-deploy-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.disko.follows = "disko";
+      inputs.home-manager.follows = "home-manager";
+      inputs.darwin.follows = "nix-darwin";
     };
 
     nixos-generators = {
@@ -44,6 +56,17 @@
         system,
         ...
       }: {
+        packages.default = let
+          cachix-deploy-lib = inputs.cachix-deploy-flake.lib pkgs;
+
+          makeNixOS = name: inputs.self.nixosConfigurations.${name}.config.system.build.toplevel;
+        in
+          cachix-deploy-lib.spec {
+            agents = {
+              shu = makeNixOS "shu";
+            };
+          };
+
         # Use nixos-generators to bootstrap
         packages.sd-image-zhuang = nixos-generators.nixosGenerate {
           system = "aarch64-linux";
