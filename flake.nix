@@ -56,16 +56,11 @@
         system,
         ...
       }: {
-        packages.default = let
-          cachix-deploy-lib = inputs.cachix-deploy-flake.lib pkgs;
-
-          makeNixOS = name: inputs.self.nixosConfigurations.${name}.config.system.build.toplevel;
-        in
-          cachix-deploy-lib.spec {
-            agents = {
-              shu = makeNixOS "shu";
-            };
-          };
+        packages.cachix-deploys = import ./lib/cachix-deploy.nix {
+          inherit pkgs;
+          inherit (inputs) self cachix-deploy-flake;
+          nixosHosts = ["shu"];
+        };
 
         # Use nixos-generators to bootstrap
         packages.sd-image-zhuang = nixos-generators.nixosGenerate {
