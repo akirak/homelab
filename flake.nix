@@ -22,7 +22,11 @@
     flake-parts,
     nixos-generators,
     ...
-  } @ inputs:
+  } @ inputs: let
+    specialArgs = {
+      inherit unstable;
+    };
+  in
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
       ];
@@ -60,9 +64,7 @@
         nixosConfigurations = {
           shu = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            specialArgs = {
-              inherit unstable;
-            };
+            inherit specialArgs;
             modules = [
               # You cannot add disko module to the root module list of
               # flake-parts. It causes infinite recursion.
@@ -79,9 +81,7 @@
         colmena = {
           meta = {
             nixpkgs = nixpkgs.legacyPackages.x86_64-linux;
-            specialArgs = {
-              inherit unstable;
-            };
+            inherit specialArgs;
           };
 
           zhuang = {
