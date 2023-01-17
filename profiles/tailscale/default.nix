@@ -1,12 +1,11 @@
-{ pkgs, config, unstable, ... }:
+{ pkgs, config, ... }:
 let
-  unstablePkgs = unstable.legacyPackages.${config.nixpkgs.system};
   cfg = config.services.tailscale;
 in
 {
   services.tailscale = {
     enable = true;
-    package = unstablePkgs.tailscale;
+    package = pkgs.unstable.tailscale;
   };
 
   networking.firewall = {
