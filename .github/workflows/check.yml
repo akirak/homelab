@@ -5,9 +5,11 @@ on:
 
   pull_request:
 
-  push:
-    branches-ignore:
-    - master
+  workflow_call:
+    inputs:
+      ref:
+        required: false
+        type: string
 
 jobs:
   check:
@@ -15,6 +17,8 @@ jobs:
     steps:
 
     - uses: actions/checkout@v3
+      with:
+        ref: ${{ inputs.ref || github.ref }}
 
     - uses: cachix/install-nix-action@v18
       with:
