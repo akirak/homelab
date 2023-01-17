@@ -38,6 +38,14 @@
     specialArgs = {
       inherit unstable;
     };
+
+    overlayModule = {
+      nixpkgs.overlays = [
+        (final: prev: {
+          unstable = unstable.legacyPackages.${prev.system};
+        })
+      ];
+    };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
@@ -82,8 +90,8 @@
         nixosConfigurations = {
           shu = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            inherit specialArgs;
             modules = [
+              overlayModule
               # You cannot add disko module to the root module list of
               # flake-parts. It causes infinite recursion.
               inputs.disko.nixosModules.disko
