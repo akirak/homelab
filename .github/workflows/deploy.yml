@@ -14,6 +14,11 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
+    env:
+      CACHIX_ACTIVATE_TOKEN: ${{ secrets.CACHIX_ACTIVATE_TOKEN }}
+      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
     steps:
 
     - uses: actions/checkout@v3
@@ -28,11 +33,20 @@ jobs:
       with:
         name: akirak
 
-    - name: Build and deploy
+    - name: Build the deploys
+      id: build
       run: |
         spec=$(nix build .#cachix-deploys --print-out-paths)
-        cachix push akirak $spec
-        cachix deploy activate $spec
+        echo "spec_path=$spec" >> $GITHUB_OUTPUT
+
+    - name: Push to Cachix
+      run: |
+        cachix push akirak $DEPLOY_SPEC
       env:
-        CACHIX_ACTIVATE_TOKEN: ${{ secrets.CACHIX_ACTIVATE_TOKEN }}
-        CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        DEPLOY_SPEC: ${{ steps.build.outputs.spec_path }}
+
+    - name: Deploy
+      run: |
+        cachix deploy activate $DEPLOY_SPEC
+      env:
+        DEPLOY_SPEC: ${{ steps.build.outputs.spec_path }}
