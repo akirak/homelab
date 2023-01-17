@@ -35,10 +35,6 @@
     nixos-generators,
     ...
   } @ inputs: let
-    specialArgs = {
-      inherit unstable;
-    };
-
     overlayModule = {
       nixpkgs.overlays = [
         (final: prev: {
@@ -70,18 +66,11 @@
           nixosHosts = ["shu"];
         };
 
-        # Use nixos-generators to bootstrap
-        packages.sd-image-zhuang = nixos-generators.nixosGenerate {
+        packages.rpi-bootstrap-sd-image = nixos-generators.nixosGenerate {
           system = "aarch64-linux";
           format = "sd-aarch64";
           modules = [
             ./machines/zhuang/initial.nix
-          ];
-        };
-
-        devShells.default = pkgs.mkShell {
-          buildInputs = [
-            pkgs.colmena
           ];
         };
       };
@@ -98,32 +87,22 @@
               ./machines/shu
             ];
           };
+
+          # zhuang = nixpkgs.lib.nixosSystem {
+          #   system = "aarch64-linux";
+          #   modules = [
+          #     overlayModule
+          #     # <nixpkgs/nixos/modules/installer/sd-card/sd-image-aarch64.nix>
+          #     # inputs.disko.nixosModules.disko
+          #     ./machines/zhuang/initial.nix
+          #     ./machines/zhuang/rest.nix
+          #   ];
+          # };
+
         };
 
         diskoConfigurations = {
           shu = import ./machines/shu/disko.nix;
-        };
-
-        colmena = {
-          meta = {
-            nixpkgs = nixpkgs.legacyPackages.x86_64-linux;
-            inherit specialArgs;
-          };
-
-          zhuang = {
-            deployment = {
-              # A fixed IP address is configured in the router
-              targetHost = "192.168.0.60";
-              targetPort = 2022;
-              targetUser = "root";
-            };
-            nixpkgs.system = "aarch64-linux";
-            imports = [
-              <nixpkgs/nixos/modules/installer/sd-card/sd-image-aarch64.nix>
-              ./machines/zhuang/initial.nix
-              ./machines/zhuang/rest.nix
-            ];
-          };
         };
       };
     };
