@@ -2,8 +2,8 @@
   imports = [
     ../../suites/hcloud-remote.nix
     ../../suites/base.nix
-    ../../profiles/tailscale.nix
-    ../../profiles/nginx.nix
+    ../../profiles/tailscale
+    ../../profiles/nginx
     ../../profiles/nix/cachix-deploy.nix
     ./boot.nix
   ];
