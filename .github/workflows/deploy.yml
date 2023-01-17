@@ -40,6 +40,8 @@ jobs:
 
     - name: Build the deploys
       id: build
+      # A timeout set arbitrary
+      timeout-minutes: 20
       run: |
         spec=$(nix build .#cachix-deploys --print-out-paths)
         echo "spec_path=$spec" >> $GITHUB_OUTPUT
@@ -51,6 +53,9 @@ jobs:
         DEPLOY_SPEC: ${{ steps.build.outputs.spec_path }}
 
     - name: Deploy
+      # Should be deployed instantly. Some machines may be offline, but then you
+      # can rerun this workflow
+      timeout-minutes: 1
       run: |
         cachix deploy activate $DEPLOY_SPEC
       env:
