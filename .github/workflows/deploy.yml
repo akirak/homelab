@@ -12,6 +12,11 @@ on:
     - 'suites/**'
 
 jobs:
+  check:
+    uses: ./.github/workflows/check.yml
+    with:
+      ref: ${{ github.ref_name }}
+
   build-and-deploy:
     runs-on: ubuntu-latest
 
