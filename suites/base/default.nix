@@ -1,6 +1,6 @@
 {
   imports = [
-    ../profiles/openssh
+    ../../profiles/openssh
   ];
 
   networking.firewall.enable = true;

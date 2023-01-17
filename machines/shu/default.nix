@@ -1,7 +1,7 @@
 {
   imports = [
-    ../../suites/hcloud-remote.nix
-    ../../suites/base.nix
+    ../../suites/hcloud-remote
+    ../../suites/base
     ../../profiles/tailscale
     ../../profiles/nginx
     ../../profiles/nix/cachix-deploy.nix
