@@ -23,6 +23,7 @@ jobs:
     env:
       CACHIX_ACTIVATE_TOKEN: ${{ secrets.CACHIX_ACTIVATE_TOKEN }}
       CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      CACHIX_SIGNING_KEY: ${{ secrets.CACHIX_SIGNING_KEY }}
 
     steps:
 
