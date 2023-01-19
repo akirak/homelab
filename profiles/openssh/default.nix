@@ -20,6 +20,12 @@
       AllowStreamLocalForwarding no
       AuthenticationMethods publickey
     '';
+
+    # Disable generation of an RSA key. See https://xeiaso.net/blog/move-away-rsa-ssh
+    hostKeys = [{
+      path = "/etc/ssh/ssh_host_ed25519_key";
+      type = "ed25519";
+    }];
   };
 
   users.users.root = {
