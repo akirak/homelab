@@ -6,6 +6,8 @@
     home-manager.url = "home-manager";
     nix-darwin.url = "nix-darwin";
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -73,6 +75,15 @@
             ./machines/zhuang/initial.nix
           ];
         };
+
+        packages.asus-br1100-iso = (nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            overlayModule
+            self.nixosModules.asus-br1100
+            ./suites/iso
+          ];
+        }).config.system.build.isoImage;
       };
 
       flake = {
@@ -103,6 +114,12 @@
 
         diskoConfigurations = {
           shu = import ./machines/shu/disko.nix;
+        };
+
+        nixosModules = {
+          asus-br1100 = import ./modules/models/asus-br1100.nix {
+            inherit (inputs) nixos-hardware
+          };
         };
       };
     };
