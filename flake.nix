@@ -118,7 +118,7 @@
 
         nixosModules = {
           asus-br1100 = import ./modules/models/asus-br1100.nix {
-            inherit (inputs) nixos-hardware
+            inherit (inputs) nixos-hardware;
           };
         };
       };
