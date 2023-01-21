@@ -80,7 +80,7 @@
           inherit system;
           modules = [
             overlayModule
-            self.nixosModules.asus-br1100
+            inputs.self.nixosModules.asus-br1100
             ./suites/iso
           ];
         }).config.system.build.isoImage;
