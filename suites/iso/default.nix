@@ -10,4 +10,10 @@
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 
   system.stateVersion = lib.mkDefault lib.trivial.release;
+
+  environment.systemPackages = [
+    pkgs.git
+    # Provided from disko flake via overlayModule
+    pkgs.disko
+  ];
 }
