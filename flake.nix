@@ -41,6 +41,7 @@
       nixpkgs.overlays = [
         (final: prev: {
           unstable = unstable.legacyPackages.${prev.system};
+          disko = inputs.disko.packages.${prev.system}.disko;
         })
       ];
     };
