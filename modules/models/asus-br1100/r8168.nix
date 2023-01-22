@@ -1,18 +1,8 @@
-{nixos-hardware}: {
-  config,
+{
   pkgs,
+  config,
   ...
 }: {
-  imports = [
-    (nixos-hardware.outPath + "/common/pc/laptop")
-    (nixos-hardware.outPath + "/common/gpu/intel.nix")
-  ];
-
-  # I don't know if this parameter is necessary.
-  boot.kernelParams = ["nouveau.modeset=0"];
-
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_0;
-
   # At present, wired interface does not work even with this kernel module due
   # to a common "ucsi_acpi usbc000:00: ppm init failed" error. This issue may be
   # fixed at some point, but I am not sure.
