@@ -2,7 +2,6 @@
 * Home Lab
 This repository is a configuration for NixOS servers running in my home network.
 ** List of machines in the network
-- Virtual machine on Hetzner Cloud
-- Raspberry Pi 3B hosted at home
+FIXME
 ** Procedures
 FIXME
