@@ -78,7 +78,7 @@
         };
 
         packages.asus-br1100-iso = (nixpkgs.lib.nixosSystem {
-          inherit system;
+          system = "x86_64-linux";
           modules = [
             overlayModule
             inputs.self.nixosModules.asus-br1100
