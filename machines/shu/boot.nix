@@ -1,9 +1,7 @@
-{config, ...}:
-let
+{config, ...}: let
   cryptName = "cryptroot";
   cryptDevice = "/dev/sda3";
-  in
-{
+in {
   boot.kernelModules = ["virtio_net"];
   boot.loader.efi.canTouchEfiVariables = false;
 

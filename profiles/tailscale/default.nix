@@ -1,8 +1,10 @@
-{ pkgs, config, ... }:
-let
-  cfg = config.services.tailscale;
-in
 {
+  pkgs,
+  config,
+  ...
+}: let
+  cfg = config.services.tailscale;
+in {
   services.tailscale = {
     enable = true;
     package = pkgs.unstable.tailscale;

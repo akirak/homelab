@@ -1,5 +1,10 @@
-{lib, pkgs, config, modulesPath, ...}:
 {
+  lib,
+  pkgs,
+  config,
+  modulesPath,
+  ...
+}: {
   imports = [
     ../base
     (modulesPath + "/installer/cd-dvd/channel.nix")

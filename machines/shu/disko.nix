@@ -1,5 +1,9 @@
 # Based on https://github.com/numtide/nixos-remote-examples/blob/9768e438b1467ec55d42e096860e7199bd1ef43d/disk-config.nix
-{ disks ? ["/dev/sda"], luksKey ? "/persist/luks-cryptroot.key", ... }: {
+{
+  disks ? ["/dev/sda"],
+  luksKey ? "/persist/luks-cryptroot.key",
+  ...
+}: {
   disk.sda = {
     device = builtins.elemAt disks 0;
     type = "disk";
@@ -31,7 +35,6 @@
             ];
           };
         }
-
 
         {
           type = "partition";
