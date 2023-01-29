@@ -5,6 +5,7 @@
     unstable.url = "unstable";
     home-manager.url = "home-manager";
     nix-darwin.url = "nix-darwin";
+    flake-utils.url = "flake-utils";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
@@ -29,7 +30,22 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    microvm = {
+      url = "github:astro/microvm.nix";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
+
+  nixConfig = {
+    extra-substituters = [
+      "https://microvm.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "microvm.cachix.org-1:oXnBc6hRE3eX5rSYdRyMYXnfzcCxC7yKPTbZXALsqys="
+    ];
+  };
+
   outputs = {
     nixpkgs,
     unstable,
@@ -77,14 +93,38 @@
           ];
         };
 
-        packages.asus-br1100-iso = (nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            overlayModule
-            inputs.self.nixosModules.asus-br1100
-            ./suites/iso
-          ];
-        }).config.system.build.isoImage;
+        packages.asus-br1100-iso =
+          (nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+              overlayModule
+              inputs.self.nixosModules.asus-br1100
+              ./suites/iso
+            ];
+          })
+          .config
+          .system
+          .build
+          .isoImage;
+
+        packages.launch-desktop-vm = let
+          inherit
+            (nixpkgs.lib.nixosSystem {
+              system = "x86_64-linux";
+              specialArgs = {
+                hypervisor = "qemu";
+              };
+              modules = [
+                overlayModule
+                inputs.microvm.nixosModules.microvm
+                ./suites/microvm-gui
+                ./profiles/desktop/plasma.nix
+              ];
+            })
+            config
+            ;
+        in
+          config.microvm.runner.${config.microvm.hypervisor};
       };
 
       flake = {
@@ -110,7 +150,6 @@
           #     ./machines/zhuang/rest.nix
           #   ];
           # };
-
         };
 
         diskoConfigurations = {
