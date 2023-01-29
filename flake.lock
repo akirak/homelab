@@ -342,7 +342,23 @@
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
+        "treefmt-nix": "treefmt-nix",
         "unstable": "unstable"
+      }
+    },
+    "treefmt-nix": {
+      "locked": {
+        "lastModified": 1674470002,
+        "narHash": "sha256-Tk1VaMeBTMMGEZeqv3TEwrTAdR9fYb3EH/TPI27AdKk=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "d5ed9a1e6793f99b2e179d5dec9639e48ef22db7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
       }
     },
     "unstable": {

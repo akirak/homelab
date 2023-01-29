@@ -35,6 +35,8 @@
       url = "github:astro/microvm.nix";
       inputs.flake-utils.follows = "flake-utils";
     };
+
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   nixConfig = {
@@ -64,6 +66,7 @@
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
+        inputs.treefmt-nix.flakeModule
       ];
 
       systems = [
@@ -79,6 +82,12 @@
         system,
         ...
       }: {
+        treefmt = {
+          projectRootFile = "flake.nix";
+          package = pkgs.treefmt;
+          programs.alejandra.enable = true;
+        };
+
         packages.cachix-deploys = import ./lib/cachix-deploy.nix {
           inherit pkgs;
           inherit (inputs) self cachix-deploy-flake;
@@ -125,6 +134,12 @@
             ;
         in
           config.microvm.runner.${config.microvm.hypervisor};
+
+        devShells.default = pkgs.mkShell {
+          nativeBuildInputs = [
+            config.treefmt.build.wrapper
+          ];
+        };
       };
 
       flake = {
