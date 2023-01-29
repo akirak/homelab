@@ -32,4 +32,7 @@ jobs:
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
         pushFilter: '-source$'
 
+    - name: Check formatting
+      run: nix develop --accept-flake-config -c treefmt --fail-on-change
+
     - run: nix flake check
