@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   cfg = config.programs.git;
   enabled = cfg.enable;
   default-identity = pkgs.writeText "config" ''
@@ -7,8 +11,7 @@ let
     name = Akira Komamura
     email = akira.komamura@gmail.com
   '';
-in
-{
+in {
   programs.git = {
     extraConfig = lib.mkIf enabled {
       github.user = "akirak";

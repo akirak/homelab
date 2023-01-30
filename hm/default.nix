@@ -1,6 +1,9 @@
-{ pkgs, lib, ... }:
 {
-  imports = import ./modules.nix { inherit lib; };
+  pkgs,
+  lib,
+  ...
+}: {
+  imports = import ./modules.nix {inherit lib;};
 
   programs = {
     bat.enable = true;
