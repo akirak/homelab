@@ -10,6 +10,7 @@ on:
     - 'machines/**'
     - 'profiles/**'
     - 'suites/**'
+    - 'hm/**'
 
 jobs:
   check:
