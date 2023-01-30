@@ -122,12 +122,15 @@
               system = "x86_64-linux";
               specialArgs = {
                 hypervisor = "qemu";
+                homeUser = "root";
               };
               modules = [
                 overlayModule
                 inputs.microvm.nixosModules.microvm
                 ./suites/microvm-gui
                 ./profiles/desktop/plasma.nix
+                inputs.home-manager.nixosModules.home-manager
+                ./profiles/home-manager
               ];
             })
             config
