@@ -1,4 +1,38 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  listEmacsProjects = pkgs.writeShellScriptBin "ls-emacs-projects" ''
+    set -euo pipefail
+
+    while [[ $# -gt 0 ]]
+    do
+      case "$1" in
+        # This option can be helpful in trivial shell functions where you don't
+        # want to set separate `set -euo pipefail` option.
+        --pipe)
+          pipe="$2"
+          shift
+          ;;
+      esac
+      shift
+    done
+
+    # /tmp is protected, so use another directory
+    tmp=$(mktemp -p "''${XDG_RUNTIME_DIR}")
+
+    trap "rm -f '$tmp'" ERR EXIT
+
+    # If the server isn't running, this script will exit with 1.
+    ${pkgs.emacs}/bin/emacsclient --eval "(with-temp-buffer
+        (insert (mapconcat #'expand-file-name (project-known-project-roots) \"\n\"))
+        (write-region (point-min) (point-max) \"$tmp\"))" > /dev/null
+
+    if [[ -v pipe ]]
+    then
+      cat "$tmp" | $pipe
+    else
+      cat "$tmp"
+    fi
+  '';
+in {
   home.packages = with pkgs; [
     zsh
     nix-zsh-completions
@@ -80,15 +114,14 @@
           print -Pn "\e]51;A$(pwd)\e\\";
       }
 
-      # TODO: Add listEmacsProjects
-      # function cd() {
-      #   if [[ $# -gt 0 ]]
-      #   then
-      #     builtin cd "$@"
-      #   else
-      #     builtin cd "$({pkgs.listEmacsProjects}/bin/ls-emacs-projects --pipe fzy)"
-      #   fi
-      # }
+      function cd() {
+        if [[ $# -gt 0 ]]
+        then
+          builtin cd "$@"
+        else
+          builtin cd "$(${listEmacsProjects}/bin/ls-emacs-projects --pipe fzy)"
+        fi
+      }
 
       alias s='builtin cd "$(fd -t d | fzy)"'
       alias r='builtin cd "$(git rev-parse --show-toplevel)"'
