@@ -121,18 +121,16 @@
 
         packages.launch-desktop-vm = let
           inherit
-            (nixpkgs.lib.nixosSystem {
+            (self.lib.mkSystem "microvm-gui" {
               system = "x86_64-linux";
               specialArgs = {
                 hypervisor = "qemu";
                 homeUser = "root";
               };
-              modules = [
-                overlayModule
+              extraModules = [
                 inputs.microvm.nixosModules.microvm
                 ./suites/microvm-gui
                 ./profiles/desktop/plasma.nix
-                inputs.home-manager.nixosModules.home-manager
                 ./profiles/home-manager
               ];
             })
@@ -214,7 +212,9 @@
             system,
             specialArgs ? {},
             extraModules ? [],
-          }:
+          }: let
+            machinePath = ./machines + "/${hostName}";
+          in
             nixpkgs.lib.nixosSystem {
               inherit system specialArgs;
               modules =
@@ -222,8 +222,8 @@
                   overlayModule
                   inputs.disko.nixosModules.disko
                   inputs.home-manager.nixosModules.home-manager
-                  (./machines + "/${hostName}")
                 ]
+                ++ lib.optional (builtins.pathExists machinePath) machinePath
                 ++ extraModules;
             };
         };
