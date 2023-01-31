@@ -13,6 +13,7 @@
     source-han-sans
     noto-fonts-emoji
     symbola
+    jetbrains-mono-nerdfont
     # Japanese
     ipafont
   ];
@@ -37,7 +38,7 @@ in {
     foot.enable = enableWayland;
     foot.server.enable = enableFoot;
     # TODO: Add font package
-    # foot.settings.main.font = "JetBrainsMono NF:size=10.5";
+    foot.settings.main.font = "JetBrainsMono NF:size=10.5";
   };
 
   services = {

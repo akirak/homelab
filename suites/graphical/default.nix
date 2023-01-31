@@ -9,14 +9,13 @@
 
   fonts = {
     fonts = with pkgs; [
-      # TODO: Add font package
-      # jetbrains-mono-nerdfont
+      jetbrains-mono-nerdfont
       merriweather
       lato
     ];
 
     fontconfig.defaultFonts = {
-      # monospace = ["JetBrains Mono NF"];
+      monospace = ["JetBrains Mono NF"];
 
       sansSerif = ["Lato"];
 

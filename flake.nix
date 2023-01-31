@@ -37,6 +37,8 @@
     };
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
+
+    my-overlay.url = "github:akirak/nixpkgs-overlay";
   };
 
   nixConfig = {
@@ -60,10 +62,13 @@
     inherit (nixpkgs) lib;
     overlayModule = {
       nixpkgs.overlays = [
-        (final: prev: {
-          unstable = unstable.legacyPackages.${prev.system};
-          disko = inputs.disko.packages.${prev.system}.disko;
-        })
+        (final: prev: (
+          {
+            unstable = unstable.legacyPackages.${prev.system};
+            disko = inputs.disko.packages.${prev.system}.disko;
+          }
+        ))
+        inputs.my-overlay.overlays.default
       ];
     };
   in
