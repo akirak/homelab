@@ -56,6 +56,7 @@
     nixos-generators,
     ...
   } @ inputs: let
+    inherit (nixpkgs) lib;
     overlayModule = {
       nixpkgs.overlays = [
         (final: prev: {
@@ -63,6 +64,11 @@
           disko = inputs.disko.packages.${prev.system}.disko;
         })
       ];
+    };
+    configurationRevision = {
+      # Let 'nixos-version --json' know about the Git revision of this
+      # flake.
+      system.configurationRevision = lib.mkIf (inputs.self ? rev) inputs.self.rev;
     };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
@@ -159,6 +165,22 @@
             ];
           };
 
+          # Laptop
+          hui = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = {
+              homeUser = "akirakomamura";
+            };
+            modules = [
+              overlayModule
+              configurationRevision
+              inputs.disko.nixosModules.disko
+              inputs.home-manager.nixosModules.home-manager
+              inputs.self.nixosModules.asus-br1100
+              ./machines/hui
+            ];
+          };
+
           # zhuang = nixpkgs.lib.nixosSystem {
           #   system = "aarch64-linux";
           #   modules = [
@@ -173,6 +195,7 @@
 
         diskoConfigurations = {
           shu = import ./machines/shu/disko.nix;
+          hui = import ./machines/hui/disko.nix;
         };
 
         nixosModules = {

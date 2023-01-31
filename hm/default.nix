@@ -36,7 +36,8 @@ in {
     firefox.enable = enableGraphical;
     foot.enable = enableWayland;
     foot.server.enable = enableFoot;
-    foot.settings.main.font = "JetBrainsMono NF:size=10.5";
+    # TODO: Add font package
+    # foot.settings.main.font = "JetBrainsMono NF:size=10.5";
   };
 
   services = {

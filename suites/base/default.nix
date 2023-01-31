@@ -1,4 +1,9 @@
 {
+  self,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ../../profiles/openssh
   ];
