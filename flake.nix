@@ -150,34 +150,26 @@
 
       flake = {
         nixosConfigurations = let
-          mkSystem = hostName: {
-            system,
-            specialArgs ? {},
-            extraModules ? [],
-          }:
-            nixpkgs.lib.nixosSystem {
-              inherit system specialArgs;
-              modules =
-                [
-                  overlayModule
-                  {
-                    # Let 'nixos-version --json' know about the Git revision of this
-                    # flake.
-                    system.configurationRevision =
-                      if self ? lastModifiedDate && self ? rev
-                      then "${self.lastModifiedDate}-${self.rev}"
-                      else if self ? rev
-                      then self.rev
-                      else null;
-                  }
-                  inputs.disko.nixosModules.disko
-                  inputs.home-manager.nixosModules.home-manager
-                  (./machines + "/${hostName}")
-                ]
-                ++ extraModules;
-            };
+          makeRevisionString = src:
+            if src ? lastModifiedDate && src ? rev
+            then "${src.lastModifiedDate}-${src.rev}"
+            else if src ? rev
+            then src.rev
+            else null;
+          mkSystem' = hostName: args @ {extraModules, ...}:
+            self.lib.mkSystem hostName (args
+              // {
+                extraModules =
+                  extraModules
+                  ++ [
+                    {
+                      # Set the version returned by `nixos-version --json' command
+                      system.configurationRevision = makeRevisionString self;
+                    }
+                  ];
+              });
         in
-          builtins.mapAttrs mkSystem {
+          builtins.mapAttrs mkSystem' {
             shu = {
               system = "x86_64-linux";
             };
@@ -212,6 +204,28 @@
           asus-br1100 = import ./modules/models/asus-br1100 {
             inherit (inputs) nixos-hardware;
           };
+        };
+
+        lib = {
+          /*
+          Build a NixOS system with the modules.
+          */
+          mkSystem = hostName: {
+            system,
+            specialArgs ? {},
+            extraModules ? [],
+          }:
+            nixpkgs.lib.nixosSystem {
+              inherit system specialArgs;
+              modules =
+                [
+                  overlayModule
+                  inputs.disko.nixosModules.disko
+                  inputs.home-manager.nixosModules.home-manager
+                  (./machines + "/${hostName}")
+                ]
+                ++ extraModules;
+            };
         };
       };
     };
