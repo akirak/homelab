@@ -4,6 +4,7 @@
     ../../suites/base
     ../../suites/graphical
     ../../suites/desktop
+    ../../profiles/home-manager
     ../../profiles/nix
     ../../profiles/sudo
     ../../profiles/tailscale
