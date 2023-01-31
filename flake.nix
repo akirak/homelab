@@ -62,12 +62,11 @@
     inherit (nixpkgs) lib;
     overlayModule = {
       nixpkgs.overlays = [
-        (final: prev: (
-          {
-            unstable = unstable.legacyPackages.${prev.system};
-            disko = inputs.disko.packages.${prev.system}.disko;
-          }
-        ))
+        (final: prev: {
+          unstable = unstable.legacyPackages.${prev.system};
+          disko = inputs.disko.packages.${prev.system}.disko;
+          zsh-plugins = inputs.my-overlay.zsh-plugins;
+        })
         inputs.my-overlay.overlays.default
       ];
     };

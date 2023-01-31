@@ -18,29 +18,28 @@
       size = 5000;
     };
 
-    # TODO: Add plugin inputs
-    # plugins = [
-    #   {
-    #     name = "zsh-history-substring-search";
-    #     src = pkgs.zsh-history-substring-search;
-    #   }
-    #   {
-    #     name = "fzy";
-    #     src = pkgs.zsh-fzy;
-    #   }
-    #   {
-    #     name = "nix-shell";
-    #     src = pkgs.zsh-nix-shell;
-    #   }
-    #   {
-    #     name = "fast-syntax-highlighting";
-    #     src = pkgs.zsh-fast-syntax-highlighting;
-    #   }
-    #   {
-    #     name = "history-filter";
-    #     src = pkgs.zsh-history-filter;
-    #   }
-    # ];
+    plugins = [
+      {
+        name = "zsh-history-substring-search";
+        src = pkgs.zsh-history-substring-search;
+      }
+      {
+        name = "fzy";
+        src = pkgs.zsh-plugins.zsh-fzy;
+      }
+      {
+        name = "nix-shell";
+        src = pkgs.zsh-plugins.zsh-nix-shell;
+      }
+      {
+        name = "fast-syntax-highlighting";
+        src = pkgs.zsh-plugins.zsh-fast-syntax-highlighting;
+      }
+      {
+        name = "history-filter";
+        src = pkgs.zsh-plugins.zsh-history-filter;
+      }
+    ];
 
     sessionVariables = {
       "DIRSTACKSIZE" = "20";
