@@ -49,7 +49,7 @@
       };
       flake = {
         overlays.default = final: _prev: makePackages final;
-        zsh-plugins = _: _:
+        zsh-plugins =
           nixpkgs.lib.genAttrs
           [
             "zsh-fzy"
