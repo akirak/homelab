@@ -2,7 +2,31 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.flake-parts.url = "github:hercules-ci/flake-parts";
 
-  outputs = inputs @ {flake-parts, ...}: let
+  # zsh plugins
+  inputs = {
+    zsh-fast-syntax-highlighting = {
+      url = "github:zdharma-continuum/fast-syntax-highlighting";
+      flake = false;
+    };
+    zsh-nix-shell = {
+      url = "github:chisui/zsh-nix-shell";
+      flake = false;
+    };
+    zsh-fzy = {
+      url = "github:aperezdc/zsh-fzy";
+      flake = false;
+    };
+    zsh-history-filter = {
+      url = "github:MichaelAquilina/zsh-history-filter";
+      flake = false;
+    };
+  };
+
+  outputs = inputs @ {
+    nixpkgs,
+    flake-parts,
+    ...
+  }: let
     makePackages = pkgs: {
       github-linguist = pkgs.callPackage ./development/github-linguist {};
 
@@ -25,6 +49,15 @@
       };
       flake = {
         overlays.default = final: _prev: makePackages final;
+        zsh-plugins = _: _:
+          nixpkgs.lib.genAttrs
+          [
+            "zsh-fzy"
+            "zsh-nix-shell"
+            "zsh-fast-syntax-highlighting"
+            "zsh-history-filter"
+          ]
+          (name: inputs.${name}.outPath);
       };
     };
 }

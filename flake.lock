@@ -55,7 +55,75 @@
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "zsh-fast-syntax-highlighting": "zsh-fast-syntax-highlighting",
+        "zsh-fzy": "zsh-fzy",
+        "zsh-history-filter": "zsh-history-filter",
+        "zsh-nix-shell": "zsh-nix-shell"
+      }
+    },
+    "zsh-fast-syntax-highlighting": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1668912623,
+        "narHash": "sha256-wLpgkX53wzomHMEpymvWE86EJfxlIb3S8TPy74WOBD4=",
+        "owner": "zdharma-continuum",
+        "repo": "fast-syntax-highlighting",
+        "rev": "7c390ee3bfa8069b8519582399e0a67444e6ea61",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zdharma-continuum",
+        "repo": "fast-syntax-highlighting",
+        "type": "github"
+      }
+    },
+    "zsh-fzy": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1610699933,
+        "narHash": "sha256-C5cflRJqi+T53izr2PBJsFW6X3CVgIlY+hGT3ODC9lI=",
+        "owner": "aperezdc",
+        "repo": "zsh-fzy",
+        "rev": "519327d9990fbea50f71649e378e650f594bb39b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aperezdc",
+        "repo": "zsh-fzy",
+        "type": "github"
+      }
+    },
+    "zsh-history-filter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1617627915,
+        "narHash": "sha256-DSq/4j4KEtirrjB3nW8fR7BOFtLdaLhlnIMv2A6Ec6s=",
+        "owner": "MichaelAquilina",
+        "repo": "zsh-history-filter",
+        "rev": "49d7987f093374fb72f0f7eef2d63e641085a226",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MichaelAquilina",
+        "repo": "zsh-history-filter",
+        "type": "github"
+      }
+    },
+    "zsh-nix-shell": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1648749800,
+        "narHash": "sha256-BjgMhILEL/qdgfno4LR64LSB8n9pC9R+gG7IQWwgyfQ=",
+        "owner": "chisui",
+        "repo": "zsh-nix-shell",
+        "rev": "af6f8a266ea1875b9a3e86e14796cadbe1cfbf08",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chisui",
+        "repo": "zsh-nix-shell",
+        "type": "github"
       }
     }
   },
