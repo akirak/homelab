@@ -154,7 +154,7 @@
             else if src ? rev
             then src.rev
             else null;
-          mkSystem' = hostName: args @ {extraModules, ...}:
+          mkSystem' = hostName: args @ {extraModules ? [], ...}:
             self.lib.mkSystem hostName (args
               // {
                 extraModules =
