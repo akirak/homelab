@@ -8,6 +8,10 @@ You also have to import home-manager.nixosModules.home-manager
   config,
   ...
 }: {
+  imports = [
+    ../nixpkgs/channels.nix
+  ];
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
