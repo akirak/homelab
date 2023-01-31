@@ -121,7 +121,7 @@
 
         packages.launch-desktop-vm = let
           inherit
-            (self.lib.mkSystem "microvm-gui" {
+            (self.lib.mkSystem "demo-microvm" {
               system = "x86_64-linux";
               specialArgs = {
                 hypervisor = "qemu";
@@ -219,6 +219,9 @@
               inherit system specialArgs;
               modules =
                 [
+                  {
+                    networking.hostName = hostName;
+                  }
                   overlayModule
                   inputs.disko.nixosModules.disko
                   inputs.home-manager.nixosModules.home-manager

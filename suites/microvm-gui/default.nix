@@ -16,7 +16,6 @@ in {
     ../../profiles/microvm/ssh.nix
   ];
 
-  networking.hostName = "demo-microvm";
   system.stateVersion = "22.11";
 
   # Set a message printed to the console before login.

@@ -8,7 +8,6 @@
     ./boot.nix
   ];
 
-  networking.hostName = "shu";
   system.stateVersion = "22.11";
   networking.hostId = "9bc2dd3d";
   time.timeZone = "America/Los_Angeles";

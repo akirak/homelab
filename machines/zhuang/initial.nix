@@ -16,7 +16,6 @@
     ];
   };
 
-  networking.hostName = "zhuang";
   time.timeZone = "Asia/Tokyo";
   system.stateVersion = "22.11";
 }

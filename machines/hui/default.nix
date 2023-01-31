@@ -10,7 +10,6 @@
     ../../profiles/tailscale
   ];
 
-  networking.hostName = "hui";
   system.stateVersion = "22.11";
   disko.devices = import ./disko.nix {};
 
