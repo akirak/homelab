@@ -50,6 +50,7 @@
   };
 
   outputs = {
+    self,
     nixpkgs,
     unstable,
     flake-parts,
@@ -162,7 +163,12 @@
                   {
                     # Let 'nixos-version --json' know about the Git revision of this
                     # flake.
-                    system.configurationRevision = lib.mkIf (inputs.self ? rev) inputs.self.rev;
+                    system.configurationRevision =
+                      if self ? lastModifiedDate && self ? rev
+                      then "${self.lastModifiedDate}-${self.rev}"
+                      else if self ? rev
+                      then self.rev
+                      else null;
                   }
                   inputs.disko.nixosModules.disko
                   inputs.home-manager.nixosModules.home-manager
