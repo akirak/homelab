@@ -19,6 +19,8 @@
     networkmanager.enable = true;
   };
 
+  hardware.opengl.enable = true;
+
   # systemd.services.NetworkManager-wait-online.enable = true;
 
   services.journald.extraConfig = ''
