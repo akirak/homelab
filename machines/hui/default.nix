@@ -8,7 +8,6 @@
     ../../profiles/nix
     ../../profiles/sudo
     ../../profiles/tailscale
-    ../../profiles/window-manager/generic.nix
   ];
 
   system.stateVersion = "22.11";

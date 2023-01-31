@@ -4,7 +4,8 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    flameshot
+    # flameshot
+    pavucontrol
   ];
 
   fonts = {
