@@ -65,11 +65,6 @@
         })
       ];
     };
-    configurationRevision = {
-      # Let 'nixos-version --json' know about the Git revision of this
-      # flake.
-      system.configurationRevision = lib.mkIf (inputs.self ? rev) inputs.self.rev;
-    };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
@@ -153,45 +148,54 @@
       };
 
       flake = {
-        nixosConfigurations = {
-          shu = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-              overlayModule
-              # You cannot add disko module to the root module list of
-              # flake-parts. It causes infinite recursion.
-              inputs.disko.nixosModules.disko
-              ./machines/shu
-            ];
-          };
-
-          # Laptop
-          hui = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            specialArgs = {
-              homeUser = "akirakomamura";
+        nixosConfigurations = let
+          mkSystem = hostName: {
+            system,
+            specialArgs ? {},
+            extraModules ? [],
+          }:
+            nixpkgs.lib.nixosSystem {
+              inherit system specialArgs;
+              modules =
+                [
+                  overlayModule
+                  {
+                    # Let 'nixos-version --json' know about the Git revision of this
+                    # flake.
+                    system.configurationRevision = lib.mkIf (inputs.self ? rev) inputs.self.rev;
+                  }
+                  inputs.disko.nixosModules.disko
+                  inputs.home-manager.nixosModules.home-manager
+                  (./machines + "/${hostName}")
+                ]
+                ++ extraModules;
             };
-            modules = [
-              overlayModule
-              configurationRevision
-              inputs.disko.nixosModules.disko
-              inputs.home-manager.nixosModules.home-manager
-              inputs.self.nixosModules.asus-br1100
-              ./machines/hui
-            ];
-          };
+        in
+          builtins.mapAttrs mkSystem {
+            shu = {
+              system = "x86_64-linux";
+            };
+            hui = {
+              system = "x86_64-linux";
+              specialArgs = {
+                homeUser = "akirakomamura";
+              };
+              extraModules = [
+                inputs.self.nixosModules.asus-br1100
+              ];
+            };
 
-          # zhuang = nixpkgs.lib.nixosSystem {
-          #   system = "aarch64-linux";
-          #   modules = [
-          #     overlayModule
-          #     # <nixpkgs/nixos/modules/installer/sd-card/sd-image-aarch64.nix>
-          #     # inputs.disko.nixosModules.disko
-          #     ./machines/zhuang/initial.nix
-          #     ./machines/zhuang/rest.nix
-          #   ];
-          # };
-        };
+            # zhuang = nixpkgs.lib.nixosSystem {
+            #   system = "aarch64-linux";
+            #   modules = [
+            #     overlayModule
+            #     # <nixpkgs/nixos/modules/installer/sd-card/sd-image-aarch64.nix>
+            #     # inputs.disko.nixosModules.disko
+            #     ./machines/zhuang/initial.nix
+            #     ./machines/zhuang/rest.nix
+            #   ];
+            # };
+          };
 
         diskoConfigurations = {
           shu = import ./machines/shu/disko.nix;
