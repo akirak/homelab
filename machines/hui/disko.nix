@@ -1,7 +1,5 @@
-{ luksKey ? "/persist/luks.key", ... }:
-{
+{luksKey ? "/persist/luks.key", ...}: {
   disk = {
-
     ssd = {
       device = "/dev/nvme0n1";
       type = "disk";
@@ -9,7 +7,6 @@
         type = "table";
         format = "gpt";
         partitions = [
-
           {
             type = "partition";
             name = "ESP";
