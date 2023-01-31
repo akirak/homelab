@@ -24,7 +24,7 @@ jobs:
       with:
         extra_nix_config: |
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-          flake-registry = https://raw.githubusercontent.com/akirak/flake-pins/master/registry.json
+          accept-flake-config = true
 
     - uses: cachix/cachix-action@v12
       with:
@@ -33,6 +33,6 @@ jobs:
         pushFilter: '-source$'
 
     - name: Check formatting
-      run: nix develop --accept-flake-config -c treefmt --fail-on-change
+      run: nix develop -c treefmt --fail-on-change
 
     - run: nix flake check

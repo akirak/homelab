@@ -16,7 +16,7 @@ jobs:
       with:
         extra_nix_config: |
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-          flake-registry = https://raw.githubusercontent.com/akirak/flake-pins/master/registry.json
+          accept-flake-config = true
     - uses: DeterminateSystems/update-flake-lock@v16
       with:
         pr-title: "Update flake.lock"
