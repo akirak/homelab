@@ -108,7 +108,10 @@
         packages.cachix-deploys = import ./lib/cachix-deploy.nix {
           inherit pkgs;
           inherit (inputs) self cachix-deploy-flake;
-          nixosHosts = ["shu" "hui"];
+          nixosHosts = [
+            # "shu"
+            "hui"
+          ];
         };
 
         packages.rpi-bootstrap-sd-image = nixos-generators.nixosGenerate {
