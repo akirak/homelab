@@ -1,4 +1,8 @@
-{homeUser, ...}: {
+{
+  homeUser,
+  pkgs,
+  ...
+}: {
   imports = [
     ./boot.nix
     ../../suites/base
@@ -8,6 +12,9 @@
     ../../profiles/nix
     ../../profiles/sudo
     ../../profiles/tailscale
+    ../../profiles/wayland/wlroots.nix
+    ../../profiles/wayland/cage/foot.nix
+    ../../profiles/wayland/cage/firefox.nix
   ];
 
   system.stateVersion = "22.11";
@@ -43,5 +50,14 @@
       "systemd-journal"
       # "docker"
     ];
+  };
+
+  services.greetd = {
+    enable = true;
+    settings.default_session = {
+      # You have to install *.desktop files to the directory
+      command = "${pkgs.greetd.tuigreet}/bin/tuigreet -t -s /etc/wayland-sessions";
+      user = homeUser;
+    };
   };
 }
