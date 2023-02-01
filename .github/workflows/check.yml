@@ -5,20 +5,12 @@ on:
 
   pull_request:
 
-  workflow_call:
-    inputs:
-      ref:
-        required: false
-        type: string
-
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
 
     - uses: actions/checkout@v3
-      with:
-        ref: ${{ inputs.ref || github.ref }}
 
     - uses: cachix/install-nix-action@v18
       with:
