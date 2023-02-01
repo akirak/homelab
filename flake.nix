@@ -1,6 +1,14 @@
 {
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.flake-parts.url = "github:hercules-ci/flake-parts";
+  inputs.flake-utils.url = "flake-utils";
+
+  # Pinned packages from flakes
+  inputs = {
+    epubinfo.url = "github:akirak/epubinfo";
+    epubinfo.inputs.flake-utils.follows = "flake-utils";
+    squasher.url = "github:akirak/squasher";
+  };
 
   # zsh plugins
   inputs = {
@@ -40,6 +48,9 @@
       mermaid-cli = pkgs.nodePackages.mermaid-cli.overrideAttrs (_: {
         meta.mainProgram = "/bin/mmdc";
       });
+
+      inherit (inputs.epubinfo.packages.${pkgs.system}) epubinfo;
+      inherit (inputs.squasher.packages.${pkgs.system}) squasher;
     };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {

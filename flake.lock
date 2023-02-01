@@ -1,5 +1,26 @@
 {
   "nodes": {
+    "epubinfo": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1674400176,
+        "narHash": "sha256-GqyveOJRJzt09Znvdy/fA3qDCeuP5WeBZmrDq1OZZ9k=",
+        "owner": "akirak",
+        "repo": "epubinfo",
+        "rev": "ed20a90b91d869e87a0b30f3152df09ed1c389df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "akirak",
+        "repo": "epubinfo",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -18,20 +39,32 @@
         "type": "github"
       }
     },
-    "nixpkgs": {
+    "flake-utils": {
       "locked": {
-        "lastModified": 1675115703,
-        "narHash": "sha256-4zetAPSyY0D77x+Ww9QBe8RHn1akvIvHJ/kgg8kGDbk=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "2caf4ef5005ecc68141ecb4aac271079f7371c44",
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
         "type": "github"
       },
       "original": {
+        "id": "flake-utils",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1671525405,
+        "narHash": "sha256-MEgNxm/oRt5w4ycMENewfZQKOak0ixmjVPfXM96N1FA=",
         "owner": "NixOS",
-        "ref": "nixos-unstable",
         "repo": "nixpkgs",
+        "rev": "cbe419ed4c8f98bd82d169c321d339ea30904f1f",
         "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
       }
     },
     "nixpkgs-lib": {
@@ -52,14 +85,66 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1675115703,
+        "narHash": "sha256-4zetAPSyY0D77x+Ww9QBe8RHn1akvIvHJ/kgg8kGDbk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2caf4ef5005ecc68141ecb4aac271079f7371c44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1642609835,
+        "narHash": "sha256-ZwJnV4mdis28u5vH240ec2mrApuEJYJekn23qlTwJ8c=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "77aa71f66fd05d9e7b7d1c084865d703a8008ab7",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-21.11",
+        "type": "indirect"
+      }
+    },
     "root": {
       "inputs": {
+        "epubinfo": "epubinfo",
         "flake-parts": "flake-parts",
-        "nixpkgs": "nixpkgs",
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs_2",
+        "squasher": "squasher",
         "zsh-fast-syntax-highlighting": "zsh-fast-syntax-highlighting",
         "zsh-fzy": "zsh-fzy",
         "zsh-history-filter": "zsh-history-filter",
         "zsh-nix-shell": "zsh-nix-shell"
+      }
+    },
+    "squasher": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1652455068,
+        "narHash": "sha256-Rbpo0JwEZbIOM8nTL0ZSbK7Oa9JHXUKxQCq0uGT2vtM=",
+        "owner": "akirak",
+        "repo": "squasher",
+        "rev": "32bfe4bf0c55395511522db96a6a15ed366881c9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "akirak",
+        "repo": "squasher",
+        "type": "github"
       }
     },
     "zsh-fast-syntax-highlighting": {
