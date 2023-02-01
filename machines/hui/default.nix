@@ -14,6 +14,7 @@
     ../../profiles/sudo
     ../../profiles/tailscale
     ../../profiles/wayland/wlroots.nix
+    ../../profiles/wayland/cage/emacs.nix
     ../../profiles/wayland/cage/foot.nix
     ../../profiles/wayland/cage/firefox.nix
     ../../profiles/nix/cachix-deploy.nix
