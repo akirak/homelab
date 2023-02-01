@@ -1,6 +1,7 @@
 {
   homeUser,
   pkgs,
+  emacs-config,
   ...
 }: {
   imports = [
@@ -58,6 +59,26 @@
       # You have to install *.desktop files to the directory
       command = "${pkgs.greetd.tuigreet}/bin/tuigreet -t -s /etc/wayland-sessions";
       user = homeUser;
+    };
+  };
+
+  home-manager.users.${homeUser} = {
+    programs.emacs-twist = {
+      enable = true;
+      emacsclient.enable = true;
+      directory = ".local/share/emacs";
+      earlyInitFile = emacs-config.outPath + "/emacs/early-init.el";
+      config = emacs-config.packages.${pkgs.system}.emacs-config.override {
+        extraFeatures = [
+          "mermaid"
+          "OCaml"
+        ];
+        prependToInitFile = ''
+          ;; -*- lexical-binding: t; no-byte-compile: t; -*-
+          (setq custom-file (locate-user-emacs-file "custom.el"))
+          (setq akirak/enabled-status-tags t)
+        '';
+      };
     };
   };
 }

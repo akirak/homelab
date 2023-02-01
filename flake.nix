@@ -39,6 +39,8 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
 
     my-overlay.url = "github:akirak/nixpkgs-overlay";
+    twist.url = "github:emacs-twist/twist.nix";
+    emacs-config.url = "github:akirak/nix-config/develop";
   };
 
   nixConfig = {
@@ -69,6 +71,14 @@
         })
         inputs.my-overlay.overlays.default
       ];
+    };
+
+    twistHomeModule = {homeUser, ...}: {
+      home-manager.users.${homeUser} = {
+        imports = [
+          inputs.twist.homeModules.emacs-twist
+        ];
+      };
     };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
@@ -179,9 +189,11 @@
               system = "x86_64-linux";
               specialArgs = {
                 homeUser = "akirakomamura";
+                inherit (inputs) emacs-config;
               };
               extraModules = [
                 inputs.self.nixosModules.asus-br1100
+                twistHomeModule
               ];
             };
 
