@@ -13,13 +13,7 @@ on:
     - 'hm/**'
 
 jobs:
-  check:
-    uses: ./.github/workflows/check.yml
-    with:
-      ref: ${{ github.ref_name }}
-
   build-and-deploy:
-    needs: ['check']
     runs-on: ubuntu-latest
 
     env:
@@ -40,6 +34,8 @@ jobs:
     - uses: cachix/cachix-action@v12
       with:
         name: akirak
+
+    - run: nix flake check
 
     - name: Build the deploys
       id: build
