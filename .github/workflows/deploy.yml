@@ -19,6 +19,7 @@ jobs:
       ref: ${{ github.ref_name }}
 
   build-and-deploy:
+    needs: ['check']
     runs-on: ubuntu-latest
 
     env:
