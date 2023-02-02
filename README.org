@@ -1,7 +1,16 @@
 # -*- org-id-link-to-org-use-id: nil; -*-
 * Home Lab
-This repository is a configuration for NixOS servers running in my home network.
-** List of machines in the network
-FIXME
-** Procedures
-FIXME
+This repository contains the configuration files of my NixOS machines.
+** Features
+- Provided as a Nix flake
+- Targeting various hosts (both cloud and physical). See below.
+- Containing images for bootstrapping
+- Using [[https://docs.cachix.org/deploy/][Cachix Deploy]] for agent-based, pull-style automated updates
+** Host environments
+- Laptop (ASUS BR1100C)
+- Hetzner Cloud
+- +Raspberry Pi 3B+​
+- QEMU for prototyping configuration
+** Note
+To provision a new virtual machine instance to Hetzner Cloud, I use Terraform.
+I have a continuous deployment setup on GitHub Actions, but the configuration is not part of this repository.
