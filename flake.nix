@@ -1,11 +1,12 @@
 {
   inputs = {
-    # From the registry
-    nixpkgs.url = "stable";
-    unstable.url = "unstable";
-    home-manager.url = "home-manager";
-    nix-darwin.url = "nix-darwin";
-    flake-utils.url = "flake-utils";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    home-manager.url = "github:nix-community/home-manager";
+    nix-darwin.url = "github:LnL7/nix-darwin";
+
+    flake-utils.url = "github:numtide/flake-utils";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
