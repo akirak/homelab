@@ -10,5 +10,5 @@
   # I don't know if this parameter is necessary.
   boot.kernelParams = ["nouveau.modeset=0"];
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_0;
+  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_0;
 }
