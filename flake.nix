@@ -63,6 +63,7 @@
     ...
   } @ inputs: let
     inherit (nixpkgs) lib;
+
     overlayModule = {
       nixpkgs.overlays = [
         (final: prev: {
@@ -137,25 +138,18 @@
           .build
           .isoImage;
 
-        packages.launch-desktop-vm = let
-          inherit
-            (self.lib.mkSystem "demo-microvm" {
-              system = "x86_64-linux";
-              specialArgs = {
-                hypervisor = "qemu";
-                homeUser = "root";
-              };
-              extraModules = [
-                inputs.microvm.nixosModules.microvm
-                ./suites/microvm-gui
-                ./profiles/desktop/plasma.nix
-                ./profiles/home-manager
-              ];
-            })
-            config
-            ;
-        in
-          config.microvm.runner.${config.microvm.hypervisor};
+        packages.launch-desktop-vm = self.lib.makeMicroVMSystem "demo-microvm" {
+          system = "x86_64-linux";
+          specialArgs = {
+            hypervisor = "qemu";
+            homeUser = "root";
+          };
+          modules = [
+            ./suites/microvm-gui
+            ./profiles/desktop/plasma.nix
+            ./profiles/home-manager
+          ];
+        };
 
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = [
@@ -249,6 +243,25 @@
                 ++ lib.optional (builtins.pathExists machinePath) machinePath
                 ++ extraModules;
             };
+
+          makeMicroVMSystem = name: {
+            system,
+            specialArgs,
+            modules,
+          }: let
+            inherit
+              (self.lib.mkSystem name {
+                inherit system specialArgs;
+                extraModules =
+                  [
+                    inputs.microvm.nixosModules.microvm
+                  ]
+                  ++ modules;
+              })
+              config
+              ;
+          in
+            config.microvm.runner.${config.microvm.hypervisor};
         };
       };
     };
