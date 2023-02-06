@@ -151,6 +151,17 @@
           ];
         };
 
+        packages.launch-container = self.lib.makeMicroVMSystem "demo-microvm" {
+          inherit system;
+          specialArgs = {
+            hypervisor = "qemu";
+            homeUser = "root";
+          };
+          modules = [
+            ./suites/microvm
+          ];
+        };
+
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = [
             config.treefmt.build.wrapper
