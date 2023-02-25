@@ -12,6 +12,8 @@ You also have to import home-manager.nixosModules.home-manager
     ../nixpkgs/channels.nix
   ];
 
+  users.defaultUserShell = pkgs.zsh;
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
