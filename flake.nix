@@ -227,6 +227,14 @@
           asus-br1100 = import ./modules/models/asus-br1100 {
             inherit (inputs) nixos-hardware;
           };
+          hmProfile = {
+            imports = [
+              inputs.home-manager.nixosModules.home-manager
+              overlayModule
+              twistHomeModule
+              ./profiles/home-manager
+            ];
+          };
         };
 
         lib = {
