@@ -80,5 +80,19 @@ in {
       xh
       rclone
     ]
-    ++ lib.optionals enableGraphical ([pkgs.blanket] ++ fontPackages);
+    ++ lib.optionals enableGraphical ([pkgs.blanket pkgs.pavucontrol] ++ fontPackages)
+    ++ lib.optionals enableWayland [
+      pkgs.wayshot
+      pkgs.wf-recorder
+      pkgs.slurp # Used with wayshot
+
+      (pkgs.writeShellApplication {
+        name = "lock-screen";
+        runtimeInputs = [pkgs.swaylock-effects];
+        # TODO: Use a color scheme
+        text = ''
+          swaylock -f --clock --fade-in 0.5
+        '';
+      })
+    ];
 }
