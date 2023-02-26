@@ -6,6 +6,7 @@ You also have to import home-manager.nixosModules.home-manager
 {
   homeUser,
   config,
+  pkgs,
   ...
 }: {
   imports = [
