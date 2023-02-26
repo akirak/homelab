@@ -39,6 +39,10 @@
 
   services.auto-cpufreq.enable = true;
 
+  zramSwap = {
+    enable = true;
+  };
+
   users.users.${homeUser} = {
     uid = 1000;
     isNormalUser = true;
