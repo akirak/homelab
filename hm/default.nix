@@ -62,6 +62,7 @@ in {
       # Development
       gh
       pre-commit
+      alejandra
 
       # squasher
       # drawio
