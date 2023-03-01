@@ -67,7 +67,7 @@ in {
       # squasher
       # drawio
       # emacsclient
-      hunspellDicts.en_GB-ize
+      # hunspellDicts.en_US
 
       # Media
       git-annex
