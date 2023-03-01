@@ -47,6 +47,8 @@ in {
     syncthing.enable = true;
   };
 
+  i18n.spell.hunspellDicts = hd: [hd.en_GB-ize];
+
   home.packages = with pkgs;
     [
       # Utilities
@@ -67,7 +69,6 @@ in {
       # squasher
       # drawio
       # emacsclient
-      hunspellDicts.en_GB-ize
 
       # Media
       git-annex
