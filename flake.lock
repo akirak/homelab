@@ -387,11 +387,11 @@
         "utils": "utils_6"
       },
       "locked": {
-        "lastModified": 1677549843,
-        "narHash": "sha256-fyemCi+B6+cp+wtrKBuSx05zmthUgqeLcIGsm9/BzFY=",
+        "lastModified": 1677641281,
+        "narHash": "sha256-DfU7oPsWuUUlxvEU0xt0w8DN6YFJy0IY6Kf/v+ZyJ6g=",
         "owner": "akirak",
         "repo": "nix-config",
-        "rev": "5e05d61c5fdf2af32404cce519ec29fc926875a5",
+        "rev": "3be8569b173cd883167ada09ab42c05c2593a10e",
         "type": "github"
       },
       "original": {
@@ -1301,11 +1301,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1677424389,
-        "narHash": "sha256-CIYXl7EzCOPmR1PggOPTDyHo2gM26fY4S4YvPRoB82I=",
+        "lastModified": 1677640450,
+        "narHash": "sha256-bJRQ/+N3n1QOvLMH3AK2L/o6Mrl0WK6B1NkXoGmOtAU=",
         "owner": "akirak",
         "repo": "homelab",
-        "rev": "a6c20bce2bd8c9fcf718ee12f313d9216137555e",
+        "rev": "d44fe31a441e89ac78f3c732ecb3b3627f163290",
         "type": "github"
       },
       "original": {
