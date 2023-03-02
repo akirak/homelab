@@ -39,6 +39,7 @@ in {
     foot.server.enable = enableFoot;
     # TODO: Add font package
     foot.settings.main.font = "JetBrainsMono NF:size=10.5";
+    vscode.enable = true;
   };
 
   services = {
