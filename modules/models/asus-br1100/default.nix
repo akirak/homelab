@@ -1,7 +1,7 @@
 {nixos-hardware}: {pkgs, ...}: {
   imports = [
     (nixos-hardware.outPath + "/common/pc/laptop")
-    (nixos-hardware.outPath + "/common/gpu/intel.nix")
+    (nixos-hardware.outPath + "/common/gpu/intel")
     ./r8168.nix
     ./wireless.nix
     ./acpi_call.nix
