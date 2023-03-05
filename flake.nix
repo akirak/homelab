@@ -19,6 +19,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    impermanence.url = "github:nix-community/impermanence";
+
     cachix-deploy-flake = {
       url = "github:cachix/cachix-deploy-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,7 +43,7 @@
 
     my-overlay.url = "github:akirak/nixpkgs-overlay";
     twist.url = "github:emacs-twist/twist.nix";
-    emacs-config.url = "github:akirak/nix-config/develop";
+    emacs-config.url = "github:akirak/emacs-config/develop";
   };
 
   nixConfig = {
@@ -205,6 +207,17 @@
                 twistHomeModule
               ];
             };
+            li = {
+              system = "x86_64-linux";
+              channel = unstable;
+              specialArgs = {
+                homeUser = "akirakomamura";
+                inherit (inputs) emacs-config;
+              };
+              extraModules = [
+                twistHomeModule
+              ];
+            };
 
             # zhuang = nixpkgs.lib.nixosSystem {
             #   system = "aarch64-linux";
@@ -243,12 +256,13 @@
           */
           mkSystem = hostName: {
             system,
+            channel ? inputs.nixpkgs,
             specialArgs ? {},
             extraModules ? [],
           }: let
             machinePath = ./machines + "/${hostName}";
           in
-            nixpkgs.lib.nixosSystem {
+            channel.lib.nixosSystem {
               inherit system specialArgs;
               modules =
                 [
@@ -258,6 +272,7 @@
                   overlayModule
                   inputs.disko.nixosModules.disko
                   inputs.home-manager.nixosModules.home-manager
+                  inputs.impermanence.nixosModules.impermanence
                 ]
                 ++ lib.optional (builtins.pathExists machinePath) machinePath
                 ++ extraModules;

@@ -19,15 +19,33 @@ in {
         description = "Directory containing the NixOS configuration";
         default = "$HOME/config";
       };
+
+      emacsConfigDirectory = lib.mkOption {
+        type = types.str;
+        description = "Directory containing the Emacs configuration";
+        default = "$HOME/emacs-config";
+      };
     };
   };
 
   config = lib.mkIf cfg.enable {
     home.packages = [
       (pkgs.writeShellScriptBin "nixos-rebuild-and-notify" ''
-        cd $HOME/config
-        if nixos-rebuild switch --flake `readlink -f "${cfg.directory}"`#`uname -n` \
-            --print-build-logs --use-remote-sudo; then
+        emacs_config="${cfg.emacsConfigDirectory}"
+        if [[ -d "''${emacs_config}" ]]
+        then
+          flags=(--override-input emacs-config $(readlink -f "''${emacs_config}"))
+        else
+          flags=()
+        fi
+
+        cd "${cfg.directory}"
+        if nixos-rebuild switch \
+            --flake `readlink -f "${cfg.directory}"`#`uname -n` \
+            --option accept-flake-config true \
+            --print-build-logs \
+            --use-remote-sudo \
+            ''${flags[@]}; then
           ${notify} -t 5000 'nixos-rebuild successfully finished'
         else
           ${notify} -t 5000 'nixos-rebuild has failed'
