@@ -112,7 +112,7 @@ in {
     programs.emacs-twist = {
       enable = true;
       emacsclient.enable = true;
-      directory = "emacs";
+      directory = ".local/share/emacs";
       earlyInitFile = emacs-config.outPath + "/emacs/early-init.el";
       createInitFile = true;
       config = emacs-config.packages.${pkgs.system}.emacs-config.override {
