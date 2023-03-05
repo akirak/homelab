@@ -103,17 +103,17 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1678003545,
-        "narHash": "sha256-Gh36LkI/m5Njq16ufOshNrtRFP5+FBoCC5sDYVKGUIU=",
+        "lastModified": 1678004222,
+        "narHash": "sha256-MLoC6ncBct1uFBJ4QcAnPNGboIakmf7FiL55OvBs/0E=",
         "owner": "akirak",
-        "repo": "nix-config",
-        "rev": "088031b83ccbe885c51cb13c70e8e4db496b554e",
+        "repo": "emacs-config",
+        "rev": "fe02be78c162c0502541c2c80a30e3abc0f27622",
         "type": "github"
       },
       "original": {
         "owner": "akirak",
         "ref": "develop",
-        "repo": "nix-config",
+        "repo": "emacs-config",
         "type": "github"
       }
     },

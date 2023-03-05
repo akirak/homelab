@@ -43,7 +43,7 @@
 
     my-overlay.url = "github:akirak/nixpkgs-overlay";
     twist.url = "github:emacs-twist/twist.nix";
-    emacs-config.url = "github:akirak/nix-config/develop";
+    emacs-config.url = "github:akirak/emacs-config/develop";
   };
 
   nixConfig = {
