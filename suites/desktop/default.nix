@@ -1,4 +1,8 @@
 {
+  imports = [
+    ../../profiles/yubikey
+  ];
+
   environment.sessionVariables = {
     "TMPDIR" = "/tmp";
   };
