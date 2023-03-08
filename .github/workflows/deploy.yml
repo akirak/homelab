@@ -13,6 +13,10 @@ on:
     - 'suites/**'
     - 'hm/**'
 
+  repository_dispatch:
+    types:
+    - deploy
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
