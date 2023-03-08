@@ -63,6 +63,9 @@ jobs:
       # Should be deployed instantly. Some machines may be offline, but then you
       # can rerun this workflow
       timeout-minutes: 1
+      # It is very possible that some machines are offline which makes this step
+      # fail. Don't mark the entire workflow run as a failure.
+      continue-on-error: true
       run: |
         cachix deploy activate $DEPLOY_SPEC
       env:
