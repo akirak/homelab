@@ -122,6 +122,7 @@ in {
           # "ChatGPT"
           "copilot"
           "OCaml"
+          "Coq"
           # "Lean4"
           # "lsp_mode"
         ];
