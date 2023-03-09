@@ -29,6 +29,10 @@
       inputs.darwin.follows = "nix-darwin";
     };
 
+    cachix = {
+      url = "github:cachix/cachix/latest";
+    };
+
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,9 +54,11 @@
     registry = "https://raw.githubusercontent.com/akirak/flake-pins/master/registry.json";
     extra-substituters = [
       "https://microvm.cachix.org"
+      "https://cachix.cachix.org"
     ];
     extra-trusted-public-keys = [
       "microvm.cachix.org-1:oXnBc6hRE3eX5rSYdRyMYXnfzcCxC7yKPTbZXALsqys="
+      "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
     ];
   };
 
@@ -72,6 +78,7 @@
           unstable = unstable.legacyPackages.${prev.system};
           disko = inputs.disko.packages.${prev.system}.disko;
           zsh-plugins = inputs.my-overlay.zsh-plugins;
+          cachix = inputs.cachix.packages.${prev.system}.cachix;
         })
         inputs.my-overlay.overlays.default
       ];
