@@ -112,29 +112,13 @@
         "type": "github"
       }
     },
-    "elisp-helpers_2": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1673163170,
-        "narHash": "sha256-U3bnpSxDAnIBY+dx0sllDYD1juY6hwr3MLjytHtX1i4=",
-        "owner": "emacs-twist",
-        "repo": "elisp-helpers",
-        "rev": "41def8036edd13f94089f55e999c754df81de660",
-        "type": "github"
-      },
-      "original": {
-        "owner": "emacs-twist",
-        "repo": "elisp-helpers",
-        "type": "github"
-      }
-    },
     "emacs-config": {
       "inputs": {
         "emacs-overlay": "emacs-overlay",
         "epkgs": "epkgs",
         "flake-no-path": "flake-no-path",
+        "flake-parts": "flake-parts",
         "flake-pins": "flake-pins",
-        "flake-utils-plus": "flake-utils-plus",
         "gnu-elpa": "gnu-elpa",
         "melpa": "melpa",
         "my-overlay": "my-overlay",
@@ -149,11 +133,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1678004222,
-        "narHash": "sha256-MLoC6ncBct1uFBJ4QcAnPNGboIakmf7FiL55OvBs/0E=",
+        "lastModified": 1678433463,
+        "narHash": "sha256-76MTjOjUzo7zKfbmz9vMohbYyBy5bSsc4AHov7CBKJM=",
         "owner": "akirak",
         "repo": "emacs-config",
-        "rev": "fe02be78c162c0502541c2c80a30e3abc0f27622",
+        "rev": "866d85f41d8cac1432a78ea2a84412820840b90c",
         "type": "github"
       },
       "original": {
@@ -331,6 +315,24 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
+        "lastModified": 1678379998,
+        "narHash": "sha256-TZdfNqftHhDuIFwBcN9MUThx5sQXCTeZk9je5byPKRw=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "c13d60b89adea3dc20704c045ec4d50dd964d447",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_2": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_2"
+      },
+      "locked": {
         "lastModified": 1674771137,
         "narHash": "sha256-Zpk1GbEsYrqKmuIZkx+f+8pU0qcCYJoSUwNz1Zk+R00=",
         "owner": "hercules-ci",
@@ -344,9 +346,9 @@
         "type": "github"
       }
     },
-    "flake-parts_2": {
+    "flake-parts_3": {
       "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_2"
+        "nixpkgs-lib": "nixpkgs-lib_3"
       },
       "locked": {
         "lastModified": 1677714448,
@@ -362,9 +364,9 @@
         "type": "github"
       }
     },
-    "flake-parts_3": {
+    "flake-parts_4": {
       "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_3"
+        "nixpkgs-lib": "nixpkgs-lib_4"
       },
       "locked": {
         "lastModified": 1674771137,
@@ -411,24 +413,6 @@
         "type": "github"
       }
     },
-    "flake-utils-plus": {
-      "inputs": {
-        "flake-utils": "flake-utils_3"
-      },
-      "locked": {
-        "lastModified": 1657226504,
-        "narHash": "sha256-GIYNjuq4mJlFgqKsZ+YrgzWm0IpA4axA3MCrdKYj7gs=",
-        "owner": "gytis-ivaskevicius",
-        "repo": "flake-utils-plus",
-        "rev": "2bf0f91643c2e5ae38c1b26893ac2927ac9bd82a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gytis-ivaskevicius",
-        "repo": "flake-utils-plus",
-        "type": "github"
-      }
-    },
     "flake-utils_2": {
       "locked": {
         "lastModified": 1667395993,
@@ -446,21 +430,6 @@
     },
     "flake-utils_3": {
       "locked": {
-        "lastModified": 1644229661,
-        "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "3cecb5b042f7f209c56ffd8371b2711a290ec797",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_4": {
-      "locked": {
         "lastModified": 1667395993,
         "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
         "owner": "numtide",
@@ -473,7 +442,7 @@
         "type": "indirect"
       }
     },
-    "flake-utils_5": {
+    "flake-utils_4": {
       "locked": {
         "lastModified": 1667395993,
         "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
@@ -488,7 +457,7 @@
         "type": "github"
       }
     },
-    "flake-utils_6": {
+    "flake-utils_5": {
       "locked": {
         "lastModified": 1676283394,
         "narHash": "sha256-XX2f9c3iySLCw54rJ/CZs+ZK6IQy7GXNY4nSOyu2QG4=",
@@ -503,7 +472,7 @@
         "type": "github"
       }
     },
-    "flake-utils_7": {
+    "flake-utils_6": {
       "locked": {
         "lastModified": 1667395993,
         "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
@@ -518,22 +487,6 @@
       }
     },
     "fromElisp": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1649625973,
-        "narHash": "sha256-y/7IsibjBGY3uUN9K/VMKPTVAbgsV0Xdi8Hnv6Nq76E=",
-        "owner": "talyz",
-        "repo": "fromElisp",
-        "rev": "edd1301d1fc35440ae6c918ca92039233e3d770f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "talyz",
-        "repo": "fromElisp",
-        "type": "github"
-      }
-    },
-    "fromElisp_2": {
       "flake": false,
       "locked": {
         "lastModified": 1649625973,
@@ -722,8 +675,8 @@
     "my-overlay": {
       "inputs": {
         "epubinfo": "epubinfo",
-        "flake-parts": "flake-parts",
-        "flake-utils": "flake-utils_4",
+        "flake-parts": "flake-parts_2",
+        "flake-utils": "flake-utils_3",
         "nixpkgs": "nixpkgs_5",
         "squasher": "squasher",
         "zsh-fast-syntax-highlighting": "zsh-fast-syntax-highlighting",
@@ -748,8 +701,8 @@
     "my-overlay_2": {
       "inputs": {
         "epubinfo": "epubinfo_2",
-        "flake-parts": "flake-parts_3",
-        "flake-utils": "flake-utils_7",
+        "flake-parts": "flake-parts_4",
+        "flake-utils": "flake-utils_6",
         "nixpkgs": "nixpkgs_11",
         "squasher": "squasher_2",
         "zsh-fast-syntax-highlighting": "zsh-fast-syntax-highlighting_2",
@@ -997,6 +950,24 @@
     "nixpkgs-lib": {
       "locked": {
         "dir": "lib",
+        "lastModified": 1678375444,
+        "narHash": "sha256-XIgHfGvjFvZQ8hrkfocanCDxMefc/77rXeHvYdzBMc8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "130fa0baaa2b93ec45523fdcde942f6844ee9f6e",
+        "type": "github"
+      },
+      "original": {
+        "dir": "lib",
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-lib_2": {
+      "locked": {
+        "dir": "lib",
         "lastModified": 1672350804,
         "narHash": "sha256-jo6zkiCabUBn3ObuKXHGqqORUMH27gYDIFFfLq5P4wg=",
         "owner": "NixOS",
@@ -1012,7 +983,7 @@
         "type": "github"
       }
     },
-    "nixpkgs-lib_2": {
+    "nixpkgs-lib_3": {
       "locked": {
         "dir": "lib",
         "lastModified": 1677407201,
@@ -1030,7 +1001,7 @@
         "type": "github"
       }
     },
-    "nixpkgs-lib_3": {
+    "nixpkgs-lib_4": {
       "locked": {
         "dir": "lib",
         "lastModified": 1672350804,
@@ -1360,7 +1331,7 @@
     "pre-commit-hooks_2": {
       "inputs": {
         "flake-compat": "flake-compat_2",
-        "flake-utils": "flake-utils_5",
+        "flake-utils": "flake-utils_4",
         "gitignore": "gitignore_2",
         "nixpkgs": "nixpkgs_8",
         "nixpkgs-stable": "nixpkgs-stable_2"
@@ -1385,8 +1356,8 @@
         "cachix-deploy-flake": "cachix-deploy-flake",
         "disko": "disko",
         "emacs-config": "emacs-config",
-        "flake-parts": "flake-parts_2",
-        "flake-utils": "flake-utils_6",
+        "flake-parts": "flake-parts_3",
+        "flake-utils": "flake-utils_5",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "microvm": "microvm",
@@ -1396,7 +1367,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_14",
         "treefmt-nix": "treefmt-nix",
-        "twist": "twist_2",
         "unstable": "unstable_2"
       }
     },
@@ -1491,25 +1461,6 @@
       "inputs": {
         "elisp-helpers": "elisp-helpers",
         "fromElisp": "fromElisp"
-      },
-      "locked": {
-        "lastModified": 1677724722,
-        "narHash": "sha256-6YFfX/2rrRQOZ1P6ODNROKjS30EJHAadE3aJHHJ4mRY=",
-        "owner": "emacs-twist",
-        "repo": "twist.nix",
-        "rev": "d7b51931cc383f5180698e1ec37646bb223d7364",
-        "type": "github"
-      },
-      "original": {
-        "owner": "emacs-twist",
-        "repo": "twist.nix",
-        "type": "github"
-      }
-    },
-    "twist_2": {
-      "inputs": {
-        "elisp-helpers": "elisp-helpers_2",
-        "fromElisp": "fromElisp_2"
       },
       "locked": {
         "lastModified": 1677724722,
