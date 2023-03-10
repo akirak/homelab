@@ -31,7 +31,7 @@
 
   hardware.opengl.enable = true;
 
-  # systemd.services.NetworkManager-wait-online.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   services.journald.extraConfig = ''
     SystemMaxFiles=5
