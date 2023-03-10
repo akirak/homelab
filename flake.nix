@@ -46,7 +46,6 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
 
     my-overlay.url = "github:akirak/nixpkgs-overlay";
-    twist.url = "github:emacs-twist/twist.nix";
     emacs-config.url = "github:akirak/emacs-config/develop";
   };
 
@@ -87,7 +86,7 @@
     twistHomeModule = {homeUser, ...}: {
       home-manager.users.${homeUser} = {
         imports = [
-          inputs.twist.homeModules.emacs-twist
+          inputs.emacs-config.homeModules.twist
         ];
       };
     };
