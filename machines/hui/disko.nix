@@ -11,7 +11,7 @@
             type = "partition";
             name = "ESP";
             start = "0";
-            end = "100MiB";
+            end = "500MiB";
             bootable = true;
             content = {
               type = "filesystem";
@@ -26,7 +26,7 @@
           {
             type = "partition";
             name = "luks";
-            start = "100MiB";
+            start = "500MiB";
             end = "-8G";
             content = {
               type = "luks";
