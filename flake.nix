@@ -179,64 +179,44 @@
       };
 
       flake = {
-        nixosConfigurations = let
-          makeRevisionString = src:
-            if src ? lastModifiedDate && src ? rev
-            then "${src.lastModifiedDate}-${src.rev}"
-            else if src ? rev
-            then src.rev
-            else null;
-          mkSystem' = hostName: args @ {extraModules ? [], ...}:
-            self.lib.mkSystem hostName (args
-              // {
-                extraModules =
-                  extraModules
-                  ++ [
-                    {
-                      # Set the version returned by `nixos-version --json' command
-                      system.configurationRevision = makeRevisionString self;
-                    }
-                  ];
-              });
-        in
-          builtins.mapAttrs mkSystem' {
-            shu = {
-              system = "x86_64-linux";
-            };
-            hui = {
-              system = "x86_64-linux";
-              specialArgs = {
-                homeUser = "akirakomamura";
-                inherit (inputs) emacs-config;
-              };
-              extraModules = [
-                inputs.self.nixosModules.asus-br1100
-                twistHomeModule
-              ];
-            };
-            li = {
-              system = "x86_64-linux";
-              channel = unstable;
-              specialArgs = {
-                homeUser = "akirakomamura";
-                inherit (inputs) emacs-config;
-              };
-              extraModules = [
-                twistHomeModule
-              ];
-            };
-
-            # zhuang = nixpkgs.lib.nixosSystem {
-            #   system = "aarch64-linux";
-            #   modules = [
-            #     overlayModule
-            #     # <nixpkgs/nixos/modules/installer/sd-card/sd-image-aarch64.nix>
-            #     # inputs.disko.nixosModules.disko
-            #     ./machines/zhuang/initial.nix
-            #     ./machines/zhuang/rest.nix
-            #   ];
-            # };
+        nixosConfigurations = builtins.mapAttrs self.lib.mkSystem {
+          shu = {
+            system = "x86_64-linux";
           };
+          hui = {
+            system = "x86_64-linux";
+            specialArgs = {
+              homeUser = "akirakomamura";
+              inherit (inputs) emacs-config;
+            };
+            extraModules = [
+              inputs.self.nixosModules.asus-br1100
+              twistHomeModule
+            ];
+          };
+          li = {
+            system = "x86_64-linux";
+            channel = unstable;
+            specialArgs = {
+              homeUser = "akirakomamura";
+              inherit (inputs) emacs-config;
+            };
+            extraModules = [
+              twistHomeModule
+            ];
+          };
+
+          # zhuang = nixpkgs.lib.nixosSystem {
+          #   system = "aarch64-linux";
+          #   modules = [
+          #     overlayModule
+          #     # <nixpkgs/nixos/modules/installer/sd-card/sd-image-aarch64.nix>
+          #     # inputs.disko.nixosModules.disko
+          #     ./machines/zhuang/initial.nix
+          #     ./machines/zhuang/rest.nix
+          #   ];
+          # };
+        };
 
         diskoConfigurations = {
           shu = import ./machines/shu/disko.nix;
@@ -268,6 +248,18 @@
             extraModules ? [],
           }: let
             machinePath = ./machines + "/${hostName}";
+
+            configurationRevision =
+              (builtins.substring 0 8 self.lastModifiedDate)
+              + (
+                if self ? rev
+                then "." + builtins.substring 0 7 self.rev
+                else "-emacs${
+                  builtins.substring 0 8 inputs.emacs-config.lastModifiedDate
+                }.${
+                  builtins.substring 0 7 inputs.emacs-config.rev
+                }"
+              );
           in
             channel.lib.nixosSystem {
               inherit system specialArgs;
@@ -275,6 +267,9 @@
                 [
                   {
                     networking.hostName = hostName;
+
+                    system.configurationRevision =
+                      nixpkgs.lib.mkIf (self ? lastModifiedDate) configurationRevision;
                   }
                   overlayModule
                   inputs.disko.nixosModules.disko
