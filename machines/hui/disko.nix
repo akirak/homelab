@@ -34,7 +34,7 @@
               keyFile = luksKey;
               content = {
                 type = "btrfs";
-                extraArgs = "-f";
+                extraArgs = ["-f"];
                 subvolumes = {
                   "/root" = {
                     mountpoint = "/";
