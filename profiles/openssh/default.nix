@@ -8,11 +8,15 @@
 
     openFirewall = true;
 
-    # Most of these options have been stolen from
+    # Most of the security options have been stolen from
     # https://xeiaso.net/blog/paranoid-nixos-2021-07-18
-    passwordAuthentication = false;
+
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
+
     allowSFTP = false;
-    kbdInteractiveAuthentication = false;
     extraConfig = ''
       AllowTcpForwarding yes
       X11Forwarding no
