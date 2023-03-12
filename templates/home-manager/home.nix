@@ -15,8 +15,6 @@
     createInitFile = true;
     config = emacs-config.packages.${pkgs.system}.emacs-config.override {
       extraFeatures = [
-        "mermaid"
-        "OCaml"
       ];
       prependToInitFile = ''
         ;; -*- lexical-binding: t; no-byte-compile: t; -*-
