@@ -21,6 +21,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    targets.genericLinux.enable = true;
+
     xdg.configFile."systemd/user/cros-garcon.service.d/override.conf".text = ''
       [Service]
       Environment="PATH=${builtins.concatStringsSep ":"

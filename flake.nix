@@ -71,16 +71,18 @@
   } @ inputs: let
     inherit (nixpkgs) lib;
 
+    overlays = [
+      (final: prev: {
+        unstable = unstable.legacyPackages.${prev.system};
+        disko = inputs.disko.packages.${prev.system}.disko;
+        zsh-plugins = inputs.my-overlay.zsh-plugins;
+        cachix = inputs.cachix.packages.${prev.system}.cachix;
+      })
+      inputs.my-overlay.overlays.default
+    ];
+
     overlayModule = {
-      nixpkgs.overlays = [
-        (final: prev: {
-          unstable = unstable.legacyPackages.${prev.system};
-          disko = inputs.disko.packages.${prev.system}.disko;
-          zsh-plugins = inputs.my-overlay.zsh-plugins;
-          cachix = inputs.cachix.packages.${prev.system}.cachix;
-        })
-        inputs.my-overlay.overlays.default
-      ];
+      nixpkgs.overlays = overlays;
     };
 
     twistHomeModule = {homeUser, ...}: {
@@ -121,6 +123,9 @@
           nixosHosts = [
             # "shu"
             "hui"
+          ];
+          homeHosts = [
+            "voyage"
           ];
         };
 
@@ -232,6 +237,28 @@
               overlayModule
               twistHomeModule
               ./profiles/home-manager
+            ];
+          };
+        };
+
+        homeConfigurations = {
+          voyage = inputs.home-manager.lib.homeManagerConfiguration {
+            pkgs = import nixpkgs {
+              system = "x86_64-linux";
+              inherit overlays;
+              config = {
+                allowUnfreePredicate = pkg:
+                  builtins.elem (lib.getName pkg) [
+                    "symbola"
+                  ];
+              };
+            };
+            extraSpecialArgs = {
+              homeUser = "akirak";
+            };
+            modules = [
+              ./machines/voyage/home.nix
+              inputs.emacs-config.homeModules.twist
             ];
           };
         };

@@ -44,11 +44,7 @@
     allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) [
         # Explicitly select unfree packages.
-        "wpsoffice"
-        "steam-run"
-        "steam-original"
         "symbola"
-        "vscode"
       ];
 
     pkgsForSystem = system:
@@ -80,7 +76,7 @@
                 home.stateVersion = "22.11";
               }
               ./home.nix
-              (inputs.homelab.outPath + "/hm")
+              (inputs.homelab.outPath + "/hm/core.nix")
               inputs.emacs-config.homeModules.twist
             ];
           };

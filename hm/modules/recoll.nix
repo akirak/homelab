@@ -1,5 +1,7 @@
 {
   services.recoll.settings = {
+    followLinks = true;
+
     # TODO: Add support for extra (private) top directories
     topdirs = [
       "~/resources/bundles"
