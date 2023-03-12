@@ -80,7 +80,7 @@
                 home.stateVersion = "22.11";
               }
               ./home.nix
-              (inputs.homelab.outPath + "/hm")
+              (inputs.homelab.outPath + "/hm/core.nix")
               inputs.emacs-config.homeModules.twist
             ];
           };
