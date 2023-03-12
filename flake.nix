@@ -236,6 +236,13 @@
           };
         };
 
+        templates = {
+          home-manager = {
+            path = ./templates/home-manager;
+            description = "An example configuration repository for home-manager";
+          };
+        };
+
         lib = {
           /*
           Build a NixOS system with the modules.
