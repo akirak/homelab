@@ -23,11 +23,6 @@ in {
       pavucontrol
 
       # fonts
-      cascadia-code
-      inter
-      source-han-sans
-      noto-fonts-emoji
-      symbola
       jetbrains-mono-nerdfont
       # Japanese
       ipafont
