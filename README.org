@@ -13,6 +13,7 @@ This repository contains the configuration files of my NixOS machines.
 - Hetzner Cloud
 - +Raspberry Pi 3B+​
 - QEMU for prototyping configuration
+- Linux container on ChromeOS or ChromeOS Flex: only home-manager is supported
 ** Note
 To provision a new virtual machine instance to Hetzner Cloud, I use Terraform.
 I have a continuous deployment setup on GitHub Actions, but the configuration is not part of this repository.
