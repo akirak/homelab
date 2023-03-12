@@ -256,7 +256,9 @@
                 else "-emacs${
                   builtins.substring 0 8 inputs.emacs-config.lastModifiedDate
                 }.${
-                  builtins.substring 0 7 inputs.emacs-config.rev
+                  if inputs.emacs-config ? rev
+                  then builtins.substring 0 7 inputs.emacs-config.rev
+                  else "dirty"
                 }"
               );
           in
