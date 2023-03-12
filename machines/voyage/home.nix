@@ -19,6 +19,8 @@
     name = "voyage";
   };
 
+  programs.rebuild-home.name = "voyage";
+
   programs.emacs-twist = {
     enable = true;
     settings = {
