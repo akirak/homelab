@@ -14,6 +14,11 @@
 
   targets.crostini.enable = true;
 
+  services.cachix-agent = {
+    enable = true;
+    name = "voyage";
+  };
+
   programs.emacs-twist = {
     enable = true;
     settings = {

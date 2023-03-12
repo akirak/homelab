@@ -124,6 +124,9 @@
             # "shu"
             "hui"
           ];
+          homeHosts = [
+            "voyage"
+          ];
         };
 
         packages.rpi-bootstrap-sd-image = nixos-generators.nixosGenerate {
