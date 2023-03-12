@@ -6,6 +6,7 @@ This repository contains the configuration files of my NixOS machines.
 - Targeting various hosts (both cloud and physical). See below.
 - Containing images for bootstrapping
 - Using [[https://docs.cachix.org/deploy/][Cachix Deploy]] for agent-based, pull-style automated updates
+- Containing [[file:templates/home-manager/flake.nix][a flake template]] for [[https://github.com/nix-community/home-manager][home-manager]] configuration, which you can use for quickly creating a private configuration
 ** Host environments
 - Desktop
 - Laptop (ASUS BR1100C)
