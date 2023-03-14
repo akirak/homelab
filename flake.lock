@@ -128,7 +128,9 @@
         "org-babel": "org-babel",
         "pre-commit-hooks": "pre-commit-hooks_2",
         "stable": "stable",
-        "twist": "twist",
+        "twist": [
+          "twist"
+        ],
         "unstable": "unstable",
         "utils": "utils"
       },
@@ -1351,6 +1353,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_14",
         "treefmt-nix": "treefmt-nix",
+        "twist": "twist",
         "unstable": "unstable_2"
       }
     },
@@ -1446,11 +1449,11 @@
         "elisp-helpers": "elisp-helpers"
       },
       "locked": {
-        "lastModified": 1678601057,
-        "narHash": "sha256-7dsW6S1xJy+N1b1ji1Vbdc8++YB/4/Vb66cG47fS9cw=",
+        "lastModified": 1678684743,
+        "narHash": "sha256-1hUkWhomjmAQ9tV+p5jfbgE51Hc2UI1SqWOynEJ0hFM=",
         "owner": "emacs-twist",
         "repo": "twist.nix",
-        "rev": "d11fd7b2b843fae85bc1051782af6d487391fa42",
+        "rev": "b5b9a347ed2508731138285d8a0297345c9aa813",
         "type": "github"
       },
       "original": {

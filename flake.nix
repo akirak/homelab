@@ -46,7 +46,11 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
 
     my-overlay.url = "github:akirak/nixpkgs-overlay";
-    emacs-config.url = "github:akirak/emacs-config/develop";
+    emacs-config = {
+      url = "github:akirak/emacs-config/develop";
+      inputs.twist.follows = "twist";
+    };
+    twist.url = "github:emacs-twist/twist.nix";
   };
 
   nixConfig = {
