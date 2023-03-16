@@ -166,6 +166,7 @@ in {
       "j" = "journalctl -xe";
       "s" = "builtin cd \"$(fd -t d | fzy)\"";
       "r" = "builtin cd \"$(git rev-parse --show-toplevel)\"";
+      "e" = "emacsclient -n";
       "start" = "systemctl --user start";
       "stop" = "systemctl --user stop";
       "enable" = "systemctl --user enable";
