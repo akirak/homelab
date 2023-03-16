@@ -123,8 +123,6 @@ in {
         fi
       }
 
-      alias s='builtin cd "$(fd -t d | fzy)"'
-      alias r='builtin cd "$(git rev-parse --show-toplevel)"'
 
       export NIX_BUILD_SHELL=bash
 
@@ -155,6 +153,8 @@ in {
       # "ll" = "ls -l";
       "rm" = "rm -i";
       "j" = "journalctl -xe";
+      "s" = "builtin cd \"$(fd -t d | fzy)\"";
+      "r" = "builtin cd \"$(git rev-parse --show-toplevel)\"";
       "start" = "systemctl --user start";
       "stop" = "systemctl --user stop";
       "enable" = "systemctl --user enable";
