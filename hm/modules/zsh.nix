@@ -123,6 +123,17 @@ in {
         fi
       }
 
+      function clone() {
+        if [[ $# -eq 0 ]]
+        then
+          echo "Usage: clone URL" >&2
+          return 1
+        else
+          dir=''${$(emacsclient --eval "(expand-file-name (akirak-git-clone-dir \"$1\"))")//\"/}
+          cd "$dir"
+          echo "$dir"
+        fi
+      }
 
       export NIX_BUILD_SHELL=bash
 
