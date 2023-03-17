@@ -21,11 +21,10 @@
         }
       ];
       ensureDatabases = [
-        "metasub_dev"
+        "ensemble_dev"
       ];
 
-      # Allow access from web applications
-      enableTCPIP = true;
+      enableTCPIP = false;
 
       # Set the data directory explicitly
       # dataDir = "/var/lib/postgresql/14";
