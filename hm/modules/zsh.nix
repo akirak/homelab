@@ -21,7 +21,7 @@
     trap "rm -f '$tmp'" ERR EXIT
 
     # If the server isn't running, this script will exit with 1.
-    ${pkgs.emacs}/bin/emacsclient --eval "(with-temp-buffer
+    emacsclient --eval "(with-temp-buffer
         (insert (mapconcat #'expand-file-name (project-known-project-roots) \"\n\"))
         (write-region (point-min) (point-max) \"$tmp\"))" > /dev/null
 
@@ -133,6 +133,13 @@ in {
           cd "$dir"
           echo "$dir"
         fi
+      }
+
+      function clock() {
+        emacsclient -n --eval "(akirak-capture-clock-in
+          (org-dog-complete-file \"Clock into file: \")
+          \"$*\"
+          :body (format \"[[file:%s]]\n%%?\" (abbreviate-file-name \"$PWD/\")))"
       }
 
       export NIX_BUILD_SHELL=bash
