@@ -135,6 +135,13 @@ in {
         fi
       }
 
+      function clock() {
+        emacsclient -n --eval "(akirak-capture-clock-in
+          (org-dog-complete-file \"Clock into file: \")
+          \"$*\"
+          :body (format \"[[file:%s]]\n%%?\" (abbreviate-file-name \"$PWD/\")))"
+      }
+
       export NIX_BUILD_SHELL=bash
 
       export EDITOR=emacsclient
