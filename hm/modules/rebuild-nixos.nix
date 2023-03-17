@@ -34,7 +34,8 @@ in {
         emacs_config="${cfg.emacsConfigDirectory}"
         if [[ -d "''${emacs_config}" ]]
         then
-          flags=(--override-input emacs-config $(readlink -f "''${emacs_config}"))
+          flags=(--override-input emacs-config $(readlink -f "''${emacs_config}") \
+                 --override-input emacs-config/flake-pins github:akirak/flake-pins)
         else
           flags=()
         fi

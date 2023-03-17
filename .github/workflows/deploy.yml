@@ -54,7 +54,8 @@ jobs:
       timeout-minutes: 30
       run: |
         spec=$(nix build .#cachix-deploys --print-out-paths \
-               --override-input emacs-config github:akirak/emacs-config/develop)
+               --override-input emacs-config github:akirak/emacs-config/develop \
+               --override-input emacs-config/flake-pins github:akirak/flake-pins)
         echo "spec_path=$spec" >> $GITHUB_OUTPUT
 
     - name: Push to Cachix
