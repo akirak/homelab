@@ -105,6 +105,13 @@ in {
       undocked.outputs = [mainMonitor];
     };
 
+    services.swayidle.timeouts = [
+      {
+        timeout = 900;
+        command = "lock-screen";
+      }
+    ];
+
     programs.river.enable = true;
 
     programs.gpg.enable = true;

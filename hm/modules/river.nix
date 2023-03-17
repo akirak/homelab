@@ -23,6 +23,7 @@ in {
     # are not triggered by the program.
     services.dunst.enable = true;
     services.kanshi.enable = true;
+    services.swayidle.enable = true;
 
     programs.waybar = {
       enable = true;
