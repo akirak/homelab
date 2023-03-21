@@ -224,6 +224,9 @@
               twistHomeModule
             ];
           };
+          zheng = {
+            system = "aarch64-linux";
+          };
 
           # zhuang = nixpkgs.lib.nixosSystem {
           #   system = "aarch64-linux";
@@ -240,6 +243,7 @@
         diskoConfigurations = {
           shu = import ./machines/shu/disko.nix;
           hui = import ./machines/hui/disko.nix;
+          zheng = import ./machines/zheng/disko.nix;
         };
 
         nixosModules = {
