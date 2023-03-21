@@ -29,10 +29,6 @@
       inputs.darwin.follows = "nix-darwin";
     };
 
-    cachix = {
-      url = "github:cachix/cachix/latest";
-    };
-
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -80,7 +76,7 @@
         unstable = unstable.legacyPackages.${prev.system};
         disko = inputs.disko.packages.${prev.system}.disko;
         zsh-plugins = inputs.my-overlay.zsh-plugins;
-        cachix = inputs.cachix.packages.${prev.system}.cachix;
+        inherit (unstable.legacyPackages.${prev.system}) cachix;
       })
       inputs.my-overlay.overlays.default
     ];
