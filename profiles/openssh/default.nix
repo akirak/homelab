@@ -1,8 +1,9 @@
+{ lib, config, ...}:
 {
   services.openssh = {
     enable = true;
 
-    ports = [
+    ports = lib.mkIf config.services.tailscale.enable [
       2022
     ];
 
