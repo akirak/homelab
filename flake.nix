@@ -178,6 +178,26 @@
             .isoImage;
         };
 
+        packages.aarch64-linux = {
+          bootstrap-sd-image =
+            (nixpkgs.lib.nixosSystem {
+              system = "aarch64-linux";
+              modules = [
+                overlayModule
+                ({modulesPath, ...}: {
+                  imports = [
+                    (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
+                  ];
+                })
+                ./suites/installer
+              ];
+            })
+            .config
+            .system
+            .build
+            .sdImage;
+        };
+
         nixosConfigurations = builtins.mapAttrs self.lib.mkSystem {
           shu = {
             system = "x86_64-linux";
