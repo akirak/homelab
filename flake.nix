@@ -121,42 +121,8 @@
           programs.alejandra.enable = true;
         };
 
-        packages.cachix-deploys = import ./lib/cachix-deploy.nix {
-          inherit pkgs;
-          inherit (inputs) self cachix-deploy-flake;
-          nixosHosts = [
-            # "shu"
-            "hui"
-          ];
-          homeHosts = [
-            "voyage"
-          ];
-        };
-
-        packages.rpi-bootstrap-sd-image = nixos-generators.nixosGenerate {
-          system = "aarch64-linux";
-          format = "sd-aarch64";
-          modules = [
-            ./machines/zhuang/initial.nix
-          ];
-        };
-
-        packages.asus-br1100-iso =
-          (nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-              overlayModule
-              inputs.self.nixosModules.asus-br1100
-              ./suites/iso
-            ];
-          })
-          .config
-          .system
-          .build
-          .isoImage;
-
         packages.launch-desktop-vm = self.lib.makeMicroVMSystem "demo-microvm" {
-          system = "x86_64-linux";
+          inherit system;
           specialArgs = {
             hypervisor = "qemu";
             homeUser = "root";
@@ -187,6 +153,35 @@
       };
 
       flake = {
+        packages.x86_64-linux = {
+          cachix-deploys = import ./lib/cachix-deploy.nix {
+            pkgs = nixpkgs.legacyPackages.x86_64-linux;
+            inherit (inputs) self cachix-deploy-flake;
+            nixosHosts = [
+              # "shu"
+              "hui"
+            ];
+            homeHosts = [
+              "voyage"
+            ];
+          };
+
+          asus-br1100-iso =
+            (nixpkgs.lib.nixosSystem
+              {
+                system = "x86_64-linux";
+                modules = [
+                  overlayModule
+                  inputs.self.nixosModules.asus-br1100
+                  ./suites/iso
+                ];
+              })
+            .config
+            .system
+            .build
+            .isoImage;
+        };
+
         nixosConfigurations = builtins.mapAttrs self.lib.mkSystem {
           shu = {
             system = "x86_64-linux";
