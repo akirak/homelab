@@ -31,6 +31,6 @@ jobs:
         pushFilter: '-source$'
 
     - name: Check formatting
-      run: nix develop -c treefmt --fail-on-change
+      run: nix develop -c , check-format
 
     - run: nix flake check
