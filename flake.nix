@@ -13,6 +13,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+    mission-control.url = "github:Platonic-Systems/mission-control";
+    flake-root.url = "github:srid/flake-root";
 
     disko = {
       url = "github:nix-community/disko";
@@ -96,6 +98,8 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
         inputs.treefmt-nix.flakeModule
+        inputs.flake-root.flakeModule
+        inputs.mission-control.flakeModule
       ];
 
       systems = [
@@ -115,6 +119,16 @@
           projectRootFile = "flake.nix";
           package = pkgs.treefmt;
           programs.alejandra.enable = true;
+        };
+
+        mission-control.banner = ''
+          echo "(Run , to show help)"
+        '';
+        mission-control.scripts = {
+          check-format = {
+            description = "Check syntax formatting; Fail if inconsistent";
+            exec = "treefmt --fail-on-change";
+          };
         };
 
         packages.launch-desktop-vm = self.lib.makeMicroVMSystem "demo-microvm" {
@@ -141,11 +155,13 @@
           ];
         };
 
-        devShells.default = pkgs.mkShell {
-          nativeBuildInputs = [
-            config.treefmt.build.wrapper
-          ];
-        };
+        devShells.default =
+          config.mission-control.installToDevShell
+          (pkgs.mkShell {
+            nativeBuildInputs = [
+              config.treefmt.build.wrapper
+            ];
+          });
       };
 
       flake = {
