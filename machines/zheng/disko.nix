@@ -50,7 +50,7 @@
                   mountOptions = ["compress=zstd" "noatime" "discard=async"];
                 };
                 "/home" = {
-                  mountOptions = ["discard=async"];
+                  mountOptions = ["compress=zstd" "discard=async"];
                 };
               };
             };
