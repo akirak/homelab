@@ -29,10 +29,6 @@
       inputs.darwin.follows = "nix-darwin";
     };
 
-    cachix = {
-      url = "github:cachix/cachix/latest";
-    };
-
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -80,7 +76,7 @@
         unstable = unstable.legacyPackages.${prev.system};
         disko = inputs.disko.packages.${prev.system}.disko;
         zsh-plugins = inputs.my-overlay.zsh-plugins;
-        cachix = inputs.cachix.packages.${prev.system}.cachix;
+        inherit (unstable.legacyPackages.${prev.system}) cachix;
       })
       inputs.my-overlay.overlays.default
     ];
@@ -182,6 +178,37 @@
             .isoImage;
         };
 
+        packages.aarch64-linux = {
+          cachix-deploys = import ./lib/cachix-deploy.nix {
+            pkgs = nixpkgs.legacyPackages.aarch64-linux;
+            inherit (inputs) self cachix-deploy-flake;
+            nixosHosts = [
+              "zheng"
+            ];
+          };
+
+          bootstrap-sd-image =
+            (nixpkgs.lib.nixosSystem {
+              system = "aarch64-linux";
+              modules = [
+                overlayModule
+                ({modulesPath, ...}: {
+                  imports = [
+                    (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
+                  ];
+                })
+                ./suites/installer
+                {
+                  networking.networkmanager.enable = true;
+                }
+              ];
+            })
+            .config
+            .system
+            .build
+            .sdImage;
+        };
+
         nixosConfigurations = builtins.mapAttrs self.lib.mkSystem {
           shu = {
             system = "x86_64-linux";
@@ -208,6 +235,9 @@
               twistHomeModule
             ];
           };
+          zheng = {
+            system = "aarch64-linux";
+          };
 
           # zhuang = nixpkgs.lib.nixosSystem {
           #   system = "aarch64-linux";
@@ -224,6 +254,7 @@
         diskoConfigurations = {
           shu = import ./machines/shu/disko.nix;
           hui = import ./machines/hui/disko.nix;
+          zheng = import ./machines/zheng/disko.nix;
         };
 
         nixosModules = {

@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    ../base
+    ../installer
     (modulesPath + "/installer/cd-dvd/channel.nix")
     (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix")
   ];
@@ -32,10 +32,4 @@
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 
   system.stateVersion = lib.mkDefault lib.trivial.release;
-
-  environment.systemPackages = [
-    pkgs.git
-    # Provided from disko flake via overlayModule
-    pkgs.disko
-  ];
 }
