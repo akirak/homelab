@@ -24,4 +24,9 @@
   boot.cleanTmpDir = true;
   powerManagement.cpuFreqGovernor = "schedutil";
   zramSwap.enable = true;
+
+  users.users.akirakomamura = {
+    uid = 1000;
+    isNormalUser = true;
+  };
 }
