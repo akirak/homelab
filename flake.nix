@@ -121,6 +121,9 @@
           programs.alejandra.enable = true;
         };
 
+        mission-control.banner = ''
+          echo "(Run , to show help)"
+        '';
         mission-control.scripts = {
           check-format = {
             description = "Check syntax formatting; Fail if inconsistent";
