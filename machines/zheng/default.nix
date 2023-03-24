@@ -1,7 +1,7 @@
 {modulesPath, ...}: {
   imports = [
     (modulesPath + "/profiles/headless.nix")
-    ../../suites/base
+    ../../suites/server
     ../../profiles/tailscale
     ../../profiles/nginx
     ../../profiles/nix/cachix-deploy.nix
