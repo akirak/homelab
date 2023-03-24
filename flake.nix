@@ -179,6 +179,14 @@
         };
 
         packages.aarch64-linux = {
+          cachix-deploys = import ./lib/cachix-deploy.nix {
+            pkgs = nixpkgs.legacyPackages.aarch64-linux;
+            inherit (inputs) self cachix-deploy-flake;
+            nixosHosts = [
+              "zheng"
+            ];
+          };
+
           bootstrap-sd-image =
             (nixpkgs.lib.nixosSystem {
               system = "aarch64-linux";
