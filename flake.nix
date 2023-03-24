@@ -198,6 +198,9 @@
                   ];
                 })
                 ./suites/installer
+                {
+                  networking.networkmanager.enable = true;
+                }
               ];
             })
             .config

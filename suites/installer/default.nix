@@ -4,8 +4,6 @@
     ../../profiles/nix
   ];
 
-  networking.networkmanager.enable = true;
-
   environment.systemPackages = [
     pkgs.git
     # Provided from disko flake via overlayModule
