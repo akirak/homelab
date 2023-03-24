@@ -129,6 +129,31 @@
             description = "Check syntax formatting; Fail if inconsistent";
             exec = "treefmt --fail-on-change";
           };
+          deploy = {
+            description = "Deploy to a host (requires root login via SSH)";
+            exec = ''
+              function deploy_to_host() {
+                host="$1"
+                nixos-rebuild switch --target-host "root@$host" --flake ".#$host" \
+                  --use-remote-sudo --print-build-logs --option accept-flake-config true
+              }
+              if [[ $# -eq 0 ]]
+              then
+                echo -n "Please specify one of: "
+                nix eval .#nixosConfigurations --apply builtins.attrNames \
+                  --accept-flake-config 2>/dev/null
+                exit 1
+              fi
+              for host; do
+                if ping -c 1 "$host" > /dev/null
+                then
+                  deploy_to_host "$host"
+                else
+                  echo "$host is offline"
+                fi
+              done
+            '';
+          };
         };
 
         packages.launch-desktop-vm = self.lib.makeMicroVMSystem "demo-microvm" {
