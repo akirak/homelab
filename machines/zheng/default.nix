@@ -1,5 +1,4 @@
-{ modulesPath, ...}:
-{
+{modulesPath, ...}: {
   imports = [
     (modulesPath + "/profiles/headless.nix")
     ../../suites/base
@@ -12,7 +11,7 @@
   system.stateVersion = "22.11";
   time.timeZone = "Asia/Tokyo";
 
-  disko.devices = import ./disko.nix { };
+  disko.devices = import ./disko.nix {};
 
   nix.settings.allowed-users = ["root"];
 

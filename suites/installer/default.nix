@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  imports =[
+  imports = [
     ../base
     ../../profiles/nix
   ];

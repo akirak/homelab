@@ -1,5 +1,8 @@
-{ lib, config, ...}:
 {
+  lib,
+  config,
+  ...
+}: {
   services.openssh = {
     enable = true;
 
