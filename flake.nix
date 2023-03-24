@@ -121,6 +121,13 @@
           programs.alejandra.enable = true;
         };
 
+        mission-control.scripts = {
+          check-format = {
+            description = "Check syntax formatting; Fail if inconsistent";
+            exec = "treefmt --fail-on-change";
+          };
+        };
+
         packages.launch-desktop-vm = self.lib.makeMicroVMSystem "demo-microvm" {
           inherit system;
           specialArgs = {
