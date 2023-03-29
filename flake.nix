@@ -43,6 +43,8 @@
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
 
+    nix-index-database.url = "github:Mic92/nix-index-database";
+
     my-overlay.url = "github:akirak/nixpkgs-overlay";
     emacs-config = {
       url = "github:akirak/emacs-config/develop";
@@ -79,6 +81,7 @@
         disko = inputs.disko.packages.${prev.system}.disko;
         zsh-plugins = inputs.my-overlay.zsh-plugins;
         inherit (unstable.legacyPackages.${prev.system}) cachix;
+        nix-index = inputs.nix-index-database.packages.${prev.system}.nix-index-with-db;
       })
       inputs.my-overlay.overlays.default
     ];
