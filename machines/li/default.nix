@@ -98,6 +98,10 @@ in {
     home.packages = [
       pkgs.wine
       pkgs.tenacity
+
+      # TODO: Move to a module
+      pkgs.rage
+      pkgs.age-plugin-yubikey
     ];
 
     services.kanshi.profiles = {
