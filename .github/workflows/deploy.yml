@@ -13,10 +13,6 @@ on:
     - 'suites/**'
     - 'hm/**'
 
-  repository_dispatch:
-    types:
-    - deploy
-
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
