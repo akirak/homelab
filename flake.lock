@@ -661,6 +661,24 @@
         "type": "github"
       }
     },
+    "nix-index-database_2": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_12"
+      },
+      "locked": {
+        "lastModified": 1679224439,
+        "narHash": "sha256-QkvcuC4b67FUkkxlMsLTMPbwoD7yZr0UvJpu6jkFuLo=",
+        "owner": "Mic92",
+        "repo": "nix-index-database",
+        "rev": "2f5e6e915d70c04d673a8930f94591595c73eb84",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "nix-index-database",
+        "type": "github"
+      }
+    },
     "nixlib": {
       "locked": {
         "lastModified": 1679187309,
@@ -924,6 +942,22 @@
     },
     "nixpkgs_12": {
       "locked": {
+        "lastModified": 1673364622,
+        "narHash": "sha256-5zQ0hJG86SwkXJSitggNxNL+ieBhsq8HKMC7EWuXyK4=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "03aec194125de1fd6f486d323cee872bb4be88cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_13": {
+      "locked": {
         "lastModified": 1679472241,
         "narHash": "sha256-VK2YDic2NjPvfsuneJCLIrWS38qUfoW8rLLimx0rWXA=",
         "owner": "NixOS",
@@ -938,7 +972,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_13": {
+    "nixpkgs_14": {
       "locked": {
         "lastModified": 1677932085,
         "narHash": "sha256-+AB4dYllWig8iO6vAiGGYl0NEgmMgGHpy9gzWJ3322g=",
@@ -1128,9 +1162,10 @@
         "mission-control": "mission-control",
         "my-overlay": "my-overlay_2",
         "nix-darwin": "nix-darwin",
+        "nix-index-database": "nix-index-database_2",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_12",
+        "nixpkgs": "nixpkgs_13",
         "treefmt-nix": "treefmt-nix",
         "twist": "twist",
         "unstable": "unstable_2"
@@ -1207,7 +1242,7 @@
     },
     "treefmt-nix": {
       "inputs": {
-        "nixpkgs": "nixpkgs_13"
+        "nixpkgs": "nixpkgs_14"
       },
       "locked": {
         "lastModified": 1679588014,
