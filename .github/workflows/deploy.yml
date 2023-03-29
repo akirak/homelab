@@ -13,9 +13,11 @@ on:
     - 'suites/**'
     - 'hm/**'
 
-  repository_dispatch:
-    types:
-    - deploy
+  schedule:
+    - cron: '0 18 * * *' # 3:00 am JST
+
+env:
+  dry: ${{ github.event.event_name == 'push' }}
 
 concurrency:
   group: ${{ github.workflow }}
@@ -43,6 +45,7 @@ jobs:
       with:
         name: akirak
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+        pushFilter: '-source$'
 
     # - run: |
     #     nix flake check \
@@ -51,20 +54,23 @@ jobs:
     - name: Build the deploys
       id: build
       # A timeout set arbitrary
-      timeout-minutes: 30
+      timeout-minutes: 90
       run: |
         spec=$(nix build .#cachix-deploys --print-out-paths \
+               ${{ env.dry == 'true' ? '--dry-run' : '' }} \
                --override-input emacs-config github:akirak/emacs-config/develop \
                --override-input emacs-config/flake-pins github:akirak/flake-pins)
         echo "spec_path=$spec" >> $GITHUB_OUTPUT
 
     - name: Push to Cachix
+      if: ${{ env.dry == 'false' }}
       run: |
         cachix push akirak $DEPLOY_SPEC
       env:
         DEPLOY_SPEC: ${{ steps.build.outputs.spec_path }}
 
     - name: Deploy
+      if: ${{ env.dry == 'false' }}
       # Should be deployed instantly. Some machines may be offline, but then you
       # can rerun this workflow
       timeout-minutes: 1
