@@ -48,7 +48,7 @@ jobs:
     - name: Build the deploys
       id: build
       # A timeout set arbitrary
-      timeout-minutes: 30
+      timeout-minutes: 90
       run: |
         spec=$(nix build .#cachix-deploys --print-out-paths \
                --override-input emacs-config github:akirak/emacs-config/develop \
