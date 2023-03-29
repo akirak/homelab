@@ -13,6 +13,9 @@ on:
     - 'suites/**'
     - 'hm/**'
 
+  schedule:
+    - cron: '0 18 * * *' # 3:00 am JST
+
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
