@@ -13,7 +13,7 @@ in {
     exa.enable = true;
     exa.enableAliases = true;
     git.enable = true; # ./modules/git.nix
-    gpg.enable = true; # ./modules/gpg.nix
+    # gpg.enable = true; # ./modules/gpg.nix
     direnv.enable = true; # ./modules/direnv.nix
     direnv.nix-direnv.enable = lib.mkIf enableDirenv true;
   };
