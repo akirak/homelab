@@ -19,6 +19,7 @@ jobs:
           accept-flake-config = true
     - uses: DeterminateSystems/update-flake-lock@v18
       with:
+        token: ${{ secrets.PAT_FOR_PR }}
         pr-title: "Update flake.lock"
         pr-labels: |
           automation
