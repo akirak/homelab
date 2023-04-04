@@ -184,6 +184,9 @@
         };
 
         devShells.default = pkgs.mkShell {
+          buildInputs = [
+            self.formatter.${system}
+          ];
           inputsFrom = [
             config.mission-control.devShell
           ];
