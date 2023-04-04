@@ -183,13 +183,14 @@
           ];
         };
 
-        devShells.default =
-          config.mission-control.installToDevShell
-          (pkgs.mkShell {
-            nativeBuildInputs = [
-              config.treefmt.build.wrapper
-            ];
-          });
+        devShells.default = pkgs.mkShell {
+          buildInputs = [
+            self.formatter.${system}
+          ];
+          inputsFrom = [
+            config.mission-control.devShell
+          ];
+        };
       };
 
       flake = {
