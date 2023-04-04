@@ -58,8 +58,7 @@ jobs:
       run: |
         spec=$(nix build .#cachix-deploys --print-out-paths \
                ${{ env.dry == 'true' && '--dry-run' || '' }} \
-               --override-input emacs-config github:akirak/emacs-config/develop \
-               --override-input emacs-config/flake-pins github:akirak/flake-pins)
+               --update-input emacs-config --no-write-lock-file)
         echo "spec_path=$spec" >> $GITHUB_OUTPUT
 
     - name: Push to Cachix
