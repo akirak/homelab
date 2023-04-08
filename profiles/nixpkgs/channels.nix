@@ -8,6 +8,7 @@
         "steam-original"
         "symbola"
         "vscode"
+        "microsoft-edge-stable"
       ];
   };
 }
