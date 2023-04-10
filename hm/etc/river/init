@@ -22,7 +22,7 @@ riverctl map normal Super+Shift Return spawn foot
 # Super+Q to close the focused view
 riverctl map normal Super Q close
 
-riverctl map normal Super P spawn 'wofi --show run'
+riverctl map normal Super P spawn 'fuzzel'
 
 riverctl map normal Super+Shift S spawn 'flameshot gui'
 

@@ -14,6 +14,6 @@
     wf-recorder
     slurp # Used with wayshot
 
-    wofi
+    fuzzel
   ];
 }

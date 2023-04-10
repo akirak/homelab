@@ -14,7 +14,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      wofi
+      fuzzel
     ];
 
     xdg.configFile."river/init".source = ../etc/river/init;
