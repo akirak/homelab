@@ -357,19 +357,11 @@
           }: let
             machinePath = ./machines + "/${hostName}";
 
-            configurationRevision =
-              (builtins.substring 0 8 self.lastModifiedDate)
-              + (
-                if self ? rev
-                then "." + builtins.substring 0 7 self.rev
-                else "-emacs${
-                  builtins.substring 0 8 inputs.emacs-config.lastModifiedDate
-                }.${
-                  if inputs.emacs-config ? rev
-                  then builtins.substring 0 7 inputs.emacs-config.rev
-                  else "dirty"
-                }"
-              );
+            configurationRevision = "${builtins.substring 0 8 self.lastModifiedDate}.${
+              if self ? rev
+              then builtins.substring 0 7 self.rev
+              else "dirty"
+            }";
           in
             channel.lib.nixosSystem {
               inherit system specialArgs;
