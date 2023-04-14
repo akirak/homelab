@@ -41,4 +41,12 @@ in {
         '';
       })
     ];
+
+  xdg.mimeApps.defaultApplications = let
+    browser = lib.optional config.programs.firefox.enable "firefox.desktop";
+  in {
+    "text/html" = browser;
+    "x-scheme-handler/http" = browser;
+    "x-scheme-handler/https" = browser;
+  };
 }
