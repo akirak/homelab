@@ -9,8 +9,12 @@
     pkgs.wlr-randr
   ];
 
-  xdg.portal.wlr = {
+  xdg.portal = {
     enable = true;
+    wlr = {
+      enable = true;
+    };
+    xdgOpenUsePortal = true;
   };
 
   security.pam.services.swaylock = {};
