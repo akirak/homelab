@@ -49,4 +49,13 @@ in {
     "x-scheme-handler/http" = browser;
     "x-scheme-handler/https" = browser;
   };
+
+  systemd.user.services.emacs = {
+    Service = {
+      Environment = lib.optionals enableWayland [
+        "MOZ_ENABLE_WAYLAND=1"
+        "WAYLAND_DISPLAY=wayland-1"
+      ];
+    };
+  };
 }
