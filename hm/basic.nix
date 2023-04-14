@@ -6,6 +6,7 @@
   programs = {
     nix-index.enable = true;
     nix-index.enableZshIntegration = config.programs.nix-index.enable;
+    nushell.enable = true;
   };
 
   home.packages = with pkgs; [

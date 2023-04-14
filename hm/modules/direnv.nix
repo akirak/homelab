@@ -7,5 +7,6 @@
 in {
   programs.direnv = lib.mkIf cfg.enable {
     enableZshIntegration = config.programs.zsh.enable;
+    enableNushellIntegration = config.programs.nushell.enable;
   };
 }
