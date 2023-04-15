@@ -39,6 +39,7 @@ in {
 
       exec-once = dunst &
       exec-once = waybar &
+      exec-once = foot --server
 
       # Mouse
       bindm=$mod        ,mouse:272,movewindow
@@ -48,7 +49,7 @@ in {
       bind = $mod SHIFT , Q, exec, pkill Hyprland
 
       # Launcher
-      bind = $mod SHIFT , Return, exec, foot
+      bind = $mod SHIFT , Return, exec, footclient
       bind = $mod       , Space, exec, fuzzel
       bind = $mod       , E, exec, emacsclient -c -a emacs
       bind = $mod SHIFT , S, exec, flameshot gui
