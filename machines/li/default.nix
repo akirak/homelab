@@ -27,7 +27,7 @@ in {
     ../../profiles/sudo
     ../../profiles/tailscale
     ../../profiles/wayland/wm/hyprland.nix
-    ../../profiles/wayland/wm/river.nix
+    # ../../profiles/wayland/wm/river.nix
     ../../profiles/nix/cachix-deploy.nix
     ../../profiles/postgresql/development.nix
   ];
@@ -109,7 +109,7 @@ in {
 
     wayland.windowManager.hyprland.enable = true;
 
-    programs.river.enable = true;
+    # programs.river.enable = true;
 
     programs.gpg.enable = true;
 
