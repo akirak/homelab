@@ -9,6 +9,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       fuzzel
+      dunst
       channels.hyprland-contrib.shellevents
       channels.hyprland-contrib.hyprprop
     ];
@@ -27,6 +28,7 @@ in {
           kb_options=ctrl:nocaps
       }
 
+      exec-once = dunst &
       exec-once = waybar &
 
       # Mouse
