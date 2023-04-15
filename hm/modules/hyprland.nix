@@ -9,6 +9,8 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       fuzzel
+      channels.hyprland-contrib.shellevents
+      channels.hyprland-contrib.hyprprop
     ];
 
     programs.waybar = {

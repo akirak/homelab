@@ -46,6 +46,7 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
 
     hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-contrib.url = "github:hyprwm/contrib";
 
     my-overlay.url = "github:akirak/nixpkgs-overlay";
     emacs-config = {
@@ -81,6 +82,9 @@
 
     overlays = [
       (final: prev: {
+        channels = lib.genAttrs [
+          "hyprland-contrib"
+        ] (name: inputs.${name}.packages.${prev.system});
         unstable = unstable.legacyPackages.${prev.system};
         customPackages = {
           hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
