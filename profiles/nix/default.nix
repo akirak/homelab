@@ -24,6 +24,7 @@ If you don't build Nix on the host, don't import this profile.
       trusted-substituters = [
         "https://nix-community.cachix.org"
         "https://emacs-ci.cachix.org"
+        "https://hyprland.cachix.org"
       ];
 
       trusted-public-keys = [
@@ -31,6 +32,7 @@ If you don't build Nix on the host, don't import this profile.
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "akirak.cachix.org-1:WJrEMdV1dYyALkOdp/kAECVZ6nAODY5URN05ITFHC+M="
         "emacs-ci.cachix.org-1:B5FVOrxhXXrOL0S+tQ7USrhjMT5iOPH+QN9q0NItom4="
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       ];
     };
 
