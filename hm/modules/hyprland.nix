@@ -28,6 +28,15 @@ in {
           kb_options=ctrl:nocaps
       }
 
+      general {
+        gaps_in = 5
+        gaps_out = 5
+        border_size = 2
+        # TODO: Use a proper color scheme
+        col.active_border = rgb(ff0000) rgb(000000) 60deg;
+        col.inactive_border = rgb(cccccc) rgb(000000) 60deg;
+      }
+
       exec-once = dunst &
       exec-once = waybar &
 
