@@ -45,6 +45,8 @@
 
     nix-index-database.url = "github:Mic92/nix-index-database";
 
+    hyprland.url = "github:hyprwm/Hyprland";
+
     my-overlay.url = "github:akirak/nixpkgs-overlay";
     emacs-config = {
       url = "github:akirak/emacs-config/develop";
@@ -78,6 +80,9 @@
     overlays = [
       (final: prev: {
         unstable = unstable.legacyPackages.${prev.system};
+        customPackages = {
+          hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
+        };
         disko = inputs.disko.packages.${prev.system}.disko;
         zsh-plugins = inputs.my-overlay.zsh-plugins;
         inherit (unstable.legacyPackages.${prev.system}) cachix;
@@ -94,6 +99,21 @@
       home-manager.users.${homeUser} = {
         imports = [
           inputs.emacs-config.homeModules.twist
+        ];
+      };
+    };
+
+    hyprlandHomeModule = {
+      homeUser,
+      pkgs,
+      ...
+    }: {
+      home-manager.users.${homeUser} = {
+        imports = [
+          inputs.hyprland.homeManagerModules.default
+          {
+            wayland.windowManager.hyprland.package = pkgs.customPackages.hyprland;
+          }
         ];
       };
     };
@@ -278,6 +298,7 @@
             };
             extraModules = [
               twistHomeModule
+              hyprlandHomeModule
             ];
           };
           zheng = {
@@ -377,6 +398,7 @@
                   inputs.disko.nixosModules.disko
                   inputs.home-manager.nixosModules.home-manager
                   inputs.impermanence.nixosModules.impermanence
+                  inputs.hyprland.nixosModules.default
                 ]
                 ++ lib.optional (builtins.pathExists machinePath) machinePath
                 ++ extraModules;
