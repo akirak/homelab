@@ -26,7 +26,8 @@ in {
     ../../profiles/nix
     ../../profiles/sudo
     ../../profiles/tailscale
-    ../../profiles/wayland/wm/river.nix
+    ../../profiles/wayland/wm/hyprland.nix
+    # ../../profiles/wayland/wm/river.nix
     ../../profiles/nix/cachix-deploy.nix
     ../../profiles/postgresql/development.nix
   ];
@@ -106,7 +107,9 @@ in {
       undocked.outputs = [mainMonitor];
     };
 
-    programs.river.enable = true;
+    wayland.windowManager.hyprland.enable = true;
+
+    # programs.river.enable = true;
 
     programs.gpg.enable = true;
 
