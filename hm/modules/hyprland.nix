@@ -9,6 +9,9 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       fuzzel
+      dunst
+      channels.hyprland-contrib.shellevents
+      channels.hyprland-contrib.hyprprop
     ];
 
     programs.waybar = {
@@ -25,7 +28,18 @@ in {
           kb_options=ctrl:nocaps
       }
 
+      general {
+        gaps_in = 5
+        gaps_out = 5
+        border_size = 2
+        # TODO: Use a proper color scheme
+        col.active_border = rgb(ff0000) rgb(000000) 60deg;
+        col.inactive_border = rgb(cccccc) rgb(000000) 60deg;
+      }
+
+      exec-once = dunst &
       exec-once = waybar &
+      exec-once = foot --server
 
       # Mouse
       bindm=$mod        ,mouse:272,movewindow
@@ -35,11 +49,11 @@ in {
       bind = $mod SHIFT , Q, exec, pkill Hyprland
 
       # Launcher
-      bind = $mod SHIFT , Return, exec, foot
+      bind = $mod SHIFT , Return, exec, footclient
       bind = $mod       , Space, exec, fuzzel
       bind = $mod       , E, exec, emacsclient -c -a emacs
       bind = $mod SHIFT , S, exec, flameshot gui
-      bind = $mod       , F9, exec, foot nixos-rebuild-and-notify
+      bind = $mod       , F9, exec, footclient --title "Rebuilding NixOS..." nixos-rebuild-and-notify
 
       # Window management
       bind = $mod       , C , killactive
@@ -69,6 +83,7 @@ in {
       bind = $mod SHIFT , k, swapwindow, u
       bind = $mod SHIFT , l, swapwindow, r
       bind = $mod       , period, focusurgentorlast
+      bind = $mod       , comma, togglespecialworkspace
 
       # Workspace management
       bind = $mod       , f5, exec,   hyprctl keyword general:layout dwindle
@@ -85,6 +100,7 @@ in {
       bind = $mod       , 5, workspace, 5
       bind = $mod SHIFT , 5, movetoworkspace, 5
 
+      windowrulev2 = workspace special,class:^(foot)$,title:^(Rebuilding)
     '';
   };
 }
