@@ -82,6 +82,7 @@
         unstable = unstable.legacyPackages.${prev.system};
         customPackages = {
           hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
+          waybar-hyprland = inputs.hyprland.packages.${prev.system}.waybar-hyprland;
         };
         disko = inputs.disko.packages.${prev.system}.disko;
         zsh-plugins = inputs.my-overlay.zsh-plugins;
