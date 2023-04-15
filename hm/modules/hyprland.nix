@@ -53,7 +53,7 @@ in {
       bind = $mod       , Space, exec, fuzzel
       bind = $mod       , E, exec, emacsclient -c -a emacs
       bind = $mod SHIFT , S, exec, flameshot gui
-      bind = $mod       , F9, exec, foot nixos-rebuild-and-notify
+      bind = $mod       , F9, exec, footclient --title "Rebuilding NixOS..." nixos-rebuild-and-notify
 
       # Window management
       bind = $mod       , C , killactive
@@ -83,6 +83,7 @@ in {
       bind = $mod SHIFT , k, swapwindow, u
       bind = $mod SHIFT , l, swapwindow, r
       bind = $mod       , period, focusurgentorlast
+      bind = $mod       , comma, togglespecialworkspace
 
       # Workspace management
       bind = $mod       , f5, exec,   hyprctl keyword general:layout dwindle
@@ -99,6 +100,7 @@ in {
       bind = $mod       , 5, workspace, 5
       bind = $mod SHIFT , 5, movetoworkspace, 5
 
+      windowrulev2 = workspace special,class:^(foot)$,title:^(Rebuilding)
     '';
   };
 }
