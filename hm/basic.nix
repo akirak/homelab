@@ -36,5 +36,6 @@
   services = {
     recoll.enable = true;
     syncthing.enable = true;
+    pueue.enable = true;
   };
 }
