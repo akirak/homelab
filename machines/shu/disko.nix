@@ -64,7 +64,7 @@
 
       datasets = {
         nix = {
-          zfs_type = "filesystem";
+          type = "zfs_fs";
           mountpoint = "/nix";
           size = "20G";
           options = {
@@ -73,14 +73,14 @@
           };
         };
         persist = {
-          zfs_type = "filesystem";
+          type = "zfs_fs";
           mountpoint = "/persist";
           options = {
             "com.sun:auto-snapshot" = "true";
           };
         };
         var = {
-          zfs_type = "filesystem";
+          type = "zfs_fs";
           mountpoint = "/var";
           options = {
             compression = "lz4";
