@@ -57,7 +57,6 @@
   };
 
   nixConfig = {
-    registry = "https://raw.githubusercontent.com/akirak/flake-pins/master/registry.json";
     extra-substituters = [
       "https://microvm.cachix.org"
       "https://cachix.cachix.org"
