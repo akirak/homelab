@@ -66,7 +66,6 @@
         nix = {
           type = "zfs_fs";
           mountpoint = "/nix";
-          size = "20G";
           options = {
             compression = "lz4";
             "com.sun:auto-snapshot" = "true";
