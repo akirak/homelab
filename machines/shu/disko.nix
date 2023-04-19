@@ -13,7 +13,6 @@
       partitions = [
         {
           name = "boot";
-          type = "partition";
           start = "0";
           end = "1M";
           part-type = "primary";
@@ -21,7 +20,6 @@
         }
 
         {
-          type = "partition";
           name = "ESP";
           start = "1MiB";
           end = "100MiB";
@@ -37,7 +35,6 @@
         }
 
         {
-          type = "partition";
           name = "luks";
           start = "100MiB";
           end = "100%";
