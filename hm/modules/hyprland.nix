@@ -66,6 +66,7 @@ in {
       bind = $mod       , bracketright, focusmonitor, 1
       bind = $mod SHIFT , bracketleft, movewindow, mon:-1
       bind = $mod SHIFT , bracketright, movewindow, mon:1
+      bind = $mod       , Backspace, swapactiveworkspaces, current +1
 
       # Master layout
       bind = $mod       , Return, layoutmsg, swapwithmaster auto
