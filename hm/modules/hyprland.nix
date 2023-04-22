@@ -116,6 +116,11 @@ in {
       windowrulev2 = float,class:^(chromium)$,title:^(Open Files)$
       windowrulev2 = size 780 600,class:^(chromium)$,title:^(Open Files)$
       windowrulev2 = center,class:^(chromium)$,title:^(Open Files)$
+
+      # Volume control (pavucontrol)
+      windowrulev2 = float,class:^(pavucontrol)$
+      windowrulev2 = size 780 600,class:^(pavucontrol)$
+      windowrulev2 = center,class:^(pavucontrol)$
     '';
   };
 }
