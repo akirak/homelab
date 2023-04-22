@@ -102,6 +102,10 @@ in {
       bind = $mod SHIFT , 5, movetoworkspace, 5
 
       windowrulev2 = workspace special,class:^(foot)$,title:^(Rebuilding)
+      # Dialog
+      windowrulev2 = float,class:^(chromium)$,title:^(Open Files)$
+      windowrulev2 = size 780 600,class:^(chromium)$,title:^(Open Files)$
+      windowrulev2 = center,class:^(chromium)$,title:^(Open Files)$
     '';
   };
 }
