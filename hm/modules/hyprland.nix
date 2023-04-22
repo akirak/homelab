@@ -5,6 +5,15 @@
   ...
 }: let
   cfg = config.wayland.windowManager.hyprland or {enable = false;};
+
+  waybarConfig = pkgs.callPackage ../lib/waybar-config.nix {
+    modulesCenter = [
+      "hyprland/window"
+    ];
+    modulesRight = ms: ms ++ [
+      "hyprland/submap"
+    ];
+  };
 in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
@@ -16,8 +25,9 @@ in {
 
     programs.waybar = {
       enable = true;
-      package = pkgs.customPackages.waybar-hyprland;
     };
+
+    xdg.configFile."waybar/config".source = waybarConfig;
 
     xdg.configFile."hypr/hyprland.conf".text = ''
 
