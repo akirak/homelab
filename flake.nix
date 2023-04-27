@@ -2,6 +2,7 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.flake-parts.url = "github:hercules-ci/flake-parts";
   inputs.flake-utils.url = "flake-utils";
+  inputs.cachix-push.url = "github:juspay/cachix-push";
 
   inputs.node2nix = {
     # url = "github:svanderburg/node2nix";
@@ -92,6 +93,9 @@
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
+      imports = [
+        inputs.cachix-push.flakeModule
+      ];
       perSystem = {
         pkgs,
         system,
@@ -105,6 +109,9 @@
             cd "generate/node2nix"
             ${self.packages.${system}.node2nix}/bin/node2nix -i node-packages.json -20
           ''}";
+        };
+        cachix-push = {
+          cacheName = "akirak";
         };
       };
       flake = {
