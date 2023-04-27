@@ -9,6 +9,7 @@
         "symbola"
         "vscode"
         "microsoft-edge-stable"
+        "android-studio-stable"
       ];
   };
 }
