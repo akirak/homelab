@@ -80,7 +80,7 @@ in {
 
       # Launcher
       bind = $mod SHIFT , Return, exec, footclient
-      bind = $mod       , Space, exec, fuzzel
+      bind = $mod       , Space, exec, fuzzel -T "footclient -H"
       bind = $mod       , E, exec, emacsclient -c -a emacs
       bind = $mod SHIFT , S, exec, flameshot gui
       bind = $mod       , F9, exec, footclient --title "Rebuilding NixOS..." nixos-rebuild-and-notify
