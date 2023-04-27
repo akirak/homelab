@@ -30,6 +30,8 @@
       emacsclient --eval "(setenv "${instanceEnv}" "''${${instanceEnv}}")"
     fi
   '';
+
+  defaultDialogSize = "780 600";
 in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
@@ -132,17 +134,17 @@ in {
       windowrulev2 = workspace special,class:^(foot)$,title:^(Rebuilding)
       # Dialog
       windowrulev2 = float,class:^(chromium)$,title:^(Open Files)$
-      windowrulev2 = size 780 600,class:^(chromium)$,title:^(Open Files)$
+      windowrulev2 = size ${defaultDialogSize},class:^(chromium)$,title:^(Open Files)$
       windowrulev2 = center,class:^(chromium)$,title:^(Open Files)$
 
       # Volume control (pavucontrol)
       windowrulev2 = float,class:^(pavucontrol)$
-      windowrulev2 = size 780 600,class:^(pavucontrol)$
+      windowrulev2 = size ${defaultDialogSize},class:^(pavucontrol)$
       windowrulev2 = center,class:^(pavucontrol)$
 
       # Android stuio
       windowrulev2 = float,title:^(Android Studio Setup Wizard)$
-      windowrulev2 = size 780 600,title:^(Android Studio Setup Wizard)$
+      windowrulev2 = size ${defaultDialogSize},title:^(Android Studio Setup Wizard)$
       windowrulev2 = center,title:^(Android Studio Setup Wizard)$
     '';
   };
