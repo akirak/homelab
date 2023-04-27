@@ -139,6 +139,11 @@ in {
       windowrulev2 = float,class:^(pavucontrol)$
       windowrulev2 = size 780 600,class:^(pavucontrol)$
       windowrulev2 = center,class:^(pavucontrol)$
+
+      # Android stuio
+      windowrulev2 = float,title:^(Android Studio Setup Wizard)$
+      windowrulev2 = size 780 600,title:^(Android Studio Setup Wizard)$
+      windowrulev2 = center,title:^(Android Studio Setup Wizard)$
     '';
   };
 }
