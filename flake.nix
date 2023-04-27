@@ -46,45 +46,69 @@
   };
 
   outputs = inputs @ {
+    self,
     nixpkgs,
     flake-parts,
     ...
   }: let
-
-    makePackages = pkgs: {
+    overlay = final: prev:
+      let
+      nodePackages =
+        import ./generate/node2nix {
+          pkgs = final;
+          inherit (prev) system;
+          nodejs = final.nodejs_latest;
+        };
+      in
+      {
       # Override node2nix
       node2nix =
         (import inputs.node2nix {
-          inherit pkgs;
-          inherit (pkgs) system;
+          pkgs = final;
+          inherit (final) system;
         })
-          .package;
+        .package;
 
-      github-linguist = pkgs.callPackage ./development/github-linguist {};
+      github-linguist = final.callPackage ./development/github-linguist {};
 
-      shippori-mincho = pkgs.callPackage ./fonts/shippori-mincho.nix {};
-      jetbrains-mono-nerdfont = pkgs.callPackage ./fonts/jetbrains-mono-nerdfont.nix {};
+      shippori-mincho = final.callPackage ./fonts/shippori-mincho.nix {};
+      jetbrains-mono-nerdfont = final.callPackage ./fonts/jetbrains-mono-nerdfont.nix {};
 
+      wordnet-sqlite = final.callPackage ./data/wordnet/wordnet-sqlite {};
 
-      wordnet-sqlite = pkgs.callPackage ./data/wordnet/wordnet-sqlite {};
+      readability-cli = prev.callPackage ./media/readability-cli {pkgs = prev;};
 
-      readability-cli = pkgs.callPackage ./media/readability-cli {inherit pkgs;};
-
-      mermaid-cli = pkgs.nodePackages.mermaid-cli.overrideAttrs (_: {
+      mermaid-cli = prev.nodePackages.mermaid-cli.overrideAttrs (_: {
         meta.mainProgram = "/bin/mmdc";
       });
 
-      inherit (inputs.epubinfo.packages.${pkgs.system}) epubinfo;
-      inherit (inputs.squasher.packages.${pkgs.system}) squasher;
+      ajv = nodePackages.ajv-cli.overrideAttrs (_: {
+        meta.mainProgram = "ajv";
+      });
+
+      inherit (inputs.epubinfo.packages.${prev.system}) epubinfo;
+      inherit (inputs.squasher.packages.${prev.system}) squasher;
     };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
-      perSystem = {pkgs, ...}: {
-        packages = makePackages pkgs;
+      perSystem = {
+        pkgs,
+        system,
+        ...
+      }: {
+        packages = overlay pkgs pkgs;
+        apps.update-node2nix = {
+          type = "app";
+          program = "${pkgs.writeShellScript "run-node2nix" ''
+            set -euo pipefail
+            cd "generate/node2nix"
+            ${self.packages.${system}.node2nix}/bin/node2nix -i node-packages.json -20
+          ''}";
+        };
       };
       flake = {
-        overlays.default = final: _prev: makePackages final;
+        overlays.default = overlay;
         zsh-plugins =
           nixpkgs.lib.genAttrs
           [
