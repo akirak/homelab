@@ -116,12 +116,30 @@
         "type": "indirect"
       }
     },
+    "node2nix": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1682558263,
+        "narHash": "sha256-FQnGCtvZHUxzJpdP04FlBvgGXJcmM7jyAy27OLmmGXc=",
+        "owner": "akirak",
+        "repo": "node2nix",
+        "rev": "f7fe751aeaab334d223420b4c4dc9f5dc32c8501",
+        "type": "github"
+      },
+      "original": {
+        "owner": "akirak",
+        "ref": "develop",
+        "repo": "node2nix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "epubinfo": "epubinfo",
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs_2",
+        "node2nix": "node2nix",
         "squasher": "squasher",
         "zsh-fast-syntax-highlighting": "zsh-fast-syntax-highlighting",
         "zsh-fzy": "zsh-fzy",

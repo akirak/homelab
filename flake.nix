@@ -3,6 +3,12 @@
   inputs.flake-parts.url = "github:hercules-ci/flake-parts";
   inputs.flake-utils.url = "flake-utils";
 
+  inputs.node2nix = {
+    # url = "github:svanderburg/node2nix";
+    url = "github:akirak/node2nix/develop";
+    flake = false;
+  };
+
   # Pinned packages from flakes
   inputs = {
     epubinfo.url = "github:akirak/epubinfo";
@@ -44,11 +50,21 @@
     flake-parts,
     ...
   }: let
+
     makePackages = pkgs: {
+      # Override node2nix
+      node2nix =
+        (import inputs.node2nix {
+          inherit pkgs;
+          inherit (pkgs) system;
+        })
+          .package;
+
       github-linguist = pkgs.callPackage ./development/github-linguist {};
 
       shippori-mincho = pkgs.callPackage ./fonts/shippori-mincho.nix {};
       jetbrains-mono-nerdfont = pkgs.callPackage ./fonts/jetbrains-mono-nerdfont.nix {};
+
 
       wordnet-sqlite = pkgs.callPackage ./data/wordnet/wordnet-sqlite {};
 
