@@ -83,7 +83,7 @@ in {
       bind = $mod       , Space, exec, fuzzel -T "footclient -H"
       bind = $mod       , E, exec, emacsclient -c -a emacs
       bind = $mod SHIFT , S, exec, flameshot gui
-      bind = $mod       , F9, exec, footclient --title "Rebuilding NixOS..." nixos-rebuild-and-notify
+      bind = $mod       , F9, exec, foot --title "Rebuilding NixOS..." nixos-rebuild-and-notify
 
       # Window management
       bind = $mod       , C , killactive
