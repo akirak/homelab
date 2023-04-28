@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  staticIp = "192.168.0.61";
+  staticIp = "192.168.2.1";
   initialSshPort = 222;
   stage1Modules = [
     "uas"
@@ -28,7 +28,7 @@ in {
 
     kernelModules = stage1Modules;
 
-    luks.devices.cryptroot = {
+    luks.devices.cryptcorsair1 = {
       allowDiscards = true;
     };
 
@@ -39,7 +39,7 @@ in {
       postCommands = ''
         until ip link set eth0 up; do sleep .1; done
         ip addr add ${staticIp} dev eth0
-        ip route add default via ${staticIp} dev eth0
+        # ip route add default via ${staticIp} dev eth0
       '';
 
       ssh = {
@@ -56,8 +56,28 @@ in {
   };
 
   networking = {
-    useDHCP = false;
-    interfaces.eth0.useDHCP = true;
+    usePredictableInterfaceNames = true;
+    dhcpcd.enable = false;
+
+    interfaces.eth0 = {
+      ipv4.addresses = [
+        {
+          address = "192.168.2.1";
+          prefixLength = 16;
+        }
+      ];
+    };
+  };
+
+  networking.networkmanager.enable = false;
+
+  systemd.network.links."20-tether1" = {
+    matchConfig = {
+      Driver = "rndis_host";
+    };
+    linkConfig = {
+      Name = "tether1";
+    };
   };
 
   # Use a bootloader that supports initrd secrets.

@@ -6,12 +6,11 @@
     ../../profiles/nginx
     ../../profiles/nix/cachix-deploy.nix
     ./boot.nix
+    (import ./disko.nix {})
   ];
 
   system.stateVersion = "22.11";
   time.timeZone = "Asia/Tokyo";
-
-  disko.devices = import ./disko.nix {};
 
   nix.settings.allowed-users = ["root"];
 
