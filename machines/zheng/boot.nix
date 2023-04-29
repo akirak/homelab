@@ -69,7 +69,12 @@ in {
     };
   };
 
-  networking.networkmanager.enable = false;
+  networking.networkmanager = {
+    enable = true;
+    unmanaged = [
+      "eth0"
+    ];
+  };
 
   systemd.network.links."20-tether1" = {
     matchConfig = {
