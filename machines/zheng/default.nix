@@ -3,8 +3,7 @@
     (modulesPath + "/profiles/headless.nix")
     ../../suites/server
     ../../profiles/tailscale
-    ../../profiles/nginx
-    ../../profiles/nix/cachix-deploy.nix
+    # ../../profiles/nix/cachix-deploy.nix
     ./boot.nix
     (import ./disko.nix {})
   ];
