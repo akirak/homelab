@@ -26,4 +26,10 @@
     uid = 1000;
     isNormalUser = true;
   };
+
+  # Using as a router
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = true;
+    "net.ipv6.conf.all.forwarding" = true;
+  };
 }
