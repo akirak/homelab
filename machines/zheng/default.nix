@@ -20,7 +20,7 @@
   '';
 
   boot.cleanTmpDir = true;
-  powerManagement.cpuFreqGovernor = "schedutil";
+  powerManagement.cpuFreqGovernor = "ondemand";
   zramSwap.enable = true;
 
   users.users.akirakomamura = {
