@@ -226,7 +226,7 @@
             inherit (inputs) self cachix-deploy-flake;
             nixosHosts = [
               # "shu"
-              # "hui"
+              "hui"
             ];
             homeHosts = [
               # "voyage"
