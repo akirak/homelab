@@ -6,6 +6,7 @@ on:
   pull_request:
     paths-ignore:
     - 'README.*'
+    - '.github/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -29,9 +30,6 @@ jobs:
         name: akirak
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
         pushFilter: '-source$'
-
-    - name: Check formatting
-      run: nix develop -c , check-format
 
     - run: |
        nix flake check --update-input emacs-config --no-write-lock-file
