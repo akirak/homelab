@@ -1,5 +1,8 @@
-{ pkgs, homeUser, ...}:
 {
+  pkgs,
+  homeUser,
+  ...
+}: {
   programs.adb.enable = true;
   users.users.${homeUser}.extraGroups = [
     "adbusers"
