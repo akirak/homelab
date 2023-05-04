@@ -71,6 +71,7 @@
   home-manager.users.${homeUser} = {
     programs.emacs-twist = {
       enable = true;
+      serviceIntegration.enable = false;
       settings = {
         extraFeatures = [
           "mermaid"
