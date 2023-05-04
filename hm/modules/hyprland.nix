@@ -10,9 +10,11 @@
     modulesCenter = [
       "hyprland/window"
     ];
-    modulesRight = ms: ms ++ [
-      "hyprland/submap"
-    ];
+    modulesRight = ms:
+      ms
+      ++ [
+        "hyprland/submap"
+      ];
   };
 
   instanceEnv = "HYPRLAND_INSTANCE_SIGNATURE";
