@@ -74,7 +74,6 @@
       serviceIntegration.enable = false;
       settings = {
         extraFeatures = [
-          "mermaid"
           "OCaml"
         ];
       };
