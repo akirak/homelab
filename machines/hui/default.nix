@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./boot.nix
+    (import ./disko.nix {})
     ../../suites/base
     ../../suites/graphical
     ../../suites/desktop
@@ -21,7 +22,6 @@
   ];
 
   system.stateVersion = "22.11";
-  disko.devices = import ./disko.nix {};
 
   networking = {
     firewall.enable = true;

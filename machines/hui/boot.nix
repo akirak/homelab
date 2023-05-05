@@ -20,15 +20,7 @@
     "usb-storage"
   ];
 
-  boot.initrd.luks.devices = {
-    cryptroot = {
-      allowDiscards = true;
-    };
-    # cryptdata = {
-    #   allowDiscards = true;
-    #   preLVM = true;
-    # };
-  };
+  boot.initrd.luks.reusePassphrases = true;
 
   boot.supportedFilesystems = ["btrfs"];
   boot.initrd.supportedFilesystems = ["btrfs"];
@@ -36,6 +28,9 @@
   # fileSystems."/home" = {
   #   neededForBoot = false;
   # };
+
+  boot.tmpOnTmpfs = true;
+  boot.tmpOnTmpfsSize = "512m";
 
   boot.runSize = "64m";
   boot.devSize = "256m";
