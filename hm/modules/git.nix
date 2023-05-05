@@ -14,7 +14,7 @@
 in {
   programs.git = {
     extraConfig = lib.mkIf enabled {
-      github.user = "akirak";
+      github.user = lib.mkDefault "akirak";
 
       pull.rebase = false;
 
