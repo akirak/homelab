@@ -2,6 +2,7 @@
   imports = [
     (modulesPath + "/profiles/base.nix")
     ../../profiles/yubikey
+    ../../profiles/users/primary-group.nix
   ];
 
   environment.sessionVariables = {
