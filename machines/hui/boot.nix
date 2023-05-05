@@ -20,15 +20,7 @@
     "usb-storage"
   ];
 
-  boot.initrd.luks.devices = {
-    cryptroot = {
-      allowDiscards = true;
-    };
-    # cryptdata = {
-    #   allowDiscards = true;
-    #   preLVM = true;
-    # };
-  };
+  boot.initrd.luks.reusePassphrases = true;
 
   boot.supportedFilesystems = ["btrfs"];
   boot.initrd.supportedFilesystems = ["btrfs"];
