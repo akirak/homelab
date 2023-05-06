@@ -70,6 +70,8 @@
   };
 
   home-manager.users.${homeUser} = {
+    programs.git.defaultToPersonalIdentity = true;
+
     programs.emacs-twist = {
       enable = true;
       serviceIntegration.enable = false;

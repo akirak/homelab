@@ -114,6 +114,8 @@ in {
 
     programs.gpg.enable = true;
 
+    programs.git.defaultToPersonalIdentity = true;
+
     programs.emacs-twist = {
       enable = true;
       settings = {
