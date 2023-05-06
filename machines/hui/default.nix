@@ -70,6 +70,8 @@
   };
 
   home-manager.users.${homeUser} = {
+    programs.gpg.enable = true;
+
     programs.git.defaultToPersonalIdentity = true;
 
     programs.emacs-twist = {
