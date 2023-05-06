@@ -28,6 +28,8 @@ in {
       userName = lib.mkIf cfg.defaultToPersonalIdentity personalUser;
       userEmail = lib.mkIf cfg.defaultToPersonalIdentity personalEmail;
 
+      delta.enable = true;
+
       extraConfig = lib.mkIf enabled {
         github.user = lib.mkDefault "akirak";
 
