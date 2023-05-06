@@ -56,7 +56,7 @@ jobs:
       # A timeout set arbitrary
       timeout-minutes: 90
       run: |
-        spec=$(nix build .#cachix-deploys --print-out-paths \
+        spec=$(nix build .#cachix-deploys --print-out-paths --print-build-logs \
                ${{ env.dry == 'true' && '--dry-run' || '' }} \
                --update-input emacs-config --no-write-lock-file)
         echo "spec_path=$spec" >> $GITHUB_OUTPUT
