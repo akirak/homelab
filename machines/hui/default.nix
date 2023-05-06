@@ -44,6 +44,7 @@
   };
 
   users.users.${homeUser} = {
+    name = "Akira Komamura";
     uid = 1000;
     isNormalUser = true;
     hashedPassword = "$6$3LmgpFGu4WEeoTss$9NQpF4CEO8ivu0uJTlDYXdiB6ZPHBsLXDZr.6S59bBNxmNuhirmcOmHTwhccdgSwq7sJOz2JbOOzmOCivxdak0";
@@ -69,6 +70,8 @@
   };
 
   home-manager.users.${homeUser} = {
+    programs.git.defaultToPersonalIdentity = true;
+
     programs.emacs-twist = {
       enable = true;
       serviceIntegration.enable = false;
