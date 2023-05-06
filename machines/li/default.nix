@@ -61,7 +61,7 @@ in {
   };
 
   users.users.${homeUser} = {
-    name = "Akira Komamura";
+    description = "Akira Komamura";
     uid = 1000;
     isNormalUser = true;
     hashedPassword = "$6$3LmgpFGu4WEeoTss$9NQpF4CEO8ivu0uJTlDYXdiB6ZPHBsLXDZr.6S59bBNxmNuhirmcOmHTwhccdgSwq7sJOz2JbOOzmOCivxdak0";
