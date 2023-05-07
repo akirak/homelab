@@ -46,6 +46,7 @@ in {
             --option accept-flake-config true \
             --print-build-logs \
             --use-remote-sudo \
+            --no-write-lock-file \
             ''${flags[@]}; then
           ${notify} -t 5000 'nixos-rebuild successfully finished'
         else
