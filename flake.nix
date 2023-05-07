@@ -293,6 +293,7 @@
             extraModules = [
               inputs.self.nixosModules.asus-br1100
               twistHomeModule
+              hyprlandHomeModule
             ];
           };
           li = {
@@ -338,6 +339,7 @@
               inputs.home-manager.nixosModules.home-manager
               overlayModule
               twistHomeModule
+              hyprlandHomeModule
               ./profiles/home-manager
             ];
           };
