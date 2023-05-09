@@ -187,32 +187,6 @@
           };
         };
 
-        packages.launch-desktop-vm = self.lib.makeMicroVMSystem "demo-microvm" {
-          inherit system;
-          specialArgs = {
-            hypervisor = "qemu";
-            homeUser = "root";
-          };
-          modules = [
-            inputs.home-manager-stable.nixosModules.home-manager
-            ./suites/microvm-gui
-            ./profiles/desktop/plasma.nix
-            ./profiles/home-manager
-          ];
-        };
-
-        packages.launch-container = self.lib.makeMicroVMSystem "demo-microvm" {
-          inherit system;
-          specialArgs = {
-            hypervisor = "qemu";
-            homeUser = "root";
-          };
-          modules = [
-            inputs.home-manager-stable.nixosModules.home-manager
-            ./suites/microvm
-          ];
-        };
-
         devShells.default = pkgs.mkShell {
           buildInputs = [
             self.formatter.${system}
@@ -251,6 +225,32 @@
             .system
             .build
             .isoImage;
+
+          launch-desktop-vm = self.lib.makeMicroVMSystem "demo-microvm" {
+            system = "x86_64-linux";
+            specialArgs = {
+              hypervisor = "qemu";
+              homeUser = "root";
+            };
+            modules = [
+              inputs.home-manager-stable.nixosModules.home-manager
+              ./suites/microvm-gui
+              ./profiles/desktop/plasma.nix
+              ./profiles/home-manager
+            ];
+          };
+
+          launch-container = self.lib.makeMicroVMSystem "demo-microvm" {
+            system = "x86_64-linux";
+            specialArgs = {
+              hypervisor = "qemu";
+              homeUser = "root";
+            };
+            modules = [
+              inputs.home-manager-stable.nixosModules.home-manager
+              ./suites/microvm
+            ];
+          };
         };
 
         packages.aarch64-linux = {
