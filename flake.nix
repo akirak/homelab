@@ -3,14 +3,16 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager-stable.url = "github:nix-community/home-manager/release-22.11";
+    home-manager-unstable.url = "github:nix-community/home-manager";
     nix-darwin.url = "github:LnL7/nix-darwin";
 
     flake-utils.url = "github:numtide/flake-utils";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager-stable.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager-unstable.inputs.nixpkgs.follows = "unstable";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     mission-control.url = "github:Platonic-Systems/mission-control";
@@ -27,7 +29,7 @@
       url = "github:cachix/cachix-deploy-flake";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.disko.follows = "disko";
-      inputs.home-manager.follows = "home-manager";
+      inputs.home-manager.follows = "home-manager-stable";
       inputs.darwin.follows = "nix-darwin";
     };
 
@@ -185,30 +187,6 @@
           };
         };
 
-        packages.launch-desktop-vm = self.lib.makeMicroVMSystem "demo-microvm" {
-          inherit system;
-          specialArgs = {
-            hypervisor = "qemu";
-            homeUser = "root";
-          };
-          modules = [
-            ./suites/microvm-gui
-            ./profiles/desktop/plasma.nix
-            ./profiles/home-manager
-          ];
-        };
-
-        packages.launch-container = self.lib.makeMicroVMSystem "demo-microvm" {
-          inherit system;
-          specialArgs = {
-            hypervisor = "qemu";
-            homeUser = "root";
-          };
-          modules = [
-            ./suites/microvm
-          ];
-        };
-
         devShells.default = pkgs.mkShell {
           buildInputs = [
             self.formatter.${system}
@@ -247,6 +225,32 @@
             .system
             .build
             .isoImage;
+
+          launch-desktop-vm = self.lib.makeMicroVMSystem "demo-microvm" {
+            system = "x86_64-linux";
+            specialArgs = {
+              hypervisor = "qemu";
+              homeUser = "root";
+            };
+            modules = [
+              inputs.home-manager-stable.nixosModules.home-manager
+              ./suites/microvm-gui
+              ./profiles/desktop/plasma.nix
+              ./profiles/home-manager
+            ];
+          };
+
+          launch-container = self.lib.makeMicroVMSystem "demo-microvm" {
+            system = "x86_64-linux";
+            specialArgs = {
+              hypervisor = "qemu";
+              homeUser = "root";
+            };
+            modules = [
+              inputs.home-manager-stable.nixosModules.home-manager
+              ./suites/microvm
+            ];
+          };
         };
 
         packages.aarch64-linux = {
@@ -291,6 +295,7 @@
               inherit (inputs) emacs-config;
             };
             extraModules = [
+              inputs.home-manager-stable.nixosModules.home-manager
               inputs.self.nixosModules.asus-br1100
               twistHomeModule
               hyprlandHomeModule
@@ -304,6 +309,7 @@
               inherit (inputs) emacs-config;
             };
             extraModules = [
+              inputs.home-manager-unstable.nixosModules.home-manager
               twistHomeModule
               hyprlandHomeModule
             ];
@@ -336,7 +342,8 @@
           };
           hmProfile = {
             imports = [
-              inputs.home-manager.nixosModules.home-manager
+              # Use a home-manager channel corresponding to your OS
+              # inputs.home-manager.nixosModules.home-manager
               overlayModule
               twistHomeModule
               hyprlandHomeModule
@@ -404,7 +411,6 @@
                   }
                   overlayModule
                   inputs.disko.nixosModules.disko
-                  inputs.home-manager.nixosModules.home-manager
                   inputs.impermanence.nixosModules.impermanence
                   inputs.hyprland.nixosModules.default
                 ]
