@@ -32,4 +32,5 @@ jobs:
         pushFilter: '-source$'
 
     - run: |
-       nix flake check --update-input emacs-config --no-write-lock-file
+       nix flake check --update-input emacs-config \
+           --no-write-lock-file --print-build-logs --show-trace
