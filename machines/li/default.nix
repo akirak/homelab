@@ -120,7 +120,7 @@ in {
       enable = true;
       settings = {
         extraFeatures = [
-          # "beancount"
+          "beancount"
           "mermaid"
           # "ChatGPT"
           "copilot"
