@@ -100,7 +100,7 @@ in {
     home.packages = [
       # pkgs.wine
       # pkgs.tenacity
-      # pkgs.microsoft-edge
+      pkgs.microsoft-edge
     ];
 
     services.kanshi.profiles = {
