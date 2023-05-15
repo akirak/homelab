@@ -30,6 +30,7 @@ in {
     # ../../profiles/wayland/wm/river.nix
     ../../profiles/nix/cachix-deploy.nix
     ../../profiles/postgresql/development.nix
+    ../../profiles/docker/rootless.nix
   ];
 
   # Needed for the ZFS pool.
