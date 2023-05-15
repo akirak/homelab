@@ -7,6 +7,7 @@ You also have to import home-manager.nixosModules.home-manager
   homeUser,
   config,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
@@ -19,6 +20,9 @@ You also have to import home-manager.nixosModules.home-manager
     else pkgs.bash;
 
   programs.zsh.enable = true;
+
+  users.users.${homeUser}.extraGroups =
+    lib.optional config.virtualisation.docker.enable "docker";
 
   home-manager = {
     useGlobalPkgs = true;
