@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_1;
+  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
