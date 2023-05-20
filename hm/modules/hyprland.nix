@@ -36,9 +36,9 @@
   defaultDialogSize = "780 600";
 
   doCenterFloat = size: condition: ''
-      windowrulev2 = float,${condition}
-      windowrulev2 = size ${size},${condition}
-      windowrulev2 = center,${condition}
+    windowrulev2 = float,${condition}
+    windowrulev2 = size ${size},${condition}
+    windowrulev2 = center,${condition}
   '';
 
   exactClass = className: "class:^(${className})$";
