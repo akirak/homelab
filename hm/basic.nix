@@ -19,6 +19,7 @@
     gh
     pre-commit
     alejandra
+    ast-grep
 
     # Media
     git-annex
