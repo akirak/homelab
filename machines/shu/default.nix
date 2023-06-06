@@ -8,7 +8,7 @@
     ./boot.nix
   ];
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
   networking.hostId = "9bc2dd3d";
   time.timeZone = "America/Los_Angeles";
 

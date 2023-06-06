@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -73,7 +73,7 @@
             };
             modules = [
               {
-                home.stateVersion = "22.11";
+                home.stateVersion = "23.05";
               }
               ./home.nix
               (inputs.homelab.outPath + "/hm/core.nix")

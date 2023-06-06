@@ -8,7 +8,7 @@
     ./boot.nix
   ];
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
   time.timeZone = "Asia/Tokyo";
 
   disko.devices = import ./disko.nix {};

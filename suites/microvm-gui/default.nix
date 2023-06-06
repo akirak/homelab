@@ -16,7 +16,7 @@ in {
     ../../profiles/microvm/ssh.nix
   ];
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 
   # Set a message printed to the console before login.
   services.getty.helpLine = ''
