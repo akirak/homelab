@@ -36,7 +36,7 @@ in {
   # Needed for the ZFS pool.
   networking.hostId = "8425e349";
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
   # I didn't use disko when I first set up this machine.
   # disko.devices = import ./disko.nix {};
 

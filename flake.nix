@@ -1,9 +1,9 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    home-manager-stable.url = "github:nix-community/home-manager/release-22.11";
+    home-manager-stable.url = "github:nix-community/home-manager/release-23.05";
     home-manager-unstable.url = "github:nix-community/home-manager";
     nix-darwin.url = "github:LnL7/nix-darwin";
 
