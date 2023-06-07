@@ -26,6 +26,7 @@ in {
     ../../profiles/nix
     ../../profiles/sudo
     ../../profiles/tailscale
+    ../../profiles/networking/usb-tether1.nix
     ../../profiles/wayland/wm/hyprland.nix
     # ../../profiles/wayland/wm/river.nix
     ../../profiles/nix/cachix-deploy.nix
