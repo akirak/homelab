@@ -31,7 +31,7 @@ in {
       extraConfig = lib.mkIf enabled {
         github.user = lib.mkDefault "akirak";
 
-        pull.rebase = false;
+        pull.rebase = lib.mkDefault true;
 
         "url \"git@github.com:\"".pushInsteadOf = "https://github.com/";
         "url \"git@git.sr.ht:\"".pushInsteadOf = "https://git.sr.ht/";
