@@ -10,7 +10,7 @@
   boot.initrd.kernelModules = ["nvme"];
 
   zramSwap.enable = true;
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
 
   fileSystems."/" = {
     device = "/dev/sda1";
@@ -18,6 +18,5 @@
   };
 
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
 }

@@ -18,6 +18,8 @@ in {
     enable = true;
     ports = [sshPort];
     openFirewall = true;
-    permitRootLogin = "yes";
+    settings = {
+      PermitRootLogin = "yes";
+    };
   };
 }
