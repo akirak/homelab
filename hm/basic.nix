@@ -14,6 +14,7 @@
     cachix
     nix-prefetch-git
     manix
+    nixd
 
     # Development
     gh
