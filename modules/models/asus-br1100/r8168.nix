@@ -15,6 +15,9 @@
         rev = version;
         sha256 = "sha256-osANis1wDOXp3eShNMUA8IlIvcHjksdt+3V1cy3It5o=";
       };
+      patches = [
+        ./r8168.patch
+      ];
       meta =
         super.meta
         // {
