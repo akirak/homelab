@@ -20,7 +20,7 @@
     MaxFileSec=10day
   '';
 
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
   powerManagement.cpuFreqGovernor = "schedutil";
   zramSwap.enable = true;
 

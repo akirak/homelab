@@ -29,8 +29,8 @@
   #   neededForBoot = false;
   # };
 
-  boot.tmpOnTmpfs = true;
-  boot.tmpOnTmpfsSize = "512m";
+  boot.tmp.useTmpfs = true;
+  boot.tmp.tmpfsSize = "512m";
 
   boot.runSize = "64m";
   boot.devSize = "256m";

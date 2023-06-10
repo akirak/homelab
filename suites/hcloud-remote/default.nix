@@ -17,7 +17,7 @@
   boot.initrd.kernelModules = ["nvme"];
 
   zramSwap.enable = true;
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
 
   boot.loader.grub = {
     version = 2;
