@@ -50,6 +50,8 @@
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-contrib.url = "github:hyprwm/contrib";
 
+    nixd.url = "github:nix-community/nixd";
+
     my-overlay.url = "github:akirak/nixpkgs-overlay";
     emacs-config = {
       url = "github:akirak/emacs-config/develop";
@@ -96,6 +98,7 @@
         nix-index = inputs.nix-index-database.packages.${prev.system}.nix-index-with-db;
       })
       inputs.my-overlay.overlays.default
+      inputs.nixd.overlays.default
     ];
 
     overlayModule = {
