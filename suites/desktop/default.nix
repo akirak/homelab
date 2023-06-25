@@ -1,8 +1,16 @@
-{modulesPath, ...}: {
+{
+  modulesPath,
+  pkgs,
+  ...
+}: {
   imports = [
     (modulesPath + "/profiles/base.nix")
     ../../profiles/yubikey
     ../../profiles/users/primary-group.nix
+  ];
+
+  environment.systemPackages = [
+    pkgs.lsof
   ];
 
   environment.sessionVariables = {
