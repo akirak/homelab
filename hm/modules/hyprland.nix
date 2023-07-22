@@ -41,6 +41,11 @@
     windowrulev2 = center,${condition}
   '';
 
+  doCenterFloatDefault = condition: ''
+    windowrulev2 = float,${condition}
+    windowrulev2 = center,${condition}
+  '';
+
   exactClass = className: "class:^(${className})$";
 
   exactTitle = className: "title:^(${className})$";
@@ -154,6 +159,7 @@ in {
       ${doCenterFloat defaultDialogSize (exactClass "pavucontrol")}
       ${doCenterFloat defaultDialogSize (exactClass "com.rafaelmardojai.Blanket")}
       ${doCenterFloat defaultDialogSize (exactTitle "Android Studio Setup Wizard")}
+      ${doCenterFloatDefault (exactClass "mpv")}
     '';
   };
 }
