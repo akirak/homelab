@@ -20,6 +20,7 @@
     pre-commit
     alejandra
     ast-grep
+    tbls
 
     # Media
     git-annex
