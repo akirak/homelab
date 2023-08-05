@@ -110,21 +110,6 @@
         ];
       };
     };
-
-    hyprlandHomeModule = {
-      homeUser,
-      pkgs,
-      ...
-    }: {
-      home-manager.users.${homeUser} = {
-        imports = [
-          inputs.hyprland.homeManagerModules.default
-          {
-            wayland.windowManager.hyprland.package = pkgs.customPackages.hyprland;
-          }
-        ];
-      };
-    };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
@@ -298,7 +283,6 @@
               inputs.home-manager-stable.nixosModules.home-manager
               inputs.self.nixosModules.asus-br1100
               twistHomeModule
-              hyprlandHomeModule
             ];
           };
           li = {
@@ -311,7 +295,6 @@
             extraModules = [
               inputs.home-manager-unstable.nixosModules.home-manager
               twistHomeModule
-              hyprlandHomeModule
             ];
           };
           zheng = {
@@ -346,7 +329,6 @@
               # inputs.home-manager.nixosModules.home-manager
               overlayModule
               twistHomeModule
-              hyprlandHomeModule
               ./profiles/home-manager
             ];
           };
