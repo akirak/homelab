@@ -32,6 +32,7 @@ in {
 
     programs.waybar = {
       enable = true;
+      package = pkgs.customPackages.waybar-hyprland;
     };
 
     xdg.configFile."waybar/config".source = pkgs.callPackage ../lib/waybar-config.nix {
