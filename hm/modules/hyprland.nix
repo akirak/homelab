@@ -18,22 +18,6 @@
       WantedBy = [systemdTarget];
     };
   };
-
-  instanceEnv = "HYPRLAND_INSTANCE_SIGNATURE";
-
-  # If there is an Emacs daemon running across NixOS configuration switches or
-  # Hyprland restarts, Emacs can have a different value of
-  # HYPRLAND_INSTANCE_SIGNATURE environment variable from the actually running
-  # one, which can cause hyprctl to fail. It is better to synchronize the value.
-  notifyToEmacs = pkgs.writeShellScript "notify-hyprland-instance" ''
-    if [[ -S "''${XDG_RUNTIME_DIR}/emacs/server" ]] \
-     && command -v emacsclient >/dev/null \
-     && [[ -v ${instanceEnv} ]]
-    then
-      echo "Updating ${instanceEnv} environment variable inside Emacs"
-      emacsclient --eval "(setenv "${instanceEnv}" "''${${instanceEnv}}")"
-    fi
-  '';
 in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
@@ -82,10 +66,6 @@ in {
           kb_layout = "us";
           kb_options = "ctrl:nocaps";
         };
-
-        exec = [
-          notifyToEmacs
-        ];
 
         decoration = {
           # gaps_in = 5;
