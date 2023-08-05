@@ -28,6 +28,7 @@ in {
     ../../profiles/tailscale
     ../../profiles/networking/usb-tether1.nix
     ../../profiles/wayland/wm/hyprland.nix
+    ../../profiles/wayland/cage/foot.nix
     # ../../profiles/wayland/wm/river.nix
     ../../profiles/nix/cachix-deploy.nix
     ../../profiles/postgresql/development.nix
