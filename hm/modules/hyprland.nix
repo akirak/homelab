@@ -6,6 +6,19 @@
 }: let
   cfg = config.wayland.windowManager.hyprland or {enable = false;};
 
+  footEnabled = config.programs.foot.enable;
+
+  systemdTarget = "hyprland-session.target";
+
+  systemdStartAfterThis = {
+    Unit = {
+      After = [systemdTarget];
+    };
+    Install = {
+      WantedBy = [systemdTarget];
+    };
+  };
+
   instanceEnv = "HYPRLAND_INSTANCE_SIGNATURE";
 
   # If there is an Emacs daemon running across NixOS configuration switches or
@@ -33,6 +46,8 @@ in {
     programs.waybar = {
       enable = true;
       package = pkgs.customPackages.waybar-hyprland;
+      systemd.enable = true;
+      systemd.target = systemdTarget;
     };
 
     xdg.configFile."waybar/config".source = pkgs.callPackage ../lib/waybar-config.nix {
@@ -46,6 +61,15 @@ in {
         ];
     };
 
+    programs.foot.server.enable = lib.mkIf footEnabled true;
+    systemd.user.services.foot =
+      lib.mkIf footEnabled
+      systemdStartAfterThis;
+
+    systemd.user.services.dunst =
+      lib.mkIf config.services.dunst.enable
+      systemdStartAfterThis;
+
     wayland.windowManager.hyprland = {
       package = pkgs.customPackages.hyprland;
       systemdIntegration = true;
@@ -58,12 +82,6 @@ in {
           kb_layout = "us";
           kb_options = "ctrl:nocaps";
         };
-
-        "exec-once" = [
-          "dunst &"
-          "waybar &"
-          # "foot --server"
-        ];
 
         exec = [
           notifyToEmacs
