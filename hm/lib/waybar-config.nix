@@ -17,8 +17,8 @@ let
 in
   {
     writeText,
-    modulesCenter ? ["wlr/workspaces"],
-    modulesLeft ? [],
+    modulesCenter ? ["hyprland/window"],
+    modulesLeft ? ["wlr/workspaces"],
     modulesRight ? defaultModulesRight,
   }:
   # Based on https://github.com/Alexays/Waybar/blob/master/resources/config
@@ -53,18 +53,7 @@ in
           "tooltip-format": "{app}: {title}"
         },
         "wlr/workspaces": {
-          "format": "{name}",
-          "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
-            "urgent": "",
-            "active": "",
-            "default": ""
-          },
-          "on-click": "activate"
+          "format": "{icon}",
         },
         "hyprland/window": {
           "format": "{}",
