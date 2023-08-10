@@ -103,7 +103,7 @@ in {
       # pkgs.wine
       # pkgs.tenacity
       pkgs.microsoft-edge
-      pkgs.zoom-us
+      # pkgs.zoom-us
     ];
 
     services.kanshi.profiles = {
