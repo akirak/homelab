@@ -275,12 +275,13 @@
           };
           hui = {
             system = "x86_64-linux";
+            channel = unstable;
             specialArgs = {
               homeUser = "akirakomamura";
               inherit (inputs) emacs-config;
             };
             extraModules = [
-              inputs.home-manager-stable.nixosModules.home-manager
+              inputs.home-manager-unstable.nixosModules.home-manager
               inputs.self.nixosModules.asus-br1100
               twistHomeModule
             ];
