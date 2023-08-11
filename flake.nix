@@ -275,6 +275,7 @@
         nixosConfigurations = builtins.mapAttrs self.lib.mkSystem {
           shu = {
             system = "x86_64-linux";
+            channel = stable;
           };
           hui = {
             system = "x86_64-linux";
