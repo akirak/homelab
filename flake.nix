@@ -211,20 +211,20 @@
             .build
             .isoImage;
 
-          launch-desktop-vm = self.lib.makeMicroVMSystem "demo-microvm" {
-            system = "x86_64-linux";
-            channel = unstable;
-            specialArgs = {
-              hypervisor = "qemu";
-              homeUser = "root";
-            };
-            modules = [
-              inputs.home-manager-unstable.nixosModules.home-manager
-              ./suites/microvm-gui
-              ./profiles/desktop/plasma.nix
-              ./profiles/home-manager
-            ];
-          };
+          # launch-desktop-vm = self.lib.makeMicroVMSystem "demo-microvm" {
+          #   system = "x86_64-linux";
+          #   channel = unstable;
+          #   specialArgs = {
+          #     hypervisor = "qemu";
+          #     homeUser = "root";
+          #   };
+          #   modules = [
+          #     inputs.home-manager-unstable.nixosModules.home-manager
+          #     ./suites/microvm-gui
+          #     ./profiles/desktop/plasma.nix
+          #     ./profiles/home-manager
+          #   ];
+          # };
 
           launch-container = self.lib.makeMicroVMSystem "demo-microvm" {
             system = "x86_64-linux";
