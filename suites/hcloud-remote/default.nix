@@ -20,7 +20,6 @@
   boot.tmp.cleanOnBoot = true;
 
   boot.loader.grub = {
-    version = 2;
     device = "/dev/sda";
     efiSupport = true;
     efiInstallAsRemovable = true;
