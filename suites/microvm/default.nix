@@ -11,8 +11,6 @@ Based on https://github.com/astro/microvm.nix/blob/main/flake.nix
     ../../profiles/microvm
   ];
 
-  system.stateVersion = lib.mkDefault "23.05";
-
   services.getty.helpLine = ''
     From this console, you can log in as "root" with an empty password.
   '';

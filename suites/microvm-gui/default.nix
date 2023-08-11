@@ -16,8 +16,6 @@ in {
     ../../profiles/microvm/ssh.nix
   ];
 
-  system.stateVersion = "23.05";
-
   # Set a message printed to the console before login.
   services.getty.helpLine = ''
     Connect to the RDP server using xfreerdp/wlfreerdp:

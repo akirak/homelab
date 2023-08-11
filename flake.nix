@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    stable.url = "github:NixOS/nixpkgs/nixos-23.05";
 
     home-manager-stable.url = "github:nix-community/home-manager/release-23.05";
     home-manager-unstable.url = "github:nix-community/home-manager";
@@ -11,7 +11,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    home-manager-stable.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager-stable.inputs.nixpkgs.follows = "stable";
     home-manager-unstable.inputs.nixpkgs.follows = "unstable";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -20,14 +20,14 @@
 
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "unstable";
     };
 
     impermanence.url = "github:nix-community/impermanence";
 
     cachix-deploy-flake = {
       url = "github:cachix/cachix-deploy-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "stable";
       inputs.disko.follows = "disko";
       inputs.home-manager.follows = "home-manager-stable";
       inputs.darwin.follows = "nix-darwin";
@@ -35,7 +35,7 @@
 
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "stable";
     };
 
     microvm = {
@@ -73,13 +73,13 @@
 
   outputs = {
     self,
-    nixpkgs,
+    stable,
     unstable,
     flake-parts,
     nixos-generators,
     ...
   } @ inputs: let
-    inherit (nixpkgs) lib;
+    inherit (stable) lib;
 
     overlays = [
       (final: prev: {
@@ -131,6 +131,8 @@
         system,
         ...
       }: {
+        _module.args.pkgs = unstable.legacyPackages.${system};
+
         treefmt = {
           projectRootFile = "flake.nix";
           package = pkgs.treefmt;
@@ -185,7 +187,7 @@
       flake = {
         packages.x86_64-linux = {
           cachix-deploys = import ./lib/cachix-deploy.nix {
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
+            pkgs = unstable.legacyPackages.x86_64-linux;
             inherit (inputs) self cachix-deploy-flake;
             nixosHosts = [
               # "shu"
@@ -197,7 +199,7 @@
           };
 
           asus-br1100-iso =
-            (nixpkgs.lib.nixosSystem
+            (stable.lib.nixosSystem
               {
                 system = "x86_64-linux";
                 modules = [
@@ -233,7 +235,7 @@
               homeUser = "root";
             };
             modules = [
-              inputs.home-manager-stable.nixosModules.home-manager
+              inputs.home-manager-unstable.nixosModules.home-manager
               ./suites/microvm
             ];
           };
@@ -241,7 +243,7 @@
 
         packages.aarch64-linux = {
           cachix-deploys = import ./lib/cachix-deploy.nix {
-            pkgs = nixpkgs.legacyPackages.aarch64-linux;
+            pkgs = unstable.legacyPackages.aarch64-linux;
             inherit (inputs) self cachix-deploy-flake;
             nixosHosts = [
               "zheng"
@@ -249,7 +251,7 @@
           };
 
           bootstrap-sd-image =
-            (nixpkgs.lib.nixosSystem {
+            (unstable.lib.nixosSystem {
               system = "aarch64-linux";
               modules = [
                 overlayModule
@@ -273,6 +275,7 @@
         nixosConfigurations = builtins.mapAttrs self.lib.mkSystem {
           shu = {
             system = "x86_64-linux";
+            channel = stable;
           };
           hui = {
             system = "x86_64-linux";
@@ -338,7 +341,7 @@
 
         homeConfigurations = {
           voyage = inputs.home-manager.lib.homeManagerConfiguration {
-            pkgs = import nixpkgs {
+            pkgs = import unstable {
               system = "x86_64-linux";
               inherit overlays;
               config = {
@@ -371,7 +374,7 @@
           */
           mkSystem = hostName: {
             system,
-            channel ? inputs.nixpkgs,
+            channel ? inputs.stable,
             specialArgs ? {},
             extraModules ? [],
           }: let
@@ -391,7 +394,7 @@
                     networking.hostName = hostName;
 
                     system.configurationRevision =
-                      nixpkgs.lib.mkIf (self ? lastModifiedDate) configurationRevision;
+                      channel.lib.mkIf (self ? lastModifiedDate) configurationRevision;
                   }
                   overlayModule
                   inputs.disko.nixosModules.disko
@@ -406,7 +409,7 @@
             system,
             specialArgs,
             modules,
-            channel ? inputs.nixpkgs,
+            channel ? inputs.unstable,
           }: let
             inherit
               (self.lib.mkSystem name {

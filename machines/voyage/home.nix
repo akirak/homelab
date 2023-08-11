@@ -6,7 +6,6 @@
 }: {
   home.username = homeUser;
   home.homeDirectory = "/home/${homeUser}";
-  home.stateVersion = "23.05";
 
   imports = [
     ../../hm/core.nix

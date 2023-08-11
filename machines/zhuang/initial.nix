@@ -17,5 +17,4 @@
   };
 
   time.timeZone = "Asia/Tokyo";
-  system.stateVersion = "23.05";
 }
