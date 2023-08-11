@@ -1,4 +1,4 @@
-{lib, ...}: {
+{...}: {
   imports = [
     ./core.nix
     ./basic.nix

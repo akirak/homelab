@@ -34,7 +34,7 @@
     inherit (nixpkgs) lib;
 
     overlays = [
-      (final: prev: {
+      (_final: prev: {
         unstable = inputs.unstable.legacyPackages.${prev.system};
         zsh-plugins = inputs.my-overlay.zsh-plugins;
       })

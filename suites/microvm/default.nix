@@ -1,12 +1,7 @@
 /*
 Based on https://github.com/astro/microvm.nix/blob/main/flake.nix
 */
-{
-  hypervisor,
-  config,
-  lib,
-  ...
-}: {
+{...}: {
   imports = [
     ../../profiles/microvm
   ];

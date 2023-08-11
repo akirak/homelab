@@ -76,13 +76,12 @@
     stable,
     unstable,
     flake-parts,
-    nixos-generators,
     ...
   } @ inputs: let
     inherit (stable) lib;
 
     overlays = [
-      (final: prev: {
+      (_final: prev: {
         channels = lib.genAttrs [
           "hyprland-contrib"
         ] (name: inputs.${name}.packages.${prev.system});
@@ -125,8 +124,6 @@
 
       perSystem = {
         config,
-        self',
-        inputs',
         pkgs,
         system,
         ...
@@ -412,7 +409,6 @@
             system,
             specialArgs,
             modules,
-            channel ? inputs.unstable,
           }: let
             inherit
               (self.lib.mkSystem name {

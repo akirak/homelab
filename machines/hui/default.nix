@@ -1,7 +1,6 @@
 {
   homeUser,
   pkgs,
-  emacs-config,
   ...
 }: {
   imports = [
