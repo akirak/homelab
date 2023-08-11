@@ -134,9 +134,12 @@
         _module.args.pkgs = unstable.legacyPackages.${system};
 
         treefmt = {
-          projectRootFile = "flake.nix";
-          package = pkgs.treefmt;
-          programs.alejandra.enable = true;
+          projectRootFile = ".git/config";
+          programs = {
+            alejandra.enable = true;
+            deadnix.enable = true;
+            shellcheck.enable = true;
+          };
         };
 
         mission-control.banner = ''
