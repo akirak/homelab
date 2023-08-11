@@ -213,12 +213,13 @@
 
           launch-desktop-vm = self.lib.makeMicroVMSystem "demo-microvm" {
             system = "x86_64-linux";
+            channel = unstable;
             specialArgs = {
               hypervisor = "qemu";
               homeUser = "root";
             };
             modules = [
-              inputs.home-manager-stable.nixosModules.home-manager
+              inputs.home-manager-unstable.nixosModules.home-manager
               ./suites/microvm-gui
               ./profiles/desktop/plasma.nix
               ./profiles/home-manager
@@ -405,6 +406,7 @@
             system,
             specialArgs,
             modules,
+            channel ? inputs.nixpkgs,
           }: let
             inherit
               (self.lib.mkSystem name {
