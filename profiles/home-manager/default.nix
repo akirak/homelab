@@ -35,7 +35,7 @@ You also have to import home-manager.nixosModules.home-manager
 
       programs.nixos-rebuild-and-notify.enable = true;
 
-      home.stateVersion = config.system.stateVersion;
+      home.stateVersion = lib.mkDefault config.system.stateVersion;
     };
   };
 }

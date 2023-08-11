@@ -9,7 +9,7 @@
   ];
 
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       jetbrains-mono-nerdfont
       merriweather
       lato

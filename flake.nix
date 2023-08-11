@@ -81,7 +81,6 @@
   } @ inputs: let
     inherit (stable) lib;
 
-
     overlays = [
       (final: prev: {
         channels = lib.genAttrs [
@@ -395,8 +394,6 @@
 
                     system.configurationRevision =
                       channel.lib.mkIf (self ? lastModifiedDate) configurationRevision;
-
-                    system.stateVersion = channel.lib.mkDefault defaultStateVersion;
                   }
                   overlayModule
                   inputs.disko.nixosModules.disko

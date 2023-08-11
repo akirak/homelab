@@ -16,6 +16,4 @@
     };
     gc.automatic = true;
   };
-
-  system.stateVersion = lib.mkDefault lib.trivial.release;
 }

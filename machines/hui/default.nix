@@ -23,8 +23,6 @@
     ../../profiles/nix/cachix-deploy.nix
   ];
 
-  system.stateVersion = "23.05";
-
   networking = {
     firewall.enable = true;
     useDHCP = false;
