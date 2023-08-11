@@ -235,7 +235,7 @@
               homeUser = "root";
             };
             modules = [
-              inputs.home-manager-stable.nixosModules.home-manager
+              inputs.home-manager-unstable.nixosModules.home-manager
               ./suites/microvm
             ];
           };
@@ -408,7 +408,7 @@
             system,
             specialArgs,
             modules,
-            channel ? inputs.nixpkgs,
+            channel ? inputs.unstable,
           }: let
             inherit
               (self.lib.mkSystem name {
