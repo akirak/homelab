@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{...}: let
   sshPort = 22;
 in {
   microvm.forwardPorts = [

@@ -76,13 +76,12 @@
     stable,
     unstable,
     flake-parts,
-    nixos-generators,
     ...
   } @ inputs: let
     inherit (stable) lib;
 
     overlays = [
-      (final: prev: {
+      (_final: prev: {
         channels = lib.genAttrs [
           "hyprland-contrib"
         ] (name: inputs.${name}.packages.${prev.system});
@@ -125,8 +124,6 @@
 
       perSystem = {
         config,
-        self',
-        inputs',
         pkgs,
         system,
         ...
@@ -134,9 +131,12 @@
         _module.args.pkgs = unstable.legacyPackages.${system};
 
         treefmt = {
-          projectRootFile = "flake.nix";
-          package = pkgs.treefmt;
-          programs.alejandra.enable = true;
+          projectRootFile = ".git/config";
+          programs = {
+            alejandra.enable = true;
+            deadnix.enable = true;
+            shellcheck.enable = true;
+          };
         };
 
         mission-control.banner = ''
@@ -409,7 +409,6 @@
             system,
             specialArgs,
             modules,
-            channel ? inputs.unstable,
           }: let
             inherit
               (self.lib.mkSystem name {

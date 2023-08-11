@@ -1,9 +1,4 @@
-{
-  pkgs,
-  homeUser,
-  emacs-config,
-  ...
-}: {
+{homeUser, ...}: {
   home.username = homeUser;
   home.homeDirectory = "/home/${homeUser}";
 
