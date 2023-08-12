@@ -6,6 +6,7 @@
   environment.systemPackages = with pkgs; [
     # flameshot
     pavucontrol
+    handlr
   ];
 
   fonts = {
