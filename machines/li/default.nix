@@ -75,6 +75,7 @@ in {
       "networkmanager"
       "systemd-journal"
       "docker"
+      "livebook"
     ];
   };
 
@@ -84,6 +85,14 @@ in {
       # You have to install *.desktop files to the directory
       command = "${pkgs.greetd.tuigreet}/bin/tuigreet -t -s /etc/wayland-sessions";
       user = homeUser;
+    };
+  };
+
+  services.livebook = {
+    enable = true;
+    settings = {
+      ipAddress = "127.0.0.1";
+      port = 8200;
     };
   };
 

@@ -4,6 +4,7 @@
     directories = [
       "/var/log"
       "/var/lib/bluetooth"
+      "/var/lib/livebook"
       "/etc/NetworkManager/system-connections"
     ];
   };
