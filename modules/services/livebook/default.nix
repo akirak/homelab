@@ -113,6 +113,11 @@ in {
         createHome = true;
         home = "/var/lib/livebook";
         homeMode = "750";
+        # Provide a shell with dependencies to allow administration. For
+        # example, you can enter a shell with `sudo su - livebook` and install
+        # hex by running `mix local.hex`.
+        useDefaultShell = true;
+        packages = cfg.package.nativeBuildInputs ++ cfg.package.buildInputs;
       };
       groups.${cfg.group} = {
       };
