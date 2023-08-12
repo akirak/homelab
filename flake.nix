@@ -400,6 +400,7 @@
                   inputs.disko.nixosModules.disko
                   inputs.impermanence.nixosModules.impermanence
                   inputs.hyprland.nixosModules.default
+                  ./modules/services/livebook
                 ]
                 ++ lib.optional (builtins.pathExists machinePath) machinePath
                 ++ extraModules;
