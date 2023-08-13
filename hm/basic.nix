@@ -14,7 +14,7 @@
     cachix
     nix-prefetch-git
     manix
-    nixd
+    customPackages.nixd
 
     # Development
     gh

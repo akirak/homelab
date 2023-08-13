@@ -91,6 +91,7 @@
         customPackages = {
           hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
           waybar-hyprland = inputs.hyprland.packages.${prev.system}.waybar-hyprland;
+          nixd = inputs.nixd.packages.${prev.system}.nixd;
         };
         disko = inputs.disko.packages.${prev.system}.disko;
         zsh-plugins = inputs.my-overlay.zsh-plugins;
@@ -98,7 +99,6 @@
         nix-index = inputs.nix-index-database.packages.${prev.system}.nix-index-with-db;
       })
       inputs.my-overlay.overlays.default
-      inputs.nixd.overlays.default
     ];
 
     overlayModule = {
