@@ -98,7 +98,10 @@ in {
 
   services.k3s = {
     enable = true;
+    role = "server";
+    serverAddr = "https://127.0.0.1:6443";
   };
+  networking.firewall.allowedTCPPorts = [ 6443 ];
 
   home-manager.users.${homeUser} = {
     programs.chromium = {
