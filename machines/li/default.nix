@@ -96,6 +96,10 @@ in {
     };
   };
 
+  services.k3s = {
+    enable = true;
+  };
+
   home-manager.users.${homeUser} = {
     programs.chromium = {
       enable = true;
