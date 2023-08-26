@@ -122,6 +122,7 @@ in {
           "$mod SHIFT , l, swapwindow, r"
           "$mod       , period, focusurgentorlast"
           "$mod       , comma, togglespecialworkspace"
+          "$mod       , s, movetoworkspace, special"
 
           # Workspace management
           "$mod       , f5, exec,   hyprctl keyword general:layout dwindle"
