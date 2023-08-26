@@ -47,7 +47,6 @@
 
     nix-index-database.url = "github:Mic92/nix-index-database";
 
-    hyprland.url = "github:hyprwm/Hyprland";
     hyprland-contrib.url = "github:hyprwm/contrib";
 
     my-overlay.url = "github:akirak/nixpkgs-overlay";
@@ -395,7 +394,6 @@
                   overlayModule
                   inputs.disko.nixosModules.disko
                   inputs.impermanence.nixosModules.impermanence
-                  inputs.hyprland.nixosModules.default
                   ./modules/services/livebook
                 ]
                 ++ lib.optional (builtins.pathExists machinePath) machinePath
