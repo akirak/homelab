@@ -29,7 +29,7 @@ in {
 
     programs.waybar = {
       enable = true;
-      package = pkgs.customPackages.waybar-hyprland;
+      package = pkgs.waybar-hyprland;
       systemd.enable = true;
       systemd.target = systemdTarget;
     };
@@ -55,7 +55,6 @@ in {
       systemdStartAfterThis;
 
     wayland.windowManager.hyprland = {
-      package = pkgs.customPackages.hyprland;
       systemdIntegration = true;
       xwayland.enable = true;
 
