@@ -67,13 +67,13 @@ in {
           kb_options = "ctrl:nocaps";
         };
 
-        decoration = {
-          # gaps_in = 5;
-          # gaps_out = 5;
-          # border_size = 2;
+        general = {
+          border_size = 5;
           # TODO: Use a proper color scheme
-          # "col.active_border" = "rgb(ff0000) rgb(000000) 60deg";
-          # "col.inactive_border" = "rgb(cccccc) rgb(000000) 60deg";
+          "col.active_border" = "rgba(ffaaff88)";
+          "col.inactive_border" = "rgba(00000088)";
+          gaps_in = 2;
+          gaps_out = 5;
         };
 
         bindm = [
