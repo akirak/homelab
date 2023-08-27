@@ -44,7 +44,6 @@ in {
         if cachix watch-exec akirak nixos-rebuild -- switch \
             --flake `readlink -f "${cfg.directory}"`#`uname -n` \
             --option accept-flake-config true \
-            --print-build-logs \
             --use-remote-sudo \
             --no-write-lock-file \
             ''${flags[@]}; then
