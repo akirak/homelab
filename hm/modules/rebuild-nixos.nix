@@ -41,7 +41,7 @@ in {
         fi
 
         cd "${cfg.directory}"
-        if cachix watch-exec akirak nixos-rebuild switch \
+        if cachix watch-exec akirak nixos-rebuild -- switch \
             --flake `readlink -f "${cfg.directory}"`#`uname -n` \
             --option accept-flake-config true \
             --print-build-logs \
