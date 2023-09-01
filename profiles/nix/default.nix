@@ -18,11 +18,11 @@ If you don't build Nix on the host, don't import this profile.
 
       substituters = [
         "https://cache.nixos.org/"
+        "https://nix-community.cachix.org"
         "https://akirak.cachix.org"
       ];
 
       trusted-substituters = [
-        "https://nix-community.cachix.org"
         "https://emacs-ci.cachix.org"
       ];
 
