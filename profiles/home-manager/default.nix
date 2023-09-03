@@ -22,7 +22,8 @@ You also have to import home-manager.nixosModules.home-manager
   programs.zsh.enable = true;
 
   users.users.${homeUser}.extraGroups =
-    lib.optional config.virtualisation.docker.enable "docker";
+    (lib.optional config.virtualisation.docker.enable "docker")
+    ++ (lib.optional config.virtualisation.virtualbox.enable "vboxsf");
 
   home-manager = {
     useGlobalPkgs = true;
