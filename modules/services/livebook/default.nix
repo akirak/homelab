@@ -39,6 +39,11 @@ in https://github.com/NixOS/nixpkgs
 
     out="$(journalctl --no-pager -t livebook -g "Application running at" | tail -1)"
 
+    if [[ -z "$out" ]]
+    then
+      err "There is no available information on the process in the journal. Can you restart it and try again?"
+    fi
+
     if [[ $out =~ livebook\[([[:digit:]]+)\] ]] \
        && [[ ''${BASH_REMATCH[1]} = $pid ]] \
        && [[ $out =~ http://[^[:space:]]+ ]]
