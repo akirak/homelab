@@ -25,7 +25,7 @@ in https://github.com/NixOS/nixpkgs
       exit 1
     }
 
-    if ! systemctl is-active livebook.service
+    if ! systemctl is-active livebook.service >/dev/null
     then
       err "livebook.service is not running"
     fi
