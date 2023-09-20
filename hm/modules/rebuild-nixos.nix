@@ -37,7 +37,7 @@ in {
           flags=(--override-input emacs-config $(readlink -f "''${emacs_config}") \
                  --update-input emacs-config/flake-pins)
         else
-          flags=()
+          flags=(--update-input emacs-config --update-input emacs-config/flake-pins)
         fi
 
         cd "${cfg.directory}"
