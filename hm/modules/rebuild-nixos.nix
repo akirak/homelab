@@ -35,19 +35,19 @@ in {
         if [[ -d "''${emacs_config}" ]]
         then
           flags=(--override-input emacs-config $(readlink -f "''${emacs_config}") \
-                 --override-input emacs-config/flake-pins github:akirak/flake-pins)
+                 --update-input emacs-config/flake-pins)
         else
           flags=()
         fi
 
         cd "${cfg.directory}"
-        if cachix watch-exec akirak nixos-rebuild -- switch \
-            --flake `readlink -f "${cfg.directory}"`#`uname -n` \
-            --option accept-flake-config true \
-            --use-remote-sudo \
-            --no-write-lock-file \
-            ''${flags[@]}; then
+        if out=$(nix build "`readlink -f ${cfg.directory}`.#nixosConfigurations.`uname -n`.config.system.build.toplevel" \
+            --accept-flake-config --no-write-lock-file --print-out-paths \
+            ''${flags[@]}) && sudo $out/bin/switch-to-configuration; then
           ${notify} -t 5000 'nixos-rebuild successfully finished'
+
+          echo "Uploading to cachix..."
+          cachix push akirak $out
         else
           ${notify} -t 5000 'nixos-rebuild has failed'
           read
