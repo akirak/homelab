@@ -142,6 +142,13 @@ in {
           :body (format \"[[file:%s]]\n%%?\" (abbreviate-file-name \"$PWD/\")))"
       }
 
+      function fzy-mountpoint() {
+        if dir=$(findmnt -oTARGET --list --noheadings | fzy)
+        then
+          cd "$dir"
+        fi
+      }
+
       export NIX_BUILD_SHELL=bash
 
       export EDITOR=emacsclient
