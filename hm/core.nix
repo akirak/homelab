@@ -10,8 +10,8 @@ in {
 
   programs = {
     bat.enable = true;
-    exa.enable = true;
-    exa.enableAliases = true;
+    eza.enable = true;
+    eza.enableAliases = true;
     git.enable = true; # ./modules/git.nix
     gpg.enable = true; # ./modules/gpg.nix
     direnv.enable = true; # ./modules/direnv.nix
