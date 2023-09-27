@@ -34,9 +34,12 @@ in {
         if emacs_config="$(readlink -e "${cfg.emacsConfigDirectory}")"
         then
           flags=(--override-input emacs-config "''${emacs_config}" \
-                 --update-input emacs-config/flake-pins)
+                 --update-input emacs-config/flake-pins \
+                 --update-input emacs-config/twist-overrides)
         else
-          flags=(--update-input emacs-config --update-input emacs-config/flake-pins)
+          flags=(--update-input emacs-config \
+                 --update-input emacs-config/flake-pins \
+                 --update-input emacs-config/twist-overrides)
         fi
 
         hostname="$(uname -n)"
