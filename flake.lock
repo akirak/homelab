@@ -273,11 +273,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1695842025,
-        "narHash": "sha256-kdRGyn9yO6FWBnWtJAWd8xCehDiSgVwB5Xz38MhnAFE=",
+        "lastModified": 1695845745,
+        "narHash": "sha256-o+pZEn3MwoWhCTr/kKTwGuXpRZ6PycVavHpyjMIamjY=",
         "owner": "akirak",
         "repo": "emacs-config",
-        "rev": "73b2e0b48aa46093fb78fb822585ba18d2b53f4c",
+        "rev": "ccaf84d0908c39c71bd9ef70998f190a3d438572",
         "type": "github"
       },
       "original": {
