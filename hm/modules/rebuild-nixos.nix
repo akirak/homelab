@@ -31,19 +31,20 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = [
       (pkgs.writeShellScriptBin "nixos-rebuild-and-notify" ''
-        emacs_config="${cfg.emacsConfigDirectory}"
-        if [[ -d "''${emacs_config}" ]]
+        if emacs_config="$(readlink -e "${cfg.emacsConfigDirectory}")"
         then
-          flags=(--override-input emacs-config $(readlink -f "''${emacs_config}") \
+          flags=(--override-input emacs-config "''${emacs_config}" \
                  --update-input emacs-config/flake-pins)
         else
           flags=(--update-input emacs-config --update-input emacs-config/flake-pins)
         fi
 
+        hostname="$(uname -n)"
+
         cd "${cfg.directory}"
-        if out=$(nix build "`readlink -f ${cfg.directory}`.#nixosConfigurations.`uname -n`.config.system.build.toplevel" \
+        if out=$(nix build ".#nixosConfigurations.$hostname.config.system.build.toplevel" \
             --accept-flake-config --no-write-lock-file --print-out-paths \
-            ''${flags[@]}) && sudo $out/bin/switch-to-configuration; then
+            ''${flags[@]}) && sudo $out/bin/switch-to-configuration switch; then
           ${notify} -t 5000 'nixos-rebuild successfully finished'
 
           echo "Uploading to cachix..."
