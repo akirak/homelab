@@ -15,6 +15,9 @@
     nix-prefetch-git
     manix
 
+    # Tools
+    pv
+
     # Development
     gh
     pre-commit
