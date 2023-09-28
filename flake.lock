@@ -573,6 +573,22 @@
         "type": "github"
       }
     },
+    "flake-pins_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1695381437,
+        "narHash": "sha256-YGH8F0eFE4ehoiWbdJscurT+UXGxWvwhiBQ4HVEHRog=",
+        "owner": "akirak",
+        "repo": "flake-pins",
+        "rev": "e476b5c92ac4cb0ca0556a604371eae60754ebe4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "akirak",
+        "repo": "flake-pins",
+        "type": "github"
+      }
+    },
     "flake-root": {
       "locked": {
         "lastModified": 1692742795,
@@ -1868,6 +1884,7 @@
         "disko": "disko",
         "emacs-config": "emacs-config",
         "flake-parts": "flake-parts_4",
+        "flake-pins": "flake-pins_2",
         "flake-root": "flake-root",
         "flake-utils": "flake-utils_5",
         "home-manager-stable": "home-manager-stable",
