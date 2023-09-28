@@ -34,7 +34,7 @@
     duf
 
     # Net
-    xh
+    httpie
     rclone
   ];
 
