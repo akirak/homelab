@@ -1,5 +1,10 @@
 {
   inputs = {
+    flake-pins = {
+      url = "github:akirak/flake-pins";
+      flake = false;
+    };
+
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     stable.url = "github:NixOS/nixpkgs/nixos-23.05";
 
@@ -75,6 +80,7 @@
     stable,
     unstable,
     flake-parts,
+    flake-pins,
     ...
   } @ inputs: let
     inherit (stable) lib;
@@ -395,6 +401,19 @@
                   inputs.disko.nixosModules.disko
                   inputs.impermanence.nixosModules.impermanence
                   ./modules/services/livebook
+                  {
+                    nix.registry =
+                      lib.pipe
+                      (lib.importJSON (flake-pins + "/registry.json")).flakes
+                      [
+                        (map ({
+                          from,
+                          to,
+                        }:
+                          lib.nameValuePair from.id {inherit from to;}))
+                        lib.listToAttrs
+                      ];
+                  }
                 ]
                 ++ lib.optional (builtins.pathExists machinePath) machinePath
                 ++ extraModules;
