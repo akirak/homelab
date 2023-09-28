@@ -30,7 +30,7 @@
 
     # System
     glances
-    du-dust
+    dua
     duf
 
     # Net
