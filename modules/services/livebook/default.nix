@@ -14,6 +14,8 @@ in https://github.com/NixOS/nixpkgs
   openScript = pkgs.writers.writeBashBin "open-livebook" ''
     set -euo pipefail
 
+    LIVEBOOK_SERVICE="''${LIVEBOOK_SERVICE:-livebook.service}"
+
     if [[ ! -v DISPLAY ]] && [[ ! -v WAYLAND_DISPLAY ]]
     then
       echo "This command can be run only in a graphical environment" >&2
@@ -25,12 +27,12 @@ in https://github.com/NixOS/nixpkgs
       exit 1
     }
 
-    if ! systemctl is-active livebook.service >/dev/null
+    if ! systemctl is-active "''${LIVEBOOK_SERVICE}" >/dev/null
     then
-      err "livebook.service is not running"
+      err "''${LIVEBOOK_SERVICE} is not running"
     fi
 
-    if [[ $(systemctl show livebook.service --property=MainPID) =~ MainPID=([[:digit:]]+) ]]
+    if [[ $(systemctl show "''${LIVEBOOK_SERVICE}" --property=MainPID) =~ MainPID=([[:digit:]]+) ]]
     then
       pid=''${BASH_REMATCH[1]}
     else
