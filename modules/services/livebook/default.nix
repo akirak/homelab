@@ -43,7 +43,9 @@ in https://github.com/NixOS/nixpkgs
 
     if [[ -z "$out" ]]
     then
-      err "There is no available information on the process in the journal. Can you restart it and try again?"
+      ${pkgs.notify-desktop}/bin/notify-desktop 'Restarting livebook service to retrieve the PID'
+      systemctl restart --wait "''${LIVEBOOK_SERVICE}"
+      LIVEBOOK_SERVICE="''${LIVEBOOK_SERVICE}" exec "$0"
     fi
 
     if [[ $out =~ livebook\[([[:digit:]]+)\] ]] \
