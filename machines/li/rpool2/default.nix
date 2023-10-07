@@ -20,4 +20,9 @@
     device = "rpool2/safe/home";
     fsType = "zfs";
   };
+
+  fileSystems."/var/lib/docker" = {
+    device = "rpool2/safe/docker";
+    fsType = "zfs";
+  };
 }
