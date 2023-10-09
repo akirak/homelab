@@ -114,6 +114,13 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    ids = {
+      # Check nixos/modules/misc/ids.nix in nixpkgs to ensure there is no
+      # collision
+      uids.livebook = 293;
+      gids.livebook = 293;
+    };
+
     users = {
       users.${cfg.user} = {
         description = "Livebook user";
@@ -127,8 +134,10 @@ in {
         # hex by running `mix local.hex`.
         useDefaultShell = true;
         packages = cfg.package.nativeBuildInputs ++ cfg.package.buildInputs;
+        uid = config.ids.uids.livebook;
       };
       groups.${cfg.group} = {
+        gid = config.ids.gids.livebook;
       };
     };
 
