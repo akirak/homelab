@@ -50,8 +50,6 @@ in {
             ''${flags[@]}) && sudo $out/bin/switch-to-configuration switch; then
           ${notify} -t 5000 'nixos-rebuild successfully finished'
 
-          echo "Uploading to cachix..."
-          cachix push akirak $out
         else
           ${notify} -t 5000 'nixos-rebuild has failed'
           read
