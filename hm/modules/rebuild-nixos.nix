@@ -47,9 +47,10 @@ in {
         cd "${cfg.directory}"
         if out=$(nix build ".#nixosConfigurations.$hostname.config.system.build.toplevel" \
             --accept-flake-config --no-write-lock-file --print-out-paths --print-build-logs \
-            ''${flags[@]}) && sudo $out/bin/switch-to-configuration switch; then
-          ${notify} -t 5000 'nixos-rebuild successfully finished'
-
+            ''${flags[@]}); then
+          ${notify} -t 5000 'The NixOS config has successfully built'
+          sudo $out/bin/switch-to-configuration switch
+          ${notify} -t 5000 'Switched to the new NixOS config'
         else
           ${notify} -t 5000 'nixos-rebuild has failed'
           read
