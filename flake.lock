@@ -273,11 +273,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1696688977,
-        "narHash": "sha256-r9P/O9rej2zWYNSuH3UaaVfJ9IoGNdDuoNdvg277ICY=",
+        "lastModified": 1697270325,
+        "narHash": "sha256-4H4hClf5q5HFOhQcO1izlxBRwHYFnDTN3Dy4I5y0Rv8=",
         "owner": "akirak",
         "repo": "emacs-config",
-        "rev": "295441dc81b1358ff4737620d9687afbdb683563",
+        "rev": "072c21c635aef02b2cddfe95c500540e189e43be",
         "type": "github"
       },
       "original": {
@@ -586,21 +586,6 @@
       "original": {
         "owner": "akirak",
         "repo": "flake-pins",
-        "type": "github"
-      }
-    },
-    "flake-root": {
-      "locked": {
-        "lastModified": 1692742795,
-        "narHash": "sha256-f+Y0YhVCIJ06LemO+3Xx00lIcqQxSKJHXT/yk1RTKxw=",
-        "owner": "srid",
-        "repo": "flake-root",
-        "rev": "d9a70d9c7a5fd7f3258ccf48da9335e9b47c3937",
-        "type": "github"
-      },
-      "original": {
-        "owner": "srid",
-        "repo": "flake-root",
         "type": "github"
       }
     },
@@ -955,11 +940,11 @@
     "melpa": {
       "flake": false,
       "locked": {
-        "lastModified": 1695836396,
-        "narHash": "sha256-+B2rVJ4NYHyVWRuZXBXFbc7qPvoTzY18Zur7l9Iuw70=",
+        "lastModified": 1697269993,
+        "narHash": "sha256-d0t6zE5+eeejTqpRBImbmv0Rx3oYErYMGDT4juykW3M=",
         "owner": "akirak",
         "repo": "melpa",
-        "rev": "1181c0d7f14dcddbca2bba1e0637966372bf5149",
+        "rev": "5b4aa661b60761461e7fa38138a9e6ed1d59762e",
         "type": "github"
       },
       "original": {
@@ -987,21 +972,6 @@
       "original": {
         "owner": "astro",
         "repo": "microvm.nix",
-        "type": "github"
-      }
-    },
-    "mission-control": {
-      "locked": {
-        "lastModified": 1690573269,
-        "narHash": "sha256-9NSmHRQvzBzfuKD3zHE2fM5xPa+hHSy7xcWQqZaCjFw=",
-        "owner": "Platonic-Systems",
-        "repo": "mission-control",
-        "rev": "9d25d9f8d610916fc144f6afc1f064392fbeec1c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Platonic-Systems",
-        "repo": "mission-control",
         "type": "github"
       }
     },
@@ -1885,14 +1855,12 @@
         "emacs-config": "emacs-config",
         "flake-parts": "flake-parts_4",
         "flake-pins": "flake-pins_2",
-        "flake-root": "flake-root",
         "flake-utils": "flake-utils_5",
         "home-manager-stable": "home-manager-stable",
         "home-manager-unstable": "home-manager-unstable",
         "hyprland-contrib": "hyprland-contrib",
         "impermanence": "impermanence",
         "microvm": "microvm",
-        "mission-control": "mission-control",
         "my-overlay": "my-overlay_2",
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",

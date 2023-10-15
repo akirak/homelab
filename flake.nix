@@ -20,8 +20,6 @@
     home-manager-unstable.inputs.nixpkgs.follows = "unstable";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
-    mission-control.url = "github:Platonic-Systems/mission-control";
-    flake-root.url = "github:srid/flake-root";
 
     disko = {
       url = "github:nix-community/disko";
@@ -116,12 +114,6 @@
     };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
-      imports = [
-        inputs.treefmt-nix.flakeModule
-        inputs.flake-root.flakeModule
-        inputs.mission-control.flakeModule
-      ];
-
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -131,62 +123,51 @@
         config,
         pkgs,
         system,
+        treefmtEval,
         ...
       }: {
         _module.args.pkgs = unstable.legacyPackages.${system};
+        _module.args.treefmtEval =
+          inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
 
-        treefmt = {
-          projectRootFile = ".git/config";
-          programs = {
-            alejandra.enable = true;
-            deadnix.enable = true;
-            shellcheck.enable = true;
-          };
-        };
-
-        mission-control.banner = ''
-          echo "(Run , to show help)"
-        '';
-        mission-control.scripts = {
-          check-format = {
-            description = "Check syntax formatting; Fail if inconsistent";
-            exec = "treefmt --fail-on-change";
-          };
-          deploy = {
-            description = "Deploy to a host (requires root login via SSH)";
-            exec = ''
-              function deploy_to_host() {
-                host="$1"
-                nixos-rebuild switch --target-host "root@$host" --flake ".#$host" \
-                  --use-remote-sudo --print-build-logs --option accept-flake-config true
-              }
-              if [[ $# -eq 0 ]]
+        packages.deploy = pkgs.writeShellApplication {
+          name = "deploy";
+          runtimeInputs = [
+            stable.legacyPackages.${system}.nixos-rebuild
+          ];
+          meta.description = "Deploy per-host configurations";
+          text = ''
+            function deploy_to_host() {
+              host="$1"
+              nixos-rebuild switch --target-host "root@$host" --flake ".#$host" \
+                --use-remote-sudo --print-build-logs --option accept-flake-config true
+            }
+            if [[ $# -eq 0 ]]
+            then
+              echo -n "Please specify one of: "
+              nix eval .#nixosConfigurations --apply builtins.attrNames \
+                --accept-flake-config 2>/dev/null
+              exit 1
+            fi
+            for host; do
+              if ping -c 1 "$host" > /dev/null
               then
-                echo -n "Please specify one of: "
-                nix eval .#nixosConfigurations --apply builtins.attrNames \
-                  --accept-flake-config 2>/dev/null
-                exit 1
+                deploy_to_host "$host"
+              else
+                echo "$host is offline"
               fi
-              for host; do
-                if ping -c 1 "$host" > /dev/null
-                then
-                  deploy_to_host "$host"
-                else
-                  echo "$host is offline"
-                fi
-              done
-            '';
-          };
+            done
+          '';
         };
 
         devShells.default = pkgs.mkShell {
-          buildInputs = [
-            self.formatter.${system}
-          ];
           inputsFrom = [
-            config.mission-control.devShell
           ];
         };
+
+        formatter = treefmtEval.config.build.wrapper;
+
+        checks.formatting = treefmtEval.config.build.check inputs.self;
       };
 
       flake = {
