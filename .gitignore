@@ -1,3 +1,4 @@
 .gcroots
 *.img
 result*
+.pre-commit-config.yaml
