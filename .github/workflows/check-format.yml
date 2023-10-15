@@ -21,5 +21,10 @@ jobs:
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
           accept-flake-config = true
 
+    # This check is actually done as part of `nix flake check` in
+    # ./check-flake.yml, but this formatting check requires less time, so run it
+    # separately for failing fast.
     - name: Check formatting
-      run: nix develop -c , check-format
+      run: |
+        nix build .#checks.$(nix eval --expr builtins.currentSystem \
+          --impure --raw).formatting
