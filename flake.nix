@@ -113,7 +113,6 @@
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
-        inputs.treefmt-nix.flakeModule
         inputs.flake-root.flakeModule
         inputs.mission-control.flakeModule
       ];
@@ -127,27 +126,17 @@
         config,
         pkgs,
         system,
+        treefmtEval,
         ...
       }: {
         _module.args.pkgs = unstable.legacyPackages.${system};
-
-        treefmt = {
-          projectRootFile = ".git/config";
-          programs = {
-            alejandra.enable = true;
-            deadnix.enable = true;
-            shellcheck.enable = true;
-          };
-        };
+        _module.args.treefmtEval =
+          inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
 
         mission-control.banner = ''
           echo "(Run , to show help)"
         '';
         mission-control.scripts = {
-          check-format = {
-            description = "Check syntax formatting; Fail if inconsistent";
-            exec = "treefmt --fail-on-change";
-          };
           deploy = {
             description = "Deploy to a host (requires root login via SSH)";
             exec = ''
@@ -176,13 +165,14 @@
         };
 
         devShells.default = pkgs.mkShell {
-          buildInputs = [
-            self.formatter.${system}
-          ];
           inputsFrom = [
             config.mission-control.devShell
           ];
         };
+
+        formatter = treefmtEval.config.build.wrapper;
+
+        checks.formatting = treefmtEval.config.build.check inputs.self;
       };
 
       flake = {
