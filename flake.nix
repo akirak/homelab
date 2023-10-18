@@ -185,17 +185,17 @@
 
       flake = {
         packages.x86_64-linux = {
-          cachix-deploys = import ./lib/cachix-deploy.nix {
-            pkgs = unstable.legacyPackages.x86_64-linux;
-            inherit (inputs) self cachix-deploy-flake;
-            nixosHosts = [
-              # "shu"
-              "hui"
-            ];
-            homeHosts = [
-              # "voyage"
-            ];
-          };
+          # cachix-deploys = import ./lib/cachix-deploy.nix {
+          #   pkgs = unstable.legacyPackages.x86_64-linux;
+          #   inherit (inputs) self cachix-deploy-flake;
+          #   nixosHosts = [
+          #     # "shu"
+          #     "hui"
+          #   ];
+          #   homeHosts = [
+          #     # "voyage"
+          #   ];
+          # };
 
           asus-br1100-iso =
             (stable.lib.nixosSystem
