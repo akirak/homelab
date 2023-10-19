@@ -262,6 +262,7 @@
         "my-overlay": "my-overlay",
         "nix-filter": "nix-filter",
         "nixpkgs": "nixpkgs_7",
+        "nongnu-elpa": "nongnu-elpa",
         "org-babel": "org-babel",
         "pre-commit-hooks": "pre-commit-hooks_2",
         "stable": "stable",
@@ -273,11 +274,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1697270325,
-        "narHash": "sha256-4H4hClf5q5HFOhQcO1izlxBRwHYFnDTN3Dy4I5y0Rv8=",
+        "lastModified": 1697716115,
+        "narHash": "sha256-z0dqKh236E9SeOdtzp6ZOgfgKI+4HeStxffAajgT+G0=",
         "owner": "akirak",
         "repo": "emacs-config",
-        "rev": "072c21c635aef02b2cddfe95c500540e189e43be",
+        "rev": "4ce247394365d712ac117337d159d425dced50a7",
         "type": "github"
       },
       "original": {
@@ -995,11 +996,11 @@
     "melpa": {
       "flake": false,
       "locked": {
-        "lastModified": 1697269993,
-        "narHash": "sha256-d0t6zE5+eeejTqpRBImbmv0Rx3oYErYMGDT4juykW3M=",
+        "lastModified": 1695836396,
+        "narHash": "sha256-+B2rVJ4NYHyVWRuZXBXFbc7qPvoTzY18Zur7l9Iuw70=",
         "owner": "akirak",
         "repo": "melpa",
-        "rev": "5b4aa661b60761461e7fa38138a9e6ed1d59762e",
+        "rev": "1181c0d7f14dcddbca2bba1e0637966372bf5149",
         "type": "github"
       },
       "original": {
@@ -1812,6 +1813,23 @@
         "type": "github"
       }
     },
+    "nongnu-elpa": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1696866121,
+        "narHash": "sha256-8ZtodqVDMaxErOVAfM+Z8gOXxKdd+6Irpb4U6tn9juc=",
+        "ref": "main",
+        "rev": "f901d857ea534934c6df1dc23261be19533488a3",
+        "revCount": 295,
+        "type": "git",
+        "url": "https://git.savannah.gnu.org/git/emacs/nongnu.git"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "https://git.savannah.gnu.org/git/emacs/nongnu.git"
+      }
+    },
     "org-babel": {
       "locked": {
         "lastModified": 1669954182,
@@ -2186,11 +2204,11 @@
         "elisp-helpers": "elisp-helpers"
       },
       "locked": {
-        "lastModified": 1696660001,
-        "narHash": "sha256-Dsp18h1fUWcqkBEHrs4itmkBvP/IZlDcE88c7Ne10/g=",
+        "lastModified": 1697716094,
+        "narHash": "sha256-VJ5zMhtx07bzzTi1wLjZmNO2wt90LN9jwH0xKF+aFRs=",
         "owner": "emacs-twist",
         "repo": "twist.nix",
-        "rev": "8b99c5d5afe73a6579d3d8f357c75dd697a518af",
+        "rev": "1e6f6be66835d51eaaadaa83c6376ae08e1be507",
         "type": "github"
       },
       "original": {
