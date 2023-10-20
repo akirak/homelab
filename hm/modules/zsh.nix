@@ -83,13 +83,6 @@ in {
       # https://github.com/NixOS/nixpkgs/issues/38991
       "LOCALE_ARCHIVE_2_11" = "${pkgs.glibcLocales}/lib/locale/locale-archive";
       "LOCALE_ARCHIVE_2_27" = "${pkgs.glibcLocales}/lib/locale/locale-archive";
-      LANG = "en_GB.UTF-8";
-      LANGUAGE = "en_US:zh_CN:zh_TW:en";
-      LC_ALL = "C";
-      LC_CTYPE = "en_GB";
-      LC_MESSAGES = "en_GB";
-      # Use ISO 8601 (YYYY-MM-DD) date format
-      LC_TIME = "en_DK.UTF-8";
     };
 
     initExtra = ''

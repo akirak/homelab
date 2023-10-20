@@ -21,6 +21,7 @@ in {
     ../../suites/base
     ../../suites/graphical
     ../../suites/desktop
+    ../../profiles/locale
     ../../profiles/home-manager
     ../../profiles/nix
     ../../profiles/sudo
