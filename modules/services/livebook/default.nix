@@ -117,6 +117,10 @@ in {
     ids = {
       # Check nixos/modules/misc/ids.nix in nixpkgs to ensure there is no
       # collision
+      #
+      # If the user/group has been already created with a different numeric ID,
+      # first disable the livebook service to remove the user and group and
+      # then re-enable it to recreate them.
       uids.livebook = 293;
       gids.livebook = 293;
     };
