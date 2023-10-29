@@ -11,6 +11,7 @@
 
   environment.systemPackages = [
     pkgs.lsof
+    pkgs.handlr
   ];
 
   environment.sessionVariables = {
