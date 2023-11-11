@@ -54,7 +54,7 @@ in {
       systemdStartAfterThis;
 
     wayland.windowManager.hyprland = {
-      systemdIntegration = true;
+      systemd.enable = true;
       xwayland.enable = true;
 
       settings = {
