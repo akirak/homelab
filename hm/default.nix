@@ -4,6 +4,4 @@
     ./basic.nix
     ./graphical.nix
   ];
-
-  programs.vscode.enable = true;
 }
