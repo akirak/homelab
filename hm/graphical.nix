@@ -59,7 +59,7 @@ in {
     };
   };
 
-  systemd.user.services.foot = lib.optionals config.programs.foot.server.enable {
+  systemd.user.services.foot = lib.mkIf config.programs.foot.server.enable {
     Service = {
       Environment = [
         "WAYLAND_DISPLAY=wayland-1"
