@@ -63,6 +63,9 @@ in {
     Service = {
       Environment = [
         "WAYLAND_DISPLAY=wayland-1"
+        "PATH=${
+          lib.concatMapStrings (dir: dir + ":") config.home.sessionPath
+        }${config.home.profileDirectory}/bin"
       ];
     };
   };
