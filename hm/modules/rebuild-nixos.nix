@@ -48,7 +48,7 @@ in {
         if out=$(nix build ".#nixosConfigurations.$hostname.config.system.build.toplevel" \
             --accept-flake-config --no-write-lock-file --print-out-paths --print-build-logs \
             ''${flags[@]}); then
-          ${notify} -t 5000 'The NixOS config has successfully built'
+          ${notify} -t 5000 'The NixOS config has been successfully built'
           sudo $out/bin/switch-to-configuration switch
           ${notify} -t 5000 'Switched to the new NixOS config'
         else
