@@ -37,6 +37,8 @@ in {
     # ../../profiles/k3s/single-node.nix
   ];
 
+  system.stateVersion = "23.05";
+
   # Needed for the ZFS pool.
   networking.hostId = "8425e349";
 
@@ -109,6 +111,8 @@ in {
         }
       ];
     };
+
+    home.stateVersion = "23.05";
 
     home.packages = [
       # pkgs.wine
