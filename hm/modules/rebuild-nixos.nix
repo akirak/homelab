@@ -31,15 +31,24 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = [
       (pkgs.writeShellScriptBin "nixos-rebuild-and-notify" ''
-        if emacs_config="$(readlink -e "${cfg.emacsConfigDirectory}")"
-        then
-          flags=(--override-input emacs-config "''${emacs_config}" \
-                 --update-input emacs-config/flake-pins \
-                 --update-input emacs-config/twist-overrides)
+        if [[ "$(nix --version)" = "nix (Nix) 2.18.1" ]]; then
+          if emacs_config="$(readlink -e "${cfg.emacsConfigDirectory}")"
+          then
+            flags=(--override-input emacs-config "''${emacs_config}" \
+                   --update-input emacs-config/flake-pins \
+                   --update-input emacs-config/twist-overrides)
+          else
+            flags=(--update-input emacs-config \
+                   --update-input emacs-config/flake-pins \
+                   --update-input emacs-config/twist-overrides)
+          fi
         else
-          flags=(--update-input emacs-config \
-                 --update-input emacs-config/flake-pins \
-                 --update-input emacs-config/twist-overrides)
+          if emacs_config="$(readlink -e "${cfg.emacsConfigDirectory}")"
+          then
+            flags=(--override-input emacs-config "''${emacs_config}")
+          else
+            flags=(--override-input emacs-config github:akirak/emacs-config/develop)
+          fi
         fi
 
         hostname="$(uname -n)"
