@@ -11,6 +11,7 @@
         "microsoft-edge-stable"
         "android-studio-stable"
         "zoom"
+        "Oracle_VM_VirtualBox_Extension_Pack"
       ];
   };
 }

@@ -62,6 +62,11 @@ in {
 
   services.auto-cpufreq.enable = true;
 
+  virtualisation.virtualbox.host = {
+    enable = true;
+    enableExtensionPack = true;
+  };
+
   zramSwap = {
     enable = true;
   };
