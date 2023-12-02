@@ -154,5 +154,7 @@ in {
         ];
       };
     };
+
+    programs.rtorrent.enable = true;
   };
 }
