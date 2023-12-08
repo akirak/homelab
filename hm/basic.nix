@@ -23,6 +23,7 @@
     pre-commit
     alejandra
     ast-grep
+    duckdb
     tbls
 
     # Media
