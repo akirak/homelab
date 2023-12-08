@@ -23,7 +23,6 @@
     pre-commit
     alejandra
     difftastic
-    ast-grep
     duckdb
     tbls
 
