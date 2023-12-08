@@ -339,25 +339,25 @@
         };
 
         homeConfigurations = {
-          voyage = inputs.home-manager.lib.homeManagerConfiguration {
-            pkgs = import unstable {
-              system = "x86_64-linux";
-              inherit overlays;
-              config = {
-                allowUnfreePredicate = pkg:
-                  builtins.elem (lib.getName pkg) [
-                    "symbola"
-                  ];
-              };
-            };
-            extraSpecialArgs = {
-              homeUser = "akirak";
-            };
-            modules = [
-              ./machines/voyage/home.nix
-              inputs.emacs-config.homeModules.twist
-            ];
-          };
+          # voyage = inputs.home-manager.lib.homeManagerConfiguration {
+          #   pkgs = import unstable {
+          #     system = "x86_64-linux";
+          #     inherit overlays;
+          #     config = {
+          #       allowUnfreePredicate = pkg:
+          #         builtins.elem (lib.getName pkg) [
+          #           "symbola"
+          #         ];
+          #     };
+          #   };
+          #   extraSpecialArgs = {
+          #     homeUser = "akirak";
+          #   };
+          #   modules = [
+          #     ./machines/voyage/home.nix
+          #     inputs.emacs-config.homeModules.twist
+          #   ];
+          # };
         };
 
         templates = {
