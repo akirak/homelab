@@ -32,5 +32,5 @@ jobs:
     # use `cachix push` to explicitly specify them.
 
     - run: |
-       nix flake check --update-input emacs-config \
-           --no-write-lock-file --print-build-logs --show-trace
+       nix flake update emacs-config
+       nix flake check --print-build-logs --show-trace
