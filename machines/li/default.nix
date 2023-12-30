@@ -34,7 +34,7 @@ in {
     ../../profiles/postgresql/development.nix
     # ../../profiles/docker/rootless.nix
     ../../profiles/docker
-    # ../../profiles/k3s/single-node.nix
+    ../../profiles/k3s/single-node-for-testing.nix
   ];
 
   system.stateVersion = "23.05";
