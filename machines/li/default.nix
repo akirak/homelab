@@ -32,8 +32,8 @@ in {
     # ../../profiles/wayland/wm/river.nix
     ../../profiles/nix/cachix-deploy.nix
     ../../profiles/postgresql/development.nix
-    ../../profiles/docker/rootless.nix
-    # ../../profiles/docker
+    # ../../profiles/docker/rootless.nix
+    ../../profiles/docker
     # ../../profiles/k3s/single-node.nix
   ];
 
