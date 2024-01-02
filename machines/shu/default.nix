@@ -6,12 +6,11 @@
     ../../profiles/nginx
     ../../profiles/nix/cachix-deploy.nix
     ./boot.nix
+    (import ./disko.nix {})
   ];
 
   networking.hostId = "9bc2dd3d";
   time.timeZone = "America/Los_Angeles";
-
-  disko.devices = import ./disko.nix {};
 
   nix.settings.allowed-users = ["root"];
 
