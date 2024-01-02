@@ -30,7 +30,7 @@ in {
     ../../profiles/wayland/wm/hyprland.nix
     ../../profiles/wayland/cage/foot.nix
     # ../../profiles/wayland/wm/river.nix
-    ../../profiles/nix/cachix-deploy.nix
+    # ../../profiles/nix/cachix-deploy.nix
     ../../profiles/postgresql/development.nix
     # ../../profiles/docker/rootless.nix
     ../../profiles/docker
