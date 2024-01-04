@@ -99,7 +99,7 @@ in {
     };
   };
 
-  services.livebook = {
+  services.my-livebook = {
     enable = true;
     settings = {
       ipAddress = "127.0.0.1";

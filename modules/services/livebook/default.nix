@@ -9,7 +9,7 @@ in https://github.com/NixOS/nixpkgs
   pkgs,
   ...
 }: let
-  cfg = config.services.livebook;
+  cfg = config.services.my-livebook;
 
   openScript = pkgs.writers.writeBashBin "open-livebook" ''
     set -euo pipefail
@@ -64,7 +64,7 @@ in https://github.com/NixOS/nixpkgs
   '';
 in {
   options = {
-    services.livebook = with lib; {
+    services.my-livebook = with lib; {
       enable = mkEnableOption (lib.mdDoc "Elixir Livebook");
 
       package = mkOption {
