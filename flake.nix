@@ -377,15 +377,18 @@
           */
           mkSystem = hostName: {
             system,
+            # If you are using this function from outside this repository,
+            # override this argument with your own inputs.self.
+            self' ? inputs.self,
             channel ? inputs.stable,
             specialArgs ? {},
             extraModules ? [],
           }: let
             machinePath = ./machines + "/${hostName}";
 
-            configurationRevision = "${builtins.substring 0 8 self.lastModifiedDate}.${
-              if self ? rev
-              then builtins.substring 0 7 self.rev
+            configurationRevision = "${builtins.substring 0 8 self'.lastModifiedDate}.${
+              if self' ? rev
+              then builtins.substring 0 7 self'.rev
               else "dirty"
             }";
           in
@@ -397,7 +400,7 @@
                     networking.hostName = hostName;
 
                     system.configurationRevision =
-                      channel.lib.mkIf (self ? lastModifiedDate) configurationRevision;
+                      channel.lib.mkIf (self' ? lastModifiedDate) configurationRevision;
                   }
                   overlayModule
                   inputs.disko.nixosModules.disko
@@ -423,12 +426,15 @@
 
           makeMicroVMSystem = name: {
             system,
+            # If you are using this function from outside this repository,
+            # override this argument with your own inputs.self.
+            self' ? inputs.self,
             specialArgs,
             modules,
           }: let
             inherit
               (self.lib.mkSystem name {
-                inherit system specialArgs;
+                inherit system self' specialArgs;
                 extraModules =
                   [
                     inputs.microvm.nixosModules.microvm
