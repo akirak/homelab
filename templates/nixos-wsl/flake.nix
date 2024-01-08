@@ -32,6 +32,14 @@
         "x86_64-linux"
       ];
 
+      perSystem = {pkgs, ...}: {
+        devShells.default = pkgs.mkShell {
+          buildInputs = [
+            pkgs.just
+          ];
+        };
+      };
+
       flake = {
         nixosConfigurations = {
           wsl-private = inputs.homelab.lib.mkSystem (throw "Set the host name") {
