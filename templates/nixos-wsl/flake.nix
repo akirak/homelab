@@ -61,6 +61,10 @@
               inputs.home-manager.nixosModules.home-manager
               inputs.homelab.nixosModules.hmProfile
 
+              # Add profiles as needed
+              (inputs.homelab.outPath + "/profiles/nix")
+              (inputs.homelab.outPath + "/profiles/locale")
+
               # My custom settings
               ({homeUser, ...}: {
                 home-manager.users.${homeUser} = {
