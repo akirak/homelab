@@ -44,6 +44,7 @@
         nixosConfigurations = {
           wsl-private = inputs.homelab.lib.mkSystem (throw "Set the host name") {
             system = "x86_64-linux";
+            self' = inputs.self;
             channel = nixpkgs;
             specialArgs = {
               homeUser = throw "Set the user name";
