@@ -108,6 +108,11 @@ in {
   };
 
   home-manager.users.${homeUser} = {
+    imports = [
+      ../../hm/basic.nix
+      ../../hm/graphical.nix
+    ];
+
     programs.chromium = {
       enable = true;
       extensions = [
