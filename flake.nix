@@ -365,6 +365,10 @@
             path = ./templates/home-manager;
             description = "An example configuration repository for home-manager";
           };
+          nixos-wsl = {
+            path = ./templates/nixos-wsl;
+            description = "An example configuration flake for NixOS-WSL";
+          };
         };
 
         lib = {
