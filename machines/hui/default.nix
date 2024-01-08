@@ -69,6 +69,11 @@
   };
 
   home-manager.users.${homeUser} = {
+    imports = [
+      ../../hm/basic.nix
+      ../../hm/graphical.nix
+    ];
+
     wayland.windowManager.labwc.enable = true;
     wayland.windowManager.hyprland.enable = true;
 
