@@ -57,6 +57,7 @@
                 wsl.enable = true;
                 wsl.defaultUser = homeUser;
                 system.stateVersion = "23.11";
+                time.timeZone = throw "Set your time zone";
               })
 
               inputs.home-manager.nixosModules.home-manager
