@@ -77,6 +77,19 @@
                   home.homeDirectory = "/home/${homeUser}";
                   home.stateVersion = "23.11";
 
+                  programs.git.extraIdentities = [
+                    {
+                      email = throw "E-mail address";
+                      fullName = throw "Full Name";
+                      conditions = [
+                        (throw "Please set conditions")
+                        "hasconfig:remote.*.url:git@YOURORG.com:XXX/**"
+                        "hasconfig:remote.*.url:https://YOURORG.com/XXX/**"
+                        "gitdir:~/work2/XXX/"
+                      ];
+                    }
+                  ];
+
                   programs.emacs-twist = {
                     enable = true;
                     serviceIntegration.enable = true;
