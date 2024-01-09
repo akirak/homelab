@@ -6,7 +6,6 @@
 }: let
   inherit (lib) mkOption types;
   cfg = config.programs.git;
-  enabled = cfg.enable;
   personalUser = "Akira Komamura";
   personalEmail = "akira.komamura@gmail.com";
   personalConfig = pkgs.writeText "config" ''
@@ -24,11 +23,11 @@ in {
   };
 
   config = {
-    programs.git = {
+    programs.git = lib.mkIf cfg.enable {
       userName = lib.mkIf cfg.defaultToPersonalIdentity personalUser;
       userEmail = lib.mkIf cfg.defaultToPersonalIdentity personalEmail;
 
-      extraConfig = lib.mkIf enabled {
+      extraConfig = {
         github.user = lib.mkDefault "akirak";
 
         pull.rebase = lib.mkDefault true;
@@ -46,7 +45,7 @@ in {
         http.postBuffer = "524288000";
       };
 
-      ignores = lib.mkIf enabled [
+      ignores = [
         ".direnv"
         "result"
         "result-*"
@@ -54,7 +53,7 @@ in {
       ];
 
       # Include configuration files to activate contextual identities
-      includes = lib.mkIf enabled [
+      includes = [
         {
           path = "~/.gitconfig";
         }
