@@ -2,11 +2,16 @@ host := "wsl-private"
 
 overrides := "--override-input emacs-config github:akirak/emacs-config/develop"
 
+upstream := "github:akirak/homelab"
+
 build:
-    nixos-rebuild build --flake .\#{{host}} {{overrides}}
+    nixos-rebuild build --flake .\#{{host}}
 
 test:
-    nixos-rebuild test --flake .\#{{host}} {{overrides}} --use-remote-sudo
+    nixos-rebuild test --flake .\#{{host}} --use-remote-sudo
 
 switch:
-    nixos-rebuild switch --flake .\#{{host}} {{overrides}} --use-remote-sudo
+    nixos-rebuild switch --flake .\#{{host}} --use-remote-sudo
+
+update:
+    nix flake update --inputs-from {{upstream}} {{overrides}}
