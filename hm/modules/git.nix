@@ -5,32 +5,93 @@
   ...
 }: let
   inherit (lib) mkOption types;
+
   cfg = config.programs.git;
-  personalUser = "Akira Komamura";
-  personalEmail = "akira.komamura@gmail.com";
-  personalConfig = pkgs.writeText "config" ''
-    [user]
-    name = ${personalUser}
-    email = ${personalEmail}
-  '';
+
+  makeGitConfig = {
+    userName,
+    userEmail,
+    githubUser,
+    signingKey,
+  }:
+    pkgs.writeText "config" (''
+        [user]
+          name = "${userName}"
+          email = "${userEmail}"
+          ${lib.optionalString (signingKey != null) ''
+          signingKey = "${signingKey}"
+        ''}
+      ''
+      + lib.optionalString (githubUser != null) ''
+        [github]
+          user = "${githubUser}"
+      '');
+
+  defaultIdentity = {
+    email = "akira.komamura@gmail.com";
+    fullName = "Akira Komamura";
+    githubUser = "akirak";
+    signingKey = "5B3390B01C01D3E";
+    conditions = [
+      "hasconfig:remote.*.url:git@github.com:akirak/**"
+      "hasconfig:remote.*.url:git@github.com:emacs-twist/**"
+      "hasconfig:remote.*.url:git@git.sr.ht:~akirak/**"
+      "hasconfig:remote.*.url:https://github.com/akirak/**"
+      "hasconfig:remote.*.url:https://github.com/emacs-twist/**"
+      "hasconfig:remote.*.url:https://git.sr.ht/~akirak/**"
+      "gitdir:~/work2/foss/"
+      "gitdir:~/work2/personal/"
+      "gitdir:~/work2/prototypes/"
+      "gitdir:/assets/"
+      "gitdir:/git-annex/"
+    ];
+  };
+
+  identityType = types.submodule {
+    options = {
+      email = mkOption {
+        type = types.str;
+        description = lib.mdDoc "E-mail address of the user";
+      };
+      fullName = mkOption {
+        type = types.str;
+        description = lib.mdDoc "Full name of the user";
+      };
+      githubUser = mkOption {
+        type = types.nullOr types.str;
+        description = lib.mdDoc "GitHub login of the user";
+        default = null;
+      };
+      signingKey = mkOption {
+        type = types.nullOr types.str;
+        description = lib.mdDoc "GPG signing key";
+        default = null;
+      };
+      conditions = mkOption {
+        type = types.listOf types.str;
+        description = lib.mdDoc "List of include conditions";
+      };
+    };
+  };
 in {
   options.programs.git = {
-    defaultToPersonalIdentity = mkOption {
-      type = types.bool;
-      description = "Whether to set the identity to the personal one";
-      default = false;
+    defaultIdentity = mkOption {
+      type = types.nullOr identityType;
+      description = lib.mdDoc "Default identity";
+      default = defaultIdentity;
+    };
+
+    extraIdentities = mkOption {
+      type = types.listOf identityType;
+      description = lib.mdDoc "Extra list of identities";
+      default = [];
     };
   };
 
   config = {
     programs.git = lib.mkIf cfg.enable {
-      userName = lib.mkIf cfg.defaultToPersonalIdentity personalUser;
-      userEmail = lib.mkIf cfg.defaultToPersonalIdentity personalEmail;
-
       extraConfig = {
-        github.user = lib.mkDefault "akirak";
-
-        pull.rebase = lib.mkDefault true;
+        pull.rebase = true;
 
         "url \"git@github.com:\"".pushInsteadOf = "https://github.com/";
         "url \"git@git.sr.ht:\"".pushInsteadOf = "https://git.sr.ht/";
@@ -52,39 +113,34 @@ in {
         "#*"
       ];
 
-      # Include configuration files to activate contextual identities
-      includes = [
-        {
-          path = "~/.gitconfig";
-        }
-        {
-          path = personalConfig;
-          condition = "hasconfig:remote.*.url:git@git.sr.ht:~akirak/**";
-        }
-        {
-          path = personalConfig;
-          condition = "hasconfig:remote.*.url:https://git.sr.ht/~akirak/**";
-        }
-        {
-          path = personalConfig;
-          condition = "gitdir:~/work2/foss/";
-        }
-        {
-          path = personalConfig;
-          condition = "gitdir:~/work2/personal/";
-        }
-        {
-          path = personalConfig;
-          condition = "gitdir:~/work2/prototypes/";
-        }
-        {
-          path = personalConfig;
-          condition = "gitdir:/assets/";
-        }
-        {
-          path = personalConfig;
-          condition = "gitdir:/git-annex/";
-        }
+      includes = lib.pipe ([cfg.defaultIdentity] ++ cfg.extraIdentities) [
+        (builtins.filter (v: v != null))
+        (
+          builtins.map (
+            {
+              email,
+              fullName,
+              githubUser,
+              signingKey,
+              conditions,
+            }: let
+              configFile = makeGitConfig {
+                inherit githubUser signingKey;
+                userName = fullName;
+                userEmail = email;
+              };
+            in
+              builtins.map
+              (
+                condition: {
+                  path = configFile;
+                  inherit condition;
+                }
+              )
+              conditions
+          )
+        )
+        lib.flatten
       ];
     };
   };

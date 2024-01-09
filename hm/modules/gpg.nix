@@ -24,6 +24,4 @@ in {
     gpg-connect-agent /bye
     export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   '';
-
-  programs.git.signing.key = lib.mkIf cfg.enable "5B3390B01C01D3E";
 }
