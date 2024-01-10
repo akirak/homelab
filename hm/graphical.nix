@@ -42,13 +42,9 @@ in {
       })
     ];
 
-  xdg.mimeApps.defaultApplications = let
-    browser = lib.optional config.programs.firefox.enable "firefox.desktop";
-  in {
-    "text/html" = browser;
-    "x-scheme-handler/http" = browser;
-    "x-scheme-handler/https" = browser;
-  };
+  xdg.mimeApps.defaultBrowser =
+    lib.mkIf config.programs.firefox.enable
+    "firefox.desktop";
 
   systemd.user.services.emacs = {
     Service = {
