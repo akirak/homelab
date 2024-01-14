@@ -135,7 +135,7 @@ in {
           :body (format \"[[file:%s]]\n%%?\" (abbreviate-file-name \"$PWD/\")))"
       }
 
-      function fzy-mountpoint() {
+      function mntcd() {
         if dir=$(findmnt -oTARGET --list --noheadings | fzy)
         then
           cd "$dir"
