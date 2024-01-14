@@ -139,6 +139,7 @@ in {
         if dir=$(findmnt -oTARGET --real --list --noheadings | fzy)
         then
           cd "$dir"
+          pwd
         fi
       }
 
