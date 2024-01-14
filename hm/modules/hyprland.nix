@@ -53,6 +53,11 @@ in {
       lib.mkIf config.services.dunst.enable
       systemdStartAfterThis;
 
+    services.kanshi = {
+      enable = true;
+      systemdTarget = lib.mkForce systemdTarget;
+    };
+
     wayland.windowManager.hyprland = {
       systemd.enable = true;
       xwayland.enable = true;
