@@ -6,13 +6,13 @@
   mainMonitor = {
     criteria = "Unknown VA32AQ K3LMAS000141 (HDMI-A-2)";
     mode = "2560x1440";
-    position = "0,0";
+    position = "1920,0";
   };
 
   subMonitor = {
     criteria = "Dell Inc. DELL S2421HS CBPT223 (DP-1)";
     mode = "1920x1080";
-    position = "2560,100";
+    position = "0,380";
   };
 in {
   imports = [
