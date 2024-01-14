@@ -164,12 +164,6 @@ in {
     shellAliases = {
       ".." = "cd ..";
       "..." = "cd ../..";
-      # "nvfetcher" = "nix run github:berberman/nvfetcher";
-      ":h" = "run-help";
-      # Drop these in favour of exa
-      # "ls" = "ls --color=auto";
-      # "la" = "ls -a";
-      # "ll" = "ls -l";
       "rm" = "rm -i";
       "j" = "journalctl -xe";
       "s" = "builtin cd \"$(fd -t d | fzy)\"";
@@ -187,8 +181,6 @@ in {
       "reset" = "systemctl --user reset-failed";
       "ssh-victim" = "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null";
       "nsearch" = "nix search --no-update-lock-file nixpkgs";
-      "npupgrade" = "nix profile upgrade $(nix profile list | fzy | cut -d' ' -f1)";
-      "npremove" = "nix profile remove $(nix profile list | fzy | cut -d' ' -f1)";
     };
   };
 }
