@@ -5,6 +5,6 @@ pkgs.mkShell {
   ];
 
   shellHook = ''
-    node2nix -14 -i npm-packages.json -c composition.nix
+    node2nix -18 -i npm-packages.json -c composition.nix
   '';
 }

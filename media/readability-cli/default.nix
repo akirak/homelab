@@ -2,7 +2,7 @@
   composition =
     (pkgs.callPackage ./composition.nix {
       inherit (pkgs) system;
-      nodejs = pkgs.nodejs-14_x;
+      nodejs = pkgs.nodejs-18_x;
     })
     .readability-cli;
 in
