@@ -38,6 +38,14 @@ in {
     # ../../profiles/k3s/single-node-for-testing.nix
   ];
 
+  hardware.opengl = {
+    enable = true;
+    extraPackages = [
+      pkgs.intel-compute-runtime
+      pkgs.intel-media-driver
+    ];
+  };
+
   system.stateVersion = "23.05";
 
   # Needed for the ZFS pool.
@@ -53,6 +61,7 @@ in {
   # systemd.services.NetworkManager-wait-online.enable = true;
 
   environment.systemPackages = [
+    pkgs.clinfo
     pkgs.hunspellDicts.en_US
     pkgs.hunspellDicts.en_GB-ise
   ];
