@@ -135,6 +135,7 @@ in {
     services.kanshi.profiles = {
       docked.outputs = [mainMonitor subMonitor];
       undocked.outputs = [mainMonitor];
+      as_secondary.outputs = [subMonitor];
     };
 
     wayland.windowManager.hyprland.enable = true;
