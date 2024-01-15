@@ -66,12 +66,14 @@
               # Add profiles as needed
               (inputs.homelab.outPath + "/profiles/nix")
               (inputs.homelab.outPath + "/profiles/locale")
+              # (inputs.homelab.outPath + "/profiles/docker/rootless.nix")
 
               # My custom settings
               ({homeUser, ...}: {
                 home-manager.users.${homeUser} = {
                   imports = [
                     (inputs.homelab.outPath + "/hm/basic.nix")
+                    (inputs.homelab.outPath + "/hm/wsl.nix")
                   ];
 
                   home.username = homeUser;
