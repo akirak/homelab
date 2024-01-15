@@ -10,7 +10,7 @@ stdenv.mkDerivation {
   buildInputs = [sqlite];
 
   src = builtins.fetchTarball {
-    url = "http://www.semantilog.org/pub/wn2sql-0.99.4a.tar";
+    url = "https://github.com/rbergmair/wn2sql/releases/download/v0.99.4a/wn2sql-0.99.4a.tar";
     sha256 = "12dm207y526vbs9jbkij6s63yk7m4gximvvznz9xnip3n4hn7s4r";
   };
 
