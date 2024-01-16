@@ -11,7 +11,7 @@
 
   fonts = {
     packages = with pkgs; [
-      jetbrains-mono-nerdfont
+      my-overlay.jetbrains-mono-nerdfont
       merriweather
       lato
     ];

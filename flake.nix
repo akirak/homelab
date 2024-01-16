@@ -99,8 +99,8 @@
         zsh-plugins = inputs.my-overlay.zsh-plugins;
         inherit (unstable.legacyPackages.${prev.system}) cachix;
         nix-index = inputs.nix-index-database.packages.${prev.system}.nix-index-with-db;
+        my-overlay = inputs.my-overlay.packages.${prev.system};
       })
-      inputs.my-overlay.overlays.default
     ];
 
     overlayModule = {

@@ -23,7 +23,7 @@ in {
       pavucontrol
 
       # fonts
-      jetbrains-mono-nerdfont
+      my-overlay.jetbrains-mono-nerdfont
       # Japanese
       ipafont
     ])
