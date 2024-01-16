@@ -77,12 +77,6 @@
 
       wordnet-sqlite = final.callPackage ./data/wordnet/wordnet-sqlite {};
 
-      readability-cli = prev.callPackage ./media/readability-cli {pkgs = prev;};
-
-      mermaid-cli = prev.nodePackages.mermaid-cli.overrideAttrs (_: {
-        meta.mainProgram = "/bin/mmdc";
-      });
-
       ajv = nodePackages.ajv-cli.overrideAttrs (_: {
         meta.mainProgram = "ajv";
       });
@@ -107,8 +101,6 @@
           "shippori-mincho"
           "jetbrains-mono-nerdfont"
           "wordnet-sqlite"
-          "readability-cli"
-          "mermaid-cli"
           "ajv"
           "epubinfo"
           "squasher"
