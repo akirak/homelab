@@ -162,7 +162,7 @@ in {
           # "ChatGPT"
           "copilot"
           "OCaml"
-          "Coq"
+          # "Coq"
           # "Lean4"
           # "lsp_mode"
         ];
