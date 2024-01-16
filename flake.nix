@@ -77,10 +77,6 @@
 
       wordnet-sqlite = final.callPackage ./data/wordnet/wordnet-sqlite {};
 
-      ajv = nodePackages.ajv-cli.overrideAttrs (_: {
-        meta.mainProgram = "ajv";
-      });
-
       inherit (inputs.epubinfo.packages.${prev.system}) epubinfo;
       inherit (inputs.squasher.packages.${prev.system}) squasher;
     };
@@ -101,7 +97,6 @@
           "shippori-mincho"
           "jetbrains-mono-nerdfont"
           "wordnet-sqlite"
-          "ajv"
           "epubinfo"
           "squasher"
         ] (import nixpkgs {
