@@ -101,7 +101,23 @@
         system,
         ...
       }: {
-        packages = overlay pkgs pkgs;
+        packages = nixpkgs.lib.getAttrs [
+          "node2nix"
+          "github-linguist"
+          "shippori-mincho"
+          "jetbrains-mono-nerdfont"
+          "wordnet-sqlite"
+          "readability-cli"
+          "mermaid-cli"
+          "ajv"
+          "epubinfo"
+          "squasher"
+        ] (import nixpkgs {
+          inherit system;
+          overlays = [
+            overlay
+          ];
+        });
         apps.update-node2nix = {
           type = "app";
           program = "${pkgs.writeShellScript "run-node2nix" ''
