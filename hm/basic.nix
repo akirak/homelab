@@ -35,7 +35,7 @@
     # Net
     httpie
     rclone
-    rustscan
+    nmap
   ];
 
   services = {
