@@ -26,6 +26,7 @@ in {
     ../../profiles/nix
     ../../profiles/sudo
     ../../profiles/tailscale
+    ../../profiles/rabbitmq/development.nix
     ../../profiles/networking/usb-tether1.nix
     ../../profiles/wayland/wm/hyprland.nix
     ../../profiles/wayland/cage/foot.nix
