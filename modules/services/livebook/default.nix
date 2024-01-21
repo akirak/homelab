@@ -155,9 +155,20 @@ in {
       })
     ];
 
+    # Without epmd already running, livebook tries to start it on its own, which
+    # can conflict with another instance of epmd required by other services,
+    # e.g. rabbitmq.
+    services.epmd.enable = true;
+
     systemd.services.livebook = {
       description = "Elixir Livebook";
       wantedBy = ["multi-user.target"];
+      requires = [
+        "epmd.socket"
+      ];
+      after = [
+        "epmd.socket"
+      ];
 
       path = [
         # osmon fails if /bin is not in the PATH.
