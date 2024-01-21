@@ -136,7 +136,7 @@ in {
       }
 
       function mntcd() {
-        if dir=$(findmnt -oTARGET --real --list --noheadings | fzy)
+        if dir=$(findmnt -oTARGET --list --noheadings | fzy)
         then
           cd "$dir"
           pwd
