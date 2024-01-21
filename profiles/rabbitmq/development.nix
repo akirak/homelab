@@ -1,6 +1,7 @@
 {
   services.rabbitmq = {
     enable = true;
+    managementPlugin.enable = true;
 
     # These values are the default, but set explicitly to ensure the service is
     # private.
