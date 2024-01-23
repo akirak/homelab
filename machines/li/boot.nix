@@ -31,22 +31,12 @@
   ];
 
   # Configuration for non-ZFS file systems on the system SSD
-  boot.initrd.luks = {
-    devices = {
-      root = {
-        device = "/dev/disk/by-uuid/8d814cba-6716-4951-94b8-331025c318f2";
-        preLVM = true;
-      };
-      mx500a = {
-        device = "/dev/disk/by-uuid/3ecfea4b-d1fe-4d39-a786-d394a4e0bf3c";
-      };
+  boot.initrd.luks.devices = {
+    root = {
+      device = "/dev/disk/by-uuid/8d814cba-6716-4951-94b8-331025c318f2";
+      preLVM = true;
     };
-    reusePassphrases = true;
   };
-  boot.initrd.postDeviceCommands = ''
-    # import the ZFS pool inside mx500 LUKS partition
-    zpool import tank1
-  '';
 
   fileSystems."/" = {
     device = "tmpfs";
