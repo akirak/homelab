@@ -29,6 +29,8 @@
 
     # System
     glances
+    # For browsing the process tree
+    htop
     dua
     duf
 
