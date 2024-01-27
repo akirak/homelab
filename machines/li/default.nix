@@ -169,9 +169,5 @@ in {
         ];
       };
     };
-
-    programs.rtorrent.enable = true;
-
-    programs.timoni.enable = true;
   };
 }
