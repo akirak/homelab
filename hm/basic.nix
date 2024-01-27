@@ -28,9 +28,7 @@
     git-annex
 
     # System
-    glances
-    # For browsing the process tree
-    htop
+    btop
     dua
     duf
 
