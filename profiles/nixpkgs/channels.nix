@@ -1,7 +1,9 @@
 {lib, ...}: {
   nixpkgs.config = {
-    allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) [
+    allowUnfreePredicate = pkg: let
+      name = lib.getName pkg;
+    in
+      builtins.elem name [
         # Explicitly select unfree packages.
         "wpsoffice"
         "steam-run"
@@ -12,6 +14,8 @@
         "android-studio-stable"
         "zoom"
         "Oracle_VM_VirtualBox_Extension_Pack"
+        "vscode-extension-github-copilot"
+        "vscode-extension-github-copilot-chat"
       ];
   };
 }
