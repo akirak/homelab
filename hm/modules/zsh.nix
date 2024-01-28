@@ -22,7 +22,17 @@
 
     # If the server isn't running, this script will exit with 1.
     emacsclient --eval "(with-temp-buffer
-        (insert (mapconcat #'expand-file-name (project-known-project-roots) \"\n\"))
+        (insert (mapconcat #'expand-file-name
+                           (thread-last
+                             (append (thread-last
+                                       (frame-list)
+                                       (mapcan #'window-list)
+                                       (mapcar #'window-buffer)
+                                       (mapcar (lambda (buffer)
+                                                 (buffer-local-value 'default-directory buffer))))
+                                     (project-known-project-roots))
+                             (seq-uniq))
+                           \"\n\"))
         (write-region (point-min) (point-max) \"$tmp\"))" > /dev/null
 
     if [[ -v pipe ]]
