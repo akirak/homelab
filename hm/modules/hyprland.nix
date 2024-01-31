@@ -18,6 +18,11 @@
       WantedBy = [systemdTarget];
     };
   };
+
+  runInTerminal = pkgs.writeShellScript "run-in-term" ''
+    id=$(basename "$1")
+    footclient -a "$id" -H "$@"
+  '';
 in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
@@ -90,7 +95,7 @@ in {
 
           # Launcher
           "$mod SHIFT , Return, exec, footclient"
-          "$mod       , Space, exec, fuzzel -T \"footclient -H\""
+          "$mod       , Space, exec, fuzzel -T ${runInTerminal}"
           "$mod       , E, exec, emacsclient -c -a emacs"
           "$mod SHIFT , S, exec, flameshot gui"
           "$mod       , F9, exec, foot --title \"Rebuilding NixOS...\" nixos-rebuild-and-notify"
