@@ -20,8 +20,17 @@
   };
 
   runInTerminal = pkgs.writeShellScript "run-in-term" ''
-    id=$(basename "$1")
-    footclient -a "$id" -H "$@"
+    windowclass=$(basename "$1")
+
+    options=()
+    case "$windowclass" in
+      btop)
+        ;;
+      *)
+        options+=(--hold)
+    esac
+
+    footclient -a "$windowclass" ''${options[@]} "$@"
   '';
 in {
   config = lib.mkIf cfg.enable {
@@ -166,6 +175,13 @@ in {
           [
             "workspace special,class:^(foot)$,title:^(Rebuilding)"
           ]
+          ++ (generateRules [
+              "float"
+              "size 80% 80%"
+              "center"
+            ] [
+              (exactClass "btop")
+            ])
           ++ (generateRules [
               "float"
               "size ${defaultDialogSize}"
