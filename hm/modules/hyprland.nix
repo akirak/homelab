@@ -18,6 +18,20 @@
       WantedBy = [systemdTarget];
     };
   };
+
+  runInTerminal = pkgs.writeShellScript "run-in-term" ''
+    windowclass=$(basename "$1")
+
+    options=()
+    case "$windowclass" in
+      btop)
+        ;;
+      *)
+        options+=(--hold)
+    esac
+
+    footclient -a "$windowclass" ''${options[@]} "$@"
+  '';
 in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
@@ -90,7 +104,7 @@ in {
 
           # Launcher
           "$mod SHIFT , Return, exec, footclient"
-          "$mod       , Space, exec, fuzzel -T \"footclient -H\""
+          "$mod       , Space, exec, fuzzel -T ${runInTerminal}"
           "$mod       , E, exec, emacsclient -c -a emacs"
           "$mod SHIFT , S, exec, flameshot gui"
           "$mod       , F9, exec, foot --title \"Rebuilding NixOS...\" nixos-rebuild-and-notify"
@@ -161,6 +175,13 @@ in {
           [
             "workspace special,class:^(foot)$,title:^(Rebuilding)"
           ]
+          ++ (generateRules [
+              "float"
+              "size 80% 80%"
+              "center"
+            ] [
+              (exactClass "btop")
+            ])
           ++ (generateRules [
               "float"
               "size ${defaultDialogSize}"
