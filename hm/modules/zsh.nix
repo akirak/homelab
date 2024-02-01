@@ -1,52 +1,15 @@
 {pkgs, ...}: let
-  listEmacsProjects = pkgs.writeShellScriptBin "ls-emacs-projects" ''
+  listEmacsProjects = pkgs.writeShellScriptBin "projects" ''
     set -euo pipefail
 
-    while [[ $# -gt 0 ]]
-    do
-      case "$1" in
-        # This option can be helpful in trivial shell functions where you don't
-        # want to set separate `set -euo pipefail` option.
-        --pipe)
-          pipe="$2"
-          shift
-          ;;
-      esac
-      shift
-    done
-
     # /tmp is protected, so use another directory
-    tmp=$(mktemp -p "''${XDG_RUNTIME_DIR}")
-
-    trap "rm -f '$tmp'" ERR EXIT
-
-    # If the server isn't running, this script will exit with 1.
-    emacsclient --eval "(with-temp-buffer
-        (insert (mapconcat #'expand-file-name
-                           (thread-last
-                             (append (thread-last
-                                       (frame-list)
-                                       (mapcan #'window-list)
-                                       (mapcar #'window-buffer)
-                                       (mapcar (lambda (buffer)
-                                                 (buffer-local-value 'default-directory buffer))))
-                                     (project-known-project-roots))
-                             (seq-uniq))
-                           \"\n\"))
-        (write-region (point-min) (point-max) \"$tmp\"))" > /dev/null
-
-    if [[ -v pipe ]]
-    then
-      cat "$tmp" | $pipe
-    else
-      cat "$tmp"
-    fi
   '';
 in {
   home.packages = with pkgs; [
     zsh
     nix-zsh-completions
     fzy
+    listEmacsProjects
   ];
 
   programs.zsh = {
@@ -128,6 +91,29 @@ in {
           | xargs realpath -q -s -e
       }
 
+      function projects() {
+        {
+          tmp=$(mktemp -p "''${XDG_RUNTIME_DIR}")
+          trap "rm -f '$tmp'" ERR EXIT
+          # If the server isn't running, this script will exit with 1.
+          emacsclient --eval "(with-temp-buffer
+              (insert (mapconcat #'expand-file-name
+                                 (thread-last
+                                   (append (thread-last
+                                             (frame-list)
+                                             (mapcan #'window-list)
+                                             (mapcar #'window-buffer)
+                                             (mapcar (lambda (buffer)
+                                                       (buffer-local-value 'default-directory buffer))))
+                                           (project-known-project-roots))
+                                   (seq-uniq))
+                                 \"\n\"))
+              (write-region (point-min) (point-max) \"$tmp\"))" > /dev/null
+
+          cat "$tmp"
+        }
+      }
+
       function _cdread() {
         read dir
         if [[ -n "$dir" ]]; then
@@ -142,7 +128,7 @@ in {
       function cd() {
         case "$1" in
           -p|)
-            ${listEmacsProjects}/bin/ls-emacs-projects | fzycd
+            projects | fzycd
             ;;
           -m)
             mountpoints | fzycd
