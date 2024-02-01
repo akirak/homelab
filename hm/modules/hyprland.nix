@@ -24,10 +24,9 @@
 
     options=()
     case "$windowclass" in
-      btop)
-        ;;
-      *)
+      hyprprop)
         options+=(--hold)
+        ;;
     esac
 
     footclient -a "$windowclass" ''${options[@]} "$@"
