@@ -117,13 +117,43 @@ in {
           print -Pn "\e]51;A$(pwd)\e\\";
       }
 
-      function cd() {
-        if [[ $# -gt 0 ]]
-        then
-          builtin cd "$@"
+      function mountpoints() {
+        findmnt -oTARGET --list --noheadings
+      }
+
+      function remotes() {
+        git rev-parse --show-toplevel >/dev/null || return 1
+        git --no-pager config --local --list \
+          | sed -n -E 's/^remote\..+?\.url=(.+)/\1/p' \
+          | xargs realpath -q -s -e
+      }
+
+      function _cdread() {
+        read dir
+        if [[ -n "$dir" ]]; then
+          builtin cd "$dir" && pwd
         else
-          builtin cd "$(${listEmacsProjects}/bin/ls-emacs-projects --pipe fzy)"
+          return 1
         fi
+      }
+
+      alias fzycd="fzy | _cdread"
+
+      function cd() {
+        case "$1" in
+          -p|)
+            ${listEmacsProjects}/bin/ls-emacs-projects | fzycd
+            ;;
+          -m)
+            mountpoints | fzycd
+            ;;
+          -r)
+            remotes | fzycd
+            ;;
+          *)
+            builtin cd "$@"
+            ;;
+        esac
       }
 
       function clone() {
@@ -143,14 +173,6 @@ in {
           (org-dog-complete-file \"Clock into file: \")
           \"$*\"
           :body (format \"[[file:%s]]\n%%?\" (abbreviate-file-name \"$PWD/\")))"
-      }
-
-      function mntcd() {
-        if dir=$(findmnt -oTARGET --list --noheadings | fzy)
-        then
-          cd "$dir"
-          pwd
-        fi
       }
 
       export NIX_BUILD_SHELL=bash
