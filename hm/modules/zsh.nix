@@ -1,15 +1,8 @@
-{pkgs, ...}: let
-  listEmacsProjects = pkgs.writeShellScriptBin "projects" ''
-    set -euo pipefail
-
-    # /tmp is protected, so use another directory
-  '';
-in {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     zsh
     nix-zsh-completions
     fzy
-    listEmacsProjects
   ];
 
   programs.zsh = {
