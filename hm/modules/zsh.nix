@@ -73,6 +73,11 @@
           print -Pn "\e]51;A$(pwd)\e\\";
       }
 
+      function pick() {
+        local arg
+        fzy | read arg && "$@" "$arg"
+      }
+
       function mountpoints() {
         findmnt -oTARGET --list --noheadings
       }
@@ -107,27 +112,20 @@
         }
       }
 
-      function _cdread() {
-        read dir
-        if [[ -n "$dir" ]]; then
-          builtin cd "$dir" && pwd
-        else
-          return 1
-        fi
+      function cdv() {
+        builtin cd "$1" && pwd
       }
-
-      alias fzycd="fzy | _cdread"
 
       function cd() {
         case "$1" in
           -p|)
-            projects | fzycd
+            projects | pick cdv
             ;;
           -m)
-            mountpoints | fzycd
+            mountpoints | pick cdv
             ;;
           -r)
-            remotes | fzycd
+            remotes | pick cdv
             ;;
           *)
             builtin cd "$@"
