@@ -22,6 +22,7 @@
     difftastic
     duckdb
     tbls
+    hyperfine
 
     # Media
     git-annex
