@@ -11,7 +11,6 @@
   home.packages = with pkgs; [
     # Nix
     nix-prefetch-git
-    manix
 
     # Tools
     pv
