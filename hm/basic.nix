@@ -23,6 +23,7 @@
     duckdb
     tbls
     hyperfine
+    just
 
     # Media
     git-annex
