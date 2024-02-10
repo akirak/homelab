@@ -39,5 +39,5 @@
     };
   };
 
-  services.xserver.layout = lib.mkDefault "us";
+  services.xserver.xkb.layout = lib.mkDefault "us";
 }
