@@ -11,6 +11,7 @@
 
   environment.systemPackages = [
     pkgs.lsof
+    pkgs.psmisc
     pkgs.handlr
   ];
 
