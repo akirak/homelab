@@ -38,19 +38,26 @@
 
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "stable";
+      inputs.nixpkgs.follows = "unstable";
     };
 
     microvm = {
       url = "github:astro/microvm.nix";
       inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs.follows = "unstable";
     };
 
-    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "unstable";
+    };
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
     pre-commit-hooks.inputs.nixpkgs.follows = "unstable";
 
-    nix-index-database.url = "github:Mic92/nix-index-database";
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "unstable";
+    };
 
     hyprland-contrib.url = "github:hyprwm/contrib";
 
