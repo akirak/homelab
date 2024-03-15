@@ -265,6 +265,7 @@
         "nongnu-elpa": "nongnu-elpa",
         "org-babel": "org-babel",
         "pre-commit-hooks": "pre-commit-hooks_2",
+        "tree-sitter-gleam": "tree-sitter-gleam",
         "twist": [
           "twist"
         ],
@@ -272,11 +273,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1709569495,
-        "narHash": "sha256-Zwih9dZF57KYepbudMmFK0BZWUrI8f6g8sGghiZP2EE=",
+        "lastModified": 1710496293,
+        "narHash": "sha256-GpmqbI4EMAAbnj6bg7rGDNrO+2zFOdSl/q49Q1ZONTE=",
         "owner": "akirak",
         "repo": "emacs-config",
-        "rev": "f776e5a055905a3484a2463f2176e9b968d466a0",
+        "rev": "92ccba723490fd87984c0c7c243ac395d42df2ee",
         "type": "github"
       },
       "original": {
@@ -327,11 +328,11 @@
     "epkgs": {
       "flake": false,
       "locked": {
-        "lastModified": 1709421561,
-        "narHash": "sha256-WgYQaakjYGwEEmXPJvznVDQbdrPaZVqCHS9WsGGjqYg=",
+        "lastModified": 1710204244,
+        "narHash": "sha256-Xa3s24Sqk5te+ud70ZjZPNcO5iXa+9rBVUUVpgBSJBI=",
         "owner": "emacsmirror",
         "repo": "epkgs",
-        "rev": "f89a9df6b05640649fff22438528f70b4706124d",
+        "rev": "cce48e5aae2aa1a8a63646a5f06bde72255ba0fc",
         "type": "github"
       },
       "original": {
@@ -837,11 +838,11 @@
     "gnu-elpa": {
       "flake": false,
       "locked": {
-        "lastModified": 1709392691,
-        "narHash": "sha256-lypZcpuxVeEhUNEMxgXdBV+QhC+c2S1q4CDhckRF0qs=",
+        "lastModified": 1710090195,
+        "narHash": "sha256-C6b1mZlW95pbDZ8A3qWKbZK0XeSUW/nexMvVDu2BB8o=",
         "ref": "main",
-        "rev": "96ff6a153dfb6c91ef2853b01bb7a716387e6670",
-        "revCount": 589,
+        "rev": "5027481bb39df93a6136f1ce71722e42d75a50cf",
+        "revCount": 590,
         "type": "git",
         "url": "https://git.savannah.gnu.org/git/emacs/elpa.git"
       },
@@ -994,11 +995,11 @@
     "melpa": {
       "flake": false,
       "locked": {
-        "lastModified": 1709301524,
-        "narHash": "sha256-KZPzk1qrtqifUbH1jRBi6uCNeH3/clByW2ORNk0gz5k=",
+        "lastModified": 1710495565,
+        "narHash": "sha256-zP8mubhHLNiUw7X7XqEDa5D8MOUS0M5MVxa9Z6HB/JE=",
         "owner": "akirak",
         "repo": "melpa",
-        "rev": "3dcc740bf9263b5ede35c8b3342feb0dbfbe97f3",
+        "rev": "57028e0735569415c2fc9caa78de34e48e302e98",
         "type": "github"
       },
       "original": {
@@ -1771,11 +1772,11 @@
     "nongnu-elpa": {
       "flake": false,
       "locked": {
-        "lastModified": 1708616504,
-        "narHash": "sha256-JFeKHSeoPACrqqryofOimHOalr7FNbZ1qFUzF3KcW9k=",
+        "lastModified": 1710442513,
+        "narHash": "sha256-iJeG9lyjCTwcl/7OTBYI+RG7ztD0u2DY76RR9mzYjvM=",
         "ref": "main",
-        "rev": "7c06709972291413f18b750248b141293415cd42",
-        "revCount": 305,
+        "rev": "f06fc1286a20c827cbbd53a8c3ed53b2ac41c9d9",
+        "revCount": 307,
         "type": "git",
         "url": "https://git.savannah.gnu.org/git/emacs/nongnu.git"
       },
@@ -2111,6 +2112,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tree-sitter-gleam": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1709587155,
+        "narHash": "sha256-W+PfxqPUKHhLH5UBATmQ1mlSfLPAWIQyDgiSQBWBtBs=",
+        "owner": "gleam-lang",
+        "repo": "tree-sitter-gleam",
+        "rev": "2012f294baacf30e7a62414754021284377366c6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gleam-lang",
+        "repo": "tree-sitter-gleam",
         "type": "github"
       }
     },
