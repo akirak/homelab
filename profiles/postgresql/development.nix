@@ -3,8 +3,10 @@
     postgresql = {
       enable = true;
 
-      # Default: 5432
-      port = 5432;
+      settings = {
+        # Default: 5432
+        port = 5432;
+      };
 
       # Specify an explicit major version
       # package = pkgs.postgresql_14;
