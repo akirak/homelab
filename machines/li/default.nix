@@ -34,7 +34,7 @@ in {
     # ../../profiles/nix/cachix-deploy.nix
     ../../profiles/postgresql/development.nix
     ../../profiles/minio/development.nix
-    ../../profiles/virtualbox-host
+    # ../../profiles/virtualbox-host
     # ../../profiles/docker/rootless.nix
     ../../profiles/docker
     ../../profiles/docker/kind.nix
