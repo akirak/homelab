@@ -107,7 +107,7 @@
                         (mapcar #'expand-file-name)
                         (seq-uniq))
                       "\n"))
-             (write-region (point-min) (point-max) "$tmp"))" > /dev/null
+             (write-region (point-min) (point-max) \"$tmp\"))" > /dev/null
           cat "$tmp"
         }
       }
