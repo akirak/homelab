@@ -106,7 +106,7 @@
                                             (buffer-local-value 'default-directory buffer)))))
                         (mapcar #'expand-file-name)
                         (seq-uniq))
-                      "\n"))
+                      \"\\n\"))
              (write-region (point-min) (point-max) \"$tmp\"))" > /dev/null
           cat "$tmp"
         }
