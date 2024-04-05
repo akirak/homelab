@@ -31,6 +31,8 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = [
       (pkgs.writeShellScriptBin "nixos-rebuild-and-notify" ''
+        operation="''${1:-switch}"
+
         if emacs_config="$(readlink -e "${cfg.emacsConfigDirectory}")"
         then
           flags=(--override-input emacs-config "''${emacs_config}" \
@@ -45,16 +47,16 @@ in {
         hostname="$(uname -n)"
 
         cd "${cfg.directory}"
-        if nixos-rebuild switch \
+        if nixos-rebuild "$operation" \
             --flake ".#$hostname" \
             --option accept-flake-config true \
             --no-write-lock-file \
             --print-build-logs \
             --use-remote-sudo \
             ''${flags[@]}; then
-          ${notify} -t 5000 'Switched to the new NixOS config'
+          ${notify} -t 5000 "nixos-rebuild $operation has finished successfully"
         else
-          ${notify} -t 5000 'nixos-rebuild has failed'
+          ${notify} -t 5000 "nixos-rebuild $operation has failed"
           read
         fi
       '')
