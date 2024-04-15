@@ -6,6 +6,11 @@
       settings = {
         # Default: 5432
         port = 5432;
+
+        # Enable logical replication for certain use cases.
+        # See https://kinsta.com/blog/postgresql-replication/ and
+        # https://electric-sql.com/docs/usage/installation/postgres
+        wal_level = "logical";
       };
 
       # Specify an explicit major version
