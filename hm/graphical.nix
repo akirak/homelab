@@ -57,7 +57,7 @@ in {
 
   systemd.user.services.foot = lib.mkIf config.programs.foot.server.enable {
     Service = {
-      Environment = [
+      Environment = lib.mkForce [
         "WAYLAND_DISPLAY=wayland-1"
         "PATH=${
           lib.concatMapStrings (dir: dir + ":") config.home.sessionPath
