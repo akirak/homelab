@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.programs.gpg;
@@ -10,6 +11,10 @@ in {
     enableSshSupport = true;
     defaultCacheTtl = 60;
     defaultCacheTtlSsh = 60;
+    # Explicitly set the pinentry package when using a non-standard window
+    # manager setting
+    # https://discourse.nixos.org/t/help-with-pinentrypackage/41393/8
+    pinentryPackage = lib.mkForce pkgs.pinentry-gtk2;
     extraConfig = ''
       allow-emacs-pinentry
       allow-loopback-pinentry
