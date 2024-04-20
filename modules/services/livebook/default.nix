@@ -23,6 +23,7 @@ in https://github.com/NixOS/nixpkgs
     fi
 
     err() {
+      echo "$@" >&2
       ${pkgs.notify-desktop}/bin/notify-desktop --app-name=Livebook "$@"
       exit 1
     }
@@ -56,6 +57,8 @@ in https://github.com/NixOS/nixpkgs
     else
       err "Failed to parse the output of journalctl"
     fi
+
+    echo "Opening $url"
 
     if ! ${pkgs.handlr}/bin/handlr open "$url"
     then
