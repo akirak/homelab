@@ -112,6 +112,18 @@ in {
           default = "/var/lib/livebook";
           description = "LIVEBOOK_HOME";
         };
+
+        enableNix = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Enable Nix package manager for the user.";
+        };
+
+        extraPackages = mkOption {
+          type = types.listOf types.package;
+          default = [];
+          description = lib.mdDoc "List of packages that are made available to the user.";
+        };
       };
     };
   };
@@ -148,6 +160,10 @@ in {
       };
     };
 
+    nix.settings.allowed-users = lib.optionals cfg.settings.enableNix [
+      cfg.user
+    ];
+
     environment.systemPackages = [
       openScript
       (pkgs.makeDesktopItem {
@@ -173,12 +189,21 @@ in {
         "epmd.socket"
       ];
 
-      path = [
-        # osmon fails if /bin is not in the PATH.
-        # Based on information at
-        # <https://github.com/petrkozorezov/mynixos/blob/cb77c06627d0add7751ca019f9e010c898715815/system/modules/livebook.nix#L142>
-        ""
-      ];
+      path =
+        [
+          # osmon fails if /bin is not in the PATH.
+          # Based on information at
+          # <https://github.com/petrkozorezov/mynixos/blob/cb77c06627d0add7751ca019f9e010c898715815/system/modules/livebook.nix#L142>
+          ""
+        ]
+        # This is not a proper way to add Nix packages to the environment, but I
+        # was unable to find other way. Adding packages to
+        # users.users.livebook.packages didn't work :(
+        ++ cfg.settings.extraPackages
+        ++ (lib.optionals cfg.settings.enableNix [
+          config.nix.package
+          "${cfg.settings.homeDirectory}/.nix-profile"
+        ]);
 
       environment = {
         LIVEBOOK_DATA_PATH = cfg.dataDir;
