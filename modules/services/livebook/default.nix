@@ -182,6 +182,7 @@ in {
         LIVEBOOK_IP = cfg.settings.ipAddress;
         LIVEBOOK_PORT = builtins.toString cfg.settings.port;
         LIVEBOOK_HOME = cfg.settings.homeDirectory;
+        RELEASE_COOKIE = "${cfg.settings.homeDirectory}/.cookie";
       };
 
       serviceConfig = {
@@ -190,7 +191,21 @@ in {
 
         Type = "exec";
 
-        ExecStart = "${cfg.package}/bin/livebook server";
+        StandardOutput = "journal";
+        StandardError = "journal";
+
+        ExecStart = "${cfg.package}/bin/livebook start";
+
+        # Create a release cookie. The code is based on
+        # https://github.com/nixos/nixpkgs/blob/nil/nixos/modules/services/networking/pleroma.nix
+        ExecStartPre = "${pkgs.writers.writeBashBin "write-cookie" ''
+          RELEASE_COOKIE="${cfg.settings.homeDirectory}/.cookie"
+
+          if [[ ! -f "''${RELEASE_COOKIE}" ]]
+          then
+            dd if=/dev/urandom bs=1 count=16 | hexdump -e '16/1 "%02x"' > "''${RELEASE_COOKIE}"
+          fi
+        ''}/bin/write-cookie";
 
         # If you ran a public instance, it might be important to set these
         # options properly, but I am only running a local private instance, so I
