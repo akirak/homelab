@@ -12,12 +12,6 @@
 in {
   boot.kernelModules = stage1Modules;
 
-  hardware.deviceTree = {
-    filter = "bcm2711-rpi-4-b.dtb";
-    kernelPackage = pkgs.linux_rpi4;
-  };
-  hardware.enableRedistributableFirmware = true;
-
   boot.initrd = {
     enable = true;
 

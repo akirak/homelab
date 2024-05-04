@@ -308,8 +308,14 @@
               twistHomeModule
             ];
           };
+
           zheng = {
             system = "aarch64-linux";
+            channel = stable;
+            extraModules = [
+              (stable + "/nixos/modules/installer/sd-card/sd-image-aarch64.nix")
+              inputs.nixos-hardware.nixosModules.raspberry-pi-4
+            ];
           };
 
           # zhuang = nixpkgs.lib.nixosSystem {
