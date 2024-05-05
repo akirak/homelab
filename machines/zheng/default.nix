@@ -23,6 +23,17 @@ in {
     })
   ];
 
+  # Replace the raspberry-pi-4 nixos-hardware module with an explicit list of
+  # kernel modules. See
+  # https://www.eisfunke.com/posts/2023/nixos-on-raspberry-pi-4.html
+  boot.initrd.availableKernelModules = [
+    "usbhid"
+    "usb_storage"
+    "vc4"
+    "pcie_brcmstb"
+    "reset-raspberrypi"
+  ];
+
   # Force no ZFS
   boot.supportedFilesystems =
     lib.mkForce
