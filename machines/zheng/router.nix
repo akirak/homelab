@@ -6,6 +6,10 @@ let
     "genet"
   ];
 in {
+  imports = [
+    ./usb-wifi.nix
+  ];
+
   boot.kernelModules = modules;
 
   # https://github.com/ghostbuster91/blogposts/blob/a2374f0039f8cdf4faddeaaa0347661ffc2ec7cf/router2023-part2/main.md#kernel
@@ -182,6 +186,40 @@ in {
       # don't use /etc/hosts as this would advertise surfer as localhost
       no-hosts = true;
       address = "/zheng.lan/192.168.10.1";
+    };
+  };
+
+  services.hostapd = {
+    enable = true;
+    radios = {
+      wlp1s0u1u4 = {
+        band = "2g";
+        countryCode = "JP";
+        channel = 8;
+
+        settings.bridge = "br-lan";
+
+        wifi4 = {
+          enable = true;
+          capabilities = [
+            "RX-STBC1"
+            "SHORT-GI-40"
+            "SHORT-GI-20"
+            "DSSS_CCK-40"
+            "MAX-AMSDU-7935"
+          ];
+        };
+
+        networks = {
+          wlp1s0u1u4 = {
+            ssid = "nicky";
+            authentication = {
+              mode = "wpa3-sae";
+              saePasswordsFile = "/etc/hostapd/password";
+            };
+          };
+        };
+      };
     };
   };
 }
