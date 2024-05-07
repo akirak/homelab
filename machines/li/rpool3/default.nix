@@ -20,6 +20,7 @@
       "/var/log"
       "/var/lib/bluetooth"
       "/var/lib/livebook"
+      "/var/lib/rabbitmq"
       "/etc/NetworkManager/system-connections"
     ];
   };
