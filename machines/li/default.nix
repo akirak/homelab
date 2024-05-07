@@ -17,7 +17,7 @@
 in {
   imports = [
     ./boot.nix
-    ./rpool2
+    ./rpool3
     ../../suites/base
     ../../suites/graphical
     ../../suites/desktop
