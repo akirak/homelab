@@ -30,14 +30,6 @@
     pkgs.git
   ];
 
-  # Configuration for non-ZFS file systems on the system SSD
-  boot.initrd.luks.devices = {
-    root = {
-      device = "/dev/disk/by-uuid/8d814cba-6716-4951-94b8-331025c318f2";
-      preLVM = true;
-    };
-  };
-
   fileSystems."/" = {
     device = "tmpfs";
     fsType = "tmpfs";
@@ -45,8 +37,14 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/89D8-EFFA";
+    device = "/dev/disk/by-uuid/B327-FDEA";
     fsType = "vfat";
+    options = ["fmask=0137" "dmask=0027"];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/f3125e1d-ef1a-4a93-82ee-29b74464b2c0";
+    fsType = "f2fs";
   };
 
   swapDevices = [];

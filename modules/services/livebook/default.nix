@@ -231,7 +231,7 @@ in {
 
           if [[ ! -f "''${RELEASE_COOKIE}" ]]
           then
-            dd if=/dev/urandom bs=1 count=16 | hexdump -e '16/1 "%02x"' > "''${RELEASE_COOKIE}"
+            dd if=/dev/urandom bs=1 count=16 | ${pkgs.hexdump}/bin/hexdump -e '16/1 "%02x"' > "''${RELEASE_COOKIE}"
           fi
         ''}/bin/write-cookie";
 

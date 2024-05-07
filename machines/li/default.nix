@@ -17,7 +17,7 @@
 in {
   imports = [
     ./boot.nix
-    ./rpool2
+    ./rpool3
     ../../suites/base
     ../../suites/graphical
     ../../suites/desktop
@@ -33,7 +33,6 @@ in {
     # ../../profiles/wayland/wm/river.nix
     # ../../profiles/nix/cachix-deploy.nix
     ../../profiles/postgresql/development.nix
-    ../../profiles/minio/development.nix
     ../../profiles/virtualbox-host
     # ../../profiles/docker/rootless.nix
     ../../profiles/docker
