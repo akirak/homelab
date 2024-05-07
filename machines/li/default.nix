@@ -33,7 +33,6 @@ in {
     # ../../profiles/wayland/wm/river.nix
     # ../../profiles/nix/cachix-deploy.nix
     ../../profiles/postgresql/development.nix
-    ../../profiles/minio/development.nix
     ../../profiles/virtualbox-host
     # ../../profiles/docker/rootless.nix
     ../../profiles/docker
