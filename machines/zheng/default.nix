@@ -7,11 +7,8 @@
 in {
   imports = [
     # (modulesPath + "/profiles/headless.nix")
-    # ../../profiles/tailscale
-    # ../../profiles/nginx
     # ../../profiles/nix/cachix-deploy.nix
     ../../profiles/openssh
-    # ./boot.nix
     ./router.nix
   ];
 
@@ -47,7 +44,6 @@ in {
     ];
 
   hardware.deviceTree = {
-    #  filter = "bcm2711-rpi-4-b.dtb";
     kernelPackage = pkgs.linux_rpi4;
   };
 
