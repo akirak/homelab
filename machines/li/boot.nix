@@ -3,7 +3,9 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  annex-dm = "local_annex";
+in {
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
@@ -45,6 +47,17 @@
   fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/f3125e1d-ef1a-4a93-82ee-29b74464b2c0";
     fsType = "f2fs";
+  };
+
+  boot.initrd.luks.devices.${annex-dm} = {
+    device = "/dev/disk/by-uuid/2f67dfa5-200f-4d38-b96d-2aabbd9f5186";
+    allowDiscards = true;
+  };
+
+  fileSystems."/git-annex/${config.networking.hostName}" = {
+    device = "/dev/mapper/${annex-dm}";
+    fsType = "ext4";
+    options = ["relatime" "discard"];
   };
 
   swapDevices = [];
