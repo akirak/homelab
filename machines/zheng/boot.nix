@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
+{config, ...}: let
   staticIp = "192.168.0.61";
   initialSshPort = 222;
   stage1Modules = [
