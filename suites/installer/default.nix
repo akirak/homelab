@@ -5,9 +5,13 @@
   ];
 
   environment.systemPackages = [
+    pkgs.emacs
+    pkgs.gnupg
+
     pkgs.git
     # Provided from disko flake via overlayModule
     pkgs.disko
+    pkgs.git-annex
 
     # Import useful packages from the package list in
     # nixos/modules/profiles/base.nix of nixpkgs.
@@ -32,6 +36,8 @@
     pkgs.xfsprogs.bin
     pkgs.jfsutils
     pkgs.f2fs-tools
+    pkgs.btrfs-progs
+    pkgs.zfs
 
     pkgs.lshw
 
