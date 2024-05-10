@@ -199,6 +199,7 @@ in {
               "center"
             ] [
               (exactClass "mpv")
+              (exactClass "VirtualBox Manager")
             ]);
       };
     };
