@@ -297,6 +297,10 @@
             system = "x86_64-linux";
             channel = stable;
           };
+          yang = {
+            system = "x86_64-linux";
+            channel = unstable;
+          };
           hui = {
             system = "x86_64-linux";
             channel = unstable;
@@ -336,6 +340,7 @@
           shu = import ./machines/shu/disko.nix;
           hui = import ./machines/hui/disko.nix;
           zheng = import ./machines/zheng/disko.nix;
+          yang = import ./machines/yang/disko.nix;
         };
 
         nixosModules = {
