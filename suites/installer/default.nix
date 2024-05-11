@@ -33,6 +33,8 @@
     pkgs.jfsutils
     pkgs.f2fs-tools
 
+    pkgs.lshw
+
     pkgs.unzip
     pkgs.zip
   ];
