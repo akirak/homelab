@@ -1,3 +1,8 @@
+{
+  config,
+  lib,
+  ...
+}:
 # This configuration is mostly based on the following awesome blog post:
 # https://github.com/ghostbuster91/blogposts/blob/a2374f0039f8cdf4faddeaaa0347661ffc2ec7cf/router2023-part2/main.md
 let
@@ -5,9 +10,12 @@ let
     "uas"
     "genet"
   ];
+
+  adguardhome = config.services.adguardhome;
 in {
   imports = [
     ./usb-wifi.nix
+    ../../profiles/adguard-home
   ];
 
   boot.kernelModules = modules;
@@ -169,6 +177,10 @@ in {
       bogus-priv = true;
       no-resolv = true;
 
+      resolveLocalQueries = lib.mkIf adguardhome.enable false;
+      # Use a port other than 53 if adguard home is running
+      port = lib.mkIf adguardhome.enable 5353;
+
       # Cache dns queries.
       cache-size = 1000;
 
@@ -221,5 +233,12 @@ in {
         };
       };
     };
+  };
+
+  services.adguardhome.settings = lib.mkIf adguardhome.enable {
+    dns.bind_hosts = [
+      "127.0.0.1"
+      "192.168.10.1"
+    ];
   };
 }
