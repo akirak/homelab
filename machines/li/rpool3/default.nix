@@ -18,6 +18,7 @@
   environment.persistence."/persist" = {
     directories = [
       "/var/log"
+      "/var/tmp"
       "/var/lib/bluetooth"
       "/var/lib/livebook"
       "/var/lib/rabbitmq"
