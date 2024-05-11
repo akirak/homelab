@@ -36,11 +36,6 @@
       inputs.darwin.follows = "nix-darwin";
     };
 
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "unstable";
-    };
-
     microvm = {
       url = "github:astro/microvm.nix";
       inputs.flake-utils.follows = "flake-utils";
