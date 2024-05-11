@@ -316,17 +316,6 @@
               (stable + "/nixos/modules/installer/sd-card/sd-image-aarch64.nix")
             ];
           };
-
-          # zhuang = nixpkgs.lib.nixosSystem {
-          #   system = "aarch64-linux";
-          #   modules = [
-          #     overlayModule
-          #     # <nixpkgs/nixos/modules/installer/sd-card/sd-image-aarch64.nix>
-          #     # inputs.disko.nixosModules.disko
-          #     ./machines/zhuang/initial.nix
-          #     ./machines/zhuang/rest.nix
-          #   ];
-          # };
         };
 
         diskoConfigurations = {
