@@ -36,4 +36,19 @@ in {
     # nginx
     80
   ];
+
+  networking = {
+    useNetworkd = true;
+  };
+
+  systemd.network = {
+    networks = {
+      "20-lan" = {
+        matchConfig.Name = "enp1s0";
+        networkConfig = {
+          DHCP = "ipv4";
+        };
+      };
+    };
+  };
 }

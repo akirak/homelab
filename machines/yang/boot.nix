@@ -53,8 +53,4 @@
     # The default is true, but it is suggested to turn it off.
     forceImportRoot = false;
   };
-
-  networking = {
-    useDHCP = true;
-  };
 }
