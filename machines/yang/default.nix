@@ -24,6 +24,9 @@ in {
   boot.devSize = "256m";
   boot.devShmSize = "256m";
 
+  services.auto-cpufreq.enable = true;
+  powerManagement.cpuFreqGovernor = "ondemand";
+
   services.nginx = {
     enable = true;
     virtualHosts.localhost.locations."/" = {
