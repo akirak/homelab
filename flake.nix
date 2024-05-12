@@ -199,6 +199,25 @@
           #   ];
           # };
 
+          remote-installer-image =
+            (stable.lib.nixosSystem
+              {
+                system = "x86_64-linux";
+                modules = [
+                  overlayModule
+                  ./suites/remote-installer
+                  ({modulesPath, ...}: {
+                    imports = [
+                      (modulesPath + "/installer/cd-dvd/installation-cd-base.nix")
+                    ];
+                  })
+                ];
+              })
+            .config
+            .system
+            .build
+            .isoImage;
+
           asus-br1100-iso =
             (stable.lib.nixosSystem
               {
@@ -278,6 +297,10 @@
             system = "x86_64-linux";
             channel = stable;
           };
+          yang = {
+            system = "x86_64-linux";
+            channel = unstable;
+          };
           hui = {
             system = "x86_64-linux";
             channel = unstable;
@@ -317,6 +340,7 @@
           shu = import ./machines/shu/disko.nix;
           hui = import ./machines/hui/disko.nix;
           zheng = import ./machines/zheng/disko.nix;
+          yang = import ./machines/yang/disko.nix;
         };
 
         nixosModules = {
