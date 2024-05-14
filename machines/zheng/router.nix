@@ -6,6 +6,10 @@
 # This configuration is mostly based on the following awesome blog post:
 # https://github.com/ghostbuster91/blogposts/blob/a2374f0039f8cdf4faddeaaa0347661ffc2ec7cf/router2023-part2/main.md
 let
+  routerAddress = "192.168.10.1";
+
+  subnet = "192.168.10.0/16";
+
   modules = [
     "uas"
     "genet"
@@ -69,7 +73,7 @@ in {
         matchConfig.Name = "br-lan";
         bridgeConfig = {};
         address = [
-          "192.168.10.1/24"
+          "${routerAddress}/24"
         ];
         networkConfig = {
           ConfigureWithoutCarrier = true;
@@ -104,7 +108,7 @@ in {
       ruleset = ''
         define DEV_PRIVATE = br-lan
         define DEV_WORLD = usb0
-        define NET_PRIVATE = 192.168.10.0/16
+        define NET_PRIVATE = ${subnet}
 
         table ip global {
 
@@ -186,7 +190,7 @@ in {
 
       dhcp-range = ["br-lan,192.168.10.50,192.168.10.254,24h"];
       interface = "br-lan";
-      dhcp-host = "192.168.10.1";
+      dhcp-host = routerAddress;
       dhcp-authoritative = true;
       # dhcp-sequential-ip = true;
 
@@ -197,7 +201,7 @@ in {
 
       # don't use /etc/hosts as this would advertise surfer as localhost
       no-hosts = true;
-      address = "/zheng.lan/192.168.10.1";
+      address = "/zheng.lan/${routerAddress}";
     };
   };
 
