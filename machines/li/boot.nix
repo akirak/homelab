@@ -45,8 +45,8 @@ in {
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/f3125e1d-ef1a-4a93-82ee-29b74464b2c0";
-    fsType = "f2fs";
+    device = "/dev/disk/by-uuid/a0fd07ca-3f1e-40ce-84f3-d41061e1ff98";
+    fsType = "ext4";
   };
 
   boot.initrd.luks.devices.${annex-dm} = {
