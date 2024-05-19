@@ -122,6 +122,7 @@ in {
 
     programs.chromium = {
       enable = true;
+      package = pkgs.ungoogled-chromium;
       extensions = [
         {
           # Google Input Tools
