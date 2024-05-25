@@ -193,6 +193,10 @@ in {
       dhcp-host = routerAddress;
       dhcp-authoritative = true;
       # dhcp-sequential-ip = true;
+      dhcp-option = [
+        "3,${routerAddress}"
+        "6,${routerAddress}"
+      ];
 
       # local domains
       local = "/lan/";
