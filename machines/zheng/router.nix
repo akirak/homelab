@@ -234,8 +234,12 @@ in {
           wlp1s0u1u4 = {
             ssid = "nicky";
             authentication = {
-              mode = "wpa3-sae";
+              # Use the transition mode to support older devices. wpa3-sae is
+              # more secure and hence would be more desirable.
+              mode = "wpa3-sae-transition";
               saePasswordsFile = "/etc/hostapd/password";
+              # Provide both sae and wpa passwords for the transition mode.
+              wpaPasswordFile = "/etc/hostapd/password";
             };
           };
         };
