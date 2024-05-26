@@ -29,6 +29,12 @@ in {
     sysctl = {
       "net.ipv4.conf.all.forwarding" = true;
       "net.ipv6.conf.all.forwarding" = false;
+
+      # Filter out Martian packets. See
+      # https://github.com/ghostbuster91/blogposts/blob/a2374f0039f8cdf4faddeaaa0347661ffc2ec7cf/router2023-part2/main.md#security
+      "net.ipv4.conf.default.rp_filter" = 1;
+      "net.ipv4.conf.wan.rp_filter" = 1;
+      "net.ipv4.conf.br-lan.rp_filter" = 0;
     };
   };
 
