@@ -146,35 +146,34 @@
           };
         };
 
-        packages.deploy = pkgs.writeShellApplication {
-          name = "deploy";
-          runtimeInputs = [
-            stable.legacyPackages.${system}.nixos-rebuild
-          ];
-          meta.description = "Deploy per-host configurations";
-          text = ''
-            function deploy_to_host() {
-              host="$1"
-              nixos-rebuild switch --target-host "root@$host" --flake ".#$host" \
-                --use-remote-sudo --print-build-logs --option accept-flake-config true
-            }
-            if [[ $# -eq 0 ]]
-            then
-              echo -n "Please specify one of: "
-              nix eval .#nixosConfigurations --apply builtins.attrNames \
-                --accept-flake-config 2>/dev/null
-              exit 1
-            fi
-            for host; do
-              if ping -c 1 "$host" > /dev/null
-              then
-                deploy_to_host "$host"
-              else
-                echo "$host is offline"
-              fi
-            done
-          '';
-        };
+        packages =
+          lib.mapAttrs' (
+            hostName: _:
+              lib.nameValuePair "deploy-${hostName}"
+              (pkgs.writeShellApplication {
+                name = "deploy";
+                runtimeInputs = [
+                  stable.legacyPackages.${system}.nixos-rebuild
+                ];
+                meta.description = "A nixos-rebuild wrapper that targets a host on LAN";
+                text = ''
+                  if [[ $# -eq 0 ]]; then
+                    echo >&2 "You need to specify one of the subcommands of nixos-rebuild"
+                    exit 1
+                  fi
+
+                  mode="$1"
+                  shift
+
+                  nixos-rebuild "$mode" \
+                    --flake ".#${hostName}" \
+                    --target-host "root@${hostName}.lan" \
+                    --option accept-flake-config true \
+                    "$@"
+                '';
+              })
+          )
+          self.nixosConfigurations;
 
         devShells.default = pkgs.mkShell {
           inherit (pre-commit-check) shellHook;
