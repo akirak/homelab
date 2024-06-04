@@ -2078,11 +2078,11 @@
         "elisp-helpers": "elisp-helpers"
       },
       "locked": {
-        "lastModified": 1716261921,
-        "narHash": "sha256-8FlpYDyxdD9ouMiGx6b0fVzkithPtiTJuK8vYZriSrs=",
+        "lastModified": 1717293546,
+        "narHash": "sha256-/l8SINd1Fv50CUj7VyKVAYzPpGZQVXpaZjkMuU1iOas=",
         "owner": "emacs-twist",
         "repo": "twist.nix",
-        "rev": "4c16ff2d274aff1930a8575a4f8379e6b10ae150",
+        "rev": "3aeeae4f76609ca7930ad705b37cdd6525810211",
         "type": "github"
       },
       "original": {
