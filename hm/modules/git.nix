@@ -40,6 +40,7 @@
       "hasconfig:remote.*.url:https://github.com/emacs-twist/**"
       "hasconfig:remote.*.url:https://git.sr.ht/~akirak/**"
       "gitdir:~/work2/foss/"
+      "gitdir:~/work2/learning/"
       "gitdir:~/work2/personal/"
       "gitdir:~/work2/prototypes/"
       "gitdir:/assets/"
