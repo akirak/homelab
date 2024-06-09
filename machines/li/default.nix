@@ -27,6 +27,7 @@ in
     ../../profiles/vaultwarden
     ../../profiles/rabbitmq/development.nix
     ../../profiles/networking/usb-tether1.nix
+    ../../profiles/wireguard
     ../../profiles/wayland/wm/hyprland.nix
     ../../profiles/wayland/cage/foot.nix
     # ../../profiles/wayland/wm/river.nix

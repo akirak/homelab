@@ -21,6 +21,7 @@ in
     ../../profiles/onedev
     ../../profiles/docker
     ../../profiles/acme/internal.nix
+    ../../profiles/wireguard
     ./fs
     ./boot.nix
     ./lgtm-stack.nix
