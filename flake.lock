@@ -273,11 +273,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1718010457,
-        "narHash": "sha256-8ttd89+dsJ5M/LkjYcHaW+fo+N2VtlZgbXwoMG1i2UU=",
+        "lastModified": 1718371643,
+        "narHash": "sha256-wyaXaOAZA/92LXgEaQVEnU2KiIUmD0S3JrmDm4xtzlA=",
         "owner": "akirak",
         "repo": "emacs-config",
-        "rev": "8c7eba306c4f3ce04864986fffe1efafa50a09a2",
+        "rev": "4c5283cbff8e8cae3db07a33837a87c4e257bfcc",
         "type": "github"
       },
       "original": {
@@ -943,11 +943,11 @@
     "melpa": {
       "flake": false,
       "locked": {
-        "lastModified": 1717811180,
-        "narHash": "sha256-X79i0r4JsaSqKaHduV6HXZMK8deo00PoIFNEH6nhXEo=",
+        "lastModified": 1718359831,
+        "narHash": "sha256-0HjwB60/ffWQxY2RlddTFrLyIDEXAoJZcg2a5+Nbej0=",
         "owner": "akirak",
         "repo": "melpa",
-        "rev": "dea740879a7b2a6909a68e1631b912a149775c15",
+        "rev": "68944f665cf66ceb4c5df15d167abba1cb363498",
         "type": "github"
       },
       "original": {
