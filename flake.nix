@@ -42,6 +42,8 @@
       inputs.nixpkgs.follows = "unstable";
     };
 
+    nil.url = "github:oxalica/nil";
+
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "unstable";
@@ -102,6 +104,7 @@
         inherit (unstable.legacyPackages.${prev.system}) cachix;
         nix-index = inputs.nix-index-database.packages.${prev.system}.nix-index-with-db;
         my-overlay = inputs.my-overlay.packages.${prev.system};
+        nil = inputs.nil.packages.${prev.system}.default;
       })
     ];
 
@@ -177,6 +180,9 @@
 
         devShells.default = pkgs.mkShell {
           inherit (pre-commit-check) shellHook;
+          buildInputs = [
+            pkgs.nil
+          ];
         };
 
         formatter = treefmtEval.config.build.wrapper;
