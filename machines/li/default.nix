@@ -23,7 +23,6 @@ in
     ../../profiles/home-manager
     ../../profiles/nix
     ../../profiles/sudo
-    ../../profiles/tailscale
     ../../profiles/caddy/client.nix
     ../../profiles/vaultwarden
     ../../profiles/rabbitmq/development.nix
