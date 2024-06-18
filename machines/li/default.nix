@@ -140,11 +140,20 @@ in {
       # pkgs.zoom-us
     ];
 
-    services.kanshi.profiles = {
-      docked.outputs = [mainMonitor subMonitor];
-      undocked.outputs = [mainMonitor];
-      as_secondary.outputs = [subMonitor];
-    };
+    services.kanshi.settings = [
+      {
+        profile.name = "docked";
+        profile.outputs = [mainMonitor subMonitor];
+      }
+      {
+        profile.name = "undocked";
+        profile.outputs = [mainMonitor];
+      }
+      {
+        profile.name = "as_secondary";
+        profile.outputs = [subMonitor];
+      }
+    ];
 
     wayland.windowManager.hyprland.enable = true;
 
