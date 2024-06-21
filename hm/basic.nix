@@ -37,6 +37,7 @@
     xh
     rclone
     nmap
+    tcpdump
   ];
 
   services = {
