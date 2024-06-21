@@ -34,7 +34,7 @@
     duf
 
     # Net
-    httpie
+    xh
     rclone
     nmap
   ];
