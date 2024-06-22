@@ -27,4 +27,4 @@ jobs:
     - name: Check formatting
       run: |
         nix build .#checks.$(nix eval --expr builtins.currentSystem \
-          --impure --raw).formatting
+          --impure --raw).formatting -L
