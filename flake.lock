@@ -1042,17 +1042,14 @@
         "zsh-nix-shell": "zsh-nix-shell_2"
       },
       "locked": {
-        "lastModified": 1705399011,
-        "narHash": "sha256-zkQApBsJVQwV4fd9MV9cvvBLPh7DKsME5OZ0RlGURA4=",
-        "owner": "akirak",
-        "repo": "nixpkgs-overlay",
-        "rev": "2f579d23042bccb0486f6b54a291526922c4d55b",
-        "type": "github"
+        "lastModified": 1,
+        "narHash": "sha256-lkihsP4Ueft08px4bKxc9JA74f6DhZG7PaK1r3LxtcE=",
+        "path": "./pkgs",
+        "type": "path"
       },
       "original": {
-        "owner": "akirak",
-        "repo": "nixpkgs-overlay",
-        "type": "github"
+        "path": "./pkgs",
+        "type": "path"
       }
     },
     "nil": {
