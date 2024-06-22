@@ -52,16 +52,7 @@
     flake-parts,
     ...
   }: let
-    overlay = final: prev:
-      let
-      nodePackages =
-        import ./generate/node2nix {
-          pkgs = final;
-          inherit (prev) system;
-          nodejs = final.nodejs_latest;
-        };
-      in
-      {
+    overlay = final: prev: {
       # Override node2nix
       node2nix =
         (import inputs.node2nix {
@@ -91,20 +82,21 @@
         system,
         ...
       }: {
-        packages = nixpkgs.lib.getAttrs [
-          "node2nix"
-          "github-linguist"
-          "shippori-mincho"
-          "jetbrains-mono-nerdfont"
-          "wordnet-sqlite"
-          "epubinfo"
-          "squasher"
-        ] (import nixpkgs {
-          inherit system;
-          overlays = [
-            overlay
-          ];
-        });
+        packages =
+          nixpkgs.lib.getAttrs [
+            "node2nix"
+            "github-linguist"
+            "shippori-mincho"
+            "jetbrains-mono-nerdfont"
+            "wordnet-sqlite"
+            "epubinfo"
+            "squasher"
+          ] (import nixpkgs {
+            inherit system;
+            overlays = [
+              overlay
+            ];
+          });
         apps.update-node2nix = {
           type = "app";
           program = "${pkgs.writeShellScript "run-node2nix" ''
