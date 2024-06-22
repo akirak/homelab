@@ -58,7 +58,7 @@
 
     hyprland-contrib.url = "github:hyprwm/contrib";
 
-    my-overlay.url = "github:akirak/nixpkgs-overlay";
+    my-overlay.url = "path:./pkgs";
     emacs-config = {
       url = "github:akirak/emacs-config/develop";
       inputs.twist.follows = "twist";
