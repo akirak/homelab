@@ -22,6 +22,8 @@ in {
       blanket
       pavucontrol
 
+      hoppscotch
+
       # fonts
       my-overlay.jetbrains-mono-nerdfont
       # Japanese
