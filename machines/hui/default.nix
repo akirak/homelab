@@ -28,7 +28,7 @@
     networkmanager.enable = true;
   };
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   systemd.services.NetworkManager-wait-online.enable = false;
 

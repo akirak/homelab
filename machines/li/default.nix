@@ -40,7 +40,7 @@ in {
     # ../../profiles/k3s/single-node-for-testing.nix
   ];
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = [
       pkgs.intel-compute-runtime
