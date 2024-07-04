@@ -16,7 +16,7 @@ jobs:
         extra_nix_config: |
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
           accept-flake-config = true
-    - uses: DeterminateSystems/update-flake-lock@v22
+    - uses: DeterminateSystems/update-flake-lock@v23
       with:
         token: ${{ secrets.PAT_FOR_PR }}
         pr-title: "Update flake.lock"
