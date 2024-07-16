@@ -10,7 +10,7 @@ let
     "temperature"
     "backlight"
     "keyboard-state"
-    "custom/nixos"
+    # "custom/nixos"
     "clock"
     "tray"
   ];
