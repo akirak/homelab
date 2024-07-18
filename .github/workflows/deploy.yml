@@ -1,84 +1,69 @@
 name: Cachix Deploy
-
 on:
   workflow_dispatch:
-
   push:
     branches:
-    - master
+      - master
     paths:
-    - 'flake.lock'
-    - 'machines/**'
-    - 'profiles/**'
-    - 'suites/**'
-    - 'hm/**'
-
+      - 'flake.lock'
+      - 'machines/**'
+      - 'profiles/**'
+      - 'suites/**'
+      - 'hm/**'
   schedule:
     - cron: '0 18 * * *' # 3:00 am JST
-
 env:
   dry: ${{ github.event.event_name == 'push' }}
-
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     env:
       CACHIX_ACTIVATE_TOKEN: ${{ secrets.CACHIX_ACTIVATE_TOKEN }}
       CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
       CACHIX_SIGNING_KEY: ${{ secrets.CACHIX_SIGNING_KEY }}
-
     steps:
-
-    - uses: actions/checkout@v4
-
-    - uses: cachix/install-nix-action@V27
-      with:
-        extra_nix_config: |
-          accept-flake-config = true
-
-    - uses: cachix/cachix-action@v15
-      with:
-        name: akirak
-        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-        skipPush: true
-        pathsToPush: |
-          # Specify paths to push
-
-    # - run: |
-    #     nix flake check \
-    #       --override-input emacs-config github:akirak/emacs-config/develop
-
-    - name: Build the deploys
-      id: build
-      # A timeout set arbitrary
-      timeout-minutes: 90
-      run: |
-        nix flake update emacs-config
-        spec=$(nix build .#cachix-deploys --print-out-paths --print-build-logs \
-               ${{ env.dry == 'true' && '--dry-run' || '' }})
-        echo "spec_path=$spec" >> $GITHUB_OUTPUT
-
-    - name: Push to Cachix
-      if: ${{ env.dry == 'false' }}
-      run: |
-        cachix push akirak $DEPLOY_SPEC
-      env:
-        DEPLOY_SPEC: ${{ steps.build.outputs.spec_path }}
-
-    - name: Deploy
-      if: ${{ env.dry == 'false' }}
-      # Should be deployed instantly. Some machines may be offline, but then you
-      # can rerun this workflow
-      timeout-minutes: 1
-      # It is very possible that some machines are offline which makes this step
-      # fail. Don't mark the entire workflow run as a failure.
-      continue-on-error: true
-      run: |
-        cachix deploy activate $DEPLOY_SPEC
-      env:
-        DEPLOY_SPEC: ${{ steps.build.outputs.spec_path }}
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@V27
+        with:
+          extra_nix_config: |
+            accept-flake-config = true
+      - uses: cachix/cachix-action@v15
+        with:
+          name: akirak
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          skipPush: true
+          pathsToPush: |
+            # Specify paths to push
+      # - run: |
+      #     nix flake check \
+      #       --override-input emacs-config github:akirak/emacs-config/develop
+      - name: Build the deploys
+        id: build
+        # A timeout set arbitrary
+        timeout-minutes: 90
+        run: |
+          nix flake update emacs-config
+          spec=$(nix build .#cachix-deploys --print-out-paths --print-build-logs \
+                 ${{ env.dry == 'true' && '--dry-run' || '' }})
+          echo "spec_path=$spec" >> "$GITHUB_OUTPUT"
+      - name: Push to Cachix
+        if: ${{ env.dry == 'false' }}
+        run: |
+          cachix push akirak "$DEPLOY_SPEC"
+        env:
+          DEPLOY_SPEC: ${{ steps.build.outputs.spec_path }}
+      - name: Deploy
+        if: ${{ env.dry == 'false' }}
+        # Should be deployed instantly. Some machines may be offline, but then you
+        # can rerun this workflow
+        timeout-minutes: 1
+        # It is very possible that some machines are offline which makes this step
+        # fail. Don't mark the entire workflow run as a failure.
+        continue-on-error: true
+        run: |
+          cachix deploy activate "$DEPLOY_SPEC"
+        env:
+          DEPLOY_SPEC: ${{ steps.build.outputs.spec_path }}

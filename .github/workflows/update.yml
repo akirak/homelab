@@ -1,24 +1,22 @@
 name: Update the flake from the registry
-
 on:
   workflow_dispatch:
   repository_dispatch:
     types:
-    - flake-update
-
+      - flake-update
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: cachix/install-nix-action@V27
-      with:
-        extra_nix_config: |
-          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-          accept-flake-config = true
-    - uses: DeterminateSystems/update-flake-lock@v23
-      with:
-        token: ${{ secrets.PAT_FOR_PR }}
-        pr-title: "Update flake.lock"
-        pr-labels: |
-          automation
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@V27
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            accept-flake-config = true
+      - uses: DeterminateSystems/update-flake-lock@v23
+        with:
+          token: ${{ secrets.PAT_FOR_PR }}
+          pr-title: "Update flake.lock"
+          pr-labels: |
+            automation
