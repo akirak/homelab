@@ -8,10 +8,8 @@
   };
 
   settings.formatter = {
-    shellcheck.includes = [
-      "*.sh"
-      "*.bash"
-      # Don't include .envrc
+    shellcheck.excludes = [
+      ".envrc"
     ];
   };
 }
