@@ -1,36 +1,28 @@
 name: Check the flake
-
 on:
   workflow_dispatch:
-
   pull_request:
     paths-ignore:
-    - 'README.*'
-    - '.github/**'
-
+      - 'README.*'
+      - '.github/**'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-
-    - uses: actions/checkout@v4
-
-    - uses: cachix/install-nix-action@V27
-      with:
-        extra_nix_config: |
-          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-          accept-flake-config = true
-
-    # It would be possible to add to here a cachix-action step to upload
-    # everything built within this workflow, but I will choose to save space by
-    # not uploading anything implicitly. If I have packages that should be
-    # available from my binary cache, I will upload them from somewhere else or
-    # use `cachix push` to explicitly specify them.
-
-    - run: |
-       nix flake update emacs-config
-       nix flake check --print-build-logs --show-trace
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@V27
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            accept-flake-config = true
+      # It would be possible to add to here a cachix-action step to upload
+      # everything built within this workflow, but I will choose to save space by
+      # not uploading anything implicitly. If I have packages that should be
+      # available from my binary cache, I will upload them from somewhere else or
+      # use `cachix push` to explicitly specify them.
+      - run: |
+          nix flake update emacs-config
+          nix flake check --print-build-logs --show-trace

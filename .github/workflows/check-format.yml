@@ -1,29 +1,23 @@
 name: Check formatting
-
 on:
   workflow_dispatch:
   push:
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-
-    - uses: actions/checkout@v4
-
-    - uses: cachix/install-nix-action@V27
-      with:
-        extra_nix_config: |
-          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-          accept-flake-config = true
-
-    # This check is actually done as part of `nix flake check` in
-    # ./check-flake.yml, but this formatting check requires less time, so run it
-    # separately for failing fast.
-    - name: Check formatting
-      run: |
-        nix build -L ".#checks.$(nix eval --expr builtins.currentSystem --impure --raw).formatting"
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@V27
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            accept-flake-config = true
+      # This check is actually done as part of `nix flake check` in
+      # ./check-flake.yml, but this formatting check requires less time, so run it
+      # separately for failing fast.
+      - name: Check formatting
+        run: |
+          nix build -L ".#checks.$(nix eval --expr builtins.currentSystem --impure --raw).formatting"
