@@ -24,6 +24,7 @@
     tbls
     hyperfine
     just
+    yamlfmt
 
     # Media
     git-annex
