@@ -48,11 +48,11 @@ jobs:
           nix flake update emacs-config
           spec=$(nix build .#cachix-deploys --print-out-paths --print-build-logs \
                  ${{ env.dry == 'true' && '--dry-run' || '' }})
-          echo "spec_path=$spec" >> $GITHUB_OUTPUT
+          echo "spec_path=$spec" >> "$GITHUB_OUTPUT"
       - name: Push to Cachix
         if: ${{ env.dry == 'false' }}
         run: |
-          cachix push akirak $DEPLOY_SPEC
+          cachix push akirak "$DEPLOY_SPEC"
         env:
           DEPLOY_SPEC: ${{ steps.build.outputs.spec_path }}
       - name: Deploy
@@ -64,6 +64,6 @@ jobs:
         # fail. Don't mark the entire workflow run as a failure.
         continue-on-error: true
         run: |
-          cachix deploy activate $DEPLOY_SPEC
+          cachix deploy activate "$DEPLOY_SPEC"
         env:
           DEPLOY_SPEC: ${{ steps.build.outputs.spec_path }}
