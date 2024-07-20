@@ -25,8 +25,8 @@
     };
   };
 
-  # hardware.pulseaudio.enable = true;
-  nixpkgs.config.pulseaudio = true;
+  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.support32Bit = true;
 
   systemd.services.setxkbmap = {
     enable = true;
