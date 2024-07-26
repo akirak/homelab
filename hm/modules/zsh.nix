@@ -75,7 +75,7 @@
 
       function pick() {
         local arg
-        fzy | read arg && "$@" "$arg"
+        fzy | read -r arg && "$@" "$arg"
       }
 
       function mountpoints() {
