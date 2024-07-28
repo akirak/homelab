@@ -41,6 +41,8 @@
     tcpdump
   ];
 
+  programs.rbw.enable = true;
+
   services = {
     recoll.enable = true;
     syncthing.enable = true;
