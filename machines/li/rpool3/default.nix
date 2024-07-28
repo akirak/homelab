@@ -1,7 +1,5 @@
 {
-  imports = [
-    ./extras.nix
-  ];
+  imports = [ ./extras.nix ];
 
   fileSystems."/persist" = {
     device = "rpool3/encrypt/safe/persist";

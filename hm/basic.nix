@@ -1,8 +1,5 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   programs = {
     nix-index.enable = true;
     nix-index.enableZshIntegration = config.programs.nix-index.enable;
