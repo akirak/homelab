@@ -8,8 +8,6 @@
   };
 
   settings.formatter = {
-    shellcheck.excludes = [
-      ".envrc"
-    ];
+    shellcheck.excludes = [ ".envrc" ];
   };
 }

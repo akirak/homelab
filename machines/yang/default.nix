@@ -1,10 +1,8 @@
-{
-  config,
-  modulesPath,
-  ...
-}: let
+{ config, modulesPath, ... }:
+let
   stateVersion = "23.11";
-in {
+in
+{
   imports = [
     (modulesPath + "/profiles/hardened.nix")
     ../../profiles/openssh
