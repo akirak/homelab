@@ -1,4 +1,9 @@
-{ config, modulesPath, ... }:
+{
+  config,
+  pkgs,
+  modulesPath,
+  ...
+}:
 let
   stateVersion = "23.11";
 in
@@ -54,5 +59,13 @@ in
         };
       };
     };
+  };
+
+  users.users.akirakomamura = {
+    # Provide minimal packages needed for specific needs.
+    packages = [
+      pkgs.git
+      pkgs.git-annex
+    ];
   };
 }
