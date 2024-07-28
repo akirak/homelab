@@ -1,8 +1,5 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   programs = {
     nix-index.enable = true;
     nix-index.enableZshIntegration = config.programs.nix-index.enable;
@@ -40,6 +37,8 @@
     nmap
     tcpdump
   ];
+
+  programs.rbw.enable = true;
 
   services = {
     recoll.enable = true;

@@ -1,7 +1,5 @@
 {
-  imports = [
-    ./extras.nix
-  ];
+  imports = [ ./extras.nix ];
 
   fileSystems."/persist" = {
     device = "rpool3/encrypt/safe/persist";
@@ -23,6 +21,7 @@
       "/var/lib/livebook"
       "/var/lib/rabbitmq"
       "/etc/NetworkManager/system-connections"
+      "/var/backup/vaultwarden"
     ];
   };
 }

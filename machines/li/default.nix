@@ -1,8 +1,5 @@
-{
-  homeUser,
-  pkgs,
-  ...
-}: let
+{ homeUser, pkgs, ... }:
+let
   mainMonitor = {
     criteria = "Unknown VA32AQ K3LMAS000141 (HDMI-A-2)";
     mode = "2560x1440";
@@ -14,7 +11,8 @@
     mode = "1920x1080";
     position = "0,380";
   };
-in {
+in
+{
   imports = [
     ./boot.nix
     ./rpool3
@@ -26,6 +24,7 @@ in {
     ../../profiles/nix
     ../../profiles/sudo
     ../../profiles/tailscale
+    ../../profiles/vaultwarden
     ../../profiles/rabbitmq/development.nix
     ../../profiles/networking/usb-tether1.nix
     ../../profiles/wayland/wm/hyprland.nix
@@ -143,15 +142,18 @@ in {
     services.kanshi.settings = [
       {
         profile.name = "docked";
-        profile.outputs = [mainMonitor subMonitor];
+        profile.outputs = [
+          mainMonitor
+          subMonitor
+        ];
       }
       {
         profile.name = "undocked";
-        profile.outputs = [mainMonitor];
+        profile.outputs = [ mainMonitor ];
       }
       {
         profile.name = "as_secondary";
-        profile.outputs = [subMonitor];
+        profile.outputs = [ subMonitor ];
       }
     ];
 
