@@ -5,6 +5,8 @@ in
 {
   imports = [
     (modulesPath + "/profiles/hardened.nix")
+    # Create a non-wheel user for hosting some personal data.
+    ../../profiles/users/1000/on-server.nix
     ../../profiles/openssh
     ./fs
     ./boot.nix
