@@ -1,10 +1,17 @@
-{ config, modulesPath, ... }:
+{
+  config,
+  pkgs,
+  modulesPath,
+  ...
+}:
 let
   stateVersion = "23.11";
 in
 {
   imports = [
     (modulesPath + "/profiles/hardened.nix")
+    # Create a non-wheel user for hosting some personal data.
+    ../../profiles/users/1000/on-server.nix
     ../../profiles/openssh
     ./fs
     ./boot.nix
@@ -52,5 +59,13 @@ in
         };
       };
     };
+  };
+
+  users.users.akirakomamura = {
+    # Provide minimal packages needed for specific needs.
+    packages = [
+      pkgs.git
+      pkgs.git-annex
+    ];
   };
 }
