@@ -8,6 +8,7 @@ in
     ../../profiles/openssh
     ./fs
     ./boot.nix
+    ../../profiles/syncthing
   ];
 
   system.stateVersion = stateVersion;
