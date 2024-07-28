@@ -23,6 +23,7 @@
       "/var/lib/livebook"
       "/var/lib/rabbitmq"
       "/etc/NetworkManager/system-connections"
+      "/var/backup/vaultwarden"
     ];
   };
 }
