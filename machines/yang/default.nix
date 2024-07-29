@@ -13,6 +13,7 @@ in
     # Create a non-wheel user for hosting some personal data.
     ../../profiles/users/1000/on-server.nix
     ../../profiles/openssh
+    ../../profiles/docker
     ./fs
     ./boot.nix
     ../../profiles/syncthing
@@ -25,6 +26,10 @@ in
   networking.hostId = "8425e349";
 
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+
+  # This option is enabled by default in nixos/modules/profiles/hardened.nix,
+  # but needed to be turned off to load br_netfilter module for Docker.
+  security.lockKernelModules = false;
 
   boot.runSize = "64m";
   boot.devSize = "256m";
@@ -59,6 +64,10 @@ in
         };
       };
     };
+  };
+
+  virtualisation.docker = {
+    storageDriver = "zfs";
   };
 
   users.users.akirakomamura = {
