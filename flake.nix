@@ -83,81 +83,79 @@
     ];
   };
 
-  outputs = {
-    self,
-    stable,
-    unstable,
-    flake-parts,
-    flake-pins,
-    ...
-  } @ inputs: let
-    inherit (stable) lib;
+  outputs =
+    {
+      self,
+      stable,
+      unstable,
+      flake-parts,
+      flake-pins,
+      ...
+    }@inputs:
+    let
+      inherit (stable) lib;
 
-    overlays = [
-      (_final: prev: {
-        channels = lib.genAttrs [
-          "hyprland-contrib"
-        ] (name: inputs.${name}.packages.${prev.system});
-        unstable = unstable.legacyPackages.${prev.system};
-        disko = inputs.disko.packages.${prev.system}.disko;
-        zsh-plugins = inputs.my-overlay.zsh-plugins;
-        inherit (unstable.legacyPackages.${prev.system}) cachix;
-        nix-index = inputs.nix-index-database.packages.${prev.system}.nix-index-with-db;
-        my-overlay = inputs.my-overlay.packages.${prev.system};
-        nil = inputs.nil.packages.${prev.system}.default;
-      })
-    ];
+      overlays = [
+        (_final: prev: {
+          channels = lib.genAttrs [ "hyprland-contrib" ] (name: inputs.${name}.packages.${prev.system});
+          unstable = unstable.legacyPackages.${prev.system};
+          disko = inputs.disko.packages.${prev.system}.disko;
+          zsh-plugins = inputs.my-overlay.zsh-plugins;
+          inherit (unstable.legacyPackages.${prev.system}) cachix;
+          nix-index = inputs.nix-index-database.packages.${prev.system}.nix-index-with-db;
+          my-overlay = inputs.my-overlay.packages.${prev.system};
+          nil = inputs.nil.packages.${prev.system}.default;
+        })
+      ];
 
-    overlayModule = {
-      nixpkgs.overlays = overlays;
-    };
-
-    twistHomeModule = {homeUser, ...}: {
-      home-manager.users.${homeUser} = {
-        imports = [
-          inputs.emacs-config.homeModules.twist
-        ];
+      overlayModule = {
+        nixpkgs.overlays = overlays;
       };
-    };
-  in
-    flake-parts.lib.mkFlake {inherit inputs;} {
+
+      twistHomeModule =
+        { homeUser, ... }:
+        {
+          home-manager.users.${homeUser} = {
+            imports = [ inputs.emacs-config.homeModules.twist ];
+          };
+        };
+    in
+    flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
         "aarch64-linux"
       ];
 
-      perSystem = {
-        config,
-        pkgs,
-        system,
-        treefmtEval,
-        pre-commit-check,
-        ...
-      }: {
-        _module.args.pkgs = unstable.legacyPackages.${system};
-        _module.args.treefmtEval =
-          inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
-        _module.args.pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
-          src = ./.;
-          hooks = {
-            nix-fmt = {
-              enable = true;
-              name = "Use the formatter setting of the flake to format all files";
-              types = ["file"];
-              entry = "nix fmt";
+      perSystem =
+        {
+          config,
+          pkgs,
+          system,
+          treefmtEval,
+          pre-commit-check,
+          ...
+        }:
+        {
+          _module.args.pkgs = unstable.legacyPackages.${system};
+          _module.args.treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
+          _module.args.pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
+            src = ./.;
+            hooks = {
+              nix-fmt = {
+                enable = true;
+                name = "Use the formatter setting of the flake to format all files";
+                types = [ "file" ];
+                entry = "nix fmt";
+              };
             };
           };
-        };
 
-        packages =
-          lib.mapAttrs' (
+          packages = lib.mapAttrs' (
             hostName: _:
-              lib.nameValuePair "deploy-${hostName}"
-              (pkgs.writeShellApplication {
+            lib.nameValuePair "deploy-${hostName}" (
+              pkgs.writeShellApplication {
                 name = "deploy";
-                runtimeInputs = [
-                  stable.legacyPackages.${system}.nixos-rebuild
-                ];
+                runtimeInputs = [ stable.legacyPackages.${system}.nixos-rebuild ];
                 meta.description = "A nixos-rebuild wrapper that targets a host on LAN";
                 text = ''
                   if [[ $# -eq 0 ]]; then
@@ -176,21 +174,19 @@
                     --option accept-flake-config true \
                     "$@"
                 '';
-              })
-          )
-          self.nixosConfigurations;
+              }
+            )
+          ) self.nixosConfigurations;
 
-        devShells.default = pkgs.mkShell {
-          inherit (pre-commit-check) shellHook;
-          buildInputs = [
-            pkgs.nil
-          ];
+          devShells.default = pkgs.mkShell {
+            inherit (pre-commit-check) shellHook;
+            buildInputs = [ pkgs.nil ];
+          };
+
+          formatter = treefmtEval.config.build.wrapper;
+
+          checks.formatting = treefmtEval.config.build.check inputs.self;
         };
-
-        formatter = treefmtEval.config.build.wrapper;
-
-        checks.formatting = treefmtEval.config.build.check inputs.self;
-      };
 
       flake = {
         packages.x86_64-linux = {
@@ -207,38 +203,29 @@
           # };
 
           remote-installer-image =
-            (stable.lib.nixosSystem
-              {
-                system = "x86_64-linux";
-                modules = [
-                  overlayModule
-                  ./suites/remote-installer
-                  ({modulesPath, ...}: {
-                    imports = [
-                      (modulesPath + "/installer/cd-dvd/installation-cd-base.nix")
-                    ];
-                  })
-                ];
-              })
-            .config
-            .system
-            .build
-            .isoImage;
+            (stable.lib.nixosSystem {
+              system = "x86_64-linux";
+              modules = [
+                overlayModule
+                ./suites/remote-installer
+                (
+                  { modulesPath, ... }:
+                  {
+                    imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-base.nix") ];
+                  }
+                )
+              ];
+            }).config.system.build.isoImage;
 
           asus-br1100-iso =
-            (stable.lib.nixosSystem
-              {
-                system = "x86_64-linux";
-                modules = [
-                  overlayModule
-                  inputs.self.nixosModules.asus-br1100
-                  ./suites/iso
-                ];
-              })
-            .config
-            .system
-            .build
-            .isoImage;
+            (stable.lib.nixosSystem {
+              system = "x86_64-linux";
+              modules = [
+                overlayModule
+                inputs.self.nixosModules.asus-br1100
+                ./suites/iso
+              ];
+            }).config.system.build.isoImage;
 
           # launch-desktop-vm = self.lib.makeMicroVMSystem "demo-microvm" {
           #   system = "x86_64-linux";
@@ -272,9 +259,7 @@
           cachix-deploys = import ./lib/cachix-deploy.nix {
             pkgs = unstable.legacyPackages.aarch64-linux;
             inherit (inputs) self cachix-deploy-flake;
-            nixosHosts = [
-              "zheng"
-            ];
+            nixosHosts = [ "zheng" ];
           };
 
           bootstrap-sd-image =
@@ -282,21 +267,16 @@
               system = "aarch64-linux";
               modules = [
                 overlayModule
-                ({modulesPath, ...}: {
-                  imports = [
-                    (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
-                  ];
-                })
+                (
+                  { modulesPath, ... }:
+                  {
+                    imports = [ (modulesPath + "/installer/sd-card/sd-image-aarch64.nix") ];
+                  }
+                )
                 ./suites/installer
-                {
-                  networking.networkmanager.enable = true;
-                }
+                { networking.networkmanager.enable = true; }
               ];
-            })
-            .config
-            .system
-            .build
-            .sdImage;
+            }).config.system.build.sdImage;
         };
 
         nixosConfigurations = builtins.mapAttrs self.lib.mkSystem {
@@ -337,9 +317,7 @@
           zheng = {
             system = "aarch64-linux";
             channel = stable;
-            extraModules = [
-              (stable + "/nixos/modules/installer/sd-card/sd-image-aarch64.nix")
-            ];
+            extraModules = [ (stable + "/nixos/modules/installer/sd-card/sd-image-aarch64.nix") ];
           };
         };
 
@@ -351,9 +329,7 @@
         };
 
         nixosModules = {
-          asus-br1100 = import ./modules/models/asus-br1100 {
-            inherit (inputs) nixos-hardware;
-          };
+          asus-br1100 = import ./modules/models/asus-br1100 { inherit (inputs) nixos-hardware; };
           hmProfile = {
             imports = [
               # Use a home-manager channel corresponding to your OS
@@ -399,78 +375,65 @@
         };
 
         lib = {
-          /*
-          Build a NixOS system with the modules.
-          */
-          mkSystem = hostName: {
-            system,
-            # If you are using this function from outside this repository,
-            # override this argument with your own inputs.self.
-            self' ? inputs.self,
-            channel ? inputs.stable,
-            specialArgs ? {},
-            extraModules ? [],
-          }: let
-            machinePath = ./machines + "/${hostName}";
+          # Build a NixOS system with the modules.
+          mkSystem =
+            hostName:
+            {
+              system,
+              # If you are using this function from outside this repository,
+              # override this argument with your own inputs.self.
+              self' ? inputs.self,
+              channel ? inputs.stable,
+              specialArgs ? { },
+              extraModules ? [ ],
+            }:
+            let
+              machinePath = ./machines + "/${hostName}";
 
-            configurationRevision = "${builtins.substring 0 8 self'.lastModifiedDate}.${
-              if self' ? rev
-              then builtins.substring 0 7 self'.rev
-              else "dirty"
-            }";
-          in
+              configurationRevision = "${builtins.substring 0 8 self'.lastModifiedDate}.${
+                if self' ? rev then builtins.substring 0 7 self'.rev else "dirty"
+              }";
+            in
             channel.lib.nixosSystem {
               inherit system specialArgs;
-              modules =
-                [
-                  {
-                    networking.hostName = hostName;
+              modules = [
+                {
+                  networking.hostName = hostName;
 
-                    system.configurationRevision =
-                      channel.lib.mkIf (self' ? lastModifiedDate) configurationRevision;
-                  }
-                  overlayModule
-                  inputs.disko.nixosModules.disko
-                  inputs.impermanence.nixosModules.impermanence
-                  ./modules/services/livebook
-                  {
-                    nix.registry =
-                      lib.pipe
-                      (lib.importJSON (flake-pins + "/registry.json")).flakes
-                      [
-                        (map ({
-                          from,
-                          to,
-                        }:
-                          lib.nameValuePair from.id {inherit from to;}))
-                        lib.listToAttrs
-                      ];
-                  }
-                ]
-                ++ lib.optional (builtins.pathExists machinePath) machinePath
-                ++ extraModules;
+                  system.configurationRevision = channel.lib.mkIf (self' ? lastModifiedDate) configurationRevision;
+                }
+                overlayModule
+                inputs.disko.nixosModules.disko
+                inputs.impermanence.nixosModules.impermanence
+                ./modules/services/livebook
+                {
+                  nix.registry = lib.pipe (lib.importJSON (flake-pins + "/registry.json")).flakes [
+                    (map ({ from, to }: lib.nameValuePair from.id { inherit from to; }))
+                    lib.listToAttrs
+                  ];
+                }
+              ] ++ lib.optional (builtins.pathExists machinePath) machinePath ++ extraModules;
             };
 
-          makeMicroVMSystem = name: {
-            system,
-            # If you are using this function from outside this repository,
-            # override this argument with your own inputs.self.
-            self' ? inputs.self,
-            specialArgs,
-            modules,
-          }: let
-            inherit
-              (self.lib.mkSystem name {
-                inherit system self' specialArgs;
-                extraModules =
-                  [
-                    inputs.microvm.nixosModules.microvm
-                  ]
-                  ++ modules;
-              })
-              config
-              ;
-          in
+          makeMicroVMSystem =
+            name:
+            {
+              system,
+              # If you are using this function from outside this repository,
+              # override this argument with your own inputs.self.
+              self' ? inputs.self,
+              specialArgs,
+              modules,
+            }:
+            let
+              inherit
+                (self.lib.mkSystem name {
+                  inherit system self' specialArgs;
+                  extraModules = [ inputs.microvm.nixosModules.microvm ] ++ modules;
+                })
+                config
+                ;
+            in
             config.microvm.runner.${config.microvm.hypervisor};
         };
       };
