@@ -23,6 +23,7 @@ in
     ../../profiles/acme/internal.nix
     ./fs
     ./boot.nix
+    ./lgtm-stack.nix
     ../../profiles/syncthing
   ];
 
