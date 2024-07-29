@@ -13,6 +13,7 @@ in
     # Create a non-wheel user for hosting some personal data.
     ../../profiles/users/1000/on-server.nix
     ../../profiles/openssh
+    ../../profiles/onedev
     ../../profiles/docker
     ./fs
     ./boot.nix
