@@ -168,7 +168,9 @@
                   mode="$1"
                   shift
 
-                  nixos-rebuild "$mode" \
+                  # Don't look up known_hosts file because the host key is updated on every deploy
+                  NIX_SSHOPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
+                    nixos-rebuild "$mode" \
                     --flake ".#${hostName}" \
                     --target-host "root@${hostName}.lan" \
                     --option accept-flake-config true \
