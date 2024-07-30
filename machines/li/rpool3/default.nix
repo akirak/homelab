@@ -21,6 +21,7 @@
       "/var/lib/livebook"
       "/var/lib/rabbitmq"
       "/etc/NetworkManager/system-connections"
+      "/var/lib/bitwarden_rs"
       "/var/backup/vaultwarden"
     ];
   };
