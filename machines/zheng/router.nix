@@ -205,13 +205,14 @@ in {
       ];
 
       # local domains
-      local = "/lan/";
-      domain = "lan";
+      # https://datatracker.ietf.org/doc/html/rfc6762#appendix-G
+      local = "/home/";
+      domain = "home";
       expand-hosts = true;
 
       # don't use /etc/hosts as this would advertise surfer as localhost
       no-hosts = true;
-      address = "/zheng.lan/${routerAddress}";
+      address = "/zheng.home/${routerAddress}";
     };
   };
 
