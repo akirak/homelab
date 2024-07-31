@@ -78,4 +78,6 @@ in
       pkgs.git-annex
     ];
   };
+
+  time.timeZone = "Asia/Tokyo";
 }
