@@ -13,6 +13,7 @@
     pkgs.lsof
     pkgs.psmisc
     pkgs.handlr
+    pkgs.wireguard-tools
   ];
 
   environment.sessionVariables = {
