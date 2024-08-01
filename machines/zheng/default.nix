@@ -19,6 +19,8 @@ in {
     })
   ];
 
+  boot.loader.timeout = 6;
+
   # Replace the raspberry-pi-4 nixos-hardware module with an explicit list of
   # kernel modules. See
   # https://www.eisfunke.com/posts/2023/nixos-on-raspberry-pi-4.html
