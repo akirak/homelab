@@ -56,8 +56,10 @@
   };
 
   environment.persistence."/persist" = {
-    directories = [
-      "/var/tmp"
+    directories = [ "/var/tmp" ];
+    files = [
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
     ];
   };
 }
