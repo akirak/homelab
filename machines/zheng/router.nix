@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 # This configuration is mostly based on the following awesome blog post:
 # https://github.com/ghostbuster91/blogposts/blob/a2374f0039f8cdf4faddeaaa0347661ffc2ec7cf/router2023-part2/main.md
 let
@@ -16,7 +12,8 @@ let
   ];
 
   adguardhome = config.services.adguardhome;
-in {
+in
+{
   imports = [
     ./usb-wifi.nix
     ../../profiles/adguard-home
@@ -77,10 +74,8 @@ in {
       # a bridge.
       "40-br-lan" = {
         matchConfig.Name = "br-lan";
-        bridgeConfig = {};
-        address = [
-          "${routerAddress}/24"
-        ];
+        bridgeConfig = { };
+        address = [ "${routerAddress}/24" ];
         networkConfig = {
           ConfigureWithoutCarrier = true;
         };
@@ -181,7 +176,11 @@ in {
     enable = true;
     settings = {
       # upstream DNS servers
-      server = ["9.9.9.9" "8.8.8.8" "1.1.1.1"];
+      server = [
+        "9.9.9.9"
+        "8.8.8.8"
+        "1.1.1.1"
+      ];
       # sensible behaviours
       domain-needed = true;
       bogus-priv = true;
@@ -194,7 +193,7 @@ in {
       # Cache dns queries.
       cache-size = 1000;
 
-      dhcp-range = ["br-lan,192.168.10.50,192.168.10.254,24h"];
+      dhcp-range = [ "br-lan,192.168.10.50,192.168.10.254,24h" ];
       interface = "br-lan";
       dhcp-host = routerAddress;
       dhcp-authoritative = true;
