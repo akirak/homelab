@@ -15,6 +15,7 @@ in
     ../../profiles/openssh
     ../../profiles/onedev
     ../../profiles/docker
+    ../../profiles/acme/internal.nix
     ./fs
     ./boot.nix
     ../../profiles/syncthing
@@ -39,17 +40,25 @@ in
   services.auto-cpufreq.enable = true;
   powerManagement.cpuFreqGovernor = "ondemand";
 
-  services.nginx = {
+  services.caddy = {
     enable = true;
-    virtualHosts.localhost.locations."/" = {
-      index = "index.html";
-      root = "/var/www";
+    virtualHosts."test.nicesunny.day" = {
+      useACMEHost = "nicesunny.day";
+      extraConfig = ''
+        respond "Hello from Caddy"
+      '';
+    };
+    virtualHosts."test:80" = {
+      extraConfig = ''
+        redir https://test.nicesunny.day
+      '';
     };
   };
 
   networking.firewall.allowedTCPPorts = [
-    # nginx
+    443
     80
+    2019 # Allow installation of local certificates for caddy
   ];
 
   networking = {
