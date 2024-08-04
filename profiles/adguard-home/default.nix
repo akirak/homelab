@@ -1,10 +1,8 @@
-{
-  lib,
-  config,
-  ...
-}: let
+{ lib, config, ... }:
+let
   dnsmasq = config.services.dnsmasq;
-in {
+in
+{
   services.adguardhome = {
     enable = true;
     mutableSettings = false;
