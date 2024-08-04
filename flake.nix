@@ -408,43 +408,46 @@
               configurationRevision = "${builtins.substring 0 8 self'.lastModifiedDate}.${
                 if self' ? rev then builtins.substring 0 7 self'.rev else "dirty"
               }";
+
+              hostPubkey = (import ./secrets/host-pubkeys.nix).${hostName} or null;
             in
             channel.lib.nixosSystem {
               inherit system specialArgs;
-              modules = [
-                {
-                  networking.hostName = hostName;
+              modules =
+                [
+                  {
+                    networking.hostName = hostName;
 
-                  system.configurationRevision = channel.lib.mkIf (self' ? lastModifiedDate) configurationRevision;
-                }
-                overlayModule
-                inputs.disko.nixosModules.disko
-                inputs.impermanence.nixosModules.impermanence
-                ./modules/services/livebook
-                {
-                  nix.registry = lib.pipe (lib.importJSON (flake-pins + "/registry.json")).flakes [
-                    (map ({ from, to }: lib.nameValuePair from.id { inherit from to; }))
-                    lib.listToAttrs
-                  ];
-                }
-                inputs.agenix.nixosModules.default
-                inputs.agenix-rekey.nixosModules.default
-                # You have to define these options for every host.
-                (
-                  { config, ... }:
+                    system.configurationRevision = channel.lib.mkIf (self' ? lastModifiedDate) configurationRevision;
+                  }
+                  overlayModule
+                  inputs.disko.nixosModules.disko
+                  inputs.impermanence.nixosModules.impermanence
+                  ./modules/services/livebook
+                  {
+                    nix.registry = lib.pipe (lib.importJSON (flake-pins + "/registry.json")).flakes [
+                      (map ({ from, to }: lib.nameValuePair from.id { inherit from to; }))
+                      lib.listToAttrs
+                    ];
+                  }
+                ]
+                ++ lib.optionals (hostPubkey != null) [
+                  inputs.agenix.nixosModules.default
+                  inputs.agenix-rekey.nixosModules.default
+                  # You have to define these options for every host.
                   {
                     age.rekey = {
-                      hostPubkey = (import ./secrets/host-pubkeys.nix).${config.networking.hostName};
+                      inherit hostPubkey;
                       masterIdentities = [ ./secrets/yubikey.pub ];
                       storageMode = "local";
-                      localStorageDir = ./. + "/secrets/rekeyed/${config.networking.hostName}";
+                      localStorageDir = ./. + "/secrets/rekeyed/${hostName}";
                       # TODO: Add backup keys
                       # extraEncryptionPubkeys = [];
                     };
-
                   }
-                )
-              ] ++ lib.optional (builtins.pathExists machinePath) machinePath ++ extraModules;
+                ]
+                ++ lib.optional (builtins.pathExists machinePath) machinePath
+                ++ extraModules;
             };
 
           makeMicroVMSystem =
