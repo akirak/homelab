@@ -117,6 +117,7 @@ in
   home-manager.users.${homeUser} = {
     imports = [
       ../../hm/basic.nix
+      ../../hm/extra.nix
       ../../hm/graphical.nix
     ];
 
