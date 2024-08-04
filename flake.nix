@@ -28,6 +28,10 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
+    agenix.url = "github:ryantm/agenix";
+    agenix-rekey.url = "github:oddlama/agenix-rekey";
+    agenix-rekey.inputs.nixpkgs.follows = "unstable";
+
     cachix-deploy-flake = {
       url = "github:cachix/cachix-deploy-flake";
       inputs.nixpkgs.follows = "stable";
@@ -119,6 +123,7 @@
             imports = [ inputs.emacs-config.homeModules.twist ];
           };
         };
+
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
@@ -180,7 +185,12 @@
 
           devShells.default = pkgs.mkShell {
             inherit (pre-commit-check) shellHook;
-            buildInputs = [ pkgs.nil ];
+            buildInputs = [
+              pkgs.nil
+              pkgs.age
+              pkgs.age-plugin-yubikey
+            ];
+            nativeBuildInputs = [ inputs.agenix-rekey.packages.${system}.default ];
           };
 
           formatter = treefmtEval.config.build.wrapper;
@@ -363,6 +373,11 @@
           # };
         };
 
+        agenix-rekey = inputs.agenix-rekey.configure {
+          userFlake = self;
+          nodes = self.nixosConfigurations;
+        };
+
         templates = {
           home-manager = {
             path = ./templates/home-manager;
@@ -393,26 +408,46 @@
               configurationRevision = "${builtins.substring 0 8 self'.lastModifiedDate}.${
                 if self' ? rev then builtins.substring 0 7 self'.rev else "dirty"
               }";
+
+              hostPubkey = (import ./secrets/host-pubkeys.nix).${hostName} or null;
             in
             channel.lib.nixosSystem {
               inherit system specialArgs;
-              modules = [
-                {
-                  networking.hostName = hostName;
+              modules =
+                [
+                  {
+                    networking.hostName = hostName;
 
-                  system.configurationRevision = channel.lib.mkIf (self' ? lastModifiedDate) configurationRevision;
-                }
-                overlayModule
-                inputs.disko.nixosModules.disko
-                inputs.impermanence.nixosModules.impermanence
-                ./modules/services/livebook
-                {
-                  nix.registry = lib.pipe (lib.importJSON (flake-pins + "/registry.json")).flakes [
-                    (map ({ from, to }: lib.nameValuePair from.id { inherit from to; }))
-                    lib.listToAttrs
-                  ];
-                }
-              ] ++ lib.optional (builtins.pathExists machinePath) machinePath ++ extraModules;
+                    system.configurationRevision = channel.lib.mkIf (self' ? lastModifiedDate) configurationRevision;
+                  }
+                  overlayModule
+                  inputs.disko.nixosModules.disko
+                  inputs.impermanence.nixosModules.impermanence
+                  ./modules/services/livebook
+                  {
+                    nix.registry = lib.pipe (lib.importJSON (flake-pins + "/registry.json")).flakes [
+                      (map ({ from, to }: lib.nameValuePair from.id { inherit from to; }))
+                      lib.listToAttrs
+                    ];
+                  }
+                ]
+                ++ lib.optionals (hostPubkey != null) [
+                  inputs.agenix.nixosModules.default
+                  inputs.agenix-rekey.nixosModules.default
+                  # You have to define these options for every host.
+                  {
+                    age.rekey = {
+                      inherit hostPubkey;
+                      masterIdentities = [ ./secrets/yubikey.pub ];
+                      storageMode = "local";
+                      localStorageDir = ./. + "/secrets/rekeyed/${hostName}";
+                      # TODO: Add backup keys
+                      # extraEncryptionPubkeys = [];
+                    };
+                  }
+                ]
+                ++ lib.optional (builtins.pathExists machinePath) machinePath
+                ++ extraModules;
             };
 
           makeMicroVMSystem =
