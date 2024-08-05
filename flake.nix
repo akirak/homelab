@@ -124,6 +124,10 @@
           };
         };
 
+      hostPubkeys = lib.pipe (lib.importTOML ./machines/metadata.toml).hosts [
+        (lib.filterAttrs (_: attrs: attrs ? publicKey))
+        (builtins.mapAttrs (_: attrs: attrs.publicKey))
+      ];
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
@@ -375,7 +379,7 @@
 
         agenix-rekey = inputs.agenix-rekey.configure {
           userFlake = self;
-          nodes = self.nixosConfigurations;
+          nodes = builtins.intersectAttrs hostPubkeys self.nixosConfigurations;
         };
 
         templates = {
@@ -409,7 +413,7 @@
                 if self' ? rev then builtins.substring 0 7 self'.rev else "dirty"
               }";
 
-              hostPubkey = (import ./secrets/host-pubkeys.nix).${hostName} or null;
+              hostPubkey = hostPubkeys.${hostName} or null;
             in
             channel.lib.nixosSystem {
               inherit system specialArgs;

@@ -1,0 +1,15 @@
+# Use `ssh-keyscan -t ed25519 <hostname>...` to get the public key(s) remotely
+[hosts.zheng]
+ipAddress = "192.168.10.1"
+publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPok1B5NsawQoyxJ2Is3wynnfqZ51o1fyueJ3gpLLCa5"
+
+[hosts.li]
+ipAddress = "192.168.10.60"
+publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPFhr1lIqPjRnzlfh5nfM8+CQj2BgC6fUk6HE/tYHRnb"
+
+[hosts.yang]
+ipAddress = "192.168.10.186"
+publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBBqIBetzQSQhJeOgBXCcNwwyWToSGh2ZUMLEROwwxeF"
+
+[networks.home]
+subnet = "192.168.10.0/16"
