@@ -179,7 +179,7 @@
                   NIX_SSHOPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
                     nixos-rebuild "$mode" \
                     --flake ".#${hostName}" \
-                    --target-host "root@${hostName}.home" \
+                    --target-host "root@${hostName}" \
                     --option accept-flake-config true \
                     "$@"
                 '';

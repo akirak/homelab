@@ -24,6 +24,7 @@ in
     ../../profiles/nix
     ../../profiles/sudo
     ../../profiles/tailscale
+    ../../profiles/caddy/client.nix
     ../../profiles/vaultwarden
     ../../profiles/rabbitmq/development.nix
     ../../profiles/networking/usb-tether1.nix
@@ -116,6 +117,7 @@ in
   home-manager.users.${homeUser} = {
     imports = [
       ../../hm/basic.nix
+      ../../hm/extra.nix
       ../../hm/graphical.nix
     ];
 

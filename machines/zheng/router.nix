@@ -1,14 +1,12 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 # This configuration is mostly based on the following awesome blog post:
 # https://github.com/ghostbuster91/blogposts/blob/a2374f0039f8cdf4faddeaaa0347661ffc2ec7cf/router2023-part2/main.md
 let
-  routerAddress = "192.168.10.1";
+  metadata = lib.importTOML ../metadata.toml;
 
-  subnet = "192.168.10.0/16";
+  routerAddress = metadata.hosts.zheng.ipAddress;
+
+  subnet = metadata.networks.home.subnet;
 
   modules = [
     "uas"
@@ -16,7 +14,12 @@ let
   ];
 
   adguardhome = config.services.adguardhome;
-in {
+
+  # To disable name resolution of *.nicesunny.day with CoreDNS, make this to
+  # false
+  useInternalDns = true;
+in
+{
   imports = [
     ./usb-wifi.nix
     ../../profiles/adguard-home
@@ -77,10 +80,8 @@ in {
       # a bridge.
       "40-br-lan" = {
         matchConfig.Name = "br-lan";
-        bridgeConfig = {};
-        address = [
-          "${routerAddress}/24"
-        ];
+        bridgeConfig = { };
+        address = [ "${routerAddress}/24" ];
         networkConfig = {
           ConfigureWithoutCarrier = true;
         };
@@ -177,24 +178,47 @@ in {
   # disable it.
   services.resolved.enable = false;
 
+  # dhcp-hosts contains the MAC address of each host. It's probably safe to put
+  # them in a public repository, but just in case.
+  age.secrets = {
+    "dhcp-hosts" = {
+      rekeyFile = ./secrets/dhcp-hosts.age;
+      owner = "dnsmasq";
+      group = "dnsmasq";
+    };
+  };
+
   services.dnsmasq = {
     enable = true;
+
+    resolveLocalQueries = !useInternalDns;
+
     settings = {
       # upstream DNS servers
-      server = ["9.9.9.9" "8.8.8.8" "1.1.1.1"];
+      server =
+        (
+          if adguardhome.enable then
+            [ "127.0.0.1#${builtins.toString adguardhome.settings.dns.port}" ]
+          else
+            [
+              "1.1.1.1"
+              "8.8.8.8"
+              "9.9.9.9"
+            ]
+        )
+        ++ (lib.optional useInternalDns "/nicesunny.day/${metadata.hosts.yang.ipAddress}");
       # sensible behaviours
       domain-needed = true;
       bogus-priv = true;
       no-resolv = true;
 
-      resolveLocalQueries = lib.mkIf adguardhome.enable false;
-      # Use a port other than 53 if adguard home is running
-      port = lib.mkIf adguardhome.enable 5353;
+      # Use as the primary DNS for the network
+      port = 53;
 
       # Cache dns queries.
       cache-size = 1000;
 
-      dhcp-range = ["br-lan,192.168.10.50,192.168.10.254,24h"];
+      dhcp-range = [ "br-lan,192.168.10.50,192.168.10.254,24h" ];
       interface = "br-lan";
       dhcp-host = routerAddress;
       dhcp-authoritative = true;
@@ -204,15 +228,20 @@ in {
         "6,${routerAddress}"
       ];
 
+      dhcp-hostsfile = config.age.secrets."dhcp-hosts".path;
+
       # local domains
       # https://datatracker.ietf.org/doc/html/rfc6762#appendix-G
-      local = "/home/";
-      domain = "home";
+      local = lib.mkIf (!useInternalDns) "/nicesunny.day/";
+      domain = "nicesunny.day";
       expand-hosts = true;
 
       # don't use /etc/hosts as this would advertise surfer as localhost
       no-hosts = true;
-      address = "/zheng.home/${routerAddress}";
+      address = [
+        "/zheng/${routerAddress}"
+        "/zheng.nicesunny.day/${routerAddress}"
+      ];
     };
   };
 

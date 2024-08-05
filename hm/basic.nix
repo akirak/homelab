@@ -33,9 +33,6 @@
 
     # Net
     xh
-    rclone
-    nmap
-    tcpdump
   ];
 
   programs.rbw.enable = true;

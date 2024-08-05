@@ -1,11 +1,16 @@
 {
   config,
   pkgs,
+  lib,
   modulesPath,
   ...
 }:
 let
   stateVersion = "23.11";
+
+  metadata = lib.importTOML ../metadata.toml;
+
+  ip = metadata.hosts.yang.ipAddress;
 in
 {
   imports = [
@@ -15,8 +20,10 @@ in
     ../../profiles/openssh
     ../../profiles/onedev
     ../../profiles/docker
+    ../../profiles/acme/internal.nix
     ./fs
     ./boot.nix
+    ./lgtm-stack.nix
     ../../profiles/syncthing
   ];
 
@@ -39,17 +46,58 @@ in
   services.auto-cpufreq.enable = true;
   powerManagement.cpuFreqGovernor = "ondemand";
 
-  services.nginx = {
+  environment.systemPackages = [
+    # Tools for diagnostics
+    pkgs.tcpdump
+    pkgs.dig
+  ];
+
+  services.caddy = {
     enable = true;
-    virtualHosts.localhost.locations."/" = {
-      index = "index.html";
-      root = "/var/www";
+    virtualHosts."test.nicesunny.day" = {
+      useACMEHost = "nicesunny.day";
+      extraConfig = ''
+        respond "Hello from Caddy"
+      '';
+    };
+    virtualHosts."test:80" = {
+      extraConfig = ''
+        redir https://test.nicesunny.day
+      '';
     };
   };
 
+  services.coredns = {
+    enable = true;
+    config = ''
+      nicesunny.day {
+        hosts {
+          ${ip} test test.nicesunny.day
+          ${ip} grafana grafana.nicesunny.day
+          ${
+            lib.pipe metadata.hosts [
+              (lib.filterAttrs (_: attrs: attrs ? ipAddress))
+              (lib.mapAttrsToList (name: attrs: "${attrs.ipAddress} ${name} ${name}.nicesunny.day"))
+              (builtins.concatStringsSep "\n")
+            ]
+          }
+          fallthrough
+        }
+        log
+      }
+    '';
+  };
+
+  services.resolved.enable = false;
+
   networking.firewall.allowedTCPPorts = [
-    # nginx
+    443
     80
+    2019 # Allow installation of local certificates for caddy
+    53 # DNS
+  ];
+  networking.firewall.allowedUDPPorts = [
+    53 # DNS
   ];
 
   networking = {
