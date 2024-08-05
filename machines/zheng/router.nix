@@ -172,6 +172,16 @@ in
   # disable it.
   services.resolved.enable = false;
 
+  # dhcp-hosts contains the MAC address of each host. It's probably safe to put
+  # them in a public repository, but just in case.
+  age.secrets = {
+    "dhcp-hosts" = {
+      rekeyFile = ./secrets/dhcp-hosts.age;
+      owner = "dnsmasq";
+      group = "dnsmasq";
+    };
+  };
+
   services.dnsmasq = {
     enable = true;
 
@@ -204,6 +214,8 @@ in
         "3,${routerAddress}"
         "6,${routerAddress}"
       ];
+
+      dhcp-hostsfile = config.age.secrets."dhcp-hosts".path;
 
       # local domains
       # https://datatracker.ietf.org/doc/html/rfc6762#appendix-G
