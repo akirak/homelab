@@ -2,9 +2,11 @@
 # This configuration is mostly based on the following awesome blog post:
 # https://github.com/ghostbuster91/blogposts/blob/a2374f0039f8cdf4faddeaaa0347661ffc2ec7cf/router2023-part2/main.md
 let
-  routerAddress = "192.168.10.1";
+  metadata = lib.importTOML ../metadata.toml;
 
-  subnet = "192.168.10.0/16";
+  routerAddress = metadata.hosts.zheng.ipAddress;
+
+  subnet = metadata.networks.home.subnet;
 
   modules = [
     "uas"
@@ -12,6 +14,10 @@ let
   ];
 
   adguardhome = config.services.adguardhome;
+
+  # To disable name resolution of *.nicesunny.day with CoreDNS, make this to
+  # false
+  useInternalDns = true;
 in
 {
   imports = [
@@ -185,11 +191,11 @@ in
   services.dnsmasq = {
     enable = true;
 
-    # resolveLocalQueries = lib.mkIf adguardhome.enable false;
+    resolveLocalQueries = !useInternalDns;
 
     settings = {
       # upstream DNS servers
-      server = [
+      server = (lib.optional useInternalDns "/nicesunny.day/${metadata.hosts.yang.ipAddress}") ++ [
         "9.9.9.9"
         "8.8.8.8"
         "1.1.1.1"
@@ -219,7 +225,7 @@ in
 
       # local domains
       # https://datatracker.ietf.org/doc/html/rfc6762#appendix-G
-      local = "/nicesunny.day/";
+      local = lib.mkIf (!useInternalDns) "/nicesunny.day/";
       domain = "nicesunny.day";
       expand-hosts = true;
 
