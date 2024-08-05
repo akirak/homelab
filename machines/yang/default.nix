@@ -40,6 +40,12 @@ in
   services.auto-cpufreq.enable = true;
   powerManagement.cpuFreqGovernor = "ondemand";
 
+  environment.systemPackages = [
+    # Tools for diagnostics
+    pkgs.tcpdump
+    pkgs.dig
+  ];
+
   services.caddy = {
     enable = true;
     virtualHosts."test.nicesunny.day" = {
