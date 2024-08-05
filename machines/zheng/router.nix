@@ -195,18 +195,25 @@ in
 
     settings = {
       # upstream DNS servers
-      server = (lib.optional useInternalDns "/nicesunny.day/${metadata.hosts.yang.ipAddress}") ++ [
-        "9.9.9.9"
-        "8.8.8.8"
-        "1.1.1.1"
-      ];
+      server =
+        (
+          if adguardhome.enable then
+            [ "127.0.0.1#${builtins.toString adguardhome.settings.dns.port}" ]
+          else
+            [
+              "1.1.1.1"
+              "8.8.8.8"
+              "9.9.9.9"
+            ]
+        )
+        ++ (lib.optional useInternalDns "/nicesunny.day/${metadata.hosts.yang.ipAddress}");
       # sensible behaviours
       domain-needed = true;
       bogus-priv = true;
       no-resolv = true;
 
-      # Use a port other than 53 if adguard home is running
-      port = lib.mkIf adguardhome.enable 5353;
+      # Use as the primary DNS for the network
+      port = 53;
 
       # Cache dns queries.
       cache-size = 1000;
@@ -231,7 +238,10 @@ in
 
       # don't use /etc/hosts as this would advertise surfer as localhost
       no-hosts = true;
-      address = "/zheng.nicesunny.day/${routerAddress}";
+      address = [
+        "/zheng/${routerAddress}"
+        "/zheng.nicesunny.day/${routerAddress}"
+      ];
     };
   };
 

@@ -1,7 +1,3 @@
-{ lib, config, ... }:
-let
-  dnsmasq = config.services.dnsmasq;
-in
 {
   services.adguardhome = {
     enable = true;
@@ -10,21 +6,21 @@ in
       dhcp = {
         enabled = false;
       };
-      dns =
-        {
-          port = 53;
-          bootstrap_dns = [
-            # Cloudflare
-            "1.1.1.1"
-            "1.0.0.1"
-          ];
-        }
-        // lib.optionalAttrs dnsmasq.enable {
-          local_domain_name = dnsmasq.settings.domain;
-          upstream_dns = [
-            "127.0.0.1:${builtins.toString dnsmasq.settings.port}"
-          ];
-        };
+      dns = {
+        # Use the AdguardHome DNS only for external traffic
+        port = 5353;
+        bootstrap_dns = [
+          # Cloudflare
+          "1.1.1.1"
+          "1.0.0.1"
+        ];
+        upstream_dns = [
+          "1.1.1.1"
+          "8.8.8.8"
+          "9.9.9.9"
+        ];
+        upstream_mode = "fastest_addr";
+      };
     };
   };
 }
