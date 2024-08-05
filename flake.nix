@@ -124,7 +124,10 @@
           };
         };
 
-      hostPubkeys = import ./secrets/host-pubkeys.nix;
+      hostPubkeys = lib.pipe (lib.importTOML ./machines/metadata.toml).hosts [
+        (lib.filterAttrs (_: attrs: attrs ? publicKey))
+        (builtins.mapAttrs (_: attrs: attrs.publicKey))
+      ];
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
