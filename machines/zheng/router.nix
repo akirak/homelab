@@ -174,6 +174,9 @@ in
 
   services.dnsmasq = {
     enable = true;
+
+    # resolveLocalQueries = lib.mkIf adguardhome.enable false;
+
     settings = {
       # upstream DNS servers
       server = [
@@ -186,7 +189,6 @@ in
       bogus-priv = true;
       no-resolv = true;
 
-      resolveLocalQueries = lib.mkIf adguardhome.enable false;
       # Use a port other than 53 if adguard home is running
       port = lib.mkIf adguardhome.enable 5353;
 
