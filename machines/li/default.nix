@@ -24,7 +24,6 @@ in
     ../../profiles/nix
     ../../profiles/sudo
     ../../profiles/tailscale
-    ../../profiles/caddy/client.nix
     ../../profiles/vaultwarden
     ../../profiles/rabbitmq/development.nix
     ../../profiles/networking/usb-tether1.nix

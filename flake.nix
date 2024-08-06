@@ -187,14 +187,25 @@
             )
           ) self.nixosConfigurations;
 
-          devShells.default = pkgs.mkShell {
-            inherit (pre-commit-check) shellHook;
-            buildInputs = [
-              pkgs.nil
-              pkgs.age
-              pkgs.age-plugin-yubikey
-            ];
-            nativeBuildInputs = [ inputs.agenix-rekey.packages.${system}.default ];
+          devShells = {
+            default = pkgs.mkShell {
+              inherit (pre-commit-check) shellHook;
+              buildInputs = [
+                pkgs.nil
+                pkgs.age
+                pkgs.age-plugin-yubikey
+              ];
+              nativeBuildInputs = [ inputs.agenix-rekey.packages.${system}.default ];
+            };
+
+            # Provide caddy and certutils to install certificates from caddy
+            # into the root store
+            caddy = pkgs.mkShell {
+              buildInputs = [
+                pkgs.caddy
+                pkgs.nssTools # certutils
+              ];
+            };
           };
 
           formatter = treefmtEval.config.build.wrapper;
