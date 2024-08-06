@@ -5,6 +5,13 @@ on:
     paths-ignore:
       - 'README.*'
       - '.github/**'
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'README.*'
+      - '.github/**'
+      - 'treefmt.nix'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
