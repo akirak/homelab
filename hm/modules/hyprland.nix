@@ -3,8 +3,9 @@
   pkgs,
   lib,
   ...
-}: let
-  cfg = config.wayland.windowManager.hyprland or {enable = false;};
+}:
+let
+  cfg = config.wayland.windowManager.hyprland or { enable = false; };
 
   footEnabled = config.programs.foot.enable;
 
@@ -12,10 +13,10 @@
 
   systemdStartAfterThis = {
     Unit = {
-      After = [systemdTarget];
+      After = [ systemdTarget ];
     };
     Install = {
-      WantedBy = [systemdTarget];
+      WantedBy = [ systemdTarget ];
     };
   };
 
@@ -31,7 +32,8 @@
 
     footclient -a "$windowclass" ''${options[@]} "$@"
   '';
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       fuzzel
@@ -47,24 +49,14 @@ in {
     };
 
     xdg.configFile."waybar/config".source = pkgs.callPackage ../lib/waybar-config.nix {
-      modulesCenter = [
-        "hyprland/window"
-      ];
-      modulesRight = ms:
-        ms
-        ++ [
-          "hyprland/submap"
-        ];
+      modulesCenter = [ "hyprland/window" ];
+      modulesRight = ms: ms ++ [ "hyprland/submap" ];
     };
 
     programs.foot.server.enable = lib.mkIf footEnabled true;
-    systemd.user.services.foot =
-      lib.mkIf footEnabled
-      systemdStartAfterThis;
+    systemd.user.services.foot = lib.mkIf footEnabled systemdStartAfterThis;
 
-    systemd.user.services.dunst =
-      lib.mkIf config.services.dunst.enable
-      systemdStartAfterThis;
+    systemd.user.services.dunst = lib.mkIf config.services.dunst.enable systemdStartAfterThis;
 
     services.kanshi = {
       enable = true;
@@ -156,36 +148,33 @@ in {
           "$mod SHIFT , 5, movetoworkspace, 5"
         ];
 
-        windowrulev2 = let
-          defaultDialogSize = "780 600";
+        windowrulev2 =
+          let
+            defaultDialogSize = "780 600";
 
-          exactClass = className: "class:^(${className})$";
+            exactClass = className: "class:^(${className})$";
 
-          exactTitle = className: "title:^(${className})$";
+            exactTitle = className: "title:^(${className})$";
 
-          andRules = builtins.concatStringsSep ",";
+            andRules = builtins.concatStringsSep ",";
 
-          generateRules = rules: windows:
-            lib.flatten (builtins.map (
-                window: (builtins.map (rule: "${rule},${window}") rules)
-              )
-              windows);
-        in
-          [
-            "workspace special,class:^(foot)$,title:^(Rebuilding)"
-          ]
+            generateRules =
+              rules: windows:
+              lib.flatten (builtins.map (window: (builtins.map (rule: "${rule},${window}") rules)) windows);
+          in
+          [ "workspace special,class:^(foot)$,title:^(Rebuilding)" ]
           ++ (generateRules [
-              "float"
-              "size 80% 80%"
-              "center"
-            ] [
-              (exactClass "btop")
-            ])
-          ++ (generateRules [
+            "float"
+            "size 80% 80%"
+            "center"
+          ] [ (exactClass "btop") ])
+          ++ (generateRules
+            [
               "float"
               "size ${defaultDialogSize}"
               "center"
-            ] [
+            ]
+            [
               (andRules [
                 (exactClass "chromium")
                 (exactTitle "Open Files")
@@ -193,14 +182,18 @@ in {
               (exactClass "pavucontrol")
               (exactClass "com.rafaelmardojai.Blanket")
               (exactTitle "Android Studio Setup Wizard")
-            ])
-          ++ (generateRules [
+            ]
+          )
+          ++ (generateRules
+            [
               "float"
               "center"
-            ] [
+            ]
+            [
               (exactClass "mpv")
               (exactClass "VirtualBox Manager")
-            ]);
+            ]
+          );
       };
     };
   };
