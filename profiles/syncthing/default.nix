@@ -4,11 +4,10 @@ let
 
   cfg = config.services.syncthing;
 
-  devices = {
-    li = {
-      id = "UTRWWS3-XAUUIAV-7DAM6RM-5N4LDSS-D27MPMQ-ERVPJER-VXB4YPJ-K3L23Q5";
-    };
-  };
+  devices = lib.pipe (lib.importTOML ../../machines/metadata.toml).hosts [
+    (lib.filterAttrs (_: attrs: attrs ? syncthingId))
+    (builtins.mapAttrs (_: attrs: { id = attrs.syncthingId; }))
+  ];
 
   inherit (config.networking) hostName;
 

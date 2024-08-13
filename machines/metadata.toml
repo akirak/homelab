@@ -6,6 +6,7 @@ publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPok1B5NsawQoyxJ2Is3wynnfqZ51o1
 [hosts.li]
 ipAddress = "192.168.10.60"
 publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPFhr1lIqPjRnzlfh5nfM8+CQj2BgC6fUk6HE/tYHRnb"
+syncthingId = "UTRWWS3-XAUUIAV-7DAM6RM-5N4LDSS-D27MPMQ-ERVPJER-VXB4YPJ-K3L23Q5"
 
 [hosts.yang]
 ipAddress = "192.168.10.186"
