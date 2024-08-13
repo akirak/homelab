@@ -11,6 +11,14 @@ let
   metadata = lib.importTOML ../metadata.toml;
 
   ip = metadata.hosts.yang.ipAddress;
+
+  inherit (config.services) reverse-proxy;
+
+  hostsTextForReverseProxy = lib.pipe reverse-proxy.subdomains [
+    builtins.attrNames
+    (builtins.map (name: "${ip} ${name} ${name}.${reverse-proxy.domain}"))
+    (builtins.concatStringsSep "\n")
+  ];
 in
 {
   imports = [
@@ -20,6 +28,7 @@ in
     ../../profiles/openssh
     ../../profiles/onedev
     ../../profiles/docker
+    ../../profiles/reverse-proxy
     ../../profiles/acme/internal.nix
     ./fs
     ./boot.nix
@@ -52,19 +61,9 @@ in
     pkgs.dig
   ];
 
-  services.caddy = {
+  services.reverse-proxy = {
     enable = true;
-    virtualHosts."test.nicesunny.day" = {
-      useACMEHost = "nicesunny.day";
-      extraConfig = ''
-        respond "Hello from Caddy"
-      '';
-    };
-    virtualHosts."test:80" = {
-      extraConfig = ''
-        redir https://test.nicesunny.day
-      '';
-    };
+    domain = "nicesunny.day";
   };
 
   services.coredns = {
@@ -73,7 +72,7 @@ in
       nicesunny.day {
         hosts {
           ${ip} test test.nicesunny.day
-          ${ip} grafana grafana.nicesunny.day
+          ${hostsTextForReverseProxy}
           ${
             lib.pipe metadata.hosts [
               (lib.filterAttrs (_: attrs: attrs ? ipAddress))
@@ -91,8 +90,6 @@ in
   services.resolved.enable = false;
 
   networking.firewall.allowedTCPPorts = [
-    443
-    80
     2019 # Allow installation of local certificates for caddy
     53 # DNS
   ];
