@@ -13,21 +13,11 @@ let
   domain = "nicesunny.day";
 in
 {
-  services.caddy = {
-    enable = true;
-    virtualHosts."grafana.${domain}" = {
-      useACMEHost = domain;
-      # TODO: Set Host header to the server domain?
-      # Proxy web sockets
-      extraConfig = ''
-        reverse_proxy localhost:${toString grafanaSettings.server.http_port}
-      '';
-    };
-    virtualHosts."grafana:80" = {
-      extraConfig = ''
-        redir https://grafana.${domain}
-      '';
-    };
+  imports = [ ../../profiles/reverse-proxy ];
+
+  services.reverse-proxy.subdomains.grafana = {
+    # TODO: Proxy web sockets?
+    reverse-proxy = "localhost:${toString grafanaSettings.server.http_port}";
   };
 
   # Set the domain to avoid "Origin not allowed" error.
