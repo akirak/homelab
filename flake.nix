@@ -420,9 +420,7 @@
             let
               machinePath = ./machines + "/${hostName}";
 
-              configurationRevision = "${builtins.substring 0 8 self'.lastModifiedDate}.${
-                if self' ? rev then builtins.substring 0 7 self'.rev else "dirty"
-              }";
+              configurationRevision = "${builtins.substring 0 8 self'.lastModifiedDate}.${self'.rev or "dirty"}";
 
               hostPubkey = hostPubkeys.${hostName} or null;
             in
