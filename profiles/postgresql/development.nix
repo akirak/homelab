@@ -22,14 +22,7 @@
         host all all localhost trust
       '';
 
-      ensureUsers = [
-        {
-          name = "postgres";
-        }
-      ];
-      ensureDatabases = [
-        "ensemble_dev"
-      ];
+      ensureUsers = [ { name = "postgres"; } ];
 
       enableTCPIP = false;
 
