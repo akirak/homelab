@@ -1,3 +1,4 @@
+{ lib, config, ... }:
 {
   # A ZFS volume for disposable container images.
   fileSystems."/images" = {
@@ -20,8 +21,19 @@
     neededForBoot = true;
   };
 
+  # You always have to backup databases. Automatic snapshots of ZFS do not work
+  # for database backups, so set up a dataset (with optional automatic
+  # snapshots) for backups and run pgbackup periodically.
+  fileSystems.${config.services.postgresqlBackup.location} = {
+    device = "rpool3/encrypt/safe/pgbackup";
+    fsType = "zfs";
+    neededForBoot = true;
+  };
+
   # Enable the transparent compression of ZFS
-  services.postgresqlBackup.compression = "none";
+  services.postgresqlBackup = lib.mkIf config.services.postgresqlBackup.enable {
+    compression = "none";
+  };
 
   # You will require github:nix-community/impermanence to use this
   environment.persistence."/images" = {
