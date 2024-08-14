@@ -35,6 +35,11 @@
     compression = "none";
   };
 
+  fileSystems."/media/virtualbox" = {
+    device = "rpool3/encrypt/safe/virtualbox";
+    fsType = "zfs";
+  };
+
   # You will require github:nix-community/impermanence to use this
   environment.persistence."/images" = {
     directories = [
