@@ -104,4 +104,12 @@ in
   boot.runSize = "64m";
   boot.devSize = "256m";
   boot.devShmSize = "256m";
+
+  services.smartd = {
+    enable = true;
+    devices = [
+      { device = "/dev/disk/by-id/ata-CT1000MX500SSD1_2316E6CCB0BC"; }
+      { device = "/dev/disk/by-id/ata-CT1000MX500SSD1_2316E6CCB574"; }
+    ];
+  };
 }
