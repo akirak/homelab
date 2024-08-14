@@ -48,7 +48,7 @@
 
     postgresqlBackup = {
       enable = true;
-      startAt = "*-*-* 01:15:00";
+      startAt = "*-*-* *:00,15,30,45:00";
       location = "/var/backup/postgresql";
       # Use the transparent compression of ZFS instead
       compression = "none";
