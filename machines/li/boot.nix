@@ -112,4 +112,16 @@ in
       { device = "/dev/disk/by-id/ata-CT1000MX500SSD1_2316E6CCB574"; }
     ];
   };
+
+  services.scrutiny = {
+    enable = true;
+    # Access only locally for now
+    openFirewall = false;
+    settings = {
+      web.listen = {
+        port = 9233;
+        host = "127.0.0.1";
+      };
+    };
+  };
 }
