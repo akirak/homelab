@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ lib, pkgs, ... }:
+{
   services = {
     postgresql = {
       enable = true;
@@ -50,9 +51,7 @@
       enable = true;
       startAt = "*-*-* *:00,15,30,45:00";
       location = "/var/backup/postgresql";
-      # Use the transparent compression of ZFS instead
-      compression = "none";
-      backupAll = true;
+      backupAll = lib.mkDefault true;
     };
   };
 }

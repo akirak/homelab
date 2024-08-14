@@ -20,6 +20,9 @@
     neededForBoot = true;
   };
 
+  # Enable the transparent compression of ZFS
+  services.postgresqlBackup.compression = "none";
+
   # You will require github:nix-community/impermanence to use this
   environment.persistence."/images" = {
     directories = [
