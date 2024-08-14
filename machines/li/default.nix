@@ -34,8 +34,8 @@ in
     ../../profiles/postgresql/development.nix
     ../../profiles/virtualbox-host
     # ../../profiles/docker/rootless.nix
-    ../../profiles/docker
-    ../../profiles/docker/kind.nix
+    # ../../profiles/docker
+    # ../../profiles/docker/kind.nix
     # ../../profiles/k3s/single-node-for-testing.nix
   ];
 
