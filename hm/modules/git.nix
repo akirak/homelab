@@ -3,29 +3,35 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkOption types;
 
   cfg = config.programs.git;
 
-  makeGitConfig = {
-    userName,
-    userEmail,
-    githubUser,
-    signingKey,
-  }:
-    pkgs.writeText "config" (''
+  makeGitConfig =
+    {
+      userName,
+      userEmail,
+      githubUser,
+      signingKey,
+    }:
+    pkgs.writeText "config" (
+      ''
         [user]
           name = "${userName}"
           email = "${userEmail}"
-          ${lib.optionalString (signingKey != null) ''
-          signingKey = "${signingKey}"
-        ''}
+          ${
+            lib.optionalString (signingKey != null) ''
+              signingKey = "${signingKey}"
+            ''
+          }
       ''
       + lib.optionalString (githubUser != null) ''
         [github]
           user = "${githubUser}"
-      '');
+      ''
+    );
 
   defaultIdentity = {
     email = "akira.komamura@gmail.com";
@@ -74,7 +80,8 @@
       };
     };
   };
-in {
+in
+{
   options.programs.git = {
     defaultIdentity = mkOption {
       type = types.nullOr identityType;
@@ -85,7 +92,7 @@ in {
     extraIdentities = mkOption {
       type = types.listOf identityType;
       description = lib.mdDoc "Extra list of identities";
-      default = [];
+      default = [ ];
     };
   };
 
@@ -112,35 +119,31 @@ in {
         "result"
         "result-*"
         "#*"
+        ".git-bak*"
       ];
 
-      includes = lib.pipe ([cfg.defaultIdentity] ++ cfg.extraIdentities) [
+      includes = lib.pipe ([ cfg.defaultIdentity ] ++ cfg.extraIdentities) [
         (builtins.filter (v: v != null))
-        (
-          builtins.map (
-            {
-              email,
-              fullName,
-              githubUser,
-              signingKey,
-              conditions,
-            }: let
-              configFile = makeGitConfig {
-                inherit githubUser signingKey;
-                userName = fullName;
-                userEmail = email;
-              };
-            in
-              builtins.map
-              (
-                condition: {
-                  path = configFile;
-                  inherit condition;
-                }
-              )
-              conditions
-          )
-        )
+        (builtins.map (
+          {
+            email,
+            fullName,
+            githubUser,
+            signingKey,
+            conditions,
+          }:
+          let
+            configFile = makeGitConfig {
+              inherit githubUser signingKey;
+              userName = fullName;
+              userEmail = email;
+            };
+          in
+          builtins.map (condition: {
+            path = configFile;
+            inherit condition;
+          }) conditions
+        ))
         lib.flatten
       ];
     };
