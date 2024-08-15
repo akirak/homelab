@@ -1,14 +1,14 @@
 { lib, config, ... }:
 {
   # fileSystems."/backup" = {
-  #   device = "/dev/mapper/backup_rpool3";
+  #   device = "/dev/mapper/backup_rpool5";
   #   fsType = "ext4";
   #   neededForBoot = true;
   # };
 
   fileSystems."/var/lib/postgresql" = {
     # This pool name was a mistake
-    device = "rpool3/encrypt/safe/postgresql";
+    device = "rpool5/safe/postgresql";
     fsType = "zfs";
     neededForBoot = true;
   };
@@ -17,7 +17,7 @@
   # for database backups, so set up a dataset (with optional automatic
   # snapshots) for backups and run pgbackup periodically.
   fileSystems.${config.services.postgresqlBackup.location} = {
-    device = "rpool3/encrypt/safe/pgbackup";
+    device = "rpool5/safe/pgbackup";
     fsType = "zfs";
     neededForBoot = true;
   };
@@ -28,7 +28,7 @@
   };
 
   fileSystems."/media/virtualbox" = {
-    device = "rpool3/encrypt/safe/virtualbox";
+    device = "rpool5/safe/virtualbox";
     fsType = "zfs";
   };
 }

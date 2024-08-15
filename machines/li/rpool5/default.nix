@@ -1,14 +1,14 @@
 {
-  imports = [ ./extras.nix ];
+#   imports = [ ./extras.nix ];
 
   fileSystems."/persist" = {
-    device = "rpool3/encrypt/safe/persist";
+    device = "rpool5/safe/persist";
     fsType = "zfs";
     neededForBoot = true;
   };
 
   fileSystems."/home" = {
-    device = "rpool3/encrypt/safe/home";
+    device = "rpool5/safe/home";
     fsType = "zfs";
   };
 
