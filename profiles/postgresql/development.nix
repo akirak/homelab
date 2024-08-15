@@ -42,7 +42,8 @@
 
     postgresqlBackup = {
       enable = true;
-      startAt = "*-*-* *:00,15,30,45:00";
+      # PostgreSQL dump and ZFS snapshot must not occur simultaneously.
+      startAt = "*-*-* *:05,20,35,50:00";
       location = "/var/backup/postgresql";
       backupAll = lib.mkDefault true;
     };
