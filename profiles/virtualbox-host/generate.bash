@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-vm_dir="$HOME/VirtualBox VMs"
+vm_dir="${VIRTUALBOX_VM_DIR:-$HOME/VirtualBox VMs}"
 data_home="${XDG_DATA_HOME:-$HOME/.local/share}"
 data_dir="${data_home}/virtualbox-items"
 applications_dir="${data_home}/applications"
