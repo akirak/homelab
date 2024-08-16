@@ -8,7 +8,7 @@ applications_dir="${data_home}/applications"
 boxes=()
 
 function prepareDirectory() {
-  mkdir -p "${data_dir}"
+  mkdir -p "${data_dir}" "${applications_dir}"
   find "${data_dir}" -name '*.desktop' -delete
 }
 
