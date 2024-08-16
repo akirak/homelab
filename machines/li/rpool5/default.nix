@@ -1,5 +1,5 @@
 {
-#   imports = [ ./extras.nix ];
+  imports = [ ./extras.nix ];
 
   fileSystems."/persist" = {
     device = "rpool5/safe/persist";
