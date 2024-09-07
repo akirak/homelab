@@ -27,6 +27,9 @@ in
       # API development
       # hoppscotch
 
+      # database admin
+      beekeeper-studio
+
       # fonts
       my-overlay.jetbrains-mono-nerdfont
       # Japanese
