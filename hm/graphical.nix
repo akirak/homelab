@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   enableFoot = config.programs.foot.enable;
   enableWayland = true;
-in {
+in
+{
   programs = {
     # alacritty.enable = enableGraphical;
     mpv.enable = true;
@@ -36,7 +38,7 @@ in {
 
       (pkgs.writeShellApplication {
         name = "lock-screen";
-        runtimeInputs = [pkgs.swaylock-effects];
+        runtimeInputs = [ pkgs.swaylock-effects ];
         # TODO: Use a color scheme
         text = ''
           swaylock -f --clock --fade-in 0.5
@@ -44,9 +46,7 @@ in {
       })
     ];
 
-  xdg.mimeApps.defaultBrowser =
-    lib.mkIf config.programs.firefox.enable
-    "firefox.desktop";
+  xdg.mimeApps.defaultBrowser = lib.mkIf config.programs.firefox.enable "firefox.desktop";
 
   systemd.user.services.emacs = {
     Service = {
