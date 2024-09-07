@@ -24,7 +24,8 @@ in
       blanket
       pavucontrol
 
-      hoppscotch
+      # API development
+      # hoppscotch
 
       # fonts
       my-overlay.jetbrains-mono-nerdfont
