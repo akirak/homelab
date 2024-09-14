@@ -33,6 +33,7 @@ in
     # ../../profiles/nix/cachix-deploy.nix
     ../../profiles/postgresql/development.nix
     ../../profiles/virtualbox-host
+    ../../profiles/waydroid
     # ../../profiles/docker/rootless.nix
     # ../../profiles/docker
     # ../../profiles/docker/kind.nix
