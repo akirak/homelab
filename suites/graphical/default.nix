@@ -2,10 +2,14 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
+  imports = [
+    ../../profiles/pipewire
+  ];
+
   environment.systemPackages = with pkgs; [
     # flameshot
-    pavucontrol
     handlr
   ];
 
@@ -24,9 +28,6 @@
       serif = ["Merriweather"];
     };
   };
-
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.support32Bit = true;
 
   systemd.services.setxkbmap = {
     enable = true;
