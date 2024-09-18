@@ -179,7 +179,7 @@ in
                 (exactClass "chromium")
                 (exactTitle "Open Files")
               ])
-              (exactClass "pavucontrol")
+              (exactTitle "Volume Control") # pavucontrol
               (exactClass "com.rafaelmardojai.Blanket")
               (exactTitle "Android Studio Setup Wizard")
             ]
