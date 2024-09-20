@@ -17,6 +17,7 @@
     directories = [
       "/var/log"
       "/var/tmp"
+      "/var/lib/nixos"
       "/var/lib/bluetooth"
       "/var/lib/livebook"
       "/var/lib/rabbitmq"
