@@ -358,14 +358,15 @@
           "twist"
         ],
         "twist-overrides": "twist-overrides",
+        "twist2elpa": "twist2elpa",
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1726654389,
-        "narHash": "sha256-xTwykGCjP5HeVdM27H+KPm74Xxjek4D8unBTHfmsCW8=",
+        "lastModified": 1726834824,
+        "narHash": "sha256-BFqCVGK+eNlfNFvPr86mMP/O+OOgJ8FG0atAUZJtKY4=",
         "owner": "akirak",
         "repo": "emacs-config",
-        "rev": "d62651421650cca6edf58752bc5d7562353d43cb",
+        "rev": "46b304366598e63f3c9fd2b894b8a9c61d2c001a",
         "type": "github"
       },
       "original": {
@@ -2422,11 +2423,11 @@
         "elisp-helpers": "elisp-helpers"
       },
       "locked": {
-        "lastModified": 1726250271,
-        "narHash": "sha256-kyyv1IrsOrXYMqcDxcrnTLCdiVBW2UrlTbTXI20nECQ=",
+        "lastModified": 1726765884,
+        "narHash": "sha256-xQ8GGZvQtwHP/8CcNGsvzluZX28PPtr4e4oPVUD1c3Q=",
         "owner": "emacs-twist",
         "repo": "twist.nix",
-        "rev": "b2ad0924ac458366a143e5ed1abff5cd15c0875f",
+        "rev": "cc1e51ebc8c8ac4db1fef940ec5b23090e14c018",
         "type": "github"
       },
       "original": {
@@ -2447,6 +2448,27 @@
       "original": {
         "owner": "emacs-twist",
         "repo": "overrides",
+        "type": "github"
+      }
+    },
+    "twist2elpa": {
+      "inputs": {
+        "twist": [
+          "emacs-config",
+          "twist"
+        ]
+      },
+      "locked": {
+        "lastModified": 1726834627,
+        "narHash": "sha256-sRkkjvtOea5E3qcqS6bTcWr+0JCHeVCDCTBMsX0ZpyM=",
+        "owner": "emacs-twist",
+        "repo": "twist2elpa",
+        "rev": "ac620727e14f70004ac5a61f25b355bfb67fab47",
+        "type": "github"
+      },
+      "original": {
+        "owner": "emacs-twist",
+        "repo": "twist2elpa",
         "type": "github"
       }
     },
