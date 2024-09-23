@@ -169,10 +169,10 @@ in
       settings = {
         extraFeatures = [
           "beancount"
-          "mermaid"
           # "ChatGPT"
-          "copilot"
           "OCaml"
+          "Emacs"
+          "Emacs__lisp"
           # "Coq"
           # "Lean4"
           # "lsp_mode"
