@@ -158,6 +158,7 @@
             ;;
           -w)
             emacs-visible-directories | pick cdv
+            ;;
           *)
             builtin cd "$@"
             ;;
