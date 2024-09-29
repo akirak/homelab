@@ -22,6 +22,7 @@
     hyperfine
     just
     yamlfmt
+    vscode-langservers-extracted # Primarily for the JSON server
 
     # Media
     git-annex
