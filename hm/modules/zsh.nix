@@ -112,6 +112,24 @@
         }
       }
 
+      function emacs-visible-directories() {
+          tmp=$(mktemp -p "''${XDG_RUNTIME_DIR}")
+          trap "rm -f '$tmp'" ERR EXIT
+          # If the server isn't running, this script will exit with 1.
+          emacsclient --eval "(with-temp-buffer
+             (insert (string-join
+                        (thread-last
+                          (window-list)
+                          (mapcar #'window-buffer)
+                          (mapcar (lambda (buffer)
+                                    (expand-file-name
+                                     (buffer-local-value 'default-directory buffer))))
+                          (seq-uniq))
+                      \"\\n\"))
+             (write-region (point-min) (point-max) \"$tmp\"))" > /dev/null
+          cat "$tmp"
+      }
+
       function cdv() {
         builtin cd "$1" && pwd
       }
@@ -126,6 +144,7 @@
                 -p: Select an Emacs project (requires an Emacs server running)
                 -m: Select a mount point
                 -r: Select a remote of the current Git repository
+                -w: Select the directory of a visible buffer
       HELP
             ;;
           -p|)
@@ -137,6 +156,8 @@
           -r)
             remotes | pick cdv
             ;;
+          -w)
+            emacs-visible-directories | pick cdv
           *)
             builtin cd "$@"
             ;;
