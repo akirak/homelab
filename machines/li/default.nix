@@ -173,6 +173,7 @@ in
           "OCaml"
           "Emacs"
           "Emacs__lisp"
+          "Org"
           # "Coq"
           # "Lean4"
           # "lsp_mode"
