@@ -118,6 +118,16 @@
 
       function cd() {
         case "$1" in
+          -h)
+            echo <<-HELP
+              Usage: cd [-p|-m|-r|DIR]
+
+              Options:
+                -p: Select an Emacs project (requires an Emacs server running)
+                -m: Select a mount point
+                -r: Select a remote of the current Git repository
+      HELP
+            ;;
           -p|)
             projects | pick cdv
             ;;
