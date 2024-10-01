@@ -9,13 +9,8 @@
     # Nix
     nix-prefetch-git
 
-    # Tools
-    pv
-
     # Development
     gh
-    pre-commit
-    alejandra
     difftastic
     duckdb
     tbls
