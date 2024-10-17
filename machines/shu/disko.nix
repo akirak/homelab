@@ -1,30 +1,26 @@
 # Based on https://github.com/numtide/nixos-remote-examples/blob/9768e438b1467ec55d42e096860e7199bd1ef43d/disk-config.nix
 {
-  disks ? ["/dev/sda"],
+  disks ? [ "/dev/sda" ],
   luksKey ? "/persist/luks-cryptroot.key",
   ...
-}: {
+}:
+{
   disko.devices = {
     disk.sda = {
       device = builtins.elemAt disks 0;
       type = "disk";
       content = {
-        type = "table";
-        format = "gpt";
-        partitions = [
-          {
-            name = "boot";
+        type = "gpt";
+        partitions = {
+          boot = {
             start = "0";
             end = "1M";
-            part-type = "primary";
-            flags = ["bios_grub"];
-          }
+            type = "EF02";
+          };
 
-          {
-            name = "ESP";
+          ESP = {
             start = "1MiB";
             end = "100MiB";
-            bootable = true;
             content = {
               type = "filesystem";
               format = "vfat";
@@ -33,10 +29,9 @@
                 "defaults"
               ];
             };
-          }
+          };
 
-          {
-            name = "luks";
+          luks = {
             start = "100MiB";
             end = "100%";
             content = {
@@ -48,8 +43,8 @@
                 pool = "zroot";
               };
             };
-          }
-        ];
+          };
+        };
       };
     };
 
