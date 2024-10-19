@@ -134,6 +134,7 @@ in
     home.stateVersion = "23.05";
 
     home.packages = [
+      pkgs.rclone
       # pkgs.wine
       # pkgs.tenacity
       # pkgs.microsoft-edge
