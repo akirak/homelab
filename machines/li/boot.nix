@@ -8,8 +8,6 @@ let
   annex-dm = "local_annex";
 in
 {
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   boot.loader.systemd-boot.enable = true;
