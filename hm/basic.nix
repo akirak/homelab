@@ -8,6 +8,7 @@
   home.packages = with pkgs; [
     # Nix
     nix-prefetch-git
+    nix-output-monitor
 
     # Development
     gh
