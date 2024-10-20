@@ -3,13 +3,15 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) types;
 
   cfg = config.programs.nixos-rebuild-and-notify;
 
   notify = "${pkgs.notify-desktop}/bin/notify-desktop -r nixos-rebuild";
-in {
+in
+{
   options = {
     programs.nixos-rebuild-and-notify = {
       enable = lib.mkEnableOption (lib.mdDoc "Install nixos-rebuild-and-notify script");
@@ -35,25 +37,38 @@ in {
 
         if emacs_config="$(readlink -e "${cfg.emacsConfigDirectory}")"
         then
-          flags=(--override-input emacs-config "''${emacs_config}" \
-                 --update-input emacs-config/flake-pins \
-                 --update-input emacs-config/twist-overrides)
+          build_flags=(--override-input emacs-config "''${emacs_config}" \
+                       --update-input emacs-config/flake-pins \
+                       --update-input emacs-config/twist-overrides)
         else
-          flags=(--update-input emacs-config \
-                 --update-input emacs-config/flake-pins \
-                 --update-input emacs-config/twist-overrides)
+          build_flags=(--update-input emacs-config \
+                       --update-input emacs-config/flake-pins \
+                       --update-input emacs-config/twist-overrides)
         fi
 
         hostname="$(uname -n)"
 
-        cd "${cfg.directory}"
-        if nixos-rebuild "$operation" \
-            --flake ".#$hostname" \
-            --option accept-flake-config true \
-            --no-write-lock-file \
-            --print-build-logs \
-            --use-remote-sudo \
-            ''${flags[@]}; then
+        function build_and_switch() {
+           local artifact
+           cd "${cfg.directory}"
+           artifact=$(${pkgs.nix-output-monitor}/bin/nom build \
+             ".#nixosConfigurations.$hostname.config.system.build.toplevel" \
+             --option accept-flake-config true \
+             --no-write-lock-file \
+             --print-out-paths \
+             --no-link \
+             --print-build-logs \
+             ''${build_flags[@]})
+           if [[ $? -eq 0 ]]
+           then
+             sudo nix-env -p /nix/var/nix/profiles/system --set "$artifact" \
+               && sudo "$artifact/bin/switch-to-configuration" "$operation"
+           else
+             return 1
+           fi
+        }
+
+        if build_and_switch; then
           ${notify} -t 5000 "nixos-rebuild $operation has finished successfully"
         else
           ${notify} -t 5000 "nixos-rebuild $operation has failed"
