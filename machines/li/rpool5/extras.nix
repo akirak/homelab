@@ -27,9 +27,10 @@
     compression = "none";
   };
 
-  fileSystems."/var/lib/private/ollama" = {
+  fileSystems."/var/lib/private" = {
     device = "rpool5/local/ollama";
     fsType = "zfs";
+    # The root directory of this file system needs to have 0700 permission.
   };
 
   fileSystems."/media/virtualbox" = {

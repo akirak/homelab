@@ -116,7 +116,7 @@ in
   services.ollama = {
     enable = true;
     acceleration = false;
-    # Also see ./rpool5 for impermanence setup for /var/lib/private
+    # /var/lib/private is on a separate file system
   };
 
   home-manager.users.${homeUser} = {
