@@ -27,6 +27,11 @@
     compression = "none";
   };
 
+  fileSystems."/var/lib/private/ollama" = {
+    device = "rpool5/local/ollama";
+    fsType = "zfs";
+  };
+
   fileSystems."/media/virtualbox" = {
     device = "rpool5/safe/virtualbox";
     fsType = "zfs";
