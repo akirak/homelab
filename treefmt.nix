@@ -12,6 +12,12 @@
     yamlfmt.enable = true;
   };
 
+  settings.excludes = [
+    "*.age"
+    "*.pub"
+    "*.org"
+  ];
+
   settings.formatter = {
     shellcheck.excludes = [ ".envrc" ];
   };
