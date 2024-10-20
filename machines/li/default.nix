@@ -113,6 +113,12 @@ in
     };
   };
 
+  services.ollama = {
+    enable = true;
+    acceleration = false;
+    # Also see ./rpool5 for impermanence setup for /var/lib/private
+  };
+
   home-manager.users.${homeUser} = {
     imports = [
       ../../hm/basic.nix
