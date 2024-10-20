@@ -50,7 +50,7 @@ in {
         fi
 
         cd "${cfg.configDirectory}"
-        if nix build "#homeConfigurations.${cfg.name}" \
+        if ${pkgs.nix-output-monitor}/bin/nom build "#homeConfigurations.${cfg.name}" \
             --option accept-flake-config true \
             --print-build-logs \
             ''${flags[@]} \
