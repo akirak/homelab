@@ -101,6 +101,8 @@ in
       extraConfig = {
         pull.rebase = true;
 
+        merge.conflictstyle = "diff3";
+
         "url \"git@github.com:\"".pushInsteadOf = "https://github.com/";
         "url \"git@git.sr.ht:\"".pushInsteadOf = "https://git.sr.ht/";
 
