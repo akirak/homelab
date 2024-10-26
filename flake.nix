@@ -49,8 +49,6 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "unstable";
     };
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
-    pre-commit-hooks.inputs.nixpkgs.follows = "unstable";
 
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
@@ -142,23 +140,11 @@
           pkgs,
           system,
           treefmtEval,
-          pre-commit-check,
           ...
         }:
         {
           _module.args.pkgs = unstable.legacyPackages.${system};
           _module.args.treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
-          _module.args.pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
-            src = ./.;
-            hooks = {
-              nix-fmt = {
-                enable = true;
-                name = "Use the formatter setting of the flake to format all files";
-                types = [ "file" ];
-                entry = "nix fmt";
-              };
-            };
-          };
 
           packages = lib.mapAttrs' (
             hostName: _:
@@ -190,7 +176,6 @@
 
           devShells = {
             default = pkgs.mkShell {
-              inherit (pre-commit-check) shellHook;
               buildInputs = [
                 pkgs.nil
                 pkgs.age
