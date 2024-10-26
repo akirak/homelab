@@ -15,7 +15,7 @@
 
   fonts = {
     packages = with pkgs; [
-      channels.customPkgs.jetbrains-mono-nerdfont
+      channels.fonts.jetbrains-mono-nerdfont
       merriweather
       lato
     ];

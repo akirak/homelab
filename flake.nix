@@ -62,7 +62,8 @@
 
     hyprland-contrib.url = "github:hyprwm/contrib";
 
-    customPkgs.url = "github:akirak/flake-pins?dir=pkgs";
+    fonts.url = "github:akirak/flake-pins?dir=pkgs/fonts";
+    zsh-plugins.url = "github:akirak/flake-pins?dir=pkgs/zsh-plugins";
 
     emacs-config = {
       url = "github:akirak/emacs-config/develop";
@@ -104,7 +105,8 @@
         (_final: prev: {
           channels = lib.genAttrs [
             "hyprland-contrib"
-            "customPkgs"
+            "fonts"
+            "zsh-plugins"
           ] (name: inputs.${name}.packages.${prev.system});
           unstable = unstable.legacyPackages.${prev.system};
           disko = inputs.disko.packages.${prev.system}.disko;
