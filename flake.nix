@@ -177,7 +177,6 @@
           devShells = {
             default = pkgs.mkShell {
               buildInputs = [
-                pkgs.nil
                 pkgs.age
                 pkgs.age-plugin-yubikey
               ];
