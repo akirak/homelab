@@ -12,8 +12,6 @@
     home-manager-unstable.url = "github:nix-community/home-manager";
     nix-darwin.url = "github:LnL7/nix-darwin";
 
-    flake-utils.url = "github:numtide/flake-utils";
-
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     home-manager-stable.inputs.nixpkgs.follows = "stable";
@@ -42,7 +40,6 @@
 
     microvm = {
       url = "github:astro/microvm.nix";
-      inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "unstable";
     };
 
