@@ -12,8 +12,6 @@
     home-manager-unstable.url = "github:nix-community/home-manager";
     nix-darwin.url = "github:LnL7/nix-darwin";
 
-    flake-utils.url = "github:numtide/flake-utils";
-
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     home-manager-stable.inputs.nixpkgs.follows = "stable";
@@ -40,20 +38,12 @@
       inputs.darwin.follows = "nix-darwin";
     };
 
-    microvm = {
-      url = "github:astro/microvm.nix";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "unstable";
-    };
-
     nil.url = "github:oxalica/nil";
 
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "unstable";
     };
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
-    pre-commit-hooks.inputs.nixpkgs.follows = "unstable";
 
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
@@ -74,14 +64,12 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://microvm.cachix.org"
       "https://cachix.cachix.org"
       "https://hyprland.cachix.org"
       "https://akirak.cachix.org"
       "https://nix-community.cachix.org"
     ];
     extra-trusted-public-keys = [
-      "microvm.cachix.org-1:oXnBc6hRE3eX5rSYdRyMYXnfzcCxC7yKPTbZXALsqys="
       "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
@@ -145,23 +133,11 @@
           pkgs,
           system,
           treefmtEval,
-          pre-commit-check,
           ...
         }:
         {
           _module.args.pkgs = unstable.legacyPackages.${system};
           _module.args.treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
-          _module.args.pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
-            src = ./.;
-            hooks = {
-              nix-fmt = {
-                enable = true;
-                name = "Use the formatter setting of the flake to format all files";
-                types = [ "file" ];
-                entry = "nix fmt";
-              };
-            };
-          };
 
           packages = lib.mapAttrs' (
             hostName: _:
@@ -193,9 +169,7 @@
 
           devShells = {
             default = pkgs.mkShell {
-              inherit (pre-commit-check) shellHook;
               buildInputs = [
-                pkgs.nil
                 pkgs.age
                 pkgs.age-plugin-yubikey
               ];
@@ -255,33 +229,6 @@
                 ./suites/iso
               ];
             }).config.system.build.isoImage;
-
-          # launch-desktop-vm = self.lib.makeMicroVMSystem "demo-microvm" {
-          #   system = "x86_64-linux";
-          #   channel = unstable;
-          #   specialArgs = {
-          #     hypervisor = "qemu";
-          #     homeUser = "root";
-          #   };
-          #   modules = [
-          #     inputs.home-manager-unstable.nixosModules.home-manager
-          #     ./suites/microvm-gui
-          #     ./profiles/desktop/plasma.nix
-          #     ./profiles/home-manager
-          #   ];
-          # };
-
-          launch-container = self.lib.makeMicroVMSystem "demo-microvm" {
-            system = "x86_64-linux";
-            specialArgs = {
-              hypervisor = "qemu";
-              homeUser = "root";
-            };
-            modules = [
-              inputs.home-manager-unstable.nixosModules.home-manager
-              ./suites/microvm
-            ];
-          };
         };
 
         packages.aarch64-linux = {
@@ -466,27 +413,6 @@
                 ++ lib.optional (builtins.pathExists machinePath) machinePath
                 ++ extraModules;
             };
-
-          makeMicroVMSystem =
-            name:
-            {
-              system,
-              # If you are using this function from outside this repository,
-              # override this argument with your own inputs.self.
-              self' ? inputs.self,
-              specialArgs,
-              modules,
-            }:
-            let
-              inherit
-                (self.lib.mkSystem name {
-                  inherit system self' specialArgs;
-                  extraModules = [ inputs.microvm.nixosModules.microvm ] ++ modules;
-                })
-                config
-                ;
-            in
-            config.microvm.runner.${config.microvm.hypervisor};
         };
       };
     };
