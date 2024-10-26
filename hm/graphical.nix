@@ -31,7 +31,7 @@ in
       beekeeper-studio
 
       # fonts
-      my-overlay.jetbrains-mono-nerdfont
+      channels.customPkgs.jetbrains-mono-nerdfont
       # Japanese
       ipafont
     ])

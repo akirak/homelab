@@ -62,7 +62,8 @@
 
     hyprland-contrib.url = "github:hyprwm/contrib";
 
-    my-overlay.url = "github:akirak/nixpkgs-overlay";
+    customPkgs.url = "github:akirak/flake-pins?dir=pkgs";
+
     emacs-config = {
       url = "github:akirak/emacs-config/develop";
       inputs.twist.follows = "twist";
@@ -101,13 +102,14 @@
 
       overlays = [
         (_final: prev: {
-          channels = lib.genAttrs [ "hyprland-contrib" ] (name: inputs.${name}.packages.${prev.system});
+          channels = lib.genAttrs [
+            "hyprland-contrib"
+            "customPkgs"
+          ] (name: inputs.${name}.packages.${prev.system});
           unstable = unstable.legacyPackages.${prev.system};
           disko = inputs.disko.packages.${prev.system}.disko;
-          zsh-plugins = inputs.my-overlay.zsh-plugins;
           inherit (unstable.legacyPackages.${prev.system}) cachix;
           nix-index = inputs.nix-index-database.packages.${prev.system}.nix-index-with-db;
-          my-overlay = inputs.my-overlay.packages.${prev.system};
           nil = inputs.nil.packages.${prev.system}.default;
         })
       ];

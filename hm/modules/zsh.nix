@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     zsh
     nix-zsh-completions
@@ -25,19 +26,19 @@
       }
       {
         name = "fzy";
-        src = pkgs.zsh-plugins.zsh-fzy;
+        src = pkgs.channels.customPkgs.zsh-fzy;
       }
       {
         name = "nix-shell";
-        src = pkgs.zsh-plugins.zsh-nix-shell;
+        src = pkgs.channels.customPkgs.zsh-nix-shell;
       }
       {
         name = "fast-syntax-highlighting";
-        src = pkgs.zsh-plugins.zsh-fast-syntax-highlighting;
+        src = pkgs.channels.customPkgs.zsh-fast-syntax-highlighting;
       }
       {
         name = "history-filter";
-        src = pkgs.zsh-plugins.zsh-history-filter;
+        src = pkgs.channels.customPkgs.zsh-history-filter;
       }
     ];
 
@@ -192,10 +193,7 @@
       gpg-connect-agent /bye
       export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
-      export STARSHIP_CONFIG=${
-        pkgs.writeText "starship.toml"
-        (pkgs.lib.fileContents ../etc/starship/starship.toml)
-      }
+      export STARSHIP_CONFIG=${pkgs.writeText "starship.toml" (pkgs.lib.fileContents ../etc/starship/starship.toml)}
 
       eval "$(${pkgs.starship}/bin/starship init zsh)"
 

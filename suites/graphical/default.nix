@@ -15,23 +15,23 @@
 
   fonts = {
     packages = with pkgs; [
-      my-overlay.jetbrains-mono-nerdfont
+      channels.customPkgs.jetbrains-mono-nerdfont
       merriweather
       lato
     ];
 
     fontconfig.defaultFonts = {
-      monospace = ["JetBrains Mono NF"];
+      monospace = [ "JetBrains Mono NF" ];
 
-      sansSerif = ["Lato"];
+      sansSerif = [ "Lato" ];
 
-      serif = ["Merriweather"];
+      serif = [ "Merriweather" ];
     };
   };
 
   systemd.services.setxkbmap = {
     enable = true;
-    after = ["post-resume.target"];
+    after = [ "post-resume.target" ];
     description = "Run setxkbmap";
 
     script = "/run/current-system/sw/bin/setxkbmap -option ctrl:nocaps";
