@@ -37,13 +37,9 @@ in
 
         if emacs_config="$(readlink -e "${cfg.emacsConfigDirectory}")"
         then
-          build_flags=(--override-input emacs-config "''${emacs_config}" \
-                       --update-input emacs-config/flake-pins \
-                       --update-input emacs-config/twist-overrides)
+          build_flags=(--override-input emacs-config "''${emacs_config}")
         else
-          build_flags=(--update-input emacs-config \
-                       --update-input emacs-config/flake-pins \
-                       --update-input emacs-config/twist-overrides)
+          build_flags=()
         fi
 
         hostname="$(uname -n)"
@@ -51,6 +47,9 @@ in
         function build_and_switch() {
            local artifact
            cd "${cfg.directory}"
+
+           nix flake update emacs-config
+
            artifact=$(${pkgs.nix-output-monitor}/bin/nom build \
              ".#nixosConfigurations.$hostname.config.system.build.toplevel" \
              --option accept-flake-config true \
