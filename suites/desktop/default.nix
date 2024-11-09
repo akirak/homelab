@@ -1,8 +1,11 @@
 {
   modulesPath,
   pkgs,
+  lib,
+  config,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/profiles/base.nix")
     ../../profiles/yubikey
@@ -13,7 +16,7 @@
     pkgs.lsof
     pkgs.psmisc
     pkgs.handlr
-  ];
+  ] ++ lib.optional config.services.postgresql.enable pkgs.pgcli;
 
   environment.sessionVariables = {
     "TMPDIR" = "/tmp";
