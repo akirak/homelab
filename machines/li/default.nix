@@ -119,6 +119,13 @@ in
     # /var/lib/private is on a separate file system
   };
 
+  services.postgresql = {
+    package = pkgs.postgresql_14;
+    extraPlugins = with pkgs.postgresql14Packages; [
+      pgmq
+    ];
+  };
+
   home-manager.users.${homeUser} = {
     imports = [
       ../../hm/basic.nix
