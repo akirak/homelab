@@ -7,6 +7,14 @@
 let
   enableFoot = config.programs.foot.enable;
   enableWayland = true;
+
+  defaultBrowser = if config.programs.firefox.enable then "firefox.desktop" else null;
+
+  defaultApplications = {
+    "image/svg+xml" = [
+      defaultBrowser
+    ];
+  };
 in
 {
   programs = {
@@ -50,7 +58,13 @@ in
       })
     ];
 
-  xdg.mimeApps.defaultBrowser = lib.mkIf config.programs.firefox.enable "firefox.desktop";
+  xdg.mime.enable = true;
+  xdg.mimeApps = lib.mkIf (defaultBrowser != null) {
+    enable = true;
+    inherit defaultBrowser;
+    inherit defaultApplications;
+    associations.added = defaultApplications;
+  };
 
   systemd.user.services.emacs = {
     Service = {
