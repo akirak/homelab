@@ -192,11 +192,11 @@
         "twist2elpa": "twist2elpa"
       },
       "locked": {
-        "lastModified": 1731255259,
-        "narHash": "sha256-enJNGazBVddV7DcglyLC6o+lkbmwWkXQlHW3XEclPL0=",
+        "lastModified": 1731600438,
+        "narHash": "sha256-eP33nwAyxOZQtRjo0/F2f9n0bqVVujJ82rzKyk18jU0=",
         "owner": "akirak",
         "repo": "emacs-config",
-        "rev": "b85e113743ba2ec4e074e40a2e66da190f66eae2",
+        "rev": "98042acb20cdb1f7d62c0a3aa775ecda4f6f5208",
         "type": "github"
       },
       "original": {
