@@ -5,15 +5,15 @@
   ];
 
   services.xserver = {
-    xkbOptions = "ctrl:nocaps";
+    xkb.options = "ctrl:nocaps";
     enableCtrlAltBackspace = true;
-    libinput = {
-      enable = true;
-      mouse = {
-        disableWhileTyping = true;
-      };
-    };
     # startDbusSession = true;
+  };
+  services.libinput = {
+    enable = true;
+    mouse = {
+      disableWhileTyping = true;
+    };
   };
 
   services.dbus = {

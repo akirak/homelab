@@ -5,7 +5,6 @@
 }: {
   imports = [
     ./boot.nix
-    (import ./disko.nix {})
     ../../suites/base
     ../../suites/graphical
     ../../suites/desktop
