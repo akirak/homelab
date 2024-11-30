@@ -299,9 +299,6 @@
 
         diskoConfigurations = {
           shu = import ./machines/shu/disko.nix;
-          hui = import ./machines/hui/disko.nix;
-          zheng = import ./machines/zheng/disko.nix;
-          yang = import ./machines/yang/disko.nix;
         };
 
         nixosModules = {
