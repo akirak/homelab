@@ -101,6 +101,14 @@
           inherit (unstable.legacyPackages.${prev.system}) cachix;
           nix-index = inputs.nix-index-database.packages.${prev.system}.nix-index-with-db;
           nil = inputs.nil.packages.${prev.system}.default;
+          dpt-rp1-py = prev.dpt-rp1-py.overrideAttrs {
+            src = prev.fetchFromGitHub {
+              owner = "akirak";
+              repo = "dpt-rp1-py";
+              rev = "ea470e51bd68138926860856e80902477770ec71";
+              sha256 = "sha256-Hb89cqx744pDxm//Lm3di9cIIFoBVyownXjY5QAk3lc=";
+            };
+          };
         })
       ];
 
