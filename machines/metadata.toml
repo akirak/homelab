@@ -9,7 +9,7 @@ publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPFhr1lIqPjRnzlfh5nfM8+CQj2BgC6
 syncthingId = "UTRWWS3-XAUUIAV-7DAM6RM-5N4LDSS-D27MPMQ-ERVPJER-VXB4YPJ-K3L23Q5"
 
 [hosts.yang]
-ipAddress = "192.168.10.184"
+ipAddress = "192.168.10.10"
 publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBBqIBetzQSQhJeOgBXCcNwwyWToSGh2ZUMLEROwwxeF"
 
 [networks.home]
