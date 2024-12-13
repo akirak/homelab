@@ -25,12 +25,29 @@ in
     foot.server.enable = enableFoot;
     # TODO: Add font package
     foot.settings.main.font = "JetBrainsMono NF:size=10.5";
+
+    # enable auto-notify plugin only in graphical environments
+    zsh = {
+      plugins = [
+        {
+          name = "auto-notify";
+          src = pkgs.channels.zsh-plugins.zsh-auto-notify;
+        }
+      ];
+      sessionVariables = {
+        # https://github.com/MichaelAquilina/zsh-auto-notify
+        "AUTO_NOTIFY_THRESHOLD" = "20";
+      };
+    };
   };
 
   home.packages =
     (with pkgs; [
       blanket
       pavucontrol
+
+      # required by zsh-auto-notify plugin
+      libnotify
 
       # API development
       # hoppscotch

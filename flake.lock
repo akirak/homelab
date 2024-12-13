@@ -1437,6 +1437,22 @@
         "type": "github"
       }
     },
+    "zsh-auto-notify": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1720453411,
+        "narHash": "sha256-ScBwky33leI8mFMpAz3Ng2Z0Gbou4EWMOAhkcMZAWIc=",
+        "owner": "MichaelAquilina",
+        "repo": "zsh-auto-notify",
+        "rev": "27c07dddb42f05b199319a9b66473c8de7935856",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MichaelAquilina",
+        "repo": "zsh-auto-notify",
+        "type": "github"
+      }
+    },
     "zsh-fast-syntax-highlighting": {
       "flake": false,
       "locked": {
@@ -1505,6 +1521,7 @@
       "inputs": {
         "nixpkgs": "nixpkgs_10",
         "systems": "systems_8",
+        "zsh-auto-notify": "zsh-auto-notify",
         "zsh-fast-syntax-highlighting": "zsh-fast-syntax-highlighting",
         "zsh-fzy": "zsh-fzy",
         "zsh-history-filter": "zsh-history-filter",
@@ -1512,11 +1529,11 @@
       },
       "locked": {
         "dir": "pkgs/zsh-plugins",
-        "lastModified": 1733217212,
-        "narHash": "sha256-KSuymGezpAzwesjWf5vsYmrKJJWnRd6vMIU42QCYW+U=",
+        "lastModified": 1734079264,
+        "narHash": "sha256-BF5CWSDP57iA0CCX1cLzS1sExWG2RPGCEO4RVxmuFMI=",
         "owner": "akirak",
         "repo": "flake-pins",
-        "rev": "abb2986072ae7a196c92e227803c9d5d5f3f7bbb",
+        "rev": "7fb4221cb5393d66046feaf4b287682ebe8033f1",
         "type": "github"
       },
       "original": {
