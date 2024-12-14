@@ -121,7 +121,7 @@ in
 
   services.postgresql = {
     package = pkgs.postgresql_14;
-    extraPlugins = with pkgs.postgresql14Packages; [
+    extensions = with pkgs.postgresql14Packages; [
       pgmq
     ];
   };
