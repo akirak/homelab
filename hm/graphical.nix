@@ -36,7 +36,7 @@ in
       ];
       sessionVariables = {
         # https://github.com/MichaelAquilina/zsh-auto-notify
-        "AUTO_NOTIFY_THRESHOLD" = "20";
+        "AUTO_NOTIFY_THRESHOLD" = "60";
       };
       initExtra = ''
         export AUTO_NOTIFY_IGNORE=("nix shell" "nix develop")
