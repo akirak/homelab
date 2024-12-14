@@ -8,6 +8,7 @@
     ../../suites/base
     ../../suites/graphical
     ../../suites/desktop
+    ../../profiles/locale
     ../../profiles/home-manager
     ../../profiles/nix
     ../../profiles/sudo
@@ -18,7 +19,8 @@
     ../../profiles/wayland/cage/firefox.nix
     ../../profiles/wayland/wm/labwc.nix
     ../../profiles/wayland/wm/hyprland.nix
-    ../../profiles/nix/cachix-deploy.nix
+    # ../../profiles/nix/cachix-deploy.nix
+    ../../profiles/dpt-rp1
   ];
 
   networking = {
