@@ -38,6 +38,9 @@ in
         # https://github.com/MichaelAquilina/zsh-auto-notify
         "AUTO_NOTIFY_THRESHOLD" = "20";
       };
+      initExtra = ''
+        export AUTO_NOTIFY_IGNORE=("nix shell" "nix develop")
+      '';
     };
   };
 
