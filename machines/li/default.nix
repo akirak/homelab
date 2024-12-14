@@ -24,7 +24,6 @@ in
     ../../profiles/nix
     ../../profiles/sudo
     ../../profiles/tailscale
-    ../../profiles/vaultwarden
     # ../../profiles/rabbitmq/development.nix
     ../../profiles/networking/usb-tether1.nix
     ../../profiles/wayland/wm/hyprland.nix
