@@ -9,7 +9,7 @@ let
 
   agePackage = pkgs.rage;
 
-  passageDir = "${config.home.homeDirectory}/secrets";
+  passageRoot = "${config.home.homeDirectory}/secrets";
 
   # A wrapper for the steps described in https://github.com/FiloSottile/passage
   # for multiple YubiKey support
@@ -42,10 +42,10 @@ in
   programs.password-store = {
     package = pkgs.passage;
     settings = {
-      PASSAGE_DIR = passageDir;
+      PASSAGE_DIR = "${passageRoot}/store";
       PASSAGE_AGE = lib.getExe agePackage;
-      PASSAGE_IDENTITIES_FILE = "${passageDir}/identities";
-      PASSAGE_RECIPIENTS_FILE = "${passageDir}/store/.age-recipients";
+      PASSAGE_IDENTITIES_FILE = "${passageRoot}/identities";
+      PASSAGE_RECIPIENTS_FILE = "${passageRoot}/store/.age-recipients";
     };
   };
 
