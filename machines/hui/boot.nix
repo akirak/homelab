@@ -7,6 +7,10 @@
     pkgs.git
   ];
 
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 10;
+  };
+
   boot.initrd.kernelModules = [
     "usbcore"
     "nvme"
@@ -71,7 +75,7 @@
   ];
 
   boot.tmp.useTmpfs = true;
-  boot.tmp.tmpfsSize = "512m";
+  boot.tmp.tmpfsSize = "4096m";
 
   boot.runSize = "64m";
   boot.devSize = "256m";
