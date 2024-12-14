@@ -12,5 +12,6 @@
   environment.systemPackages = [
     pkgs.yubikey-manager
     pkgs.yubikey-manager-qt
+    pkgs.age-plugin-yubikey
   ];
 }

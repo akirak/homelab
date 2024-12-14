@@ -3,6 +3,7 @@
   programs = {
     nix-index.enable = true;
     nix-index.enableZshIntegration = config.programs.nix-index.enable;
+    password-store.enable = true;
   };
 
   home.packages = with pkgs; [
