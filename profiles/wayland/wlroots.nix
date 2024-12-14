@@ -15,6 +15,9 @@
       enable = true;
     };
     xdgOpenUsePortal = true;
+    config = {
+      common.default = "*";
+    };
   };
 
   security.pam.services.swaylock = {};
