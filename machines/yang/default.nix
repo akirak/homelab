@@ -42,8 +42,6 @@ in
   # Use `cat /etc/machine-id | cut -c1-8`
   networking.hostId = "8425e349";
 
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-
   # This option is enabled by default in nixos/modules/profiles/hardened.nix,
   # but needed to be turned off to load br_netfilter module for Docker.
   security.lockKernelModules = false;
