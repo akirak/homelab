@@ -20,6 +20,6 @@ in
     extraDomainNames = [ "*.${domain}" ];
     dnsProvider = "cloudflare";
     dnsPropagationCheck = true;
-    credentialsFile = config.age.secrets."nicesunny.day.credentials.txt".path;
+    environmentFile = config.age.secrets."nicesunny.day.credentials.txt".path;
   };
 }
