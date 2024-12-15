@@ -39,7 +39,7 @@ in
         "AUTO_NOTIFY_THRESHOLD" = "60";
       };
       initExtra = ''
-        export AUTO_NOTIFY_IGNORE=("nix shell" "nix develop")
+        export AUTO_NOTIFY_IGNORE=("nix shell" "nix develop" "ssh" "agenix edit" "man" "less")
       '';
     };
   };
