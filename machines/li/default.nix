@@ -183,6 +183,7 @@ in
       settings = {
         extraFeatures = [
           "beancount"
+          "copilot"
           # "ChatGPT"
           "OCaml"
           "Emacs"
