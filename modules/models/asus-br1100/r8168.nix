@@ -8,20 +8,7 @@
   # to a common "ucsi_acpi usbc000:00: ppm init failed" error. This issue may be
   # fixed at some point, but I am not sure.
   boot.extraModulePackages = [
-    (config.boot.kernelPackages.r8168.overrideAttrs (
-      _: super: rec {
-        version = "8.054.00";
-        src = pkgs.fetchFromGitHub {
-          owner = "mtorromeo";
-          repo = "r8168";
-          rev = version;
-          sha256 = "sha256-KyycAe+NBmyDDH/XkAM4PpGvXI5J1CuMW4VuHcOm0UQ=";
-        };
-        meta = super.meta // {
-          broken = false;
-        };
-      }
-    ))
+    (config.boot.kernelPackages.r8168.overrideAttrs (import ../overrides/r8168.nix { inherit pkgs; }))
   ];
   boot.blacklistedKernelModules = [ "r8169" ];
 }
