@@ -68,6 +68,7 @@ in
     enable = true;
     config = ''
       nicesunny.day {
+        # forward _acme-challenge.nicesunny.day 1.1.1.1
         hosts {
           ${ip} test test.nicesunny.day
           ${hostsTextForReverseProxy}
@@ -79,6 +80,11 @@ in
           fallthrough
         }
         log
+      }
+
+      . {
+        # acme-v02.api.letsencrypt.org should be discoverable from the host
+        forward . 1.1.1.1 8.8.8.8 9.9.9.9
       }
     '';
   };
