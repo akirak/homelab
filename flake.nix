@@ -272,6 +272,10 @@
             system = "x86_64-linux";
             channel = unstable;
           };
+          wang = {
+            system = "x86_64-linux";
+            channel = stable;
+          };
           hui = {
             system = "x86_64-linux";
             channel = unstable;
