@@ -22,6 +22,8 @@ in
 {
   services.syncthing = {
     enable = true;
+    # Just the default dataDir. This needs to be on a dedicated ZFS dataset.
+    dataDir = "/var/lib/syncthing";
     overrideDevices = true;
     overrideFolders = true;
     openDefaultPorts = true;
