@@ -205,8 +205,6 @@
       "..." = "cd ../..";
       "rm" = "rm -i";
       "j" = "journalctl -xe";
-      "s" = "builtin cd \"$(fd -t d | fzy)\"";
-      "r" = "builtin cd \"$(git rev-parse --show-toplevel)\"";
       "e" = "emacsclient -n";
       "start" = "systemctl --user start";
       "stop" = "systemctl --user stop";
@@ -215,11 +213,7 @@
       "reload" = "systemctl --user daemon-reload";
       "status" = "systemctl --user --full status";
       "restart" = "systemctl --user restart";
-      "list-units" = "systemctl --user list-units";
-      "list-unit-files" = "systemctl --user list-unit-files";
-      "reset" = "systemctl --user reset-failed";
       "ssh-victim" = "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null";
-      "nsearch" = "nix search --no-update-lock-file nixpkgs";
     };
   };
 }
