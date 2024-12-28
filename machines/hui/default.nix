@@ -78,6 +78,7 @@ in
   home-manager.users.${homeUser} = {
     imports = [
       ../../hm/basic.nix
+      ../../hm/extra.nix
       ../../hm/graphical.nix
     ];
 
@@ -91,7 +92,11 @@ in
       serviceIntegration.enable = false;
       settings = {
         extraFeatures = [
+          "beancount"
           "OCaml"
+          "Emacs"
+          "Emacs__lisp"
+          "Org"
         ];
       };
     };
