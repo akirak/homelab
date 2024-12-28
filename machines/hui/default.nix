@@ -2,7 +2,11 @@
   homeUser,
   pkgs,
   ...
-}: {
+}:
+let
+  stateVersion = "24.11";
+in
+{
   imports = [
     ./boot.nix
     ../../suites/base
@@ -28,6 +32,8 @@
     useDHCP = false;
     networkmanager.enable = true;
   };
+
+  system.stateVersion = stateVersion;
 
   hardware.graphics.enable = true;
 
