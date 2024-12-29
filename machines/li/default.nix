@@ -121,9 +121,6 @@ in
 
   services.postgresql = {
     package = pkgs.postgresql_14;
-    extensions = with pkgs.postgresql14Packages; [
-      pgmq
-    ];
   };
 
   home-manager.users.${homeUser} = {
