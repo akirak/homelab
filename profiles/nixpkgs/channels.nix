@@ -11,7 +11,8 @@
         "microsoft-edge-stable"
         "android-studio-stable"
         "zoom"
-        "Oracle_VM_VirtualBox_Extension_Pack"
+        "Oracle_VM_VirtualBox_Extension_Pack" # older
+        "Oracle_VirtualBox_Extension_Pack" # newer
         "google-chrome"
       ];
   };
