@@ -1,5 +1,7 @@
 { homeUser, pkgs, ... }:
 let
+  stateVersion = "25.05";
+
   mainMonitor = {
     criteria = "Unknown VA32AQ K3LMAS000141 (HDMI-A-2)";
     mode = "2560x1440";
@@ -47,7 +49,7 @@ in
     ];
   };
 
-  system.stateVersion = "23.05";
+  system.stateVersion = stateVersion;
 
   # Needed for the ZFS pool.
   networking.hostId = "8425e349";
@@ -120,7 +122,7 @@ in
   };
 
   services.postgresql = {
-    package = pkgs.postgresql_14;
+    package = pkgs.postgresql_17;
   };
 
   home-manager.users.${homeUser} = {
@@ -141,7 +143,7 @@ in
       ];
     };
 
-    home.stateVersion = "23.05";
+    home.stateVersion = stateVersion;
 
     home.packages = [
       pkgs.rclone
