@@ -51,11 +51,6 @@ in
             inherit (cfg) useACMEHost;
             extraConfig = ''
               reverse_proxy ${attrs.reverse-proxy}
-
-              tls {
-                dns cloudflare {env.CLOUDFLARE_DNS_API_TOKEN}
-                # resolvers 1.0.0.1
-              }
             '';
           };
           "${name}:${builtins.toString httpPort}" = {
