@@ -71,13 +71,11 @@ in
         hosts {
           ${ip} test test.nicesunny.day
           ${hostsTextForReverseProxy}
-          ${
-            lib.pipe metadata.hosts [
-              (lib.filterAttrs (_: attrs: attrs ? ipAddress))
-              (lib.mapAttrsToList (name: attrs: "${attrs.ipAddress} ${name} ${name}.nicesunny.day"))
-              (builtins.concatStringsSep "\n")
-            ]
-          }
+          ${lib.pipe metadata.hosts [
+            (lib.filterAttrs (_: attrs: attrs ? ipAddress))
+            (lib.mapAttrsToList (name: attrs: "${attrs.ipAddress} ${name} ${name}.nicesunny.day"))
+            (builtins.concatStringsSep "\n")
+          ]}
           fallthrough
         }
         log
