@@ -68,7 +68,8 @@ in
     enable = true;
     config = ''
       nicesunny.day {
-        # forward _acme-challenge.nicesunny.day 1.1.1.1
+        # Bypass requests for ACME challenges
+        forward _acme-challenge.nicesunny.day 1.1.1.1
         hosts {
           ${ip} test test.nicesunny.day
           ${hostsTextForReverseProxy}
