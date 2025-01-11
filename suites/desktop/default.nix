@@ -16,6 +16,7 @@
     pkgs.lsof
     pkgs.psmisc
     pkgs.handlr
+    pkgs.libnotify
   ] ++ lib.optional config.services.postgresql.enable pkgs.pgcli;
 
   environment.sessionVariables = {
