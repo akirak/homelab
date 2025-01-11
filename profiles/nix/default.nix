@@ -6,7 +6,7 @@ If you don't build Nix on the host, don't import this profile.
 {
   nix = {
     gc = {
-      dates = "2weeks";
+      dates = "monthly";
       automatic = true;
     };
     optimise.automatic = false;
