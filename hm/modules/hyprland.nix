@@ -56,6 +56,10 @@ in
     programs.foot.server.enable = lib.mkIf footEnabled true;
     systemd.user.services.foot = lib.mkIf footEnabled systemdStartAfterThis;
 
+    services.dunst = {
+      enable = true;
+      waylandDisplay = "wayland-1";
+    };
     systemd.user.services.dunst = lib.mkIf config.services.dunst.enable systemdStartAfterThis;
 
     services.kanshi = {
