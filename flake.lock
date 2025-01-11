@@ -192,11 +192,11 @@
         "twist2elpa": "twist2elpa"
       },
       "locked": {
-        "lastModified": 1735747571,
-        "narHash": "sha256-UtqGNdH2OxvamRTj8x9MEa+E6jq+Si1kAIvYn+I1qus=",
+        "lastModified": 1736572666,
+        "narHash": "sha256-S5BNaaBFNfWxH/uGabnm0w2VA7l7cnXy0FF1e7tf51Y=",
         "owner": "akirak",
         "repo": "emacs-config",
-        "rev": "4cd9b2e1a6c880bb79d55263aa6516f14e920be0",
+        "rev": "98e7991516d0e8ed9cba801137a4ec1f9c8c96ad",
         "type": "github"
       },
       "original": {
@@ -602,11 +602,11 @@
     "melpa": {
       "flake": false,
       "locked": {
-        "lastModified": 1735565378,
-        "narHash": "sha256-tVGO1ix3xvIwUTqFc8OergOP5k1z4/nOINbmpWtrfx4=",
+        "lastModified": 1735900502,
+        "narHash": "sha256-KcVPXFKVSsbfqlFHulw+7RZPE/S2ct/JGeKEd4K8sgU=",
         "owner": "melpa",
         "repo": "melpa",
-        "rev": "c1a84e4999dfbb3caf5ed83ec680e623573687a5",
+        "rev": "b51bc89476900ff52cfeeee5943ddee561bcb5dc",
         "type": "github"
       },
       "original": {
@@ -1408,11 +1408,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1726911794,
-        "narHash": "sha256-p4WC4SPu82gusJBJWaO5gPTpfFSp9TsTCy1zqNKWWc0=",
+        "lastModified": 1736055294,
+        "narHash": "sha256-VhfQoocPN1KCzdKPDSlNNL0WeqbzB9txxPqgA2XwX9E=",
         "owner": "emacs-twist",
         "repo": "twist2elpa",
-        "rev": "cf045eda0fdcfa8d8c529c3c7de5ac511f264afd",
+        "rev": "de1a40cffcb7383b5a0d0dfa57b06387c2b0a0da",
         "type": "github"
       },
       "original": {
