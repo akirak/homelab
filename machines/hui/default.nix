@@ -18,10 +18,10 @@ in
     ../../profiles/sudo
     ../../profiles/tailscale
     ../../profiles/wayland/wlroots.nix
-    ../../profiles/wayland/cage/emacs.nix
+    # ../../profiles/wayland/cage/emacs.nix
     ../../profiles/wayland/cage/foot.nix
-    ../../profiles/wayland/cage/firefox.nix
-    ../../profiles/wayland/wm/labwc.nix
+    # ../../profiles/wayland/cage/firefox.nix
+    # ../../profiles/wayland/wm/labwc.nix
     ../../profiles/wayland/wm/hyprland.nix
     # ../../profiles/nix/cachix-deploy.nix
     ../../profiles/dpt-rp1
@@ -82,7 +82,7 @@ in
       ../../hm/graphical.nix
     ];
 
-    wayland.windowManager.labwc.enable = true;
+    # wayland.windowManager.labwc.enable = true;
     wayland.windowManager.hyprland.enable = true;
 
     programs.gpg.enable = true;
