@@ -1,7 +1,7 @@
 /*
-   Nix options for desktop machines
+     Nix options for desktop machines
 
-If you don't build Nix on the host, don't import this profile.
+  If you don't build Nix on the host, don't import this profile.
 */
 {
   nix = {
@@ -13,8 +13,11 @@ If you don't build Nix on the host, don't import this profile.
 
     settings = {
       # sandbox = true;
-      allowed-users = ["@wheel"];
-      trusted-users = ["root" "@wheel"];
+      allowed-users = [ "@wheel" ];
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
 
       substituters = [
         "https://cache.nixos.org/"
