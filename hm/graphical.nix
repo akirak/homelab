@@ -26,6 +26,9 @@ in
     # TODO: Add font package
     foot.settings.main.font = "JetBrainsMono NF:size=10.5";
 
+    # Use cursor when it helps
+    vscode.enable = true;
+
     # enable auto-notify plugin only in graphical environments
     zsh = {
       plugins = [

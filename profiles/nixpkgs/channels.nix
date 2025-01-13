@@ -15,6 +15,7 @@
         "Oracle_VirtualBox_Extension_Pack" # newer
         "google-chrome"
         "intel-ocl"
+        "cursor"
         "steam-unwrapped"
       ];
   };
