@@ -44,6 +44,7 @@ function cleanupObsoleteItems() {
 
 if ! [[ -d "${vm_dir}" ]]; then
   echo >&2 "Directory ${vm_dir} does not exist"
+  echo >&2 "Consider setting VIRTUALBOX_VM_DIR to the directory containing VMs"
   exit 0
 fi
 
