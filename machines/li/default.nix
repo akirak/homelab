@@ -33,6 +33,7 @@ in
     # ../../profiles/wayland/wm/river.nix
     # ../../profiles/nix/cachix-deploy.nix
     ../../profiles/postgresql/development.nix
+    ../../profiles/ollama
     ../../profiles/virtualbox-host
     ../../profiles/dpt-rp1
     # ../../profiles/docker/rootless.nix
@@ -115,11 +116,7 @@ in
     };
   };
 
-  services.ollama = {
-    enable = true;
-    acceleration = false;
-    # /var/lib/private is on a separate file system
-  };
+  services.ollama.acceleration = false;
 
   services.postgresql = {
     package = pkgs.postgresql_17;
