@@ -8,6 +8,10 @@ let
   annex-dm = "local_annex";
 in
 {
+  imports = [
+    ../../profiles/intel-arc
+  ];
+
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   boot.loader.systemd-boot.enable = true;
@@ -81,19 +85,7 @@ in
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-  };
-
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-      # vaapiIntel
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
-  };
+  hardware.enableRedistributableFirmware = true;
 
   # hardware.bluetooth = {
   #   enable = true;
