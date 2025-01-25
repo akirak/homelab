@@ -19,8 +19,8 @@
   environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
   hardware.intelgpu.driver = "xe";
 
-  # Use the latest kernel for the intel driver
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Use the latest kernel for the intel driver that supports ZFS
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   environment.systemPackages = with pkgs; [
     libva-utils
