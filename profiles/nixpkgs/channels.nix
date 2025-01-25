@@ -14,6 +14,7 @@
         "Oracle_VM_VirtualBox_Extension_Pack" # older
         "Oracle_VirtualBox_Extension_Pack" # newer
         "google-chrome"
+        "intel-ocl"
       ];
   };
 }

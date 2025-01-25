@@ -298,6 +298,7 @@
             };
             extraModules = [
               inputs.home-manager-unstable.nixosModules.home-manager
+              inputs.nixos-hardware.nixosModules.common-gpu-intel
               twistHomeModule
             ];
           };
