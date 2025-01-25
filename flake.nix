@@ -109,6 +109,15 @@
               sha256 = "sha256-Hb89cqx744pDxm//Lm3di9cIIFoBVyownXjY5QAk3lc=";
             };
           };
+          # TODO wait for https://github.com/c0fec0de/anytree/issues/270
+          # TODO wait for https://github.com/NixOS/nixpkgs/issues/375763
+          python3Packages = prev.python3Packages.overrideScope (
+            _finalPy: prevPy: {
+              anytree = prevPy.anytree.overrideAttrs (old: {
+                patches = old.patches ++ [ ./patches/python-anytree-poetry-project-name-version.patch ];
+              });
+            }
+          );
         })
       ];
 
