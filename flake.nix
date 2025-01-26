@@ -118,6 +118,16 @@
               });
             }
           );
+          intel-media-driver = prev.intel-media-driver.overrideAttrs {
+            version = "24.4.4";
+            # Use the master newer than 24.4.4 for bugfixes.
+            src = prev.fetchFromGitHub {
+              owner = "intel";
+              repo = "media-driver";
+              rev = "76b1eae796e8d1a697ac63a54f04c8d866c8b348";
+              hash = "sha256-4BikrE/u5sVUIDcF9+8scbcAbzSFoH9HmbH5bRuPn+4=";
+            };
+          };
         })
       ];
 
