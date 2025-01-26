@@ -11,12 +11,22 @@
       intel-ocl
       # nixos-unstable
       vpl-gpu-rt
+      intel-media-sdk
       intel-compute-runtime
       intel-vaapi-driver
     ];
   };
 
-  environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
+  boot.kernelParams = [
+    # Check the ID by running `lspci -k | grep -EA3 'VGA|3D|Display'`
+    "i915.force_probe=6021"
+    "i915.enable_guc=3"
+  ];
+
+  environment.sessionVariables = {
+    VDPAU_DRIVER = "va_gl";
+    LIBVA_DRIVER_NAME = "iHD";
+  };
   hardware.intelgpu.driver = "xe";
 
   # Use the latest kernel for the intel driver that supports ZFS
