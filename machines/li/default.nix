@@ -144,6 +144,7 @@ in
 
     home.packages = [
       pkgs.rclone
+      pkgs.steam-run
       # pkgs.wine
       # pkgs.tenacity
       # pkgs.microsoft-edge
