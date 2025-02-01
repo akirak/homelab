@@ -15,13 +15,7 @@
         "Oracle_VirtualBox_Extension_Pack" # newer
         "google-chrome"
         "intel-ocl"
-<<<<<<< HEAD
-||||||| parent of 4fddacc (machines/li: Add stream-run package)
-        "cursor"
-=======
-        "cursor"
         "steam-unwrapped"
->>>>>>> 4fddacc (machines/li: Add stream-run package)
       ];
   };
 }
