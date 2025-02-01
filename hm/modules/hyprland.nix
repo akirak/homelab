@@ -167,11 +167,25 @@ in
               lib.flatten (builtins.map (window: (builtins.map (rule: "${rule},${window}") rules)) windows);
           in
           [ "workspace special,class:^(foot)$,title:^(Rebuilding)" ]
-          ++ (generateRules [
-            "float"
-            "size 80% 80%"
-            "center"
-          ] [ (exactClass "btop") ])
+          ++ (generateRules
+            [
+              "float"
+              "size 80% 80%"
+              "center"
+            ]
+            [ (exactClass "btop") ]
+          )
+          ++ (generateRules
+            [
+              "float"
+              "size 25% 25%"
+              "move 74% 74%"
+            ]
+            [
+              # This title is for Firefox which I use daily.
+              (exactTitle "Picture-in-Picture")
+            ]
+          )
           ++ (generateRules
             [
               "float"
