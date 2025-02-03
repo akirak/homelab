@@ -8,7 +8,13 @@ let
   enableFoot = config.programs.foot.enable;
   enableWayland = true;
 
-  defaultBrowser = if config.programs.firefox.enable then "firefox.desktop" else null;
+  defaultBrowser =
+    if config.programs.librewolf.enable then
+      "librewolf.desktop"
+    else if config.programs.firefox.enable then
+      "firefox.desktop"
+    else
+      null;
 
   defaultApplications = {
     "image/svg+xml" = [
@@ -20,11 +26,14 @@ in
   programs = {
     # alacritty.enable = enableGraphical;
     mpv.enable = true;
-    firefox.enable = true;
     foot.enable = enableWayland;
     foot.server.enable = enableFoot;
     # TODO: Add font package
     foot.settings.main.font = "JetBrainsMono NF:size=10.5";
+
+    # See modules/librewolf.nix for details
+    librewolf.enable = true;
+    # firefox.enable = true;
 
     # Use cursor when it helps
     vscode.enable = true;
