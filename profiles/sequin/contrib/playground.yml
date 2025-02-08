@@ -1,0 +1,22 @@
+# Based on https://github.com/sequinstream/sequin/blob/23a6b7e8c600bec0f0aa79ad53b7ee944b92a6ef/docker/playground.yml
+account:
+  name: "Playground"
+
+users:
+  - account: "Playground"
+    email: "admin@sequinstream.com"
+    password: "sequinpassword!"
+
+databases:
+  # To run this example, the database needs to be initialized using init.sql.
+  - name: "sequin-playground"
+    username: "postgres"
+    password: "postgres"
+    hostname: "localhost"
+    database: "sequin_playground"
+    port: 5432
+    slot_name: "sequin_slot"
+    publication_name: "sequin_pub"
+    tables:
+      - table_name: "products"
+        sort_column_name: "updated_at"
