@@ -32,18 +32,16 @@ in {
     "reset-raspberrypi"
   ];
 
-  # Force no ZFS
-  boot.supportedFilesystems =
-    lib.mkForce
-    [
-      "btrfs"
-      # "reiserfs"
-      "vfat"
-      "f2fs"
-      # "xfs"
-      "ntfs"
-      # "cifs"
-    ];
+  boot.supportedFilesystems = {
+    btrfs = true;
+    vfat = true;
+    # Force no ZFS
+    zfs = lib.mkForce false;
+    # Just unnecessary for the system
+    ntfs = lib.mkForce false;
+    reiserfs = lib.mkForce false;
+    cifs = lib.mkForce false;
+  };
 
   hardware.deviceTree = {
     kernelPackage = pkgs.linux_rpi4;
