@@ -1,0 +1,3 @@
+{
+  virtualisation.containers.enable = true;
+}
