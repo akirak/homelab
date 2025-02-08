@@ -16,6 +16,7 @@
     "*.age"
     "*.pub"
     "*.org"
+    "**/contrib/**"
   ];
 
   settings.formatter = {
