@@ -18,20 +18,20 @@
 
   boot.kernelParams = [ "ip=dhcp" ];
 
-  boot.supportedFilesystems = [
-    "zfs"
-    "btrfs"
-    "ext4"
-  ];
+  boot.supportedFilesystems = {
+    zfs = true;
+    btrfs = true;
+    ext4 = true;
+  };
 
   boot.initrd = {
     enable = true;
 
-    supportedFilesystems = [
-      "zfs"
-      "btrfs"
-      "ext4"
-    ];
+    supportedFilesystems = {
+      zfs = true;
+      btrfs = true;
+      ext4 = true;
+    };
 
     availableKernelModules = [
       "xhci_pci"

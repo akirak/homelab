@@ -30,8 +30,8 @@ in
   boot.extraModulePackages = [ ];
 
   # ZFS support
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.initrd.supportedFilesystems = [ "zfs" ];
+  boot.supportedFilesystems.zfs = true;
+  boot.initrd.supportedFilesystems.zfs = true;
   boot.zfs.requestEncryptionCredentials = true;
   services.zfs.autoSnapshot.enable = true;
   services.zfs.autoScrub.enable = true;

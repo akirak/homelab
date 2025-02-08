@@ -1,24 +1,25 @@
-{config, ...}: {
+{ config, ... }:
+{
   boot.loader = {
     efi.canTouchEfiVariables = false;
     systemd-boot.enable = true;
     timeout = 3;
   };
 
-  boot.kernelParams = ["ip=dhcp"];
+  boot.kernelParams = [ "ip=dhcp" ];
 
-  boot.supportedFilesystems = [
-    "zfs"
-    "btrfs"
-  ];
+  boot.supportedFilesystems = {
+    "zfs" = true;
+    "btrfs" = true;
+  };
 
   boot.initrd = {
     enable = true;
 
-    supportedFilesystems = [
-      "zfs"
-      "btrfs"
-    ];
+    supportedFilesystems = {
+      "zfs" = true;
+      "btrfs" = true;
+    };
 
     availableKernelModules = [
       "xhci_hcd"
