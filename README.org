@@ -1,17 +1,3 @@
 # -*- org-id-link-to-org-use-id: nil; -*-
 * Home Lab
 This repository contains the configuration files of my NixOS machines.
-** Features
-- Provided as a Nix flake
-- +Targeting various hosts (both cloud and physical). See below.+​ *inactive*​
-- Containing images for bootstrapping
-- +Using [[https://docs.cachix.org/deploy/][Cachix Deploy]] for agent-based, pull-style automated updates+​ *inactive*
-- Containing [[file:templates/home-manager/flake.nix][a flake template]] for [[https://github.com/nix-community/home-manager][home-manager]] configuration, which you can use for quickly creating a private configuration
-** Host environments
-- NixOS Desktop (~li~)
-- +Laptop (ASUS BR1100C) (~hui~)+​
-- Raspberry Pi 4 serving as a router and AP (~zheng~)
-- Mini PC with [[https://nixos.wiki/wiki/Remote_disk_unlocking][remote disk unlocking]] support (~yang~)
-** Note
-To provision a new virtual machine instance to Hetzner Cloud, I use Terraform.
-I have a continuous deployment setup on GitHub Actions, but the configuration is not part of this repository.
