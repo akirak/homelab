@@ -36,6 +36,7 @@ in
     ../../profiles/ollama
     ../../profiles/virtualbox-host
     ../../profiles/dpt-rp1
+    ../../profiles/podman/rootless-docker.nix
     # ../../profiles/docker/rootless.nix
     # ../../profiles/docker
     # ../../profiles/docker/kind.nix
