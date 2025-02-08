@@ -41,6 +41,7 @@ in
     # ../../profiles/docker
     # ../../profiles/docker/kind.nix
     # ../../profiles/k3s/single-node-for-testing.nix
+    ../../profiles/sequin
   ];
 
   hardware.graphics = {
