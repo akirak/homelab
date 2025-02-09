@@ -70,7 +70,7 @@ in
       # hoppscotch
 
       # database admin
-      beekeeper-studio
+      # beekeeper-studio
 
       # fonts
       channels.fonts.jetbrains-mono-nerdfont
