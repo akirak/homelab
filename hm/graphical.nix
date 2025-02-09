@@ -61,6 +61,8 @@ in
       blanket
       pavucontrol
 
+      windsurf
+
       # required by zsh-auto-notify plugin
       libnotify
 

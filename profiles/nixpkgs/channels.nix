@@ -17,6 +17,7 @@
         "intel-ocl"
         "cursor"
         "steam-unwrapped"
+        "windsurf"
       ];
   };
 }
