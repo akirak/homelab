@@ -166,6 +166,7 @@ in
               rules: windows:
               lib.flatten (builtins.map (window: (builtins.map (rule: "${rule},${window}") rules)) windows);
           in
+          # FIXME: This doesn't work now.
           [ "workspace special,class:^(foot)$,title:^(Rebuilding)" ]
           ++ (generateRules
             [
