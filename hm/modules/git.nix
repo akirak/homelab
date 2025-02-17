@@ -98,7 +98,7 @@ in
 
   config = {
     programs.git = lib.mkIf cfg.enable {
-      signing.format = "openpgp";
+      signing.format = lib.mkForce "openpgp";
 
       extraConfig = {
         pull.rebase = true;
