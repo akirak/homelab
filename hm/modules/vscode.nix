@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
   programs.vscode = {
-    package = pkgs.code-cursor;
+    package = pkgs.windsurf;
   };
 }

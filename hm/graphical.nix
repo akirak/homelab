@@ -35,7 +35,7 @@ in
     librewolf.enable = true;
     # firefox.enable = true;
 
-    # Use cursor when it helps
+    # AI coding
     vscode.enable = true;
 
     # enable auto-notify plugin only in graphical environments
@@ -60,8 +60,6 @@ in
     (with pkgs; [
       blanket
       pavucontrol
-
-      windsurf
 
       # required by zsh-auto-notify plugin
       libnotify
