@@ -1,4 +1,12 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  homeUser,
+  ...
+}:
+let
+  rootlessStoragePath = "/home/${homeUser}/.local/share/containers";
+in
 {
   # fileSystems."/backup" = {
   #   device = "/dev/mapper/backup_rpool5";
@@ -37,6 +45,12 @@
     device = "rpool5/local/containers";
     fsType = "zfs";
   };
+
+  fileSystems.${rootlessStoragePath} = {
+    device = "rpool5/local/containers-rootless";
+    fsType = "zfs";
+  };
+  virtualisation.containers.storage.settings.storage.rootless_storage_path = rootlessStoragePath;
 
   fileSystems."/media/virtualbox" = {
     device = "rpool5/safe/virtualbox";
