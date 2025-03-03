@@ -124,8 +124,8 @@
             src = prev.fetchFromGitHub {
               owner = "intel";
               repo = "media-driver";
-              rev = "7b698ed3a33171544e9bdef1fa31d626ce01bf99";
-              sha256 = "sha256-ucVNmg/ycVoZayVb1LzOCAX+p25Cp6dHWq/Qm9nxoU4=";
+              rev = "c88e772049e0cd32193a31979689db2babf138d1";
+              sha256 = "sha256-C0sl3QlM5apdO5xars+qKXdBoEOJNFv2ukH8RlH7V8A=";
             };
           };
         })
