@@ -22,6 +22,5 @@ in {
     ripgrep
     fd
     jq
-    tailspin
   ];
 }
