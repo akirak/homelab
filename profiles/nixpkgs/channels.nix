@@ -18,6 +18,7 @@
         "cursor"
         "steam-unwrapped"
         "windsurf"
+        "claude-code"
       ];
   };
 }

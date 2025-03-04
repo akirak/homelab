@@ -127,6 +127,7 @@ in
     imports = [
       ../../hm/basic.nix
       ../../hm/extra.nix
+      ../../hm/code.nix
       ../../hm/graphical.nix
     ];
 

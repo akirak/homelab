@@ -18,9 +18,6 @@
     tbls
     hyperfine
     just
-    yamlfmt
-    vscode-langservers-extracted # Primarily for the JSON server
-    nil # Nix
 
     # Media
     git-annex
