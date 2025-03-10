@@ -213,7 +213,7 @@
       "reload" = "systemctl --user daemon-reload";
       "status" = "systemctl --user --full status";
       "restart" = "systemctl --user restart";
-      "ssh-victim" = "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null";
+      "ssh-ignore" = "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null";
     };
   };
 }
