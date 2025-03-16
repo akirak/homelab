@@ -19,6 +19,7 @@
         "steam-unwrapped"
         "windsurf"
         "claude-code"
+        "copilot-language-server"
       ];
   };
 }
