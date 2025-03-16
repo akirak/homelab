@@ -146,7 +146,7 @@ in
 
     home.packages = [
       pkgs.rclone
-      pkgs.steam-run
+      # pkgs.steam-run
       # pkgs.wine
       # pkgs.tenacity
       # pkgs.microsoft-edge
@@ -182,8 +182,6 @@ in
       settings = {
         extraFeatures = [
           "beancount"
-          "copilot"
-          # "ChatGPT"
           "OCaml"
           "Emacs"
           "Emacs__lisp"
