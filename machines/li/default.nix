@@ -153,6 +153,13 @@ in
       # pkgs.zoom-us
     ];
 
+    home.file.".npmrc".text = ''
+      # Required because of the network instability
+      fetch-retries = 5
+      # Required because of ZFS
+      package-import-method=copy
+    '';
+
     services.kanshi.settings = [
       {
         profile.name = "docked";
