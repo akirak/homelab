@@ -35,8 +35,8 @@ in
     librewolf.enable = true;
     # firefox.enable = true;
 
-    # AI coding
-    vscode.enable = true;
+    # AI coding (Cline)
+    # vscode.enable = true;
 
     # enable auto-notify plugin only in graphical environments
     zsh = {
