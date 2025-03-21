@@ -145,7 +145,7 @@ in
     home.stateVersion = stateVersion;
 
     home.packages = [
-      pkgs.rclone
+      pkgs.vscode
       # pkgs.steam-run
       # pkgs.wine
       # pkgs.tenacity
