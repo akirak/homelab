@@ -25,6 +25,7 @@ in
     (modulesPath + "/profiles/hardened.nix")
     # Create a non-wheel user for hosting some personal data.
     ../../profiles/users/1000/on-server.nix
+    ../../profiles/agenix
     ../../profiles/openssh
     ../../profiles/onedev
     ../../profiles/docker
