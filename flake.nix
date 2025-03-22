@@ -370,7 +370,7 @@
 
         agenix-rekey = inputs.agenix-rekey.configure {
           userFlake = self;
-          nodes = builtins.intersectAttrs hostPubkeys self.nixosConfigurations;
+          nixosConfigurations = builtins.intersectAttrs hostPubkeys self.nixosConfigurations;
         };
 
         templates = {

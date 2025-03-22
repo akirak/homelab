@@ -25,6 +25,7 @@ in
     (modulesPath + "/profiles/hardened.nix")
     # Create a non-wheel user for hosting some personal data.
     ../../profiles/users/1000/on-server.nix
+    ../../profiles/agenix
     ../../profiles/openssh
     ../../profiles/onedev
     ../../profiles/docker
@@ -68,6 +69,8 @@ in
     enable = true;
     config = ''
       nicesunny.day {
+        # Bypass requests for ACME challenges
+        forward _acme-challenge.nicesunny.day 1.1.1.1
         hosts {
           ${ip} test test.nicesunny.day
           ${hostsTextForReverseProxy}
@@ -79,6 +82,11 @@ in
           fallthrough
         }
         log
+      }
+
+      . {
+        # acme-v02.api.letsencrypt.org should be discoverable from the host
+        forward . 1.1.1.1 8.8.8.8 9.9.9.9
       }
     '';
   };
