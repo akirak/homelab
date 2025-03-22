@@ -11,9 +11,9 @@ let
 
   inherit (config.networking) hostName;
 
-  excludeThisDevice = lib.remove hostName;
+  otherDevicesByHostName = lib.remove hostName;
 
-  allDevices = excludeThisDevice (builtins.attrNames devices);
+  allDevices = otherDevicesByHostName (builtins.attrNames devices);
 
   enableReverseProxy = config.services.reverse-proxy.enable;
 
@@ -35,20 +35,31 @@ in
         "org" = {
           path = cfg.dataDir + "/org";
           devices = allDevices;
-          id = "qv34o-qzgf6";
+          id = "v3msx-gwdqt";
+        };
+        "notes-and-pdfs" = {
+          path = cfg.dataDir + "/notes-and-pdfs";
+          devices = otherDevicesByHostName [
+            "li"
+          ];
+          id = "4warh-yejmn";
         };
         "private" = {
           path = cfg.dataDir + "/private";
-          devices = excludeThisDevice [
+          devices = otherDevicesByHostName [
             "li"
             "yang"
           ];
-          id = "oyzfe-oidou";
+          id = "gstwc-lxb3v";
         };
       };
       # Prevent "Host check error"
       # https://docs.syncthing.net/users/faq.html#why-do-i-get-host-check-error-in-the-gui-api
       gui.insecureSkipHostCheck = lib.mkIf enableReverseProxy true;
+
+      # Wait for the PR
+      # gui.user = "akirak";
+      # inherit guiPasswordFile;
     };
   };
 
@@ -64,8 +75,11 @@ in
     allowedTCPPorts = [ 8384 ];
   };
 
-  services.syncthing.settings.gui = {
-    user = "akirak";
-    password = "$2y$10$epya6R5qrkZzGGCUZFQ5duA9NBvPesWkNp1QBnyJE8JWp1zenEEdq";
-  };
+  # The password is unencrypted, so it's basically useless. Wait for the PR on
+  # guiPasswordFile option to get merged.
+
+  # services.syncthing.settings.gui = {
+  #   user = "akirak";
+  #   password = "$2y$10$epya6R5qrkZzGGCUZFQ5duA9NBvPesWkNp1QBnyJE8JWp1zenEEdq";
+  # };
 }
