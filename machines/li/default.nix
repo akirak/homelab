@@ -146,6 +146,7 @@ in
 
     home.packages = [
       pkgs.vscode
+      pkgs.rclone
       # pkgs.steam-run
       # pkgs.wine
       # pkgs.tenacity
