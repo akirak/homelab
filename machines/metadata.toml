@@ -8,7 +8,7 @@ ipAddress = "192.168.10.60"
 syncthingId = "FWMZWNO-CIL5HZL-5IOA5IZ-UGXYQK6-DYK76L4-VDQAOZP-VHDLLC4-JYUSAAU"
 
 [hosts.yang]
-ipAddress = "192.168.10.185"
+ipAddress = "192.168.10.10"
 publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBBqIBetzQSQhJeOgBXCcNwwyWToSGh2ZUMLEROwwxeF"
 
 [hosts.wang]
