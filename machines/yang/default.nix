@@ -111,6 +111,9 @@ in
         matchConfig.Name = "enp1s0";
         networkConfig = {
           DHCP = "ipv4";
+          Address = metadata.hosts.${config.networking.hostName}.ipAddress;
+          Gateway = metadata.hosts.zheng.ipAddress;
+          DNS = metadata.hosts.zheng.ipAddress;
         };
       };
     };
