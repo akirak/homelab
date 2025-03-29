@@ -113,6 +113,15 @@
         }
       }
 
+      function project-subdirectories() {
+        local root="$(git rev-parse --show-toplevel)"
+        if [[ -z "$root" ]]; then
+          return 1
+        else
+          ( cd "$root" && fd -a -L -t d )
+        fi
+      }
+
       function emacs-visible-directories() {
           tmp=$(mktemp -p "''${XDG_RUNTIME_DIR}")
           trap "rm -f '$tmp'" ERR EXIT
@@ -146,6 +155,8 @@
                 -m: Select a mount point
                 -r: Select a remote of the current Git repository
                 -w: Select the directory of a visible buffer
+                -d: Select a sub-directory inside the current Git repository
+                -g: Go to the root of the current Git working tree
       HELP
             ;;
           -p|)
@@ -159,6 +170,15 @@
             ;;
           -w)
             emacs-visible-directories | pick cdv
+            ;;
+          -d)
+            project-subdirectories | pick cdv
+            ;;
+          -g)
+            local root="$(git rev-parse --show-toplevel)"
+            if [[ -n "$root" ]]; then
+              builtin cd "$root"
+            fi
             ;;
           *)
             builtin cd "$@"
