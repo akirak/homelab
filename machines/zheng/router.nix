@@ -135,7 +135,8 @@ in
                 icmp type echo-request limit rate 5/second accept
 
                 # allow DHCP, DNS and SSH from the private network
-                ip protocol . th dport vmap { tcp . 22 : accept, udp . 53 : accept, tcp . 53 : accept, udp . 67 : accept}
+                # also allow access to the admin of AdguardHome
+                ip protocol . th dport vmap { tcp . 22 : accept, udp . 53 : accept, tcp . 53 : accept, udp . 67 : accept, tcp . 3000 : accept }
             }
 
             chain inbound {
