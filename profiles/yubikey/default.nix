@@ -11,7 +11,7 @@
 
   environment.systemPackages = [
     pkgs.yubikey-manager
-    pkgs.yubikey-manager-qt
+    pkgs.yubioath-flutter
     pkgs.age-plugin-yubikey
   ];
 }
