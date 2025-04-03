@@ -194,6 +194,7 @@ in
           "Emacs"
           "Emacs__lisp"
           "Org"
+          "MCP"
           # "Coq"
           # "Lean4"
           # "lsp_mode"
