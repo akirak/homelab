@@ -124,6 +124,7 @@ in
         "result-*"
         "#*"
         ".git-bak*"
+        ".aider*"
       ];
 
       includes = lib.pipe ([ cfg.defaultIdentity ] ++ cfg.extraIdentities) [
