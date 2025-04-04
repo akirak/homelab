@@ -25,8 +25,8 @@ in
     vscode-langservers-extracted # Primarily for the JSON server
     nil # Nix
 
-    # AI frontends
-    claude-code
+    # AI
+    aider-chat
 
     # Used to run MCP servers.
     (onlySingleBin pkgs.nodejs "npx")
