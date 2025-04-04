@@ -30,15 +30,12 @@
     agenix-rekey.url = "github:oddlama/agenix-rekey";
     agenix-rekey.inputs.nixpkgs.follows = "unstable";
 
-    cachix-deploy-flake = {
-      url = "github:cachix/cachix-deploy-flake";
-      inputs.nixpkgs.follows = "stable";
-      inputs.disko.follows = "disko";
-      inputs.home-manager.follows = "home-manager-stable";
-      inputs.darwin.follows = "nix-darwin";
-    };
-
-    nil.url = "github:oxalica/nil";
+    # cachix-deploy-flake = {
+    #   url = "github:cachix/cachix-deploy-flake";
+    #   inputs.nixpkgs.follows = "stable";
+    #   inputs.home-manager.follows = "home-manager-stable";
+    #   inputs.darwin.follows = "nix-darwin";
+    # };
 
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
@@ -98,9 +95,7 @@
           ] (name: inputs.${name}.packages.${prev.system});
           unstable = unstable.legacyPackages.${prev.system};
           disko = inputs.disko.packages.${prev.system}.disko;
-          inherit (unstable.legacyPackages.${prev.system}) cachix;
           nix-index = inputs.nix-index-database.packages.${prev.system}.nix-index-with-db;
-          nil = inputs.nil.packages.${prev.system}.default;
           dpt-rp1-py = prev.dpt-rp1-py.overrideAttrs {
             src = prev.fetchFromGitHub {
               owner = "akirak";
@@ -282,11 +277,11 @@
         };
 
         packages.aarch64-linux = {
-          cachix-deploys = import ./lib/cachix-deploy.nix {
-            pkgs = unstable.legacyPackages.aarch64-linux;
-            inherit (inputs) self cachix-deploy-flake;
-            nixosHosts = [ "zheng" ];
-          };
+          # cachix-deploys = import ./lib/cachix-deploy.nix {
+          #   pkgs = unstable.legacyPackages.aarch64-linux;
+          #   inherit (inputs) self cachix-deploy-flake;
+          #   nixosHosts = [ "zheng" ];
+          # };
 
           bootstrap-sd-image =
             (unstable.lib.nixosSystem {
