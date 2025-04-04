@@ -87,7 +87,7 @@
       inherit (stable) lib;
 
       overlays = [
-        (_final: prev: {
+        (final: prev: {
           channels = lib.genAttrs [
             "hyprland-contrib"
             "fonts"
@@ -96,6 +96,24 @@
           unstable = unstable.legacyPackages.${prev.system};
           disko = inputs.disko.packages.${prev.system}.disko;
           nix-index = inputs.nix-index-database.packages.${prev.system}.nix-index-with-db;
+          aider-chat = prev.aider-chat.overrideAttrs (old: {
+            nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [
+              prev.makeWrapper
+            ];
+            propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++ [
+              final.age
+            ];
+            # Store one or more multiple --api-key options in an age-encrypted
+            # file and decrypt the content when the program starts.
+            postInstall = ''
+              wrapProgram $out/bin/aider \
+                --inherit-argv0 \
+                --run 'args=($(${lib.getExe final.age} \
+                  -i ${./secrets/yubikey.pub} \
+                  --decrypt ${./secrets/aider-args.txt.age}))' \
+                --add-flags '"''${args[@]}"'
+            '';
+          });
           dpt-rp1-py = prev.dpt-rp1-py.overrideAttrs {
             src = prev.fetchFromGitHub {
               owner = "akirak";
