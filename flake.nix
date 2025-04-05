@@ -108,10 +108,9 @@
             postInstall = ''
               wrapProgram $out/bin/aider \
                 --inherit-argv0 \
-                --run 'args=($(${lib.getExe final.age} \
+                --run 'export $(${lib.getExe final.age} \
                   -i ${./secrets/yubikey.pub} \
-                  --decrypt ${./secrets/aider-args.txt.age}))' \
-                --add-flags '"''${args[@]}"'
+                  --decrypt ${./secrets/aider-env.age})'
             '';
           });
           dpt-rp1-py = prev.dpt-rp1-py.overrideAttrs {
