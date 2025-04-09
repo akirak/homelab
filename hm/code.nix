@@ -14,7 +14,7 @@ let
         }
         ''
           mkdir -p $out/bin
-          makeWrapper ${lib.getBin drv}/bin/${name} $out/bin/${name} \
+          makeWrapper ${lib.getExe' drv name} $out/bin/${name} \
             --prefix PATH : ${lib.getBin drv}/bin
         ''
     ) { });
