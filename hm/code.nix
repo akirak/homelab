@@ -31,5 +31,9 @@ in
     # Used to run MCP servers.
     (onlySingleBin pkgs.nodejs "npx")
     (onlySingleBin pkgs.uv "uvx")
-  ];
+    ])
+    ++ (lib.optionals pkgs.stdenv.isLinux [
+      # Sandbox MCP scripts
+      pkgs.bubblewrap
+    ]);
 }
