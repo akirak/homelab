@@ -79,6 +79,7 @@ in
       pkgs.wayshot
       pkgs.wf-recorder
       pkgs.slurp # Used with wayshot
+      pkgs.wl-clipboard
 
       (pkgs.writeShellApplication {
         name = "lock-screen";
