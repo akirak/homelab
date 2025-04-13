@@ -20,17 +20,18 @@ let
     ) { });
 in
 {
-  home.packages = with pkgs; [
-    yamlfmt
-    vscode-langservers-extracted # Primarily for the JSON server
-    nil # Nix
+  home.packages =
+    (with pkgs; [
+      yamlfmt
+      vscode-langservers-extracted # Primarily for the JSON server
+      nil # Nix
 
-    # AI
-    aider-chat
+      # AI
+      aider-chat
 
-    # Used to run MCP servers.
-    (onlySingleBin pkgs.nodejs "npx")
-    (onlySingleBin pkgs.uv "uvx")
+      # Used to run MCP servers.
+      (onlySingleBin pkgs.nodejs "npx")
+      (onlySingleBin pkgs.uv "uvx")
     ])
     ++ (lib.optionals pkgs.stdenv.isLinux [
       # Sandbox MCP scripts
