@@ -87,7 +87,7 @@
       inherit (stable) lib;
 
       overlays = [
-        (final: prev: {
+        (_final: prev: {
           channels = lib.genAttrs [
             "hyprland-contrib"
             "fonts"
