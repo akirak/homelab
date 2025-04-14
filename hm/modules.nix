@@ -1,9 +1,12 @@
-{lib}: let
+{ lib }:
+let
   dir = ./modules;
+
+  isModule =
+    name: type: ((type == "regular") && (lib.hasSuffix ".nix" name)) || (type == "directory");
 in
-  lib.pipe (builtins.readDir dir) [
-    (lib.filterAttrs (_: type: type == "regular"))
-    builtins.attrNames
-    (builtins.filter (lib.hasSuffix ".nix"))
-    (builtins.map (filename: dir + "/${filename}"))
-  ]
+lib.pipe (builtins.readDir dir) [
+  (lib.filterAttrs isModule)
+  builtins.attrNames
+  (builtins.map (filename: dir + "/${filename}"))
+]

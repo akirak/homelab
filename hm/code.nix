@@ -20,6 +20,15 @@ let
     ) { });
 in
 {
+  # Custom module
+  programs.aider = {
+    enable = true;
+    age = {
+      identityFile = ../secrets/yubikey.pub;
+      envFile = ../secrets/aider-env.age;
+    };
+  };
+
   home.packages =
     (with pkgs; [
       yamlfmt
@@ -27,7 +36,6 @@ in
       nil # Nix
 
       # AI
-      aider-chat
       goose-cli
 
       # Used to run MCP servers.
