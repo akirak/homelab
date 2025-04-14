@@ -28,6 +28,7 @@ in
 
       # AI
       aider-chat
+      goose-cli
 
       # Used to run MCP servers.
       (onlySingleBin pkgs.nodejs "npx")

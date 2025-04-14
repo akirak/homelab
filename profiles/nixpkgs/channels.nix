@@ -20,6 +20,7 @@
         "windsurf"
         "claude-code"
         "copilot-language-server"
+        "tokenizer.json"
       ];
   };
 }
