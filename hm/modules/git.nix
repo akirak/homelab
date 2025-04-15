@@ -125,6 +125,9 @@ in
         "#*"
         ".git-bak*"
         ".aider*"
+        # Non-standard
+        "!.aider.conf.yml"
+        "!.aiderignore"
       ];
 
       includes = lib.pipe ([ cfg.defaultIdentity ] ++ cfg.extraIdentities) [
