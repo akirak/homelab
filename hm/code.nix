@@ -24,8 +24,8 @@ in
   programs.aider = {
     enable = true;
     age = {
-      identityFile = ../secrets/yubikey.pub;
-      envFile = ../secrets/aider-env.age;
+      identityFile = lib.mkDefault ../secrets/yubikey.pub;
+      envFile = lib.mkDefault ../secrets/aider-env.age;
     };
   };
 
