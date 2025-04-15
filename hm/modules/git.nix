@@ -21,11 +21,9 @@ let
         [user]
           name = "${userName}"
           email = "${userEmail}"
-          ${
-            lib.optionalString (signingKey != null) ''
-              signingKey = "${signingKey}"
-            ''
-          }
+          ${lib.optionalString (signingKey != null) ''
+            signingKey = "${signingKey}"
+          ''}
       ''
       + lib.optionalString (githubUser != null) ''
         [github]
