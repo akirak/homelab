@@ -69,6 +69,9 @@ in
     pkgs.clinfo
     pkgs.hunspellDicts.en_US
     pkgs.hunspellDicts.en_GB-ise
+
+    # Install Cloud Hypervisor for use with MicroVM
+    pkgs.cloud-hypervisor
   ];
 
   services.journald.extraConfig = ''
