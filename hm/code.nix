@@ -35,9 +35,6 @@ in
       vscode-langservers-extracted # Primarily for the JSON server
       nil # Nix
 
-      # AI
-      goose-cli
-
       # Used to run MCP servers.
       (onlySingleBin pkgs.nodejs "npx")
       (onlySingleBin pkgs.uv "uvx")
