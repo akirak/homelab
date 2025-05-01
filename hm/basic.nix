@@ -18,6 +18,7 @@
     tbls
     hyperfine
     just
+    tailspin
 
     # Media
     git-annex
