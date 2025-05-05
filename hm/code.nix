@@ -34,6 +34,7 @@ in
       yamlfmt
       vscode-langservers-extracted # Primarily for the JSON server
       nil # Nix
+      just-lsp
 
       # Used to run MCP servers.
       (onlySingleBin pkgs.nodejs "npx")
