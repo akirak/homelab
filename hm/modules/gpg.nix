@@ -14,7 +14,7 @@ in {
     # Explicitly set the pinentry package when using a non-standard window
     # manager setting
     # https://discourse.nixos.org/t/help-with-pinentrypackage/41393/8
-    pinentryPackage = lib.mkForce pkgs.pinentry-gtk2;
+    pinentry.package = lib.mkForce pkgs.pinentry-gtk2;
     extraConfig = ''
       allow-emacs-pinentry
       allow-loopback-pinentry
