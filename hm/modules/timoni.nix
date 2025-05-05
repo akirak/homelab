@@ -24,7 +24,7 @@ in {
       pkgs.timoni
     ];
 
-    programs.zsh.initExtra = mkIf cfg.enableZshIntegration ''
+    programs.zsh.initContent = mkIf cfg.enableZshIntegration ''
       source <(${pkgs.timoni}/bin/timoni completion zsh)
       compdef _timoni timoni
     '';

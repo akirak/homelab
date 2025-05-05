@@ -52,7 +52,7 @@
       "LOCALE_ARCHIVE_2_27" = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     };
 
-    initExtra = ''
+    initContent = ''
       setopt auto_cd
       setopt cdable_vars
       setopt auto_name_dirs

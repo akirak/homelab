@@ -50,7 +50,7 @@ in
         # https://github.com/MichaelAquilina/zsh-auto-notify
         "AUTO_NOTIFY_THRESHOLD" = "60";
       };
-      initExtra = ''
+      initContent = ''
         export AUTO_NOTIFY_IGNORE=("nix shell" "nix develop" "ssh" "agenix edit" "man" "less")
       '';
     };
