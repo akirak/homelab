@@ -1,9 +1,6 @@
 {
   inputs = {
-    flake-pins = {
-      url = "github:akirak/flake-pins";
-      flake = false;
-    };
+    flake-pins.url = "github:akirak/flake-pins";
 
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     stable.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -49,9 +46,6 @@
 
     hyprland-contrib.url = "github:hyprwm/contrib";
 
-    fonts.url = "github:akirak/flake-pins?dir=pkgs/fonts";
-    zsh-plugins.url = "github:akirak/flake-pins?dir=pkgs/zsh-plugins";
-
     emacs-config = {
       url = "github:akirak/emacs-config/develop";
       inputs.twist.follows = "twist";
@@ -87,6 +81,7 @@
       inherit (stable) lib;
 
       overlays = [
+        inputs.flake-pins.overlays.default
         (_final: prev: {
           channels = lib.genAttrs [
             "hyprland-contrib"
@@ -96,24 +91,6 @@
           unstable = unstable.legacyPackages.${prev.system};
           disko = inputs.disko.packages.${prev.system}.disko;
           nix-index = inputs.nix-index-database.packages.${prev.system}.nix-index-with-db;
-          dpt-rp1-py = prev.dpt-rp1-py.overrideAttrs {
-            src = prev.fetchFromGitHub {
-              owner = "akirak";
-              repo = "dpt-rp1-py";
-              rev = "ea470e51bd68138926860856e80902477770ec71";
-              sha256 = "sha256-Hb89cqx744pDxm//Lm3di9cIIFoBVyownXjY5QAk3lc=";
-            };
-          };
-          intel-media-driver = prev.intel-media-driver.overrideAttrs {
-            version = "24.4.4";
-            # Use the master newer than 24.4.4 for bugfixes.
-            src = prev.fetchFromGitHub {
-              owner = "intel";
-              repo = "media-driver";
-              rev = "187a0c7d0803feff7de0c63f6e583c57aede48a6";
-              sha256 = "sha256-979/jtejVAH49j4kT9QuSKiWc/7slgeKprvHEEEQ01M=";
-            };
-          };
         })
       ];
 
