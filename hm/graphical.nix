@@ -43,7 +43,7 @@ in
       plugins = [
         {
           name = "auto-notify";
-          src = pkgs.channels.zsh-plugins.zsh-auto-notify;
+          src = pkgs.customZshPlugins.zsh-auto-notify;
         }
       ];
       sessionVariables = {
@@ -71,7 +71,7 @@ in
       # beekeeper-studio
 
       # fonts
-      channels.fonts.jetbrains-mono-nerdfont
+      customFontPackages.jetbrains-mono-nerdfont
       # Japanese
       ipafont
     ])

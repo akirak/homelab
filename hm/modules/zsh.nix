@@ -26,19 +26,19 @@
       }
       {
         name = "fzy";
-        src = pkgs.channels.zsh-plugins.zsh-fzy;
+        src = pkgs.customZshPlugins.zsh-fzy;
       }
       {
         name = "nix-shell";
-        src = pkgs.channels.zsh-plugins.zsh-nix-shell;
+        src = pkgs.customZshPlugins.zsh-nix-shell;
       }
       {
         name = "fast-syntax-highlighting";
-        src = pkgs.channels.zsh-plugins.zsh-fast-syntax-highlighting;
+        src = pkgs.customZshPlugins.zsh-fast-syntax-highlighting;
       }
       {
         name = "history-filter";
-        src = pkgs.channels.zsh-plugins.zsh-history-filter;
+        src = pkgs.customZshPlugins.zsh-history-filter;
       }
     ];
 
