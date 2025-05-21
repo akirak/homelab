@@ -91,7 +91,6 @@
           unstable = unstable.legacyPackages.${prev.system};
           disko = inputs.disko.packages.${prev.system}.disko;
           nix-index = inputs.nix-index-database.packages.${prev.system}.nix-index-with-db;
-          inherit (inputs.codex.packages.${prev.system}) codex-cli;
         })
       ];
 

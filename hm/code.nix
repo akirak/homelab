@@ -29,15 +29,6 @@ in
     };
   };
 
-  programs.codex-cli = {
-    enable = true;
-    package = pkgs.customPackages.codex-cli;
-    age = {
-      identityFile = lib.mkDefault ../secrets/yubikey.pub;
-      envFile = lib.mkDefault ../secrets/aider-env.age;
-    };
-  };
-
   home.packages =
     (with pkgs; [
       yamlfmt
