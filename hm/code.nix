@@ -36,6 +36,8 @@ in
       nil # Nix
       just-lsp
 
+      customPackages.codex-cli
+
       # Used to run MCP servers.
       (onlySingleBin pkgs.nodejs "npx")
       (onlySingleBin pkgs.uv "uvx")
