@@ -145,6 +145,11 @@ in
       ];
     };
 
+    programs.uv.settings = {
+      # ZFS
+      tool.uv.link-mode = "copy";
+    };
+
     home.stateVersion = stateVersion;
 
     home.packages = [

@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   # Build an interpreter-only derivation for running a package directly.
   onlySingleBin =
@@ -29,6 +34,8 @@ in
     };
   };
 
+  programs.uv.enable = true;
+
   home.packages =
     (with pkgs; [
       yamlfmt
@@ -40,8 +47,8 @@ in
 
       # Used to run MCP servers.
       (onlySingleBin pkgs.nodejs "npx")
-      (onlySingleBin pkgs.uv "uvx")
     ])
+    ++ (lib.optional (!config.programs.uv.enable) (onlySingleBin pkgs.uv "uvx"))
     ++ (lib.optionals pkgs.stdenv.isLinux [
       # Sandbox MCP scripts
       pkgs.bubblewrap
