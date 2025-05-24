@@ -147,7 +147,7 @@ in
 
     programs.uv.settings = {
       # ZFS
-      tool.uv.link-mode = "copy";
+      link-mode = "copy";
     };
 
     home.stateVersion = stateVersion;
