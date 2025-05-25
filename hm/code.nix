@@ -44,6 +44,7 @@ in
       just-lsp
 
       customPackages.codex-cli
+      unstable-small-unfree.claude-code
 
       # Used to run MCP servers.
       (onlySingleBin pkgs.nodejs "npx")
