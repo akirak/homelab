@@ -5,6 +5,9 @@
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     stable.url = "github:NixOS/nixpkgs/nixos-24.11";
 
+    # More frequently input to use the newer versions of packages.
+    unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+
     home-manager-stable.url = "github:nix-community/home-manager/release-24.11";
     home-manager-unstable.url = "github:nix-community/home-manager";
     nix-darwin.url = "github:LnL7/nix-darwin";
@@ -89,6 +92,12 @@
             "zsh-plugins"
           ] (name: inputs.${name}.packages.${prev.system});
           unstable = unstable.legacyPackages.${prev.system};
+          # Explicit import from the small nixpkgs.
+          unstable-small-unfree = import inputs.unstable-small {
+            inherit (prev) system;
+            config.allowUnfree = true;
+          };
+          # unstable-small = inputs.unstable-small.legacyPackages.${prev.system};
           disko = inputs.disko.packages.${prev.system}.disko;
           nix-index = inputs.nix-index-database.packages.${prev.system}.nix-index-with-db;
         })

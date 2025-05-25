@@ -200,11 +200,11 @@
         "twist2elpa": "twist2elpa"
       },
       "locked": {
-        "lastModified": 1747885604,
-        "narHash": "sha256-uQ53RYVoIkPHzUsz1AsZq+Qrv7VOrhr0Y/ywwuJcEzo=",
+        "lastModified": 1748114011,
+        "narHash": "sha256-2Q4LFbMRmO5kYtfE4TKE22fdzS1ujMaeq9alPQJc9j4=",
         "owner": "akirak",
         "repo": "emacs-config",
-        "rev": "1b282dd849c6b3847290878cc1c8e4c643b95284",
+        "rev": "942718097db714ab79ba24a7d6b44db5cecde9c4",
         "type": "github"
       },
       "original": {
@@ -1372,7 +1372,8 @@
         "stable": "stable_3",
         "treefmt-nix": "treefmt-nix_2",
         "twist": "twist",
-        "unstable": "unstable_3"
+        "unstable": "unstable_3",
+        "unstable-small": "unstable-small"
       }
     },
     "rust-overlay": {
@@ -1679,6 +1680,22 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "unstable-small": {
+      "locked": {
+        "lastModified": 1748074755,
+        "narHash": "sha256-b3SC3Q3cXr4tdCN3WVTFqMP8I9OwaXXcj1aVoSVaygw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c3ee76c437067f1ae09d6e530df46a3f80977992",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable-small",
         "repo": "nixpkgs",
         "type": "github"
       }
