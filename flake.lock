@@ -478,11 +478,11 @@
         "unstable": "unstable_2"
       },
       "locked": {
-        "lastModified": 1748013730,
-        "narHash": "sha256-b6YgdrKcjFEZT52mxXxdIhd+QPqq85//UnRtL/8xDMc=",
+        "lastModified": 1748339855,
+        "narHash": "sha256-batzmReKLd0h9ogDUAsXsW5HPlS6F8ZN/qQtRwvoIPg=",
         "owner": "akirak",
         "repo": "flake-pins",
-        "rev": "e8e001bd5f64a5c78eed8a305c77d7ccc05287bc",
+        "rev": "6af69f4b190dbebf3a03901a602efb26bbe7136b",
         "type": "github"
       },
       "original": {
