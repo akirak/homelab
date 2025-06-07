@@ -20,4 +20,4 @@ jobs:
       # separately for failing fast.
       - name: Check formatting
         run: |
-          nix build -L ".#checks.$(nix eval --expr builtins.currentSystem --impure --raw).formatting"
+          nix build -L ".#checks.$(nix eval --expr builtins.currentSystem --impure --raw).treefmt"
