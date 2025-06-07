@@ -1,22 +1,27 @@
 # Currently unused
-{ inputs, ... }:
+{ lib, inputs, ... }:
 let
-  inherit (inputs) unstable;
+  inherit (inputs) self;
+
+  nixosHosts = [
+    "hui"
+  ];
+
+  homeHosts = [
+  ];
 in
 {
   flake = {
-    packages.x86_64-linux = {
-      cachix-deploys = import ./lib/cachix-deploy.nix {
-        pkgs = unstable.legacyPackages.x86_64-linux;
-        inherit (inputs) self cachix-deploy-flake;
-        nixosHosts = [
-          # "shu"
-          "hui"
-        ];
-        homeHosts = [
-          # "voyage"
-        ];
+    packages.x86_64-linux =
+      let
+        pkgs = inputs.unstable.legacyPackages.x86_64-linux;
+      in
+      {
+        cachix-deploys = (inputs.cachix-deploy-flake.lib pkgs).spec {
+          agents =
+            (lib.genAttrs nixosHosts (name: self.nixosConfigurations.${name}.config.system.build.toplevel))
+            // (lib.genAttrs homeHosts (name: self.homeConfigurations.${name}.activationPackage));
+        };
       };
-    };
   };
 }
