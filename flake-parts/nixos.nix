@@ -27,7 +27,6 @@ in
             [
               inputs.disko.nixosModules.disko
               inputs.impermanence.nixosModules.impermanence
-              ../modules/services/livebook
               flake-pins.nixosModules.nix-registry
             ]
             ++ lib.optionals (hostPubkey != null) [

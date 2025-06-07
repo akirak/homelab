@@ -33,6 +33,7 @@ in
     # ../../profiles/wayland/wm/river.nix
     # ../../profiles/nix/cachix-deploy.nix
     ../../profiles/postgresql/development.nix
+    ../../profiles/livebook
     ../../profiles/ollama
     ../../profiles/virtualbox-host
     ../../profiles/dpt-rp1
