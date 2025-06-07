@@ -14,7 +14,7 @@ in
           system = "x86_64-linux";
           modules = [
             overlayModule
-            ../suites/remote-installer
+            ../nixos/suites/remote-installer
             (
               { modulesPath, ... }:
               {
@@ -37,7 +37,7 @@ in
                 imports = [ (modulesPath + "/installer/sd-card/sd-image-aarch64.nix") ];
               }
             )
-            ../suites/installer
+            ../nixos/suites/installer
             { networking.networkmanager.enable = true; }
           ];
         }).config.system.build.sdImage;

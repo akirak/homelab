@@ -18,30 +18,30 @@ in
   imports = [
     ./boot.nix
     ./rpool5
-    ../../suites/base
-    ../../suites/graphical
-    ../../suites/desktop
-    ../../profiles/locale
-    ../../profiles/home-manager
-    ../../profiles/nix
-    ../../profiles/sudo
-    ../../profiles/tailscale
-    # ../../profiles/rabbitmq/development.nix
-    ../../profiles/networking/usb-tether1.nix
-    ../../profiles/wayland/wm/hyprland.nix
-    ../../profiles/wayland/cage/foot.nix
-    # ../../profiles/wayland/wm/river.nix
-    # ../../profiles/nix/cachix-deploy.nix
-    ../../profiles/postgresql/development.nix
-    ../../profiles/livebook
-    ../../profiles/ollama
-    ../../profiles/virtualbox-host
-    ../../profiles/dpt-rp1
-    ../../profiles/podman/rootless-docker.nix
-    # ../../profiles/docker/rootless.nix
-    # ../../profiles/docker
-    # ../../profiles/docker/kind.nix
-    # ../../profiles/k3s/single-node-for-testing.nix
+    ../../nixos/suites/base
+    ../../nixos/suites/graphical
+    ../../nixos/suites/desktop
+    ../../nixos/profiles/locale
+    ../../nixos/profiles/home-manager
+    ../../nixos/profiles/nix
+    ../../nixos/profiles/sudo
+    ../../nixos/profiles/tailscale
+    # ../../nixos/profiles/rabbitmq/development.nix
+    ../../nixos/profiles/networking/usb-tether1.nix
+    ../../nixos/profiles/wayland/wm/hyprland.nix
+    ../../nixos/profiles/wayland/cage/foot.nix
+    # ../../nixos/profiles/wayland/wm/river.nix
+    # ../../nixos/profiles/nix/cachix-deploy.nix
+    ../../nixos/profiles/postgresql/development.nix
+    ../../nixos/profiles/livebook
+    ../../nixos/profiles/ollama
+    ../../nixos/profiles/virtualbox-host
+    ../../nixos/profiles/dpt-rp1
+    ../../nixos/profiles/podman/rootless-docker.nix
+    # ../../nixos/profiles/docker/rootless.nix
+    # ../../nixos/profiles/docker
+    # ../../nixos/profiles/docker/kind.nix
+    # ../../nixos/profiles/k3s/single-node-for-testing.nix
   ];
 
   hardware.graphics = {

@@ -9,7 +9,7 @@ let
 in
 {
   imports = [
-    ../../profiles/intel-arc
+    ../../nixos/profiles/intel-arc
   ];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

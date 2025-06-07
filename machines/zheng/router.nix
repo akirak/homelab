@@ -22,7 +22,7 @@ in
 {
   imports = [
     ./usb-wifi.nix
-    ../../profiles/adguard-home
+    ../../nixos/profiles/adguard-home
   ];
 
   boot.kernelModules = modules;

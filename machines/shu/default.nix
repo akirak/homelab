@@ -1,10 +1,10 @@
 {
   imports = [
-    ../../suites/hcloud-remote
-    ../../suites/base
-    ../../profiles/tailscale
-    ../../profiles/nginx
-    ../../profiles/nix/cachix-deploy.nix
+    ../../nixos/suites/hcloud-remote
+    ../../nixos/suites/base
+    ../../nixos/profiles/tailscale
+    ../../nixos/profiles/nginx
+    ../../nixos/profiles/nix/cachix-deploy.nix
     ./boot.nix
     (import ./disko.nix {})
   ];

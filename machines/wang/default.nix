@@ -11,12 +11,12 @@ in
     # basics
     (modulesPath + "/profiles/hardened.nix")
     (modulesPath + "/profiles/headless.nix")
-    ../../suites/server
+    ../../nixos/suites/server
     ./fs
     ./boot.nix
 
     # Create a non-wheel user for hosting some personal data.
-    ../../profiles/users/1000/on-server.nix
+    ../../nixos/profiles/users/1000/on-server.nix
   ];
 
   system.stateVersion = stateVersion;

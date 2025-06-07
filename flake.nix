@@ -88,7 +88,7 @@
 
         ./templates/flake-module.nix
 
-        ./models/asus-br1100/flake-module.nix
+        ./nixos/models/asus-br1100/flake-module.nix
 
         ./machines/li/flake-module.nix
         ./machines/yang/flake-module.nix

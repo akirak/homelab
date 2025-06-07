@@ -8,7 +8,7 @@
           # Use a home-manager channel corresponding to your OS
           # inputs.home-manager.nixosModules.home-manager
           inputs.self.nixosModules.twistHomeModule
-          ../profiles/home-manager
+          ../nixos/profiles/home-manager
         ];
       };
     };

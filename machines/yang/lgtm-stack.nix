@@ -13,7 +13,7 @@ let
   domain = "nicesunny.day";
 in
 {
-  imports = [ ../../profiles/reverse-proxy ];
+  imports = [ ../../nixos/profiles/reverse-proxy ];
 
   services.reverse-proxy.subdomains.grafana = {
     # TODO: Proxy web sockets?

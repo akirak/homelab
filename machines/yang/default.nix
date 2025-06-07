@@ -24,17 +24,17 @@ in
   imports = [
     (modulesPath + "/profiles/hardened.nix")
     # Create a non-wheel user for hosting some personal data.
-    ../../profiles/users/1000/on-server.nix
-    ../../profiles/agenix
-    ../../profiles/openssh
-    ../../profiles/onedev
-    ../../profiles/docker
-    ../../profiles/reverse-proxy
-    ../../profiles/acme/internal.nix
+    ../../nixos/profiles/users/1000/on-server.nix
+    ../../nixos/profiles/agenix
+    ../../nixos/profiles/openssh
+    ../../nixos/profiles/onedev
+    ../../nixos/profiles/docker
+    ../../nixos/profiles/reverse-proxy
+    ../../nixos/profiles/acme/internal.nix
     ./fs
     ./boot.nix
     ./lgtm-stack.nix
-    ../../profiles/syncthing
+    ../../nixos/profiles/syncthing
   ];
 
   system.stateVersion = stateVersion;

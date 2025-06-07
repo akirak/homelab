@@ -7,8 +7,8 @@
 in {
   imports = [
     # (modulesPath + "/profiles/headless.nix")
-    # ../../profiles/nix/cachix-deploy.nix
-    ../../profiles/openssh
+    # ../../nixos/profiles/nix/cachix-deploy.nix
+    ../../nixos/profiles/openssh
     ./router.nix
   ];
 

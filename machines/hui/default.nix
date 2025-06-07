@@ -9,22 +9,22 @@ in
 {
   imports = [
     ./boot.nix
-    ../../suites/base
-    ../../suites/graphical
-    ../../suites/desktop
-    ../../profiles/locale
-    ../../profiles/home-manager
-    ../../profiles/nix
-    ../../profiles/sudo
-    ../../profiles/tailscale
-    ../../profiles/wayland/wlroots.nix
-    # ../../profiles/wayland/cage/emacs.nix
-    ../../profiles/wayland/cage/foot.nix
-    # ../../profiles/wayland/cage/firefox.nix
-    # ../../profiles/wayland/wm/labwc.nix
-    ../../profiles/wayland/wm/hyprland.nix
-    # ../../profiles/nix/cachix-deploy.nix
-    ../../profiles/dpt-rp1
+    ../../nixos/suites/base
+    ../../nixos/suites/graphical
+    ../../nixos/suites/desktop
+    ../../nixos/profiles/locale
+    ../../nixos/profiles/home-manager
+    ../../nixos/profiles/nix
+    ../../nixos/profiles/sudo
+    ../../nixos/profiles/tailscale
+    ../../nixos/profiles/wayland/wlroots.nix
+    # ../../nixos/profiles/wayland/cage/emacs.nix
+    ../../nixos/profiles/wayland/cage/foot.nix
+    # ../../nixos/profiles/wayland/cage/firefox.nix
+    # ../../nixos/profiles/wayland/wm/labwc.nix
+    ../../nixos/profiles/wayland/wm/hyprland.nix
+    # ../../nixos/profiles/nix/cachix-deploy.nix
+    ../../nixos/profiles/dpt-rp1
   ];
 
   networking = {
