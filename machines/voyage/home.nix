@@ -3,7 +3,7 @@
   home.homeDirectory = "/home/${homeUser}";
 
   imports = [
-    ../../hm/core.nix
+    ../../homes/core.nix
   ];
 
   targets.crostini.enable = true;

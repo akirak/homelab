@@ -34,7 +34,7 @@ You also have to import home-manager.nixosModules.home-manager
 
     users.${homeUser} = {
       imports = [
-        ../../hm/core.nix
+        ../../homes/core.nix
       ];
 
       programs.nixos-rebuild-and-notify.enable = true;

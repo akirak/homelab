@@ -9,7 +9,7 @@ on:
       - 'machines/**'
       - 'profiles/**'
       - 'suites/**'
-      - 'hm/**'
+      - 'homes/**'
   schedule:
     - cron: '0 18 * * *' # 3:00 am JST
 env:

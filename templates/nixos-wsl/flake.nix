@@ -72,8 +72,8 @@
               ({homeUser, ...}: {
                 home-manager.users.${homeUser} = {
                   imports = [
-                    (inputs.homelab.outPath + "/hm/basic.nix")
-                    (inputs.homelab.outPath + "/hm/wsl.nix")
+                    (inputs.homelab.outPath + "/homes/basic.nix")
+                    (inputs.homelab.outPath + "/homes/wsl.nix")
                   ];
 
                   home.username = homeUser;

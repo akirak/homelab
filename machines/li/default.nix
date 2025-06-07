@@ -129,10 +129,10 @@ in
 
   home-manager.users.${homeUser} = {
     imports = [
-      ../../hm/basic.nix
-      ../../hm/extra.nix
-      ../../hm/code.nix
-      ../../hm/graphical.nix
+      ../../homes/basic.nix
+      ../../homes/extra.nix
+      ../../homes/code.nix
+      ../../homes/graphical.nix
     ];
 
     programs.chromium = {

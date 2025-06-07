@@ -77,9 +77,9 @@ in
 
   home-manager.users.${homeUser} = {
     imports = [
-      ../../hm/basic.nix
-      ../../hm/extra.nix
-      ../../hm/graphical.nix
+      ../../homes/basic.nix
+      ../../homes/extra.nix
+      ../../homes/graphical.nix
     ];
 
     # wayland.windowManager.labwc.enable = true;
