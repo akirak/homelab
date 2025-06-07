@@ -478,11 +478,11 @@
         "unstable": "unstable_2"
       },
       "locked": {
-        "lastModified": 1749095897,
-        "narHash": "sha256-wR9Tl8FuLav6Tdq3yB7wH362qHspexvMI9iffzdYOow=",
+        "lastModified": 1749302073,
+        "narHash": "sha256-CjCZpAiSryyRWdPtAE/pgJPIjOiPrB2IHQPFl1dBFPI=",
         "owner": "akirak",
         "repo": "flake-pins",
-        "rev": "8b15957b9e529dbd83d3195e7e93ca7765b11825",
+        "rev": "754b45fbc2696167f270fdaceb024a26c1aad605",
         "type": "github"
       },
       "original": {
@@ -1111,6 +1111,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_16": {
+      "locked": {
+        "lastModified": 1749213349,
+        "narHash": "sha256-UAaWOyQhdp7nXzsbmLVC67fo+QetzoTm9hsPf9X3yr4=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "a4ff0e3c64846abea89662bfbacf037ef4b34207",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1748186667,
@@ -1596,9 +1612,7 @@
     },
     "treefmt-nix_2": {
       "inputs": {
-        "nixpkgs": [
-          "unstable"
-        ]
+        "nixpkgs": "nixpkgs_16"
       },
       "locked": {
         "lastModified": 1748243702,
