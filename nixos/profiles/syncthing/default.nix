@@ -4,7 +4,7 @@ let
 
   cfg = config.services.syncthing;
 
-  devices = lib.pipe (lib.importTOML ../../machines/metadata.toml).hosts [
+  devices = lib.pipe (lib.importTOML ../../../machines/metadata.toml).hosts [
     (lib.filterAttrs (_: attrs: attrs ? syncthingId))
     (builtins.mapAttrs (_: attrs: { id = attrs.syncthingId; }))
   ];
