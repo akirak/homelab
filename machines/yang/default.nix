@@ -6,7 +6,7 @@
   ...
 }:
 let
-  stateVersion = "23.11";
+  stateVersion = "25.05";
 
   metadata = lib.importTOML ../metadata.toml;
 

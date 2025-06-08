@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  stateVersion = "23.11";
+  stateVersion = "25.05";
 in {
   imports = [
     # (modulesPath + "/profiles/headless.nix")
