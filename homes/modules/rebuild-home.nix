@@ -26,13 +26,13 @@ in {
       configDirectory = lib.mkOption {
         type = types.str;
         description = "Directory containing the home-manager configuration";
-        default = "$HOME/config";
+        default = "$HOME/build/nix-config";
       };
 
       emacsConfigDirectory = lib.mkOption {
         type = types.str;
         description = "Directory containing the Emacs configuration";
-        default = "$HOME/emacs-config";
+        default = "$HOME/build/emacs-config";
       };
     };
   };
